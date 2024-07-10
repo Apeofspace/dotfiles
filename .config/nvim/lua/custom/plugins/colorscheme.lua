@@ -4,12 +4,21 @@ local colorschemes = {
 	"kanagawa",
 	"rose-pine",
 	"nordic",
-	"tokyonight-night",
-	"eldritch",
 	"catppuccin",
 	"melange",
 	"hybrid",
+	-- "tokyonight-storm",
+	"tokyonight-moon",
+	-- "tokyonight-night",
 	"everforest",
+	"eldritch",
+	"nightfall",
+	"deepernight",
+	"maron",
+	"nightfox",
+	"duskfox",
+	"nordfox",
+	"onedark",
 }
 
 -- Path to the file where the colorscheme will be saved
@@ -193,5 +202,78 @@ return {
 				transparent_background_level = 2,
 			})
 		end,
+	},
+	{
+		"2giosangmitom/nightfall.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			transparent = false,
+			dim_inactive = true,
+			integrations = {
+				telescope = {
+					enabled = true,
+					style = "bordered",
+				},
+			},
+		},
+	},
+	{
+		"EdenEast/nightfox.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			options = {
+
+				transparent = true,
+				dim_inactive = false,
+				integrations = {
+					telescope = {
+						enabled = true,
+						style = "bordered",
+					},
+				},
+				styles = { -- Style to be applied to different syntax groups
+					types = "italic",
+					methods = "NONE",
+					numbers = "NONE",
+					strings = "italic",
+					comments = "italic",
+					keywords = "bold,italic",
+					constants = "NONE",
+					functions = "italic",
+					operators = "NONE",
+					variables = "NONE",
+					parameters = "NONE",
+					conditionals = "italic",
+					virtual_text = "italic",
+				},
+			},
+		},
+	},
+	{
+		"olimorris/onedarkpro.nvim",
+		priority = 1000, -- Ensure it loads first
+		opts = {
+			options = {
+				transparency = false,
+				lualine_transparency = true,
+			},
+			styles = {
+				types = "italic",
+				methods = "NONE",
+				numbers = "NONE",
+				strings = "italic",
+				comments = "italic",
+				keywords = "bold,italic",
+				constants = "NONE",
+				functions = "italic",
+				operators = "NONE",
+				variables = "NONE",
+				parameters = "NONE",
+				conditionals = "italic",
+				virtual_text = "italic",
+			},
+		},
 	},
 }
