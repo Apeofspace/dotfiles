@@ -256,7 +256,7 @@ return {
 		priority = 1000, -- Ensure it loads first
 		opts = {
 			options = {
-				transparency = false,
+				transparency = true,
 				lualine_transparency = true,
 			},
 			styles = {
