@@ -11,5 +11,8 @@ return {
 
 			"nvim-tree/nvim-web-devicons",
 		},
+		opts = {
+			vim.keymap.set("n", "<leader>tm", ":Markview toggleAll<CR>", { desc = "[T]oggle [M]arkview" }),
+		},
 	},
 }

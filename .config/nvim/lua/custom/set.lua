@@ -43,6 +43,9 @@ vim.opt.shiftwidth = 2
 
 vim.lsp.inlay_hint.enable()
 
+-- conceal level for obsidian nvim mainly
+vim.opt.conceallevel = 1
+
 -- don't continue comment when hitting newline
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
