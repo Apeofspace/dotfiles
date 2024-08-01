@@ -67,14 +67,14 @@ return {
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 					-- toggle inlay_hints
-					map("<leader>gh", function()
+					map("<leader>th", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 						if vim.lsp.inlay_hint.is_enabled() == true then
 							print("Inlay hints enabled")
 						else
 							print("Inlay hints disabled")
 						end
-					end, "Toggle Inlay [H]ints")
+					end, "[T]oggle Inlay [H]ints")
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
@@ -212,20 +212,11 @@ return {
 					linelength = 120,
 				},
 				lua_ls = {
+					-- cmd = {...},
+					-- filetypes = { ...},
+					-- capabilities = {},
 					settings = {
 						Lua = {
-							runtime = { version = "LuaJIT" },
-							workspace = {
-								checkThirdParty = false,
-								-- Tells lua_ls where to find all the Lua files that you have loaded
-								-- for your neovim configuration.
-								library = {
-									"${3rd}/luv/library",
-									unpack(vim.api.nvim_get_runtime_file("", true)),
-								},
-								-- If lua_ls is really slow on your computer, you can try this instead:
-								-- library = { vim.env.VIMRUNTIME },
-							},
 							completion = {
 								callSnippet = "Replace",
 							},

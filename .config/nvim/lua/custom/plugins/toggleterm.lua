@@ -5,7 +5,7 @@ return {
 	version = "*",
 	lazy = true,
 	keys = {
-		{ "<leader>t", ":ToggleTerm size=15<cr>", { desc = "Toggle [T]erm" } },
+		{ "<leader>tt", ":ToggleTerm size=15<cr>", desc = "Toggle [T]erm" },
 	},
 	config = function()
 		require("toggleterm").setup({
@@ -27,3 +27,4 @@ return {
 		})
 	end,
 }
+-- FIX: for some reason when opening this terminal the echo $TERM shows wrong terminal

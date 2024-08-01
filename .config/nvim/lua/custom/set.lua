@@ -27,7 +27,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.list = false -- to mark tabs and spaces with symbols
 vim.opt.listchars = { tab = "> ", trail = "·", nbsp = "␣" }
 vim.opt.updatetime = 250 -- swap file written after than many ms
-vim.opt.timeoutlen = 300 -- timeout for a keymap sequence
+vim.opt.timeoutlen = 500 -- timeout for a keymap sequence
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.cursorline = true -- Highlight the text line of the cursor
