@@ -19,6 +19,7 @@ local colorschemes = {
 	"duskfox",
 	"nordfox",
 	"onedark",
+	"dracula-soft",
 }
 
 -- Path to the file where the colorscheme will be saved
@@ -87,7 +88,7 @@ return {
 	{
 		"sainnhe/sonokai",
 		name = "sonokai",
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			vim.g.sonokai_style = "shusia"
@@ -97,7 +98,7 @@ return {
 	},
 	{
 		"folke/tokyonight.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- vim.cmd.colorscheme 'tokyonight-night'
@@ -105,7 +106,7 @@ return {
 	},
 	{
 		"eldritch-theme/eldritch.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- vim.cmd.colorscheme 'eldritch'
@@ -116,7 +117,7 @@ return {
 	},
 	{
 		"loctvl842/monokai-pro.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			require("monokai-pro").setup({
@@ -128,7 +129,7 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
@@ -138,7 +139,7 @@ return {
 	{
 		"savq/melange-nvim",
 		name = "melange",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
@@ -147,7 +148,7 @@ return {
 	},
 	{
 		"HoNamDuong/hybrid.nvim",
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require("hybrid").setup({
@@ -163,7 +164,7 @@ return {
 	},
 	{
 		"rebelot/kanagawa.nvim",
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require("kanagawa").setup({
@@ -181,10 +182,10 @@ return {
 			})
 		end,
 	},
-	{ "rose-pine/neovim", name = "rose-pine", lazy = false, priority = 1000 },
+	{ "rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000 },
 	{
 		"AlexvZyl/nordic.nvim",
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require("nordic").load()
@@ -193,7 +194,7 @@ return {
 	{
 		"neanias/everforest-nvim",
 		version = false,
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require("everforest").setup({
@@ -205,7 +206,7 @@ return {
 	},
 	{
 		"2giosangmitom/nightfall.nvim",
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		opts = {
 			transparent = false,
@@ -220,7 +221,7 @@ return {
 	},
 	{
 		"EdenEast/nightfox.nvim",
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		opts = {
 			options = {
@@ -275,5 +276,14 @@ return {
 				virtual_text = "italic",
 			},
 		},
+	},
+	-- add dracula
+	{ "Mofiqul/dracula.nvim" },
+	lazy = true,
+	priority = 1000,
+	opts = {
+		-- theme = "dracula-soft",
+		transparent_bg = true,
+		italic_comment = true,
 	},
 }
