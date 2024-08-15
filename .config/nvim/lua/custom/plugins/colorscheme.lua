@@ -1,32 +1,35 @@
 local colorschemes = {
 	"sonokai",
-	"monokai-pro",
-	"kanagawa",
-	"rose-pine",
+	-- "monokai-pro",
+	-- "kanagawa",
+	-- "rose-pine",
 	"nordic",
-	"catppuccin",
-	"melange",
-	"hybrid",
+	-- "catppuccin",
+	-- "melange",
+	-- "hybrid",
 	-- "tokyonight-storm",
 	"tokyonight-moon",
 	-- "tokyonight-night",
 	"everforest",
-	"eldritch",
-	"nightfall",
-	"deepernight",
-	"maron",
-	"nightfox",
-	"duskfox",
-	"nordfox",
-	"onedark",
-	"dracula-soft",
+	-- "eldritch",
+	-- "nightfall",
+	-- "deepernight",
+	-- "maron",
+	-- "nightfox",
+	-- "duskfox",
+	-- "nordfox",
+	-- "onedark",
+	-- "dracula-soft",
+	"edge",
+	"gruvbox",
+	-- "gruvbox-material",
 }
 
 -- Path to the file where the colorscheme will be saved
 local colorscheme_file = vim.fn.stdpath("config") .. "/lua/custom/colorscheme.txt"
 local colorschemeindex = 1
 
-function read_colorscheme()
+local function read_colorscheme()
 	local f = io.open(colorscheme_file, "r")
 	if f then
 		local colorscheme = f:read("*n")
@@ -88,25 +91,31 @@ return {
 	{
 		"sainnhe/sonokai",
 		name = "sonokai",
-		lazy = true,
+		lazy = false,
 		priority = 1000,
 		config = function()
 			vim.g.sonokai_style = "shusia"
 			vim.g.sonokai_enable_italic = true
+			vim.g.sonokai_transparent_background = false
+			vim.g.sonokai_current_word = "bold"
+			vim.g.sonokai_better_performance = 1
 			-- vim.cmd.colorscheme 'sonokai'
 		end,
 	},
 	{
 		"folke/tokyonight.nvim",
-		lazy = true, -- make sure we load this during startup if it is your main colorscheme
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			-- vim.cmd.colorscheme 'tokyonight-night'
-		end,
+		opts = {
+			styles = {
+				sidebars = "transparent",
+				floats = "transparent",
+			},
+		},
 	},
 	{
 		"eldritch-theme/eldritch.nvim",
-		lazy = true, -- make sure we load this during startup if it is your main colorscheme
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- vim.cmd.colorscheme 'eldritch'
@@ -117,7 +126,7 @@ return {
 	},
 	{
 		"loctvl842/monokai-pro.nvim",
-		lazy = true, -- make sure we load this during startup if it is your main colorscheme
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			require("monokai-pro").setup({
@@ -129,7 +138,7 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		lazy = true, -- make sure we load this during startup if it is your main colorscheme
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
@@ -139,7 +148,7 @@ return {
 	{
 		"savq/melange-nvim",
 		name = "melange",
-		lazy = true, -- make sure we load this during startup if it is your main colorscheme
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
@@ -148,7 +157,7 @@ return {
 	},
 	{
 		"HoNamDuong/hybrid.nvim",
-		lazy = true,
+		lazy = false,
 		priority = 1000,
 		config = function()
 			require("hybrid").setup({
@@ -164,7 +173,7 @@ return {
 	},
 	{
 		"rebelot/kanagawa.nvim",
-		lazy = true,
+		lazy = false,
 		priority = 1000,
 		config = function()
 			require("kanagawa").setup({
@@ -182,10 +191,10 @@ return {
 			})
 		end,
 	},
-	{ "rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000 },
+	{ "rose-pine/neovim", name = "rose-pine", lazy = false, priority = 1000 },
 	{
 		"AlexvZyl/nordic.nvim",
-		lazy = true,
+		lazy = false,
 		priority = 1000,
 		config = function()
 			require("nordic").load()
@@ -194,7 +203,7 @@ return {
 	{
 		"neanias/everforest-nvim",
 		version = false,
-		lazy = true,
+		lazy = false,
 		priority = 1000,
 		config = function()
 			require("everforest").setup({
@@ -206,7 +215,7 @@ return {
 	},
 	{
 		"2giosangmitom/nightfall.nvim",
-		lazy = true,
+		lazy = false,
 		priority = 1000,
 		opts = {
 			transparent = false,
@@ -221,7 +230,7 @@ return {
 	},
 	{
 		"EdenEast/nightfox.nvim",
-		lazy = true,
+		lazy = false,
 		priority = 1000,
 		opts = {
 			options = {
@@ -257,7 +266,7 @@ return {
 		priority = 1000, -- Ensure it loads first
 		opts = {
 			options = {
-				transparency = true,
+				-- transparency = true,
 				lualine_transparency = true,
 			},
 			styles = {
@@ -277,13 +286,56 @@ return {
 			},
 		},
 	},
-	-- add dracula
-	{ "Mofiqul/dracula.nvim" },
-	lazy = true,
-	priority = 1000,
-	opts = {
-		-- theme = "dracula-soft",
-		transparent_bg = true,
-		italic_comment = true,
+	{
+		"Mofiqul/dracula.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {
+			theme = "dracula-soft",
+			transparent_bg = false,
+			italic_comment = true,
+		},
+	},
+	{
+		"ellisonleao/gruvbox.nvim",
+		lazy = false,
+		priority = 1000,
+		config = true,
+		opts = {
+			undercurl = true,
+			underline = true,
+			bold = true,
+			italic = {
+				strings = true,
+				emphasis = true,
+				comments = true,
+				operators = true,
+				folds = true,
+			},
+			strikethrough = true,
+			dim_inactive = false,
+			transparent_mode = false,
+		},
+	},
+	-- {
+	-- 	"sainnhe/gruvbox-material",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.g.gruvbox_material_enable_italic = true
+	-- 		vim.g.gruvbox_material_enable_bold = true
+	-- 		vim.g.gruvbox_marerial_background = "medium"
+	-- 		vim.g.gruvbox_material_foreground = "mix"
+	-- 	end,
+	-- },
+	{
+		"sainnhe/edge",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			vim.g.edge_style = "neon"
+			vim.g.edge_enable_italic = true
+			vim.g.edge_current_word = "bold"
+		end,
 	},
 }

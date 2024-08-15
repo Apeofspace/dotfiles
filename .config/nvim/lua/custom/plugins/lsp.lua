@@ -130,16 +130,16 @@ return {
 					single_file_support = true,
 				},
 				-- marksman = {},
-				markdown_oxide = {
-					-- try to extend capabilities for moxide. Read: https://github.com/Feel-ix-343/markdown-oxide
-					capabilities = {
-						workspace = {
-							didChangeWatchedFiles = {
-								dynamicRegistration = true,
-							},
-						},
-					},
-				},
+				-- markdown_oxide = {
+				-- 	-- try to extend capabilities for moxide. Read: https://github.com/Feel-ix-343/markdown-oxide
+				-- 	capabilities = {
+				-- 		workspace = {
+				-- 			didChangeWatchedFiles = {
+				-- 				dynamicRegistration = true,
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
 				cmake = {},
 				-- READ MORE ON PYTHON TOOLS https://inventwithpython.com/blog/2022/11/19/python-linter-comparison-2022-pylint-vs-pyflakes-vs-flake8-vs-autopep8-vs-bandit-vs-prospector-vs-pylama-vs-pyroma-vs-black-vs-mypy-vs-radon-vs-mccabe/
 				-- pylsp = {
@@ -221,7 +221,7 @@ return {
 								callSnippet = "Replace",
 							},
 							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-							-- diagnostics = { disable = { 'missing-fields' } },
+							diagnostics = { disable = { "missing-fields" }, globals = { "vim" } },
 						},
 					},
 				},
