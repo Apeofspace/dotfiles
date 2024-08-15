@@ -15,6 +15,10 @@ return {
 		},
 		opts = {
 			notify_on_error = false,
+			notify_no_formatters = false,
+			default_format_opts = {
+				lsp_format = "fallback",
+			},
 			format_on_save = function(bufnr)
 				local disable_filetypes = { c = true, cpp = true }
 				return {
@@ -53,5 +57,14 @@ return {
 		},
 	},
 	-- automatically download conform formatters with mason
-	{ "zapling/mason-conform.nvim", opts = {} },
+	{
+		"zapling/mason-conform.nvim",
+		dependencies = {
+			"stevearc/conform.nvim",
+			"williamboman/mason.nvim",
+		},
+		opts = {
+			ignore_install = { "prettier", "prettierd" }, -- List of formatters to ignore during install
+		},
+	},
 }
