@@ -1,97 +1,8 @@
-local colorschemes = {
-	"sonokai",
-	-- "monokai-pro",
-	-- "kanagawa",
-	-- "rose-pine",
-	"nordic",
-	-- "catppuccin",
-	-- "melange",
-	-- "hybrid",
-	-- "tokyonight-storm",
-	"tokyonight-moon",
-	-- "tokyonight-night",
-	"everforest",
-	-- "eldritch",
-	-- "nightfall",
-	-- "deepernight",
-	-- "maron",
-	-- "nightfox",
-	-- "duskfox",
-	-- "nordfox",
-	-- "onedark",
-	-- "dracula-soft",
-	"edge",
-	"gruvbox",
-	-- "gruvbox-material",
-}
-
--- Path to the file where the colorscheme will be saved
-local colorscheme_file = vim.fn.stdpath("config") .. "/lua/custom/colorscheme.txt"
-local colorschemeindex = 1
-
-local function read_colorscheme()
-	local f = io.open(colorscheme_file, "r")
-	if f then
-		local colorscheme = f:read("*n")
-		f:close()
-		return colorscheme
-	end
-	return nil
-end
-
-local function write_colorscheme(colorscheme)
-	local f = io.open(colorscheme_file, "w")
-	if f then
-		f:write(colorscheme)
-		f:close()
-	end
-end
-
-local function setColorscheme(index)
-	vim.cmd("colorscheme " .. colorschemes[index])
-	vim.notify("Colorscheme: " .. colorschemes[index])
-	write_colorscheme(index)
-end
-
-local function NextColorScheme()
-	colorschemeindex = colorschemeindex + 1
-	if colorschemeindex <= 0 or colorschemeindex > #colorschemes then
-		colorschemeindex = 1
-	end
-	setColorscheme(colorschemeindex)
-end
-
-local function PrevColorScheme()
-	colorschemeindex = colorschemeindex - 1
-	if colorschemeindex <= 0 or colorschemeindex > #colorschemes then
-		colorschemeindex = #colorschemes
-	end
-	setColorscheme(colorschemeindex)
-end
-
-vim.keymap.set("n", "<leader>cn", NextColorScheme, { desc = "[N]ext [C]olorscheme" })
-vim.keymap.set("n", "<leader>cp", PrevColorScheme, { desc = "[P]rev [C]olorscheme" })
-
--- Defer loading the colorscheme until VimEnter
-vim.api.nvim_create_autocmd("VimEnter", {
-	callback = function()
-		local saved_index = read_colorscheme()
-		if saved_index and saved_index >= 1 and saved_index <= #colorschemes then
-			colorschemeindex = saved_index
-		else
-			colorschemeindex = 1
-		end
-		setColorscheme(colorschemeindex)
-		-- Autocmd for breakindent plugin, otherwise it breaks exoticly
-		vim.cmd("doautocmd User ColorschemeLoaded")
-	end,
-})
-
-return {
+local schemes = {
 	{
 		"sainnhe/sonokai",
 		name = "sonokai",
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			vim.g.sonokai_style = "shusia"
@@ -99,12 +10,13 @@ return {
 			vim.g.sonokai_transparent_background = false
 			vim.g.sonokai_current_word = "bold"
 			vim.g.sonokai_better_performance = 1
-			-- vim.cmd.colorscheme 'sonokai'
 		end,
 	},
 	{
 		"folke/tokyonight.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		name = "tokyonight",
+		-- variants = { "tokyonight-day", "tokyonight-moon", "tokyonight-night", "tokyonight-storm" },
+		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		opts = {
 			styles = {
@@ -115,7 +27,8 @@ return {
 	},
 	{
 		"eldritch-theme/eldritch.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		name = "eldritch",
+		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- vim.cmd.colorscheme 'eldritch'
@@ -126,7 +39,17 @@ return {
 	},
 	{
 		"loctvl842/monokai-pro.nvim",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		name = "monokai-pro",
+		-- variants = {
+		-- 	"monokai-pro-classic",
+		-- 	"monokai-pro-machine",
+		-- 	"monokai-pro-default",
+		-- 	"monokai-pro-spectrum",
+		-- 	"monokai-pro-ristretto",
+		-- 	"monokai-pro-machine",
+		-- 	"monokai-pro-octagon",
+		-- },
+		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			require("monokai-pro").setup({
@@ -138,7 +61,14 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		-- variants = {
+		-- 	"catpuccin",
+		-- 	"catpuccin-frappe",
+		-- 	"catpuccin-mocchiato",
+		-- 	"catpuccin-latte",
+		-- 	"catpuccin-mocha",
+		-- },
+		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
@@ -148,7 +78,7 @@ return {
 	{
 		"savq/melange-nvim",
 		name = "melange",
-		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			-- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
@@ -157,7 +87,8 @@ return {
 	},
 	{
 		"HoNamDuong/hybrid.nvim",
-		lazy = false,
+		name = "hybrid",
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require("hybrid").setup({
@@ -173,7 +104,8 @@ return {
 	},
 	{
 		"rebelot/kanagawa.nvim",
-		lazy = false,
+		name = "kanagawa",
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require("kanagawa").setup({
@@ -191,10 +123,11 @@ return {
 			})
 		end,
 	},
-	{ "rose-pine/neovim", name = "rose-pine", lazy = false, priority = 1000 },
+	{ "rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000 },
 	{
 		"AlexvZyl/nordic.nvim",
-		lazy = false,
+		name = "nordic",
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require("nordic").load()
@@ -202,8 +135,9 @@ return {
 	},
 	{
 		"neanias/everforest-nvim",
+		name = "everforest",
 		version = false,
-		lazy = false,
+		lazy = true,
 		priority = 1000,
 		config = function()
 			require("everforest").setup({
@@ -215,7 +149,8 @@ return {
 	},
 	{
 		"2giosangmitom/nightfall.nvim",
-		lazy = false,
+		name = "nightfall",
+		lazy = true,
 		priority = 1000,
 		opts = {
 			transparent = false,
@@ -230,7 +165,8 @@ return {
 	},
 	{
 		"EdenEast/nightfox.nvim",
-		lazy = false,
+		name = "nightfox",
+		lazy = true,
 		priority = 1000,
 		opts = {
 			options = {
@@ -263,32 +199,37 @@ return {
 	},
 	{
 		"olimorris/onedarkpro.nvim",
+		name = "onedark",
+		lazy = true,
 		priority = 1000, -- Ensure it loads first
-		opts = {
-			options = {
-				-- transparency = true,
-				lualine_transparency = true,
-			},
-			styles = {
-				types = "italic",
-				methods = "NONE",
-				numbers = "NONE",
-				strings = "italic",
-				comments = "italic",
-				keywords = "bold,italic",
-				constants = "NONE",
-				functions = "italic",
-				operators = "NONE",
-				variables = "NONE",
-				parameters = "NONE",
-				conditionals = "italic",
-				virtual_text = "italic",
-			},
-		},
+		config = function()
+			require("onedarkpro").setup({
+				options = {
+					-- transparency = true,
+					lualine_transparency = true,
+				},
+				styles = {
+					types = "italic",
+					methods = "NONE",
+					numbers = "NONE",
+					strings = "italic",
+					comments = "italic",
+					keywords = "bold,italic",
+					constants = "NONE",
+					functions = "italic",
+					operators = "NONE",
+					variables = "NONE",
+					parameters = "NONE",
+					conditionals = "italic",
+					virtual_text = "italic",
+				},
+			})
+		end,
 	},
 	{
 		"Mofiqul/dracula.nvim",
-		lazy = false,
+		name = "dracula",
+		lazy = true,
 		priority = 1000,
 		opts = {
 			theme = "dracula-soft",
@@ -298,7 +239,8 @@ return {
 	},
 	{
 		"ellisonleao/gruvbox.nvim",
-		lazy = false,
+		name = "gruvbox",
+		lazy = true,
 		priority = 1000,
 		config = true,
 		opts = {
@@ -317,20 +259,10 @@ return {
 			transparent_mode = false,
 		},
 	},
-	-- {
-	-- 	"sainnhe/gruvbox-material",
-	-- 	lazy = false,
-	-- 	priority = 1000,
-	-- 	config = function()
-	-- 		vim.g.gruvbox_material_enable_italic = true
-	-- 		vim.g.gruvbox_material_enable_bold = true
-	-- 		vim.g.gruvbox_marerial_background = "medium"
-	-- 		vim.g.gruvbox_material_foreground = "mix"
-	-- 	end,
-	-- },
 	{
 		"sainnhe/edge",
-		lazy = false,
+		name = "edge",
+		lazy = true,
 		priority = 1000,
 		config = function()
 			vim.g.edge_style = "neon"
@@ -339,3 +271,68 @@ return {
 		end,
 	},
 }
+
+------------------------------------------------------------------
+
+-- Path to the file where the colorscheme will be saved
+local colorscheme_file = vim.fn.stdpath("config") .. "/lua/custom/colorscheme.txt"
+
+local function read_colorscheme()
+	local f = io.open(colorscheme_file, "r")
+	if f then
+		local colorscheme = f:read("*l")
+		f:close()
+		return colorscheme
+	end
+	return nil
+end
+
+local function write_colorscheme(colorscheme)
+	local f = io.open(colorscheme_file, "w")
+	if f then
+		f:write(colorscheme)
+		f:close()
+	end
+end
+
+function schemes.SetColorschemeFromFile()
+	local active_scheme = read_colorscheme()
+	if active_scheme then
+		vim.cmd("colorscheme " .. active_scheme)
+	end
+end
+
+-- write on loading scheme
+vim.api.nvim_create_autocmd("ColorScheme", {
+	callback = function()
+		local current_scheme = vim.g.colors_name
+		write_colorscheme(current_scheme)
+	end,
+})
+
+vim.keymap.set("n", "<leader>cs", function() --> Show all custom colors in telescope...
+	for _, color in ipairs(schemes) do --> Load all colors in spec....
+		vim.cmd("Lazy load " .. color.name) --> vim colorschemes cannot be required...
+	end
+
+	vim.schedule(function() --> Needs to be scheduled:
+    -- stylua: ignore
+    local builtins = { "zellner", "torte", "slate", "shine", "ron", "quiet", "peachpuff",
+    "pablo", "murphy", "lunaperche", "koehler", "industry", "evening", "elflord",
+    "desert", "delek", "default", "darkblue", "blue", "zaibatsu", "vim", "retrobox",
+			'morning', 'randomhue', 'wildcharm', 'habamax' , 'sorbet', 'minischeme', 'minicyan'}
+
+		local completion = vim.fn.getcompletion
+		---@diagnostic disable-next-line: duplicate-set-field
+		vim.fn.getcompletion = function() --> override
+			return vim.tbl_filter(function(color)
+				return not vim.tbl_contains(builtins, color) --
+			end, completion("", "color"))
+		end
+
+		vim.cmd("Telescope colorscheme enable_preview=true")
+		vim.fn.getcompletion = completion --> restore
+	end)
+end, { desc = "Telescope COLORSCHEMES", silent = true })
+
+return schemes
