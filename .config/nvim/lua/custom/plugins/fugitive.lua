@@ -25,8 +25,8 @@ return {
 					local bufnr = vim.api.nvim_get_current_buf()
 					local opts = { buffer = bufnr, remap = false } -- current buffer only
 
-					-- esc out
-					vim.keymap.set("n", "<Esc>", ":q<CR>", opts)
+					-- q out
+					vim.keymap.set("n", "q", ":q<CR>", opts)
 
 					-- push
 					vim.keymap.set("n", "<leader>p", function()
@@ -42,7 +42,7 @@ return {
 					vim.keymap.set(
 						"n",
 						"<leader>gl",
-						":Git log -10 --oneline<CR>",
+						":Git log -10 --oneline --all<CR>",
 						opts,
 						{ desc = "Fugitive Git Log -10" }
 					)

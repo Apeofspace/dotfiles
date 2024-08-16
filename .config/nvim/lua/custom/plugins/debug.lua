@@ -10,7 +10,7 @@ return {
 	-- NOTE: Yes, you can install new plugins here!
 	"mfussenegger/nvim-dap",
 	-- NOTE: And you can specify dependencies as well
-	enabled = true,
+	enabled = false,
 	dependencies = {
 		-- Creates a beautiful debugger UI
 		{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
