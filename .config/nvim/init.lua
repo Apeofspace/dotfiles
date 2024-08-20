@@ -37,6 +37,7 @@ else
 		-- },
 	})
 	require("custom.plugins.colorscheme").SetColorschemeFromFile()
+	vim.cmd("doautocmd User ColorschemeLoaded") -- I set up some plugins to work off this
 	-- The line beneath this is called `modeline`. See `:help modeline`
 	-- -vim: ts=2 sts=2 sw=2 et
 end
