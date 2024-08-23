@@ -3,15 +3,15 @@ return {
 		"tpope/vim-fugitive",
 		-- lazy = true,
 		config = function()
-			vim.keymap.set("n", "<leader>gg", ":Git<cr>", { desc = ":Git <CR>" })
+			-- vim.keymap.set("n", "<leader>gg", ":Git<cr>", { desc = ":Git <CR>" })
 
-			vim.keymap.set("n", "<leader>gd", function()
+			vim.keymap.set("n", "<leader>gdf", function()
 				local word = vim.fn.input("SHA > ")
 				if not (word == nil or word == "") then
 					vim.cmd(":vsplit")
 					vim.cmd(string.format(":Gedit %s:%%", word))
 				end
-			end, { desc = "Fugitive [ G ]it [ D ]diff current file with SHA in Vsplit" })
+			end, { desc = "[G]it [D]diff [F]ugitive  current file with SHA in Vsplit" })
 
 			local fugg = vim.api.nvim_create_augroup("fugg", {})
 			local autocmd = vim.api.nvim_create_autocmd

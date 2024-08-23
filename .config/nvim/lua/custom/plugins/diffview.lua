@@ -1,5 +1,7 @@
 return {
+	-- this plugin causes hangs
 	"sindrets/diffview.nvim",
+	lazy = true,
 	opts = {
 		view = {
 			file_panel = {
@@ -8,11 +10,18 @@ return {
 				},
 			},
 		},
-		vim.keymap.set("n", "<leader>tdc", ":DiffviewOpen<CR>", { desc = "Compare current file against indexed" }),
-		vim.keymap.set("n", "<leader>tdf", function()
-			local word = vim.fn.input("SHA > ") or ""
-			vim.cmd(string.format(":DiffviewOpen %s", word))
-		end, { desc = "Compare current file against git rev" }),
+	},
+	keys = {
+		{ "<leader>gdc", "<cmd>DiffviewOpen<CR>", "n", desc = "Compare current file against indexed" },
+		{
+			"<leader>gdf",
+			function()
+				local word = vim.fn.input("SHA > ") or ""
+				vim.cmd(string.format("<cmd>DiffviewOpen %s", word))
+			end,
+			"n",
+			desc = "Compare current file against git rev",
+		},
 		-- Examples:
 		-- :DiffviewOpen
 		-- :DiffviewOpen HEAD~2

@@ -1,5 +1,6 @@
 M = {
 	"yujinyuz/gitpad.nvim",
+	lazy = true,
 	config = function()
 		require("gitpad").setup({
 			-- your configuration comes here

@@ -67,7 +67,7 @@ return {
 					},
 				},
 			})
-			vim.keymap.set("n", "<leader>go", function()
+			vim.keymap.set("n", "<leader>to", function()
 				vim.cmd("lua MiniDiff.toggle_overlay()")
 			end)
 

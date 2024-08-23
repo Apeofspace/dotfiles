@@ -3,11 +3,11 @@ return {
 	version = "*", -- recommended, use latest release instead of latest commit
 	lazy = true,
 	keys = {
-		{ "<leader>soo" },
-		{ "<leader>sot" },
+		{ "<leader>oo", desc = "[S]earch [O]bsidian Vault" },
+		{ "<leader>ot", desc = "[S]earch [O]bsidian [T]ags" },
 	},
 	enabled = true,
-	ft = "markdown",
+	-- ft = "markdown",
 	-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
 	-- event = {
 	--   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
@@ -21,37 +21,41 @@ return {
 		"nvim-telescope/telescope.nvim",
 		"hrsh7th/nvim-cmp",
 	},
-	opts = {
-		workspaces = {
-			{
-				name = "work",
-				path = "~/Documents/Obsidian Vault",
+	config = function()
+		require("obsidian").setup({
+			workspaces = {
+				{
+					name = "work",
+					path = "~/Documents/Obsidian Vault",
+				},
 			},
-		},
-		mappings = {
-			-- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
-			["gf"] = {
-				action = function()
-					return require("obsidian").util.gf_passthrough()
-				end,
-				opts = { noremap = false, expr = true, buffer = true },
+			mappings = {
+				-- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.
+				["gf"] = {
+					action = function()
+						return require("obsidian").util.gf_passthrough()
+					end,
+					opts = { noremap = false, expr = true, buffer = true },
+				},
+				-- Toggle check-boxes.
+				["<leader>ch"] = {
+					action = function()
+						return require("obsidian").util.toggle_checkbox()
+					end,
+					opts = { buffer = true },
+				},
+				-- Smart action depending on context, either follow link or toggle checkbox.
+				-- ["<cr>"] = {
+				-- 	action = function()
+				-- 		return require("obsidian").util.smart_action()
+				-- 	end,
+				-- 	opts = { buffer = true, expr = true },
+				-- },
 			},
-			-- Toggle check-boxes.
-			["<leader>ch"] = {
-				action = function()
-					return require("obsidian").util.toggle_checkbox()
-				end,
-				opts = { buffer = true },
-			},
-			-- Smart action depending on context, either follow link or toggle checkbox.
-			-- ["<cr>"] = {
-			-- 	action = function()
-			-- 		return require("obsidian").util.smart_action()
-			-- 	end,
-			-- 	opts = { buffer = true, expr = true },
-			-- },
-		},
-	},
+			vim.keymap.set("n", "<leader>oo", ":ObsidianSearch<CR>", { desc = "[S]earch [O]bsidian Vault" }),
+			vim.keymap.set("n", "<leader>ot", ":ObsidianTags<CR>", { desc = "[S]earch [O]bsidian [T]ags" }),
+		})
+	end,
 	picker = {
 		-- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
 		name = "telescope.nvim",
@@ -69,7 +73,5 @@ return {
 			-- Insert a tag at the current location.
 			insert_tag = "<C-l>",
 		},
-		vim.keymap.set("n", "<leader>soo", ":ObsidianSearch<CR>", { desc = "[S]earch [O]bsidian Vault" }),
-		vim.keymap.set("n", "<leader>sot", ":ObsidianTags<CR>", { desc = "[S]earch [O]bsidian [T]ags" }),
 	},
 }

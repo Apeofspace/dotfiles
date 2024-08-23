@@ -124,7 +124,7 @@ return {
 						-- '--function-arg-placeholders',
 						-- '-j4',
 						"--fallback-style=llvm",
-						-- '--enable-config',
+						-- "--enable-config",
 						-- "-style='{ColumnLimit: 150, }'",
 					},
 					single_file_support = true,
