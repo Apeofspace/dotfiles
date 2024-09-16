@@ -4,6 +4,7 @@ return {
 		"OXY2DEV/markview.nvim",
 		lazy = true,
 		ft = "markdown",
+		enabled = false,
 
 		dependencies = {
 			-- You may not need this if you don't lazy load
