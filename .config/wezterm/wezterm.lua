@@ -10,6 +10,7 @@ if wezterm.config_builder then
 end
 
 -- Settings
+-- config.color_scheme = "Gruvbox"
 config.color_scheme = "Tokyo Night"
 config.font = wezterm.font_with_fallback({
 	{ family = "Victor Mono", scale = 1, weight = "Medium" },

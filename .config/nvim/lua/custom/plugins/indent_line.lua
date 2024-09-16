@@ -18,7 +18,10 @@ return {
 					enable = false,
 				},
 				chunk = {
+					-- https://github.com/shellRaining/hlchunk.nvim/blob/main/docs/en/chunk.md#chunk_example1
 					enable = true,
+					duration = 0,
+					delay = 0,
 				},
 				indent = {
 					enable = true,
