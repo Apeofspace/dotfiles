@@ -16,6 +16,10 @@ elseif vim.loop.os_uname().sysname == "Linux" then
 	vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 end
 
+-- no swap file, auto sync instances
+vim.opt.autoread = true
+vim.opt.swapfile = false
+
 -- incsearch
 vim.opt.ignorecase = true
 vim.opt.smartcase = true

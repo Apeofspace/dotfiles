@@ -26,8 +26,8 @@ local section_config = {
 return {
 	-- https://neoland.dev/plugin/8327
 	"nvim-lualine/lualine.nvim",
-	lazy = true,
-	event = "User ColorschemeLoaded",
+	-- lazy = true,
+	-- event = "User ColorschemeLoaded",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		sections = section_config,

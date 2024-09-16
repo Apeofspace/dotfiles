@@ -1,5 +1,13 @@
 local schemes = {
 	{
+		"ferdinandrau/lavish.nvim",
+		name = "lavish",
+		priority = 1000,
+		config = function()
+			require("lavish").apply()
+		end,
+	},
+	{
 		"sainnhe/sonokai",
 		name = "sonokai",
 		lazy = true,
@@ -242,22 +250,43 @@ local schemes = {
 		name = "gruvbox",
 		lazy = true,
 		priority = 1000,
-		config = true,
-		opts = {
-			undercurl = true,
-			underline = true,
-			bold = true,
-			italic = {
-				strings = true,
-				emphasis = true,
-				comments = true,
-				operators = true,
-				folds = true,
-			},
-			strikethrough = true,
-			dim_inactive = false,
-			transparent_mode = false,
-		},
+		config = function()
+			local gruvbox = require("gruvbox")
+			local palette = gruvbox.palette
+			gruvbox.setup({
+				undercurl = true,
+				underline = true,
+				bold = true,
+				italic = {
+					strings = true,
+					emphasis = true,
+					comments = true,
+					operators = false,
+					folds = true,
+				},
+				strikethrough = true,
+				dim_inactive = false,
+				transparent_mode = false,
+				overrides = {
+					-- ["@diff.minus"] = { fg = palette.dark_red },
+					-- ["@diff.plus"] = { fg = palette.bright_green },
+					-- ["@diff.delta"] = { fg = palette.bright_aqua },
+					-- ["@module"] = { italic = true },
+					-- ["@module.buitlin"] = { italic = true, fg = palette.bright_orange },
+					["@attribute"] = { italic = true },
+					["@keyword"] = { italic = true, bold = false, fg = palette.bright_red },
+					["@keyword.function"] = { italic = true, bold = true, fg = palette.bright_red },
+					["@keyword.return"] = { italic = true, bold = true, fg = palette.bright_red },
+					["@keyword.exception"] = { italic = true, bold = true, fg = palette.bright_red },
+					["@keyword.repeat"] = { italic = true, bold = false, fg = palette.bright_red },
+					["@keyword.operator"] = { italic = true, bold = false, fg = palette.bright_red },
+					["@keyword.conditional"] = { italic = true, bold = false, fg = palette.bright_red },
+					["@keyword.modifier"] = { italic = true, fg = palette.bright_red },
+					["@keyword.coroutine"] = { italic = true, fg = palette.bright_red },
+					["@keyword.type"] = { italic = true, bold = true, fg = palette.bright_red },
+				},
+			})
+		end,
 	},
 	{
 		"sainnhe/edge",
@@ -334,5 +363,10 @@ vim.keymap.set("n", "<leader>cs", function() --> Show all custom colors in teles
 		vim.fn.getcompletion = completion --> restore
 	end)
 end, { desc = "Telescope COLORSCHEMES", silent = true })
+
+-- function ReloadColorScheme()
+-- 	local current_scheme = vim.g.colors_name
+-- 	vim.cmd("colorscheme" .. current_scheme)
+-- end
 
 return schemes

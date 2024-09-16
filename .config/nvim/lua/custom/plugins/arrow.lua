@@ -14,7 +14,7 @@ return {
 		require("arrow").setup({
 			show_icons = true,
 			leader_key = "<leader><leader>", -- Recommended to be a single key
-			buffer_leader_key = "<leader>m", -- Per Buffer Mappings
+			buffer_leader_key = "<leader>`", -- Per Buffer Mappings
 		})
 		-- local statusline = require("arrow.statusline")
 		-- statusline.is_on_arrow_file() -- return nil if current file is not on arrow.  Return the index if it is.
