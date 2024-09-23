@@ -14,7 +14,7 @@ return {
 				{ "<leader>w", group = "[W]orkspace" },
 				{ "<leader>t", group = "[T]oggle" },
 				{ "<leader>gd", group = "[G]it [D]iff" },
-				{ "<leader>gp", group = "GITPAD" },
+				{ "<leader>gp", group = "[G]it [P]ad" },
 				{ "<leader>so", group = "[S]earch [O]bsidian" },
 			})
 		end,
