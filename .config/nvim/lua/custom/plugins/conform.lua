@@ -127,8 +127,18 @@ M = {
 					-- check https://pypi.org/project/black/
 				},
 				astyle = {
-					prepend_args = { "--style=google", "--indent=spaces=2 ", "--max-code-length=120" },
 					-- check https://astyle.sourceforge.net/astyle.html#_Brace_Style_Options
+					prepend_args = {
+						"--style=google",
+						"--indent=spaces=2 ",
+						"--max-code-length=120",
+						"--pad-oper",
+						"--pad-comma",
+						"--pad-header",
+						"--squeeze-ws",
+						"--squeeze-lines=2", -- anything more than 2 empty lines removed
+						"--break-one-line-headers",
+					},
 				},
 			},
 		},
