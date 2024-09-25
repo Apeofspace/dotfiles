@@ -11,13 +11,26 @@ local function get_arrow()
 	return ""
 end
 
+-- this is older config
+-- local section_config = {
+-- 	-- +-------------------------------------------------+
+-- 	-- | A | B | C                             X | Y | Z |
+-- 	-- +-------------------------------------------------+
+-- 	lualine_a = { "mode" },
+-- 	lualine_b = { "branch", "diff", "diagnostics" },
+-- 	lualine_c = { "filename", get_arrow },
+-- 	lualine_x = { "encoding", "filesize", "filetype" },
+-- 	lualine_y = { "progress", get_linecount },
+-- 	lualine_z = { "location" },
+-- }
+
 local section_config = {
 	-- +-------------------------------------------------+
 	-- | A | B | C                             X | Y | Z |
 	-- +-------------------------------------------------+
 	lualine_a = { "mode" },
-	lualine_b = { "branch", "diff", "diagnostics" },
-	lualine_c = { "filename", get_arrow },
+	lualine_b = { "branch", "filename" },
+	lualine_c = { "diagnostics", get_arrow },
 	lualine_x = { "encoding", "filesize", "filetype" },
 	lualine_y = { "progress", get_linecount },
 	lualine_z = { "location" },
