@@ -1,6 +1,7 @@
 return {
 	{
 		"stevearc/oil.nvim",
+		enabled = false,
 		lazy = true,
 		cmd = "Oil",
 		event = { "VimEnter */*,.*", "BufNew */*,.*" },

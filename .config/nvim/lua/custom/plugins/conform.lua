@@ -42,7 +42,7 @@ M = {
 
 			formatters_by_ft = {
 				-- Use the "*" filetype to run formatters on all filetypes.
-				["*"] = { "codespell" },
+				-- ["*"] = { "codespell" },
 				lua = { "stylua" },
 				python = function(bufnr)
 					if require("conform").get_formatter_info("ruff_format", bufnr).available then

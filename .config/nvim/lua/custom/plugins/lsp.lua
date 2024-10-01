@@ -236,7 +236,7 @@ return {
 				"codespell",
 				"isort",
 				"black",
-				-- 'ruff',
+				"ruff",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
