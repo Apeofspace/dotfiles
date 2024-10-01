@@ -67,7 +67,7 @@ return {
 					--  This will auto-import if your LSP supports it.
 					--  This will expand snippets if the LSP sent a snippet.
 					["<C-y>"] = cmp.mapping.confirm({ select = true }),
-					-- ['<TAB>'] = cmp.mapping.confirm { select = true },
+					["<TAB>"] = cmp.mapping.confirm({ select = true }),
 
 					-- If you prefer more traditional completion keymaps,
 					-- you can uncomment the following lines
@@ -104,9 +104,11 @@ return {
 					--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 				}),
 				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-					{ name = "path" },
+					{ name = "supermaven", priority = 500 },
+					{ name = "nvim_lsp", priority = 400 },
+					{ name = "luasnip", priority = 1000 },
+					{ name = "path", priority = 100 },
+					{ name = "buffer", priority = 200 },
 				},
 			})
 		end,
