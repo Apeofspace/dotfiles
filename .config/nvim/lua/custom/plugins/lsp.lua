@@ -7,7 +7,7 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			-- Useful status updates for LSP.
-			-- { "j-hui/fidget.nvim", opts = {} }, -- not sure if it works with noice
+			{ "j-hui/fidget.nvim", opts = {} }, -- not sure if it works with noice
 		},
 		config = function()
 			--  This function gets run when an LSP attaches to a particular buffer.

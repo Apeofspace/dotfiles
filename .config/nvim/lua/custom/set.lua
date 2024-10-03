@@ -50,6 +50,8 @@ vim.lsp.inlay_hint.enable()
 -- conceal level for obsidian nvim mainly
 vim.opt.conceallevel = 0
 
+vim.opt.hidden = false
+
 -- spellchecking
 -- vim.opt.spell = true
 -- vim.opt.spelllang = "en_us"

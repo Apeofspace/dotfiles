@@ -1,6 +1,8 @@
 -- read up on config options
 -- https://github.com/folke/noice.nvim
 
+-- i do like fidget.nvim way more than this
+
 local params = {
 	views = {
 		cmdline_popup = {
@@ -31,6 +33,7 @@ local params = {
 M = {
 	"folke/noice.nvim",
 	event = "VeryLazy",
+	enabled = false,
 	-- opts = {},
 	opts = params,
 	dependencies = {

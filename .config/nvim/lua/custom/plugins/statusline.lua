@@ -36,6 +36,15 @@ local section_config = {
 	lualine_z = { "location" },
 }
 
+local winbar_config = {
+	lualine_a = {},
+	lualine_b = {},
+	lualine_c = { "filename" },
+	lualine_x = {},
+	lualine_y = {},
+	lualine_z = {},
+}
+
 return {
 	-- https://neoland.dev/plugin/8327
 	"nvim-lualine/lualine.nvim",
@@ -45,5 +54,7 @@ return {
 	opts = {
 		sections = section_config,
 		inactive_sections = section_config,
+		-- winbar = winbar_config,
+		-- inactive_winbar = winbar_config,
 	},
 }

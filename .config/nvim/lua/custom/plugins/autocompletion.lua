@@ -48,7 +48,13 @@ return {
 					end,
 				},
 				completion = { completeopt = "menu,menuone,noinsert" },
-
+				window = {
+					documentation = {
+						-- use all available space
+						max_width = 0,
+						max_height = 0,
+					},
+				},
 				-- For an understanding of why these mappings were
 				-- chosen, you will need to read `:help ins-completion`
 				--
