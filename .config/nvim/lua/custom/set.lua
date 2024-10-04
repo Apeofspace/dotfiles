@@ -50,7 +50,8 @@ vim.lsp.inlay_hint.enable()
 -- conceal level for obsidian nvim mainly
 vim.opt.conceallevel = 0
 
-vim.opt.hidden = false
+-- allow unsaved buffers to be hidden
+vim.opt.hidden = true
 
 -- spellchecking
 -- vim.opt.spell = true

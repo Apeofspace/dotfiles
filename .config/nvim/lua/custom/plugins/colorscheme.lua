@@ -354,7 +354,7 @@ vim.keymap.set("n", "<leader>cs", function() --> Show all custom colors in teles
 
 		local completion = vim.fn.getcompletion
 		---@diagnostic disable-next-line: duplicate-set-field
-		vim.fn.getcompletion = function() --> override
+		vim.fn.getcompletion = function(pat, type) --> override
 			return vim.tbl_filter(function(color)
 				return not vim.tbl_contains(builtins, color) --
 			end, completion("", "color"))
@@ -364,10 +364,5 @@ vim.keymap.set("n", "<leader>cs", function() --> Show all custom colors in teles
 		vim.fn.getcompletion = completion --> restore
 	end)
 end, { desc = "Telescope COLORSCHEMES", silent = true })
-
--- function ReloadColorScheme()
--- 	local current_scheme = vim.g.colors_name
--- 	vim.cmd("colorscheme" .. current_scheme)
--- end
 
 return schemes
