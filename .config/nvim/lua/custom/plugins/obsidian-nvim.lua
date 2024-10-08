@@ -3,7 +3,7 @@ return {
 	version = "*", -- recommended, use latest release instead of latest commit
 	lazy = true,
 	keys = {
-		{ "<leader>oo", desc = "[O]bsidian [O]pen" },
+		{ "<leader>ov", desc = "[O]bsidian [V]ault" },
 		{ "<leader>ot", desc = "[O]bsidian [T]ags" },
 		{ "<leader>on", desc = "[O]bsidian [N]ew" },
 	},
@@ -53,7 +53,7 @@ return {
 				-- 	opts = { buffer = true, expr = true },
 				-- },
 			},
-			vim.keymap.set("n", "<leader>oo", ":ObsidianSearch<CR>", { desc = "[O]bsidian [O]pen" }),
+			vim.keymap.set("n", "<leader>ov", ":ObsidianSearch<CR>", { desc = "[O]bsidian [V]ault" }),
 			vim.keymap.set("n", "<leader>ot", ":ObsidianTags<CR>", { desc = "[O]bsidian [T]ags" }),
 			vim.keymap.set("n", "<leader>on", function()
 				local word = vim.fn.input("New note name: > ")

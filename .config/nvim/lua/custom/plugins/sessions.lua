@@ -20,6 +20,13 @@ M = {
 			desc = "Restore Last Session",
 		},
 		{
+			"<leader>oo",
+			function()
+				require("persistence").load()
+			end,
+			desc = "Restore Session in CWD",
+		},
+		{
 			"<leader>od",
 			function()
 				require("persistence").stop()
@@ -27,16 +34,16 @@ M = {
 			desc = "Don't Save Current Session",
 		},
 	},
-	init = function()
-		-- autoload current dir session
-		vim.api.nvim_create_autocmd("VimEnter", {
-			once = true,
-			nested = true,
-			callback = function()
-				require("persistence").load()
-			end,
-		})
-	end,
+	-- init = function()
+	-- 	-- autoload current dir session
+	-- 	vim.api.nvim_create_autocmd("VimEnter", {
+	-- 		once = true,
+	-- 		nested = true,
+	-- 		callback = function()
+	-- 			require("persistence").load()
+	-- 		end,
+	-- 	})
+	-- end,
 }
 
 return M

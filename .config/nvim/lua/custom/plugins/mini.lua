@@ -40,7 +40,20 @@ return {
 			end, { desc = "Toggle mini.diff overlay" })
 
 			-- move selection
-			require("mini.move").setup()
+			require("mini.move").setup({
+				mappings = {
+					-- visual
+					left = "<leader>h",
+					right = "<leader>l",
+					down = "<leader>j",
+					up = "<leader>k",
+					-- normal
+					line_left = "<leader>h",
+					line_right = "<leader>l",
+					line_down = "<leader>j",
+					line_up = "<leader>k",
+				},
+			})
 
 			-- file navigation
 			require("mini.files").setup({
