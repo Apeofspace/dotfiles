@@ -38,6 +38,18 @@ function M.apply_to_config(config)
 		{ key = "l", mods = "LEADER", action = wezterm.action.ActivatePaneDirection("Right") },
 		{ key = "q", mods = "LEADER", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
 		{ key = "z", mods = "LEADER", action = wezterm.action.TogglePaneZoomState },
+		-- {
+		-- 	key = "<F2>",
+		-- 	mods = "LEADER",
+		-- 	action = wezterm.action.PromptInputLine({
+		-- 		description = "Enter new name for tab",
+		-- 		action = wezterm.action_callback(function(window, pane, line)
+		-- 			if line then
+		-- 				window:active_tab():set_title(line)
+		-- 			end
+		-- 		end),
+		-- 	}),
+		-- },
 		-- { key = "o", mods = "LEADER", action = wezterm.action.RotatePanes("Clockwise") },
 		-- We can make separate keybindings for resizing panes
 		-- But Wezterm offers custom "mode" in the name of "KeyTable"
@@ -88,6 +100,7 @@ function M.apply_to_config(config)
 					{ Attribute = { Intensity = "Bold" } },
 					{ Foreground = { AnsiColor = "Fuchsia" } },
 					{ Text = "Enter name for new workspace" },
+					-- { Text = wezterm.workspaces },
 				}),
 				action = wezterm.action_callback(function(window, pane, line)
 					-- line will be `nil` if they hit escape without entering anything
@@ -113,6 +126,16 @@ function M.apply_to_config(config)
 			action = wezterm.action.ActivateTab(i - 1),
 		})
 	end
+	-- local disabled_keys = {
+	-- 	{ key = "h", mods = "SHIFT|CTRL" },
+	-- 	{ key = "j", mods = "SHIFT|CTRL" },
+	-- 	{ key = "k", mods = "SHIFT|CTRL" },
+	-- 	{ key = "l", mods = "SHIFT|CTRL" },
+	-- }
+	-- for _, dis_key in pairs(disabled_keys) do
+	-- 	dis_key.action = wezterm.action.DisableDefaultAssignment
+	-- 	table.insert(config.keys, dis_key)
+	-- end
 end
 
 return M

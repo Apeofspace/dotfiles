@@ -128,8 +128,10 @@ export PIP_DOWNLOAD_CACHE=$HOME/.pip_download_cache
 if [ -n "$RANGER_LEVEL" ]; then 
     export PS1="[r$RANGER_LEVEL]$PS1";
 fi
+
 export VISUAL=nvim
 export EDITOR=nvim
+export PATH="$PATH:/opt/nvim-linux64/bin"
 
 # zoxide 
 eval "$(zoxide init bash)"

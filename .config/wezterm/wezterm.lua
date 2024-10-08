@@ -8,6 +8,7 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
+wezterm.disable_default_keymaps = true
 require("keymaps").apply_to_config(config)
 require("tabbar").apply_to_config(config)
 
