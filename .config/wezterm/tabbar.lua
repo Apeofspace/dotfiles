@@ -1,7 +1,8 @@
-M = {}
 local wezterm = require("wezterm")
 
-function M.apply_to_config(config)
+local M = {}
+
+M.configure = function(config)
 	config.use_fancy_tab_bar = false
 	config.status_update_interval = 1000
 	config.tab_bar_at_bottom = false
@@ -30,7 +31,7 @@ function M.apply_to_config(config)
 			if type(cwd) == "userdata" then
 				-- Wezterm introduced the URL object in 20240127-113634-bbcac864
 				cwd = cwd.file_path
-			-- cwd = get_cwd_name(cwd.file_path)
+				-- cwd = get_cwd_name(cwd.file_path)
 			else
 				-- 20230712-072601-f4abf8fd or earlier version
 				cwd = cwd

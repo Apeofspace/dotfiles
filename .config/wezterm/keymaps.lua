@@ -1,8 +1,10 @@
 local wezterm = require("wezterm")
+local helpers = require("helpers")
+
 local M = {}
 
 -- Keys
-function M.apply_to_config(config)
+function M.configure(config)
 	config.leader = { key = "w", mods = "ALT", timeout_milliseconds = 1000 }
 	config.key_tables = {
 		resize_pane = {
@@ -22,7 +24,7 @@ function M.apply_to_config(config)
 			{ key = "Enter", action = "PopKeyTable" },
 		},
 	}
-	config.keys = {
+	local new_keys = {
 		-- Send M-w when pressing M-w twice
 		{ key = "w", mods = "LEADER|ALT", action = wezterm.action.SendKey({ key = "w", mods = "ALT" }) },
 
@@ -117,15 +119,17 @@ function M.apply_to_config(config)
 				end),
 			}),
 		},
+		-- { key = "f", mods = "ALT", action = wezterm.action_callback(require("sessionizer").toggle) },
 	}
-	-- I can use the tab navigator (LDR t), but I also want to quickly navigate tabs with index
 	for i = 1, 9 do
-		table.insert(config.keys, {
+		table.insert(new_keys, {
 			key = tostring(i),
 			mods = "LEADER",
 			action = wezterm.action.ActivateTab(i - 1),
 		})
 	end
+	helpers.merge_keys(config, new_keys)
+	-- I can use the tab navigator (LDR t), but I also want to quickly navigate tabs with index
 	-- local disabled_keys = {
 	-- 	{ key = "h", mods = "SHIFT|CTRL" },
 	-- 	{ key = "j", mods = "SHIFT|CTRL" },
