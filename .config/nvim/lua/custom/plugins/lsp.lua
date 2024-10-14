@@ -21,7 +21,6 @@ return {
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
-
 					-- Jump to the definition of the word under your cursor.
 					--  This is where a variable was first declared, or where a function is defined, etc.
 					--  To jump back, press <C-T>.
@@ -66,6 +65,7 @@ return {
 					--  For example, in C this would take you to the header
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+					map("gS", ":ClangdSwitchSourceHeader<CR>", "Switch Source/Header")
 					-- toggle inlay_hints
 					map("<leader>th", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -121,90 +121,11 @@ return {
 						"--background-index",
 						"--header-insertion=iwyu",
 						"--completion-style=detailed",
-						-- '--function-arg-placeholders',
-						-- '-j4',
 						"--fallback-style=llvm",
-						-- "--enable-config",
-						-- "-style='{ColumnLimit: 150, }'",
 					},
 					single_file_support = true,
 				},
-				-- marksman = {},
-				-- markdown_oxide = {
-				-- 	-- try to extend capabilities for moxide. Read: https://github.com/Feel-ix-343/markdown-oxide
-				-- 	capabilities = {
-				-- 		workspace = {
-				-- 			didChangeWatchedFiles = {
-				-- 				dynamicRegistration = true,
-				-- 			},
-				-- 		},
-				-- 	},
-				-- },
 				cmake = {},
-				-- READ MORE ON PYTHON TOOLS https://inventwithpython.com/blog/2022/11/19/python-linter-comparison-2022-pylint-vs-pyflakes-vs-flake8-vs-autopep8-vs-bandit-vs-prospector-vs-pylama-vs-pyroma-vs-black-vs-mypy-vs-radon-vs-mccabe/
-				-- pylsp = {
-				--   -- install dependencies to make it work??
-				--   -- pip install python-lsp-server flake8
-				--   -- not sure if i need this or if mason can handle it
-				--   -- https://github.com/python-lsp/python-lsp-server
-				--   settings = {
-				--     pylsp = {
-				--       plugins = {
-				--         jedi_completion = {
-				--           enabled = true,
-				--           include_params = true,
-				--         },
-				--         ruff = {
-				--           enabled = false, -- doesnt work anyway
-				--           ignore = { 'E501', 'E231' },
-				--           formatEnabled = true,
-				--           linelength = 120,
-				--           format = { 'ALL' },
-				--         },
-				--         pylint = {
-				--           -- error/style linter
-				--           -- use this or pyflakes + pycodestyle
-				--           -- said to be much slower than flake8
-				--           enabled = false,
-				--           debounce = 200,
-				--           args = {
-				--             '--ignore=E501,E231',
-				--             '-',
-				--           },
-				--         },
-				--         flake8 = {
-				--           -- includes mccabe, pycodestyle (pep8), pyflakes
-				--           enabled = false,
-				--         },
-				--         mccabe = {
-				--           -- complexity analyzer
-				--           -- responsible for cyclomatic complexity warnings
-				--           enabled = false,
-				--         },
-				--         -- i need those two below or pylint
-				--         pyflakes = {
-				--           -- error linter (no style errors)
-				--           enabled = true,
-				--         },
-				--         pycodestyle = {
-				--           -- style linter only
-				--           enabled = true,
-				--           ignore = { 'E501', 'E231' },
-				--           maxLineLength = 120,
-				--         },
-				--         pylsp_mypy = {
-				--           -- static types analyzer.
-				--           -- Alternatives with similar functionality: pyright, pyre, pytype
-				--           enabled = false,
-				--           report_progress = true,
-				--         },
-				--       },
-				--     },
-				--   },
-				-- },
-				-- use ruff and jedi together or just pylsp honestly
-				-- pyright = {},
-				-- pylyzer = {},
 				jedi_language_server = {},
 				ruff = {
 					ignore = { "E501", "E231" },
@@ -212,15 +133,11 @@ return {
 					linelength = 120,
 				},
 				lua_ls = {
-					-- cmd = {...},
-					-- filetypes = { ...},
-					-- capabilities = {},
 					settings = {
 						Lua = {
 							completion = {
 								callSnippet = "Replace",
 							},
-							-- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
 							diagnostics = { disable = { "missing-fields" }, globals = { "vim" } },
 						},
 					},
