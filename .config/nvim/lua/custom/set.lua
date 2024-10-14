@@ -92,10 +92,10 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { noremap = true, desc = "Del
 vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>")
 
 -- moving splits with leader
-vim.keymap.set({ "n", "v" }, "<C-H>", "<C-w>H", { noremap = true })
-vim.keymap.set({ "n", "v" }, "<C-J>", "<C-w>J", { noremap = true })
-vim.keymap.set({ "n", "v" }, "<C-K>", "<C-w>K", { noremap = true })
-vim.keymap.set({ "n", "v" }, "<C-L>", "<C-w>L", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<leader>h", "<C-w>H", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<leader>", "<C-w>J", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<leader>", "<C-w>K", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<leader>", "<C-w>L", { noremap = true })
 -- moving between splits with Ctrl
 vim.keymap.set({ "n", "v" }, "<C-h>", "<C-w>h", { noremap = false })
 vim.keymap.set({ "n", "v" }, "<C-j>", "<C-w>j", { noremap = false })

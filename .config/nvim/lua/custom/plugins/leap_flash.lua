@@ -1,7 +1,7 @@
 M = {
 	{
 		"ggandor/leap.nvim",
-		enabled = true,
+		enabled = false,
 		config = function()
 			local leap = require("leap")
 			leap.setup({})
