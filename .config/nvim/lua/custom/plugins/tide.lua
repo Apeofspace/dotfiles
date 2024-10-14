@@ -1,6 +1,6 @@
 return {
 	"jackMort/tide.nvim",
-	enabled = true,
+	enabled = false,
 	config = function()
 		require("tide").setup({
 			-- optional configuration
