@@ -2,7 +2,7 @@ return {
 	{ -- Autocompletion
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
-		enabled = true,
+		enabled = false,
 		dependencies = {
 			{
 				"L3MON4D3/LuaSnip",
@@ -92,11 +92,9 @@ return {
 		-- WARN this plugin likely to have breaking changes
 		-- https://github.com/Saghen/blink.cmp
 		"saghen/blink.cmp",
-		enabled = false,
+		enabled = true,
 		lazy = false, -- lazy loading handled internally
-		-- optional: provides snippets for the snippet source
-		dependencies = "rafamadriz/friendly-snippets",
-
+		dependencies = { "rafamadriz/friendly-snippets" },
 		-- use a release tag to download pre-built binaries
 		version = "v0.*",
 		-- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
@@ -118,6 +116,10 @@ return {
 
 			-- experimental signature help support
 			-- trigger = { signature_help = { enabled = true } }
+			keymap = {
+				snippet_forward = "<C-l>",
+				snippet_backward = "<C-h>",
+			},
 		},
 	},
 }

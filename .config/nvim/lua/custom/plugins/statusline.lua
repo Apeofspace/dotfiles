@@ -2,14 +2,14 @@ local get_linecount = function()
 	return vim.fn.line("$") or ""
 end
 
-local statusline = require("arrow.statusline")
+-- local statusline = require("arrow.statusline")
 
-local function get_arrow()
-	if statusline.is_on_arrow_file() then
-		return statusline.text_for_statusline_with_icons()
-	end
-	return ""
-end
+-- local function get_arrow()
+-- 	if statusline.is_on_arrow_file() then
+-- 		return statusline.text_for_statusline_with_icons()
+-- 	end
+-- 	return ""
+-- end
 
 -- this is older config
 -- local section_config = {
@@ -30,7 +30,8 @@ local section_config = {
 	-- +-------------------------------------------------+
 	lualine_a = { "mode" },
 	lualine_b = { "branch", "filename" },
-	lualine_c = { "diagnostics", get_arrow },
+	lualine_c = { "diagnostics"},
+	-- lualine_c = { "diagnostics", get_arrow },
 	lualine_x = { "encoding", "filesize", "filetype" },
 	lualine_y = { "progress", get_linecount },
 	lualine_z = { "location" },

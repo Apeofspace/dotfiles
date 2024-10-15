@@ -22,7 +22,7 @@ M = {
 			format_on_save = function(bufnr)
 				-- disable format on save for some filetypes entirely
 				-- enable format on save but disable lsp fallback for some filetypes
-				local disable_filetypes = { c = true, cpp = true }
+				local disable_filetypes = { c = true, cpp = true } -- NOTE DISABLED FILETYPES HERE <<<---
 				local no_fallback_filetupes = { c = false, cpp = false }
 				local lsp_format_opt
 				if disable_filetypes[vim.bo[bufnr].filetype] then
