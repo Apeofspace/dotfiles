@@ -3,14 +3,13 @@
 local wezterm = require("wezterm")
 local helpers = require("helpers")
 local act = wezterm.action
-
+local fd = "fdfind"
 local M = {}
 
-local fd = "fdfind"
-
-local toggle = function(window, pane)
+local toggle_sesh_list = function(window, pane)
 	local projects = {}
 
+	-- get git projects in proj dir
 	local success, stdout, stderr = wezterm.run_child_process({
 		fd,
 		"-HI",
@@ -20,11 +19,13 @@ local toggle = function(window, pane)
 		os.getenv("HOME") .. "/proj",
 	})
 
+	-- failed to run fdfind
 	if not success then
 		wezterm.log_error("Failed to run fd: " .. stderr)
 		return
 	end
 
+	-- populate table "projects" with the results
 	for line in stdout:gmatch("([^\n]*)\n?") do
 		local project = line:gsub("/.git.*$", "")
 		local label = project
@@ -40,6 +41,7 @@ local toggle = function(window, pane)
 				else
 					wezterm.log_info("Selected " .. label)
 					win:perform_action(act.SwitchToWorkspace({ name = id, spawn = { cwd = label } }), pane)
+					act.EmitEvent("restore_session") -- FIX why doesn't this work???
 				end
 			end),
 			fuzzy = true,
@@ -50,11 +52,25 @@ local toggle = function(window, pane)
 	)
 end
 
+-- SESSION MANAGER
+-- stylua: ignore start
+local session_manager = require("session-manager")
+wezterm.on("save_session", function(window, pane, label) session_manager.save_state(window) end)
+wezterm.on("load_session", function(window, pane) session_manager.load_state(window) end)
+wezterm.on("restore_session", function(window, pane) session_manager.restore_state(window) end)
+-- stylua: ignore end
+
+-- configure hotkeys
 M.configure = function(config)
-	local new_keys = {
-		{ key = "f", mods = "ALT", action = wezterm.action_callback(toggle) },
+	local sessionizer_keys = {
+		{ key = "f", mods = "ALT", action = wezterm.action_callback(toggle_sesh_list) },
 	}
-	helpers.merge_keys(config, new_keys)
+	helpers.merge_keys(config, sessionizer_keys)
+	local session_manager_keys = {
+		{ key = "s", mods = "ALT", action = act.EmitEvent("save_session") },
+		{ key = "r", mods = "ALT", action = act.EmitEvent("restore_session") },
+	}
+	helpers.merge_keys(config, session_manager_keys)
 end
 
 return M
