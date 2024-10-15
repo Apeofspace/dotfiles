@@ -9,10 +9,9 @@ if wezterm.config_builder then
 end
 
 wezterm.disable_default_keymaps = true
-require("keymaps").configure(config)
+require("common-keymaps").configure(config)
 require("tabbar").configure(config)
 require("sessions").configure(config)
--- require("resurrect").configure(config)
 
 -- config.color_scheme = "Gruvbox"
 config.color_scheme = "Tokyo Night"

@@ -102,7 +102,6 @@ function M.configure(config)
 					{ Attribute = { Intensity = "Bold" } },
 					{ Foreground = { AnsiColor = "Fuchsia" } },
 					{ Text = "Enter name for new workspace" },
-					-- { Text = wezterm.workspaces },
 				}),
 				action = wezterm.action_callback(function(window, pane, line)
 					-- line will be `nil` if they hit escape without entering anything
@@ -119,7 +118,6 @@ function M.configure(config)
 				end),
 			}),
 		},
-		-- { key = "f", mods = "ALT", action = wezterm.action_callback(require("sessionizer").toggle) },
 	}
 	for i = 1, 9 do
 		table.insert(new_keys, {
@@ -129,17 +127,6 @@ function M.configure(config)
 		})
 	end
 	helpers.merge_keys(config, new_keys)
-	-- I can use the tab navigator (LDR t), but I also want to quickly navigate tabs with index
-	-- local disabled_keys = {
-	-- 	{ key = "h", mods = "SHIFT|CTRL" },
-	-- 	{ key = "j", mods = "SHIFT|CTRL" },
-	-- 	{ key = "k", mods = "SHIFT|CTRL" },
-	-- 	{ key = "l", mods = "SHIFT|CTRL" },
-	-- }
-	-- for _, dis_key in pairs(disabled_keys) do
-	-- 	dis_key.action = wezterm.action.DisableDefaultAssignment
-	-- 	table.insert(config.keys, dis_key)
-	-- end
 end
 
 return M
