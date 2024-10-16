@@ -35,5 +35,6 @@ return {
 			--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
 		end,
 	},
+	-- jumping between the matching opposing end of a Tree-sitter node, such as brackets, quotes, and more.
 	{ "yorickpeterse/nvim-tree-pairs", opts = {} },
 }
