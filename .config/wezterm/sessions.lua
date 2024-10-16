@@ -21,7 +21,8 @@ local toggle_sesh_list = function(window, pane)
 
 	-- failed to run fdfind
 	if not success then
-		wezterm.log_error("Failed to run fd: " .. stderr)
+		wezterm.log_error("Failed to run fdfind: " .. stderr)
+		window:toast_notification("Failed to run fdfind", nil, 400)
 		return
 	end
 
@@ -58,6 +59,14 @@ local session_manager = require("session-manager")
 wezterm.on("save_session", function(window, pane, label) session_manager.save_state(window) end)
 wezterm.on("load_session", function(window, pane) session_manager.load_state(window) end)
 wezterm.on("restore_session", function(window, pane) session_manager.restore_state(window) end)
+-- auto-restore
+-- wezterm.on("gui-startup", function(cmd)
+--   local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+--   -- maximize window when open
+--   window:gui_window():maximize()
+--   -- restore previous session state
+--   session_manager.restore_state(window:gui_window())
+-- end)
 -- stylua: ignore end
 
 -- configure hotkeys

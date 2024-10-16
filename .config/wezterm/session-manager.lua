@@ -22,6 +22,7 @@ local function retrieve_workspace_data(window)
 	for _, tab in ipairs(window:mux_window():tabs()) do
 		local tab_data = {
 			tab_id = tostring(tab:tab_id()),
+			tab_title = tostring(tab:get_title()),
 			panes = {},
 		}
 
@@ -129,6 +130,8 @@ local function recreate_workspace(window, workspace_data)
 
 		-- Activate the new tab before creating panes
 		new_tab:activate()
+		-- Restore its title
+		new_tab:set_title(tab_data.tab_title)
 
 		-- Recreate panes within this tab
 		for j, pane_data in ipairs(tab_data.panes) do
@@ -205,19 +208,19 @@ function session_manager.restore_state(window)
 			"WezTerm",
 			"Workspace state file not found for workspace: " .. workspace_name,
 			nil,
-			4000
+			400
 		)
 		return
 	end
 
 	if recreate_workspace(window, workspace_data) then
-		window:toast_notification("WezTerm", "Workspace state loaded for workspace: " .. workspace_name, nil, 4000)
+		-- window:toast_notification("WezTerm", "Workspace state loaded for workspace: " .. workspace_name, nil, 400)
 	else
 		window:toast_notification(
 			"WezTerm",
 			"Workspace state loading failed for workspace: " .. workspace_name,
 			nil,
-			4000
+			400
 		)
 	end
 end
@@ -244,9 +247,9 @@ function session_manager.save_state(window)
 
 	-- Save the workspace data to a JSON file and display the appropriate notification
 	if save_to_json_file(data, file_path) then
-		window:toast_notification("WezTerm Session Manager", "Workspace state saved successfully", nil, 4000)
+		window:toast_notification("WezTerm Session Manager", "Workspace state saved successfully", nil, 400)
 	else
-		window:toast_notification("WezTerm Session Manager", "Failed to save workspace state", nil, 4000)
+		window:toast_notification("WezTerm Session Manager", "Failed to save workspace state", nil, 400)
 	end
 end
 
