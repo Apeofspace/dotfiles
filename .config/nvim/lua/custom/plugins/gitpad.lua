@@ -1,4 +1,4 @@
-M = {
+local M = {
 	"yujinyuz/gitpad.nvim",
 	lazy = true,
 	config = function()

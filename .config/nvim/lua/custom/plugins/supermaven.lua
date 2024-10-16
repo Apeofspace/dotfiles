@@ -1,4 +1,4 @@
-M = {
+local M = {
 	"supermaven-inc/supermaven-nvim",
 	lazy = true,
 	enabled = false,

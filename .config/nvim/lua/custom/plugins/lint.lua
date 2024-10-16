@@ -1,4 +1,4 @@
-M = {
+local M = {
 	{
 		"mfussenegger/nvim-lint",
 		enabled = true,

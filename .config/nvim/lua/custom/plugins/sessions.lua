@@ -1,5 +1,5 @@
 -- autoloading stolen from https://github.com/rafi/vim-config/blob/master/lua/rafi/plugins/editor.lua
-M = {
+local M = {
 	"folke/persistence.nvim",
 	event = "BufReadPre", -- this will only start session saving when an actual file was opened
 	opts = {},

@@ -1,4 +1,4 @@
-M = {
+local M = {
 	{ -- Autoformat
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
