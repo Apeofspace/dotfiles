@@ -30,7 +30,7 @@ local section_config = {
 	-- +-------------------------------------------------+
 	lualine_a = { "mode" },
 	lualine_b = { "branch", "filename" },
-	lualine_c = { "diagnostics"},
+	lualine_c = { "diagnostics" },
 	-- lualine_c = { "diagnostics", get_arrow },
 	lualine_x = { "encoding", "filesize", "filetype" },
 	lualine_y = { "progress", get_linecount },
@@ -45,16 +45,27 @@ local winbar_config = {
 	lualine_y = {},
 	lualine_z = {},
 }
+local tabline_config = {
+	lualine_a = { {
+		"tabs",
+		mode = 2,
+		cond = function()
+			return #vim.fn.gettabinfo() > 1
+		end,
+	} },
+}
 
 return {
 	-- https://neoland.dev/plugin/8327
 	"nvim-lualine/lualine.nvim",
 	-- lazy = true,
 	-- event = "User ColorschemeLoaded",
+	-- event = "VeryLazy",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		sections = section_config,
 		inactive_sections = section_config,
+		-- tabline = tabline_config,
 		-- winbar = winbar_config,
 		-- inactive_winbar = winbar_config,
 	},
