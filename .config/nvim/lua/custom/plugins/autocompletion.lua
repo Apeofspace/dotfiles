@@ -120,6 +120,9 @@ return {
 				snippet_forward = "<C-l>",
 				snippet_backward = "<C-h>",
 			},
+			windows = {
+				documentation = { auto_show = true },
+			},
 		},
 	},
 }

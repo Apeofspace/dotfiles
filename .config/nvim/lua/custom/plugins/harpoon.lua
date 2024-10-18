@@ -11,8 +11,8 @@ return {
 		harpoon:setup()
 		-- REQUIRED
 		--stylua: ignore start
+		vim.keymap.set("n", "<leader><leader>", function() harpoon.ui:toggle_quick_menu(require("harpoon"):list()) end, { desc = "Harpoon list" })
 		vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon add" })
-		vim.keymap.set("n", "<leader>`", function() harpoon.ui:toggle_quick_menu(require("harpoon"):list()) end, { desc = "Harpoon list" })
 		vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end, { desc = "Harpoon file 1" })
 		vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end, { desc = "Harpoon file 2" })
 		vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end, { desc = "Harpoon file 3" })
