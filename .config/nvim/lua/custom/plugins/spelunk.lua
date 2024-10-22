@@ -4,7 +4,7 @@ local M = {
 	{
 		"EvWilson/spelunk.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		enabled = true,
+		enabled = false,
 		opts = {
 			base_mappings = {
 				toggle = "<leader>`",
