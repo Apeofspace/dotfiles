@@ -118,19 +118,13 @@ return {
 					{
 						"blink.cmp.sources.snippets",
 						name = "Snippets",
-						-- keyword_length = 1, -- not supported yet
 					},
-					{
-						"blink.cmp.sources.path",
-						name = "Path",
-						score_offset = 3,
-						opts = { get_cwd = vim.uv.cwd },
-					},
+					{ "blink.cmp.sources.path", name = "Path", score_offset = 3, opts = { get_cwd = vim.uv.cwd } },
 					{
 						"blink.cmp.sources.buffer",
 						name = "Buffer",
 						keyword_length = 3,
-						score_offset = -1,
+						score_offset = -2,
 						fallback_for = { "Path" }, -- PENDING https://github.com/Saghen/blink.cmp/issues/122
 					},
 				},
