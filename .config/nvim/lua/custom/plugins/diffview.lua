@@ -22,15 +22,16 @@ local M = {
 				enhanced_diff_hl = true, -- See ':h diffview-config-enhanced_diff_hl'
 				keymaps = {
 					view = {
-						{ "n", "q", actions.close },
-						-- { "n", "q", "<cmd>DiffviewClose<CR>" }, -- whats the diff even
+						-- { "n", "q", actions.close },
+						{ "n", "q", "<cmd>DiffviewClose<CR>" }, -- whats the diff even
 						{ "n", "<Tab>", actions.select_next_entry },
 						{ "n", "<S-Tab>", actions.select_prev_entry },
 						{ "n", "<Leader>a", actions.focus_files }, -- whats this?
 						{ "n", "<Leader>f", actions.toggle_files },
 					},
 					file_panel = {
-						{ "n", "q", actions.close },
+						-- { "n", "q", actions.close },
+						{ "n", "q", "<cmd>DiffviewClose<CR>" },
 						{ "n", "h", actions.prev_entry },
 						{ "n", "gf", actions.goto_file },
 						{ "n", "sg", actions.goto_file_split },
