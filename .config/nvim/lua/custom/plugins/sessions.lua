@@ -7,7 +7,7 @@ local M = {
 	keys = {
 		{ "<leader>os", function() require("persistence").select() end, desc = "List Sessions", },
 		{ "<leader>ol", function() require("persistence").load({ last = true }) end, desc = "Restore Last Session", },
-		{ "<leader>oo", function() require("persistence").load() end, desc = "Restore Session in CWD", },
+		{ "<leader>oc", function() require("persistence").load() end, desc = "Restore Session in CWD", },
 		{ "<leader>od", function() require("persistence").stop() end, desc = "Don't Save Current Session", },
 	},
 	init = function()
