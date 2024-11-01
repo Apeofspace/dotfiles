@@ -57,6 +57,10 @@ vim.opt.hidden = true
 -- vim.opt.spell = true
 -- vim.opt.spelllang = "en_us"
 
+-- set terminal title to filename and to "bash" when exiting
+vim.opt.title = true
+vim.opt.titleold = "bash"
+
 -- don't continue comment when hitting newline
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
