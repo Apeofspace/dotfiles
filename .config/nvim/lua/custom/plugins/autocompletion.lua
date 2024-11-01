@@ -101,32 +101,40 @@ return {
 				use_nvim_cmp_as_default = true, -- temp
 			},
 			nerd_font_variant = "normal",
-			-- experimental auto-brackets support
 			accept = { auto_brackets = { enabled = true } },
-			-- experimental signature help support
 			-- trigger = { signature_help = { enabled = true } },
+			-- keymap = "default",
 			keymap = {
-				snippet_forward = "<C-l>",
-				snippet_backward = "<C-h>",
+				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				["<C-e>"] = { "hide" },
+				["<Tab>"] = {
+					function(cmp)
+						if cmp.is_in_snippet() then
+							return cmp.accept()
+						else
+							return cmp.select_and_accept()
+						end
+					end,
+				},
+				["<C-p>"] = { "select_prev", "fallback" },
+				["<C-n>"] = { "select_next", "fallback" },
+				["<C-b>"] = { "scroll_documentation_up", "fallback" },
+				["<C-f>"] = { "scroll_documentation_down", "fallback" },
+				["<C-h>"] = { "snippet_forward", "fallback" },
+				["<C-l>"] = { "snippet_backward", "fallback" },
 			},
 			windows = {
 				documentation = { auto_show = true },
 			},
-
 			sources = {
 				-- list of enabled providers
 				completion = {
 					enabled_providers = { "lsp", "path", "snippets", "buffer" },
 				},
-
 				providers = {
 					lsp = {
 						name = "LSP",
 						module = "blink.cmp.sources.lsp",
-
-						--- *All* of the providers have the following options available
-						--- NOTE: All of these options may be functions to get dynamic behavior
-						--- See the type definitions for more information
 						enabled = true, -- whether or not to enable the provider
 						transform_items = nil, -- function to transform the items before they're returned
 						should_show_items = true, -- whether or not to show the items
@@ -160,9 +168,6 @@ return {
 							extended_filetypes = {},
 							ignored_filetypes = {},
 						},
-
-						--- Example usage for disabling the snippet provider after pressing trigger characters (i.e. ".")
-						-- enabled = function(ctx) return ctx ~= nil and ctx.trigger.kind == vim.lsp.protocol.CompletionTriggerKind.TriggerCharacter end,
 					},
 					buffer = {
 						name = "Buffer",
@@ -172,24 +177,6 @@ return {
 					},
 				},
 			},
-
-			-- sources = {
-			-- providers = {
-			-- 	{ "blink.cmp.sources.lsp", name = "LSP", score_offset = 1 },
-			-- 	{
-			-- 		"blink.cmp.sources.snippets",
-			-- 		name = "Snippets",
-			-- 	},
-			-- 	{ "blink.cmp.sources.path", name = "Path", score_offset = 3, opts = { get_cwd = vim.uv.cwd } },
-			-- 	{
-			-- 		"blink.cmp.sources.buffer",
-			-- 		name = "Buffer",
-			-- 		keyword_length = 3,
-			-- 		score_offset = -2,
-			-- 		fallback_for = { "Path" }, -- PENDING https://github.com/Saghen/blink.cmp/issues/122
-			-- 	},
-			-- },
-			-- },
 		},
 	},
 }
