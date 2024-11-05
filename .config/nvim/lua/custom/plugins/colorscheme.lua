@@ -22,11 +22,6 @@ local schemes = {
 				dim_inactive = false,
 				transparent_mode = false,
 				overrides = {
-					-- ["@diff.minus"] = { fg = palette.dark_red },
-					-- ["@diff.plus"] = { fg = palette.bright_green },
-					-- ["@diff.delta"] = { fg = palette.bright_aqua },
-					-- ["@module"] = { italic = true },
-					-- ["@module.buitlin"] = { italic = true, fg = palette.bright_orange },
 					["@attribute"] = { italic = true },
 					["@keyword"] = { italic = true, bold = false, fg = palette.bright_red },
 					["@keyword.function"] = { italic = true, bold = true, fg = palette.bright_red },
@@ -40,33 +35,6 @@ local schemes = {
 					["@keyword.type"] = { italic = true, bold = true, fg = palette.bright_red },
 				},
 			})
-		end,
-	},
-	{
-		"ilof2/posterpole.nvim",
-		priority = 1000,
-		name = "posterpole",
-		lazy = true,
-		config = function()
-			require("posterpole").setup({
-				transparent = true,
-				colorless_bg = false, -- grayscale or not
-				dim_inactive = false, -- highlight inactive splits
-				brightness = 0, -- negative numbers - darker, positive - lighter
-				selected_tab_highlight = false, --highlight current selected tab
-				fg_saturation = 5, -- font saturation, gray colors become more brighter
-				bg_saturation = 0, -- background saturation
-			})
-			vim.cmd("colorscheme posterpole")
-		end,
-	},
-	{
-		"ferdinandrau/lavish.nvim",
-		name = "lavish",
-		lazy = true,
-		priority = 1000,
-		config = function()
-			require("lavish").apply()
 		end,
 	},
 	{
@@ -101,7 +69,6 @@ local schemes = {
 		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
-			-- vim.cmd.colorscheme 'eldritch'
 			require("eldritch").setup({
 				transparent = false,
 			})
@@ -125,7 +92,6 @@ local schemes = {
 			require("monokai-pro").setup({
 				filter = "pro",
 			})
-			-- vim.cmd.colorscheme 'monokai-pro'
 		end,
 	},
 	{
@@ -169,7 +135,6 @@ local schemes = {
 					folds = true,
 				},
 			})
-			-- vim.cmd.colorscheme 'hybrid'
 		end,
 	},
 	{
@@ -211,7 +176,7 @@ local schemes = {
 		priority = 1000,
 		config = function()
 			require("everforest").setup({
-				transparent = true,
+				transparent = false,
 				background = "hard",
 				transparent_background_level = 2,
 			})
@@ -223,7 +188,7 @@ local schemes = {
 		lazy = true,
 		priority = 1000,
 		opts = {
-			transparent = false,
+			transparent = true,
 			dim_inactive = true,
 			integrations = {
 				telescope = {
