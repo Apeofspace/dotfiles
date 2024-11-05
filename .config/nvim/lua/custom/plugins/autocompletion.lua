@@ -106,7 +106,7 @@ return {
 			-- keymap = "default",
 			keymap = {
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-				["<C-e>"] = { "hide" },
+				["<C-e>"] = { "hide", "fallback" },
 				["<Tab>"] = {
 					function(cmp)
 						if cmp.is_in_snippet() then
@@ -115,6 +115,7 @@ return {
 							return cmp.select_and_accept()
 						end
 					end,
+					"fallback",
 				},
 				["<C-p>"] = { "select_prev", "fallback" },
 				["<C-n>"] = { "select_next", "fallback" },
