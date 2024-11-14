@@ -19,26 +19,27 @@ local M = {
 				timeout_ms = 500,
 				lsp_format = "fallback",
 			},
-			format_on_save = function(bufnr)
-				-- disable format on save for some filetypes entirely
-				-- enable format on save but disable lsp fallback for some filetypes
-				local disable_filetypes = { c = true, cpp = true } -- NOTE DISABLED FILETYPES HERE <<<---
-				local no_fallback_filetupes = { c = false, cpp = false }
-				local lsp_format_opt
-				if disable_filetypes[vim.bo[bufnr].filetype] then
-					return false
-				else
-					if no_fallback_filetupes[vim.bo[bufnr].filetype] then
-						lsp_format_opt = "never"
-					else
-						lsp_format_opt = "fallback"
-					end
-					return {
-						timeout_ms = 1000,
-						lsp_format = lsp_format_opt,
-					}
-				end
-			end,
+			format_on_save = false,
+			-- format_on_save = function(bufnr)
+			-- 	-- disable format on save for some filetypes entirely
+			-- 	-- enable format on save but disable lsp fallback for some filetypes
+			-- 	local disable_filetypes = { c = true, cpp = true } -- NOTE DISABLED FILETYPES HERE <<<---
+			-- 	local no_fallback_filetupes = { c = false, cpp = false }
+			-- 	local lsp_format_opt
+			-- 	if disable_filetypes[vim.bo[bufnr].filetype] then
+			-- 		return false
+			-- 	else
+			-- 		if no_fallback_filetupes[vim.bo[bufnr].filetype] then
+			-- 			lsp_format_opt = "never"
+			-- 		else
+			-- 			lsp_format_opt = "fallback"
+			-- 		end
+			-- 		return {
+			-- 			timeout_ms = 1000,
+			-- 			lsp_format = lsp_format_opt,
+			-- 		}
+			-- 	end
+			-- end,
 
 			formatters_by_ft = {
 				-- Use the "*" filetype to run formatters on all filetypes.

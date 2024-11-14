@@ -65,7 +65,7 @@ return {
 					--  For example, in C this would take you to the header
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-					map("gS", ":ClangdSwitchSourceHeader<CR>", "Switch Source/Header")
+					map("gs", ":ClangdSwitchSourceHeader<CR>", "Switch Source/Header")
 					-- toggle inlay_hints
 					map("<leader>th", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())

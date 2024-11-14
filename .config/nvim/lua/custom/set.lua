@@ -45,7 +45,7 @@ vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
-vim.lsp.inlay_hint.enable()
+-- vim.lsp.inlay_hint.enable()
 
 -- conceal level for obsidian nvim mainly
 vim.opt.conceallevel = 0
