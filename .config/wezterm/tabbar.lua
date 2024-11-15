@@ -4,6 +4,7 @@ local M = {}
 
 M.configure = function(config)
 	config.use_fancy_tab_bar = false
+	config.tab_max_width = 40
 	config.status_update_interval = 1000
 	config.tab_bar_at_bottom = false
 	wezterm.on("update-status", function(window, pane)
