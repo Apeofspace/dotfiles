@@ -58,8 +58,18 @@ vim.opt.hidden = true
 -- vim.opt.spelllang = "en_us"
 
 -- set terminal title to filename and to "bash" when exiting
-vim.opt.title = true
 vim.opt.titleold = "bash"
+vim.opt.title = true
+local title = function()
+	local dir = ""
+	for w in string.gmatch(vim.fn.getcwd(), "/.[^/]+") do
+		-- only the last offurance in dir
+		dir = w
+	end
+	dir = string.gsub(dir, "/", "")
+	return "NVIM | " .. dir
+end
+vim.opt.titlestring = title()
 
 -- don't continue comment when hitting newline
 vim.api.nvim_create_autocmd("FileType", {
