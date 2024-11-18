@@ -60,7 +60,7 @@ return {
 	"nvim-lualine/lualine.nvim",
 	-- lazy = true,
 	-- event = "User ColorschemeLoaded",
-	-- event = "VeryLazy",
+	event = "VeryLazy",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	opts = {
 		sections = section_config,
