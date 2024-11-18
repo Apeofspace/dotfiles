@@ -1,7 +1,7 @@
 return {
 	"j-hui/fidget.nvim",
 	enabled = true,
-	event = 'VeryLazy',
+	event = 'LspAttach',
 	config = function()
 		local fidget = require("fidget")
 		fidget.setup({
