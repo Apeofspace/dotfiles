@@ -38,6 +38,20 @@ local schemes = {
 		end,
 	},
 	{
+		"sainnhe/gruvbox-material",
+		name = "gruvbox-material",
+		lazy = true,
+		priority = 1000,
+		config = function()
+			vim.g.gruvbox_material_enable_italic = 1
+			vim.g.gruvbox_material_background = "medium"
+			vim.g.gruvbox_material_foreground = "material"
+			vim.g.gruvbox_material_enable_bold = 1
+			vim.g.gruvbox_material_enable_bold = 1
+			vim.g.gruvbox_material_better_performance = 1
+		end,
+	},
+	{
 		"sainnhe/sonokai",
 		name = "sonokai",
 		lazy = true,
@@ -176,9 +190,8 @@ local schemes = {
 		priority = 1000,
 		config = function()
 			require("everforest").setup({
-				transparent = false,
 				background = "hard",
-				transparent_background_level = 2,
+				-- transparent_background_level = 2,
 			})
 		end,
 	},
