@@ -303,7 +303,7 @@ local schemes = {
 -- Path to the file where the colorscheme will be saved
 local colorscheme_file = vim.fn.stdpath("config") .. "/lua/custom/colorscheme.txt"
 
-local function read_colorscheme()
+function schemes.read_colorscheme()
 	local f = io.open(colorscheme_file, "r")
 	if f then
 		local colorscheme = f:read("*l")
@@ -322,7 +322,7 @@ local function write_colorscheme(colorscheme)
 end
 
 function schemes.SetColorschemeFromFile()
-	local active_scheme = read_colorscheme()
+	local active_scheme = schemes.read_colorscheme()
 	if active_scheme then
 		vim.cmd("colorscheme " .. active_scheme)
 	end

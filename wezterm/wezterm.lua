@@ -17,8 +17,8 @@ require("sessions").configure(config)
 config.color_scheme = "Tokyo Night"
 config.font = wezterm.font_with_fallback({
 	{ family = "Victor Mono", scale = 1, weight = "Medium" },
+	{ family = "JetBrains Mono", scale = 1, weight = "Regular" },
 	{ family = "Fira Code", scale = 1, weight = "Regular" },
-	{ family = "Iosevka Nerd Font", scale = 1, weight = "Medium" },
 })
 config.font_size = 12
 config.warn_about_missing_glyphs = false
@@ -30,7 +30,18 @@ config.initial_cols = 100
 config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 3000
 config.default_workspace = "main"
-config.term = "wezterm"
+config.term = "wezterm" -- enable the use of terminfo file (curled underlines etc)
+-- check out more https://wezfurlong.org/wezterm/config/lua/config/term.html
+config.max_fps = 120
+-- config.front_end = "Software"
+-- config.front_end = "OpenGL"
+config.front_end = "WebGpu"
+config.webgpu_power_preference = "HighPerformance"
+-- config.webgpu_preferred_adapter = {
+-- 	backend = "Vulkan",
+-- 	device_type = "DiscreteGpu",
+-- 	name = "NVIDIA GeForce RTX 3060",
+-- }
 
 -- Dim inactive panes
 config.inactive_pane_hsb = {

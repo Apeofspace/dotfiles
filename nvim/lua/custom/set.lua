@@ -35,7 +35,8 @@ vim.opt.timeoutlen = 500 -- timeout for a keymap sequence
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.cursorline = true -- Highlight the text line of the cursor
-vim.opt.scrolloff = 40
+-- vim.opt.scrolloff = 40
+vim.opt.scrolloff = 8
 
 vim.opt.colorcolumn = "80"
 vim.opt.wrap = false
