@@ -170,4 +170,4 @@ if [[ ${BASH_VERSINFO[0]:-0} -eq 4 && ${BASH_VERSINFO[1]:-0} -ge 4 || ${BASH_VER
 fi
 
 # autostart zellij
-eval "$(zellij setup --generate-auto-start bash)"
+# eval "$(zellij setup --generate-auto-start bash)"
