@@ -168,3 +168,6 @@ if [[ ${BASH_VERSINFO[0]:-0} -eq 4 && ${BASH_VERSINFO[1]:-0} -ge 4 || ${BASH_VER
     \builtin complete -F __zoxide_z_complete -o filenames -- z
     \builtin complete -r zi &>/dev/null || \builtin true
 fi
+
+# autostart zellij
+eval "$(zellij setup --generate-auto-start bash)"
