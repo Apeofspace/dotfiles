@@ -7,9 +7,11 @@ local M = {
 			"SmiteshP/nvim-navic",
 			"nvim-tree/nvim-web-devicons", -- optional dependency
 		},
-		opts = {
-			-- configurations go here
-		},
+    -- config = function ()
+    --   require("nvim-web-devicons").setup()
+    --   require("barbecue").setup()
+    -- end
+		opts = { },
 	},
 }
 

@@ -112,20 +112,20 @@ vim.keymap.set({ "n", "v" }, "<leader>j", "<C-w>J", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<leader>k", "<C-w>K", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<leader>l", "<C-w>L", { noremap = true })
 -- moving between splits with Ctrl
-vim.keymap.set({ "n", "v" }, "<C-h>", "<C-w>h", { noremap = false })
-vim.keymap.set({ "n", "v" }, "<C-j>", "<C-w>j", { noremap = false })
-vim.keymap.set({ "n", "v" }, "<C-k>", "<C-w>k", { noremap = false })
-vim.keymap.set({ "n", "v" }, "<C-l>", "<C-w>l", { noremap = false })
+vim.keymap.set({ "n", "v" }, "<C-h>", "<C-w>h", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-j>", "<C-w>j", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-k>", "<C-w>k", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-l>", "<C-w>l", { noremap = true })
 
 -- vim.keymap.set({ "n", "v" }, "q", "<nop>", { desc = "fucking nothing" })
 -- remap ctrl-u to nothing (to avoid undoing while trying to yank or paste)
-vim.keymap.set({ "n", "v", "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
+vim.keymap.set({"i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 
 -- use JQ to format json file
 vim.keymap.set({ "n" }, "<leader>gj", [[:%!jq '.'<CR>]], { desc = "Format file with jq" })
 vim.keymap.set({ "v" }, "<leader>gj", [[:'<,'>!jq '.'<CR>]], { desc = "Format selection with jq" })
 
 -- center of screen on halfpage movements
-vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz", { noremap = true })
-vim.keymap.set({ "n", "v" }, "<C-u>", "<C-u>zz", { noremap = true })
-vim.keymap.set({ "n", "v" }, "G", "Gzz", { noremap = true })
+-- vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz", { noremap = true })
+-- vim.keymap.set({ "n", "v" }, "<C-u>", "<C-u>zz", { noremap = true })
+-- vim.keymap.set({ "n", "v" }, "G", "Gzz", { noremap = true })

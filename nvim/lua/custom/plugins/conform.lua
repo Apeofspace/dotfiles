@@ -43,17 +43,18 @@ local M = {
 
 			formatters_by_ft = {
 				-- Use the "*" filetype to run formatters on all filetypes.
-				-- ["*"] = { "codespell" },
 				lua = { "stylua" },
-				python = function(bufnr)
-					if require("conform").get_formatter_info("ruff_format", bufnr).available then
-						return { "ruff_fix", "ruff_format", "ruff_organize_imports" }
-					else
-						return { "isort", "black", stop_after_first = false }
-					end
-				end,
+				-- python = function(bufnr)
+				-- 	if require("conform").get_formatter_info("ruff_format", bufnr).available then
+				-- 		return { "ruff_fix", "ruff_format", "ruff_organize_imports" }
+				-- 	else
+				-- 		return { "isort", "black", stop_after_first = false }
+				-- 	end
+				-- end,
+				python = { "ruff_format", "ruff_organize_imports" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
+				yaml = { "prettierd" },
 				json = { "prettierd", "prettier", stop_after_first = true },
 				jsonc = { "prettierd", "prettier", stop_after_first = true },
 				-- WARN: astyle needs to be installed manually

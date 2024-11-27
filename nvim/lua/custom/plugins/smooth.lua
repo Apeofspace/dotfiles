@@ -1,34 +1,30 @@
 local running_neovide = vim.g.neovide
-local running_wezterm = (vim.env.TERM_PROGRAM or vim.env.TERM) == 'WezTerm'
+local running_kitty = (vim.env.TERM_PROGRAM or vim.env.TERM) == "xterm-kitty"
+local running_wezterm = (vim.env.TERM_PROGRAM or vim.env.TERM) == "WezTerm"
 local M = {
 	{
 		"sphamba/smear-cursor.nvim",
-		enabled = not running_neovide,
-		opts = {
-			-- Cursor color. Defaults to Cursor gui color
-			cursor_color = "#d3cdc3",
-			-- Background color. Defaults to Normal gui background color
-			normal_bg = "#282828",
-			-- Smear cursor when switching buffers
-			smear_between_buffers = true,
-			-- Smear cursor when moving within line or to neighbor lines
-			smear_between_neighbor_lines = true,
-			-- Use floating windows to display smears outside buffers.
-			-- May have performance issues with other plugins.
-			use_floating_windows = true,
-			-- Set to `true` if your font supports legacy computing symbols (block unicode symbols).
-			-- Smears will blend better on all backgrounds.
-			legacy_computing_symbols_support = false,
-			-- Attempt to hide the real cursor when smearing.
-			hide_target_hack = true,
-		},
+		enabled = not running_neovide and not running_kitty,
+    -- enabled = false,
+		opts = {},
 	},
 	{
 		"karb94/neoscroll.nvim",
 		-- enabled = (not running_neovide) and (not running_wezterm),
-		enabled = (not running_neovide),
-		opts = {},
-		main = "neoscroll",
+		enabled = not running_neovide,
+    -- enabled = false,
+		config = function()
+			local neoscroll = require("neoscroll")
+			neoscroll.setup({
+				easing = "quadratic",
+				performance_mode = false, -- disable treesitter
+				-- mappings = { "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
+			})
+			-- vim.keymap.set({ "n", "v", "x" }, "<C-u>", neoscroll.scroll(-0.5, {move_cursor=true, duration=1000}))
+			-- vim.keymap.set({ "n", "v", "x" }, "<C-d>", neoscroll.scroll(0.5, {move_cursor=true, duration=1000}))
+			-- vim.keymap.set({ "n", "v", "x" }, "<C-u>", neoscroll.scroll(-vim.wo.scroll, true, 350))
+			-- vim.keymap.set({ "n", "v", "x" }, "<C-d>", neoscroll.scroll(vim.wo.scroll, true, 350))
+		end,
 	},
 }
 

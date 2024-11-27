@@ -127,10 +127,19 @@ return {
 				},
 				cmake = {},
 				jedi_language_server = {},
+				-- ruff = {
+				-- 	ignore = { "E501", "E231" },
+				-- 	formatEnabled = false,
+				-- 	linelength = 120,
+				-- },
 				ruff = {
-					ignore = { "E501", "E231" },
-					formatEnabled = false,
-					linelength = 120,
+					init_options = {
+						settings = {
+							ignore = { "E501", "E231" },
+							formatEnabled = false,
+							linelength = 120,
+						},
+					},
 				},
 				lua_ls = {
 					settings = {
@@ -151,9 +160,10 @@ return {
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format lua code
 				"codespell",
-				"isort",
-				"black",
-				"ruff",
+				-- "isort",
+				-- "black",
+				-- "ruff",
+				"prettierd",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
