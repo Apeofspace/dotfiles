@@ -1,0 +1,15 @@
+; add this to your ~/.gitconfig
+; [include]
+;   path = ~/.config/git/gitconfig_ext
+
+[core]
+    editor = nvim
+    pager = cat
+[merge]
+    tool = nvimdiff
+    prompt = false
+    keepBackup = false
+[mergetool "nvimdiff"]
+    cmd = nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J' -c 'set diffopt&' -c 'set diffopt+=algorithm:patience'
+    keepBackup = false
+
