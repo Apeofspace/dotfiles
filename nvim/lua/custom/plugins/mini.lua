@@ -42,16 +42,17 @@ return {
 			-- move selection
 			require("mini.move").setup({
 				-- mappings = {
-				-- 	-- visual
-				-- 	left = "<leader>h",
-				-- 	right = "<leader>l",
-				-- 	down = "<leader>j",
-				-- 	up = "<leader>k",
-				-- 	-- normal
-				-- 	line_left = "<leader>h",
-				-- 	line_right = "<leader>l",
-				-- 	line_down = "<leader>j",
-				-- 	line_up = "<leader>k",
+				-- 	-- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+				-- 	left = "<C-M-h>",
+				-- 	right = "<C-M-l>",
+				-- 	down = "<C-M-j>",
+				-- 	up = "<C-M-k>",
+
+				-- 	-- Move current line in Normal mode
+				-- 	line_left = "<C-M-h>",
+				-- 	line_right = "<C-M-l>",
+				-- 	line_down = "<C-M-j>",
+				-- 	line_up = "<C-M-k>",
 				-- },
 			})
 

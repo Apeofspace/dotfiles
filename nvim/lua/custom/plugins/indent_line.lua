@@ -24,7 +24,7 @@ return {
 					delay = 0,
 				},
 				indent = {
-					enable = true,
+					enable = false,
 				},
 			})
 		end,
