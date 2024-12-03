@@ -1,20 +1,38 @@
 local M = {
 	{
 		"mfussenegger/nvim-dap",
-		enabled = false,
+		enabled = true,
 		dependencies = {
 			{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
 			"williamboman/mason.nvim",
 			"jay-babu/mason-nvim-dap.nvim",
 			"mfussenegger/nvim-dap-python",
 			"theHamsta/nvim-dap-virtual-text",
+			"jedrzejboczar/nvim-dap-cortex-debug",
 		},
+    --stylua: ignore start
+		keys = {
+			{ "<F5>", function() -- (Re-)reads launch.json if present
+					-- if vim.fn.filereadable(".vscode/launch.json") then
+					-- 	require("dap.ext.vscode").load_launchjs(nil, { cpptools = { "c", "cpp" } })
+					-- end
+					require("dap").continue()
+				end,
+        desc = "Debug: Start/Continue", },
+			{ "<F11>", function() require("dap").step_into() end, desc = "Debug: Step Into", },
+			{ "<F10>", function() require("dap").step_over() end, desc = "Debug: Step Over", },
+			{ "<S-F11>", function() require("dap").step_out() end, desc = "Debug: Step Out", },
+			{ "<leader>b", function() require("dap").toggle_breakpoint() end, desc = "Debug: Toggle Breakpoint", },
+			{ "<leader>B", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Debug: Set Breakpoint", },
+			-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
+			{ "<F7>", function() require("dapui").toggle() end, desc = "Debug: See last session result.", },
+		},
+		--stylua: ignore end
 		config = function()
 			local dap = require("dap")
 			local dapui = require("dapui")
 			require("nvim-dap-virtual-text").setup()
 			require("mason-nvim-dap").setup({
-				-- Makes a best effort to setup the various debuggers with
 				-- reasonable debug configurations
 				automatic_installation = true,
 				-- You can provide additional configuration to the handlers,
@@ -26,19 +44,10 @@ local M = {
 					-- Update this to ensure that you have the debuggers for the langs you want
 					"codelldb",
 					"debugpy",
-					-- 'cortex-debug',
+					"cortex-debug",
 					"cpptools",
 				},
 			})
-			-- Basic debugging keymaps, feel free to change to your liking!
-			vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
-			vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })
-			vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
-			vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Debug: Step Out" })
-			vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-			vim.keymap.set("n", "<leader>B", function()
-				dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-			end, { desc = "Debug: Set Breakpoint" })
 			-- Dap UI setup. For more information, see |:help nvim-dap-ui|
 			dapui.setup({
 				icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
@@ -56,35 +65,39 @@ local M = {
 					},
 				},
 			})
-			-- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-			vim.keymap.set("n", "<F7>", dapui.toggle, { desc = "Debug: See last session result." })
+
+			-- Change breakpoint icons
+			vim.api.nvim_set_hl(0, "DapBreak", { fg = "#e51400" })
+			vim.api.nvim_set_hl(0, "DapStop", { fg = "#ffcc00" })
+			local breakpoint_icons = vim.g.have_nerd_font -- not set likely
+					and {
+						Breakpoint = "",
+						BreakpointCondition = "",
+						BreakpointRejected = "",
+						LogPoint = "",
+						Stopped = "",
+					}
+				or {
+					Breakpoint = "●",
+					BreakpointCondition = "⊜",
+					BreakpointRejected = "⊘",
+					LogPoint = "◆",
+					Stopped = "⭔",
+				}
+			for type, icon in pairs(breakpoint_icons) do
+				local tp = "Dap" .. type
+				local hl = (type == "Stopped") and "DapStop" or "DapBreak"
+				vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
+			end
 
 			dap.listeners.after.event_initialized["dapui_config"] = dapui.open
 			dap.listeners.before.event_terminated["dapui_config"] = dapui.close
 			dap.listeners.before.event_exited["dapui_config"] = dapui.close
 
 			require("dap-python").setup()
-		end,
-	},
-	{
-		"jedrzejboczar/nvim-dap-cortex-debug",
-		enabled = false,
-		dependencies = { "mfussenegger/nvim-dap" },
-		config = function()
-			local dap_cortex_debug = require("dap-cortex-debug")
-			local dap = require("dap")
-			dap.configurations.c = {
-				dap_cortex_debug.openocd_config({
-					name = "Example debugging with OpenOCD",
-					cwd = "${workspaceFolder}",
-					executable = "${workspaceFolder}/build/${workspaceFolder}.elf",
-					-- configFiles = { '${workspaceFolder}/build/openocd/connect.cfg' },
-					configFiles = { "interface/stlink.cfg", "target/stm32f4x.cfg" },
-					gdbTarget = "localhost:3333",
-					rttConfig = dap_cortex_debug.rtt_config(0),
-					showDevDebugOutput = false,
-				}),
-			}
+			require("dap-cortex-debug").setup() -- requires node-js sadly
+			-- WARN: this uses standard JSON, which mean trailing commas at the end
+			-- of a list are an error! see ":h dap-launch.json"
 		end,
 	},
 }

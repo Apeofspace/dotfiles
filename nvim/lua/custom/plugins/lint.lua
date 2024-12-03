@@ -20,7 +20,9 @@ local M = {
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 				group = lint_augroup,
 				callback = function()
-					lint.try_lint()
+					if vim.opt_local.modifiable:get() then
+						lint.try_lint()
+					end
 				end,
 			})
 		end,
