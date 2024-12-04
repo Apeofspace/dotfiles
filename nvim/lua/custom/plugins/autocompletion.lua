@@ -126,6 +126,11 @@ return {
 			},
 			windows = {
 				documentation = { auto_show = true },
+				autocomplete = {
+					draw = {
+						columns = { { "kind_icon"}, { "label", "label_description", "kind", gap = 1 } },
+					},
+				},
 			},
 			sources = {
 				-- list of enabled providers
