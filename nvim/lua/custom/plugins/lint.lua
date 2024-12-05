@@ -1,7 +1,7 @@
 local M = {
 	{
 		"mfussenegger/nvim-lint",
-		enabled = true,
+		-- enabled = false,
 		event = {
 			"BufReadPre",
 			"BufNewFile",
@@ -10,7 +10,7 @@ local M = {
 			local lint = require("lint")
 
 			lint.linters_by_ft = {
-				-- python = { "ruff" }, -- not sure about this one
+				python = { "ruff" }, -- not sure about this one
 				text = { "codespell" },
 				markdown = { "codespell" },
 			}

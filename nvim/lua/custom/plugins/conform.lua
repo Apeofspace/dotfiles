@@ -7,7 +7,7 @@ local M = {
 			{
 				"<leader>f",
 				function()
-					require("conform").format({ async = true, lsp_format = "fallback" })
+					require("conform").format({ async = true })
 				end,
 				mode = "",
 				desc = "[F]ormat buffer",
@@ -51,7 +51,8 @@ local M = {
 				-- 		return { "isort", "black", stop_after_first = false }
 				-- 	end
 				-- end,
-				python = { "ruff_format", "ruff_organize_imports" },
+				-- python = { "ruff_format", "ruff_organize_imports"},
+				python = { "ruff_organize_imports", lsp_format = "last" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				yaml = { "prettierd" },
@@ -63,7 +64,7 @@ local M = {
 			},
 			formatters = {
 				ruff_format = {
-					command = "ruff check",
+					-- command = "ruff format",
 					prepend_args = { "--line-length=125", '--indent-style="space"' },
 				},
 				black = {
