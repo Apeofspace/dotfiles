@@ -92,30 +92,24 @@ return {
 		-- WARN this plugin likely to have breaking changes
 		-- https://github.com/Saghen/blink.cmp
 		"saghen/blink.cmp",
-		enabled = true,
+		-- enabled = false,
 		lazy = false, -- lazy loading handled internally
 		dependencies = { "rafamadriz/friendly-snippets" },
 		version = "v0.*",
 		opts = {
-			highlight = {
-				use_nvim_cmp_as_default = true, -- temp
-			},
-			nerd_font_variant = "normal",
-			accept = { auto_brackets = { enabled = true } },
-			-- trigger = { signature_help = { enabled = true } },
-			-- keymap = "default",
 			keymap = {
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide", "fallback" },
 				["<Tab>"] = {
 					function(cmp)
-						if cmp.is_in_snippet() then
+						if cmp.snippet_active() then
 							return cmp.accept()
 						else
 							return cmp.select_and_accept()
 						end
 					end,
-					"fallback",
+					"snippet_forward", -- next snippet element
+					"fallback", -- normal tab basically
 				},
 				["<C-p>"] = { "select_prev", "fallback" },
 				["<C-n>"] = { "select_next", "fallback" },
@@ -124,63 +118,29 @@ return {
 				["<C-h>"] = { "snippet_forward", "fallback" },
 				["<C-l>"] = { "snippet_backward", "fallback" },
 			},
-			windows = {
-				documentation = { auto_show = true },
-				autocomplete = {
-					draw = {
-						columns = { { "kind_icon"}, { "label", "label_description", "kind", gap = 1 } },
-					},
+			completion = {
+				menu = {
+					draw = { columns = { { "kind_icon" }, { "label", "label_description", "kind", gap = 1 } } },
 				},
+				documentation = { auto_show = true },
+				-- didnt look too good when tried
+				ghost_text = { enabled = false },
+				-- experimental auto-brackets support
+				{ accept = { auto_brackets = { enabled = true } } },
 			},
+			-- Experimental signature help support
+			signature = { enabled = true },
 			sources = {
-				-- list of enabled providers
 				completion = {
+					-- list of enabled providers
 					enabled_providers = { "lsp", "path", "snippets", "buffer" },
 				},
 				providers = {
-					lsp = {
-						name = "LSP",
-						module = "blink.cmp.sources.lsp",
-						enabled = true, -- whether or not to enable the provider
-						transform_items = nil, -- function to transform the items before they're returned
-						should_show_items = true, -- whether or not to show the items
-						max_items = nil, -- maximum number of items to return
-						min_keyword_length = 0, -- minimum number of characters to trigger the provider
-						fallback_for = {}, -- if any of these providers return 0 items, it will fallback to this provider
-						score_offset = 1, -- boost/penalize the score of the items
-						override = nil, -- override the source's functions
-					},
-					path = {
-						name = "Path",
-						module = "blink.cmp.sources.path",
-						score_offset = 3,
-						opts = {
-							trailing_slash = false,
-							label_trailing_slash = true,
-							get_cwd = function(context)
-								return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
-							end,
-							show_hidden_files_by_default = false,
-						},
-					},
-					snippets = {
-						name = "Snippets",
-						module = "blink.cmp.sources.snippets",
-						score_offset = -3,
-						opts = {
-							friendly_snippets = true,
-							search_paths = { vim.fn.stdpath("config") .. "/snippets" },
-							global_snippets = { "all" },
-							extended_filetypes = {},
-							ignored_filetypes = {},
-						},
-					},
-					buffer = {
-						name = "Buffer",
-						module = "blink.cmp.sources.buffer",
-						score_offset = -2,
-						fallback_for = { "lsp" },
-					},
+					-- boost/penalize the score of the items (among other things)
+					lsp = { score_offset = 1 },
+					path = { score_offset = 3 },
+					snippets = { score_offset = -3 },
+					buffer = { score_offset = -2 },
 				},
 			},
 		},

@@ -98,6 +98,8 @@ return {
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+      -- passing config.capabilities to blink.cmp merges with the capabilities in your 
+			require("blink.cmp").get_lsp_capabilities(capabilities)
 
 			-- whatever in this table gets passed directly to
 			-- require('lspconfig').server.setup()
