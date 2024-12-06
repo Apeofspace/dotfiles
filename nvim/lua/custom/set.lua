@@ -120,6 +120,11 @@ vim.keymap.set({ "n", "v" }, "<C-l>", "<C-w>l", { noremap = true })
 -- vim.keymap.set({ "n", "v" }, "q", "<nop>", { desc = "fucking nothing" })
 -- remap ctrl-u to nothing (to avoid undoing while trying to yank or paste)
 vim.keymap.set({"i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
+-- remap ctrl-ы to nothing (to avoid undoing while trying to save)
+vim.keymap.set({"n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
+
+-- source current file
+vim.keymap.set({"n" }, "<leader>x", ":source %<CR>", { desc = "Source this file" })
 
 -- use JQ to format json file
 vim.keymap.set({ "n" }, "<leader>gj", [[:%!jq '.'<CR>]], { desc = "Format file with jq" })

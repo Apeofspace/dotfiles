@@ -10,7 +10,6 @@ local M = {
 			local lint = require("lint")
 
 			lint.linters_by_ft = {
-				python = { "ruff" }, -- not sure about this one
 				text = { "codespell" },
 				markdown = { "codespell" },
 			}
