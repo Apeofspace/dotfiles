@@ -98,7 +98,7 @@ return {
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-      -- passing config.capabilities to blink.cmp merges with the capabilities in your 
+			-- passing config.capabilities to blink.cmp merges with the capabilities in your
 			require("blink.cmp").get_lsp_capabilities(capabilities)
 
 			-- whatever in this table gets passed directly to
@@ -118,14 +118,28 @@ return {
 					single_file_support = true,
 				},
 				cmake = {},
-				jedi_language_server = {},
+				basedpyright = {
+					settings = {
+						basedpyright = {
+							disableOrganizeImports = true, -- ruff
+							analysis = {
+								typeCheckingMode = "basic",
+								-- typeCheckingMode = "recommended",
+							},
+						},
+					},
+				},
+				-- jedi_language_server = {},
 				ruff = {
 					init_options = {
 						settings = {
 							ignore = { "E501", "E231" },
-							formatEnabled = true, -- use conform is false
+							formatEnabled = true, -- use conform if false
 							lineLength = 120,
 						},
+					},
+					server_capabilities = {
+						hoverProvider = false, -- pyright
 					},
 				},
 				lua_ls = {
