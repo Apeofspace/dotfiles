@@ -1,10 +1,10 @@
 -- TBH this isn't great
--- FIX: for some reason when opening this terminal the echo $TERM shows wrong terminal
+local running_neovide = vim.g.neovide
 local M = {
 	{
 		-- https://github.com/akinsho/toggleterm.nvim
 		"akinsho/toggleterm.nvim", -- for smart terminal
-		enabled = true,
+		enabled = running_neovide,
 		version = "*",
 		lazy = true,
 		keys = {

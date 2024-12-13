@@ -117,6 +117,7 @@ return {
 
 					-- Window commands
 					{ mode = "n", keys = "<C-w>" },
+					{ mode = "n", keys = "<Leader>w" },
 
 					-- `z` key
 					{ mode = "n", keys = "z" },

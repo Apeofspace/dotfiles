@@ -117,6 +117,9 @@ vim.keymap.set({ "n", "v" }, "<C-j>", "<C-w>j", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<C-k>", "<C-w>k", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<C-l>", "<C-w>l", { noremap = true })
 
+--<C-W> to <leader>W
+vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
+
 -- vim.keymap.set({ "n", "v" }, "q", "<nop>", { desc = "fucking nothing" })
 -- remap ctrl-u to nothing (to avoid undoing while trying to yank or paste)
 vim.keymap.set({"i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
