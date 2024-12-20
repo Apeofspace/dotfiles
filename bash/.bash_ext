@@ -169,5 +169,5 @@ if [[ ${BASH_VERSINFO[0]:-0} -eq 4 && ${BASH_VERSINFO[1]:-0} -ge 4 || ${BASH_VER
     \builtin complete -r zi &>/dev/null || \builtin true
 fi
 
-# autostart zellij
-# eval "$(zellij setup --generate-auto-start bash)"
+# fzf change to fdfind default command
+export FZF_DEFAULT_COMMAND="fdfind . -IH"
