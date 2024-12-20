@@ -15,7 +15,7 @@ return {
 				max_height = 0,
 				border = "rounded",
 				win_options = {
-					winblend = 30,
+					winblend = 15,
 				},
 			},
 			-- Optional dependencies

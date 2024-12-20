@@ -118,6 +118,7 @@ return {
 					single_file_support = true,
 				},
 				cmake = {},
+				marksman = {},
 				basedpyright = {
 					settings = {
 						basedpyright = {

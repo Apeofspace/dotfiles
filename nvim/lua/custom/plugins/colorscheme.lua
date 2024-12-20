@@ -191,6 +191,7 @@ local schemes = {
 		config = function()
 			require("everforest").setup({
 				background = "hard",
+        italics=true,
 				-- transparent_background_level = 2,
 			})
 		end,
