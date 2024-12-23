@@ -58,7 +58,7 @@ local M = {
 	},
 	{
 		"altermo/ultimate-autopair.nvim",
-    -- :help ultimate-autopair
+		-- :help ultimate-autopair
 		-- Alt+e for fastwrap
 		opts = {
 			space = {

@@ -28,6 +28,7 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>") -- reset hl with esc
 
 vim.opt.signcolumn = "yes"
+vim.opt.foldcolumn = "auto"
 vim.opt.list = false -- to mark tabs and spaces with symbols
 vim.opt.listchars = { tab = "> ", trail = "·", nbsp = "␣" }
 vim.opt.updatetime = 250 -- swap file written after than many ms
@@ -46,7 +47,7 @@ vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
--- vim.lsp.inlay_hint.enable()
+vim.lsp.inlay_hint.enable()
 
 -- conceal level for obsidian nvim mainly
 vim.opt.conceallevel = 0
@@ -56,7 +57,7 @@ vim.opt.hidden = true
 
 -- spellchecking
 vim.opt.spell = false
-vim.opt.spelllang = "en,ru"
+vim.opt.spelllang = "en,ru" --have netrw enabled to auto download this
 
 -- set terminal title to filename and to "bash" when exiting
 vim.opt.titleold = "bash"
@@ -120,7 +121,6 @@ vim.keymap.set({ "n", "v" }, "<leader>l", "<C-w>L", { noremap = true })
 --<C-W> to <leader>W
 vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
 
--- vim.keymap.set({ "n", "v" }, "q", "<nop>", { desc = "fucking nothing" })
 -- remap ctrl-u to nothing (to avoid undoing while trying to yank or paste)
 vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 -- remap ctrl-ы to nothing (to avoid undoing while trying to save)
@@ -129,9 +129,9 @@ vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
 -- source current file
 vim.keymap.set({ "n" }, "<leader>x", ":source %<CR>", { desc = "Source this file" })
 
--- use JQ to format json file
-vim.keymap.set({ "n" }, "<leader>gj", [[:%!jq '.'<CR>]], { desc = "Format file with jq" })
-vim.keymap.set({ "v" }, "<leader>gj", [[:'<,'>!jq '.'<CR>]], { desc = "Format selection with jq" })
+-- use JQ to format json file (who cares honestly)
+-- vim.keymap.set({ "n" }, "<leader>gj", [[:%!jq '.'<CR>]], { desc = "Format file with jq" })
+-- vim.keymap.set({ "v" }, "<leader>gj", [[:'<,'>!jq '.'<CR>]], { desc = "Format selection with jq" })
 
 -- center of screen on halfpage movements
 -- vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz", { noremap = true })
