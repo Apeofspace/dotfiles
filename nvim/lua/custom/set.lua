@@ -55,8 +55,8 @@ vim.opt.conceallevel = 0
 vim.opt.hidden = true
 
 -- spellchecking
--- vim.opt.spell = true
--- vim.opt.spelllang = "en_us"
+vim.opt.spell = false
+vim.opt.spelllang = "en,ru"
 
 -- set terminal title to filename and to "bash" when exiting
 vim.opt.titleold = "bash"
@@ -64,7 +64,7 @@ vim.opt.title = true
 local title = function()
 	local dir = ""
 	for w in string.gmatch(vim.fn.getcwd(), "/.[^/]+") do
-		-- only the last offurance in dir
+		-- only the last occurance in dir
 		dir = w
 	end
 	dir = string.gsub(dir, "/", "")
@@ -111,7 +111,7 @@ vim.keymap.set({ "n", "v" }, "<leader>h", "<C-w>H", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<leader>j", "<C-w>J", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<leader>k", "<C-w>K", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<leader>l", "<C-w>L", { noremap = true })
--- moving between splits 
+-- moving between splits
 -- vim.keymap.set({ "n", "v" }, "<C-h>", "<C-w>h", { noremap = true })
 -- vim.keymap.set({ "n", "v" }, "<C-j>", "<C-w>j", { noremap = true })
 -- vim.keymap.set({ "n", "v" }, "<C-k>", "<C-w>k", { noremap = true })
@@ -122,12 +122,12 @@ vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
 
 -- vim.keymap.set({ "n", "v" }, "q", "<nop>", { desc = "fucking nothing" })
 -- remap ctrl-u to nothing (to avoid undoing while trying to yank or paste)
-vim.keymap.set({"i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
+vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 -- remap ctrl-ы to nothing (to avoid undoing while trying to save)
-vim.keymap.set({"n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
+vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
 
 -- source current file
-vim.keymap.set({"n" }, "<leader>x", ":source %<CR>", { desc = "Source this file" })
+vim.keymap.set({ "n" }, "<leader>x", ":source %<CR>", { desc = "Source this file" })
 
 -- use JQ to format json file
 vim.keymap.set({ "n" }, "<leader>gj", [[:%!jq '.'<CR>]], { desc = "Format file with jq" })

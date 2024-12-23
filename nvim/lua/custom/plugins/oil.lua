@@ -1,9 +1,10 @@
 return {
 	"stevearc/oil.nvim",
+	-- enabled = false,
 	config = function()
 		local oil = require("oil")
 		oil.setup({
-      delete_to_trash = true,
+			delete_to_trash = true,
 			view_options = {
 				-- Show files and directories that start with "."
 				show_hidden = true,

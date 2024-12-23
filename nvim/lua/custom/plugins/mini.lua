@@ -37,6 +37,7 @@ return {
 			})
 			vim.keymap.set("n", "<leader>to", function()
 				vim.cmd("lua MiniDiff.toggle_overlay()")
+				vim.notify("Toggle mini.diff overlay")
 			end, { desc = "Toggle mini.diff overlay" })
 
 			-- move selection

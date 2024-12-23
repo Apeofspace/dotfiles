@@ -70,9 +70,9 @@ return {
 					map("<leader>th", function()
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 						if vim.lsp.inlay_hint.is_enabled() == true then
-							print("Inlay hints enabled")
+              vim.notify("Inlay hints enabled")
 						else
-							print("Inlay hints disabled")
+              vim.notify("Inlay hints disabled")
 						end
 					end, "[T]oggle Inlay [H]ints")
 
@@ -98,7 +98,7 @@ return {
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			-- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-			-- passing config.capabilities to blink.cmp merges with the capabilities in your
+			-- passing config.capabilities to blink.cmp merges with the capabilities in yourprintdisablei
 			require("blink.cmp").get_lsp_capabilities(capabilities)
 
 			-- whatever in this table gets passed directly to
