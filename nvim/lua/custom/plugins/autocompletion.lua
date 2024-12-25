@@ -6,7 +6,9 @@ local M = {
 		-- enabled = false,
 		lazy = false, -- lazy loading handled internally
 		dependencies = { "rafamadriz/friendly-snippets" },
-		version = "v0.*",
+		version = "*",
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
 		opts = {
 			keymap = {
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
@@ -29,32 +31,19 @@ local M = {
 				["<C-h>"] = { "snippet_forward", "fallback" },
 				["<C-l>"] = { "snippet_backward", "fallback" },
 			},
-			completion = {
-				menu = {
-					draw = { columns = { { "kind_icon" }, { "label", "label_description", "kind", gap = 1 } } },
-				},
-				documentation = { auto_show = true },
-				-- didnt look too good when tried
-				ghost_text = { enabled = false },
-				-- experimental auto-brackets support
-				{ accept = { auto_brackets = { enabled = true } } },
+			appearance = {
+				use_nvim_cmp_as_default = true, -- temp for beta
+				nerd_font_variant = "mono",
 			},
-			-- Experimental signature help support
-			signature = { enabled = true },
 			sources = {
-				completion = {
-					-- list of enabled providers
-					enabled_providers = { "lsp", "path", "snippets", "buffer" },
-				},
-				providers = {
-					-- boost/penalize the score of the items (among other things)
-					lsp = { score_offset = 1 },
-					path = { score_offset = 3 },
-					snippets = { score_offset = -3 },
-					buffer = { score_offset = -2 },
-				},
+				default = { "lsp", "path", "snippets", "buffer" },
+			},
+			signature = { enabled = true }, -- experimental
+			completion = {
+				ghost_text = { enabled = true },
 			},
 		},
+		opts_extend = { "sources.default" },
 	},
 	{
 		"altermo/ultimate-autopair.nvim",
