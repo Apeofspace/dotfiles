@@ -90,6 +90,22 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
+-- don't remove autoindent when changing lines on empty line
+vim.opt.cpoptions:append("I")
+-- this is hack to automatically indent empty lines with correct indentation
+local autoindent_empty_line = function(key)
+  -- local line = vim.fn.getline(".")
+	local line = vim.fn.getline("."):gsub("^%s+", "") -- get line and trim whitespaces
+	if line == "" then
+		return '"_cc'
+	else
+		return key
+	end
+end
+-- stylua: ignore start
+vim.keymap.set("n", "i", function() return autoindent_empty_line("i") end, { expr = true, noremap = true })
+vim.keymap.set("n", "a", function() return autoindent_empty_line("a") end, { expr = true, noremap = true })
+-- stylua: ignore stop
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>ge", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "<leader>gq", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
