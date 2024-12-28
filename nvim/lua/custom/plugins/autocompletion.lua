@@ -39,9 +39,9 @@ local M = {
 				default = { "lsp", "path", "snippets", "buffer" },
 			},
 			signature = { enabled = true }, -- experimental
-			completion = {
-				ghost_text = { enabled = false },
-			},
+			-- completion = {
+			-- 	ghost_text = { enabled = true },
+			-- },
 		},
 		opts_extend = { "sources.default" },
 	},

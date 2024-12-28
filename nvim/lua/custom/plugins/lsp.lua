@@ -124,10 +124,12 @@ return {
 				marksman = {},
 				basedpyright = {
 					settings = {
+						disableOrganizeImports = true, -- ruff
 						basedpyright = {
-							disableOrganizeImports = true, -- ruff
 							analysis = {
 								typeCheckingMode = "basic",
+								diagnosticMode = "openFilesOnly",
+								useLibraryCodeForTypes = true,
 								-- typeCheckingMode = "recommended",
 							},
 						},
@@ -144,6 +146,7 @@ return {
 					},
 					server_capabilities = {
 						hoverProvider = false, -- pyright
+						signatureHelpProvider = false, -- pyright (not sure if this even works)
 					},
 				},
 				lua_ls = {
