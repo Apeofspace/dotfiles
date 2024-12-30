@@ -177,3 +177,7 @@ export FZF_DEFAULT_COMMAND="fdfind . -IH"
 # add to path
 export PATH=/home/v/.local/bin/:$PATH
 #export PATH=$(/usr/bin/getconf PATH)
+
+# nvim as default editor
+export EDITOR=nvim
+export PAGER=nvim
