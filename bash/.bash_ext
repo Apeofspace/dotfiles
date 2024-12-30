@@ -170,4 +170,10 @@ if [[ ${BASH_VERSINFO[0]:-0} -eq 4 && ${BASH_VERSINFO[1]:-0} -ge 4 || ${BASH_VER
 fi
 
 # fzf change to fdfind default command
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
 export FZF_DEFAULT_COMMAND="fdfind . -IH"
+
+# add to path
+export PATH=/home/v/.local/bin/:$PATH
+#export PATH=$(/usr/bin/getconf PATH)
