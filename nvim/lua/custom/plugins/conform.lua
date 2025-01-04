@@ -59,8 +59,8 @@ local M = {
 				json = { "prettierd", "prettier", stop_after_first = true },
 				jsonc = { "prettierd", "prettier", stop_after_first = true },
 				-- WARN: astyle needs to be installed manually
-				c = { "astyle" },
-				cpp = { "astyle" },
+				c = { "astyle", "clang-format", stop_after_first = true },
+				cpp = { "astyle", "clang-format", stop_after_first = true },
 			},
 			formatters = {
 				ruff_format = {
@@ -83,6 +83,12 @@ local M = {
 						"--squeeze-ws",
 						"--squeeze-lines=2", -- anything more than 2 empty lines removed
 						"--break-one-line-headers",
+					},
+					clang_format = {
+						prepend_args = {
+							'--style="{BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 120}"',
+							"--fallback-style=Google",
+						},
 					},
 				},
 			},

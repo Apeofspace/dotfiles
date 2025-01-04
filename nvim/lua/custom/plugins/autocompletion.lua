@@ -40,7 +40,7 @@ local M = {
 			},
 			signature = { enabled = true }, -- experimental
 			completion = {
-				ghost_text = { enabled = true },
+				ghost_text = { enabled = false },
 			},
 		},
 		opts_extend = { "sources.default" },

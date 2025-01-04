@@ -105,16 +105,20 @@ return {
 			-- can OVERWRITE capabilities by adding capabilities field to the table
 			local ensure_installed_servers = {
 				clangd = {
+					-- can use built in ckangd formatter. check below
+					-- https://clang.llvm.org/docs/ClangFormat.html
+					-- https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 					cmd = {
 						"clangd",
 						"--query-driver=/usr/bin/arm-none-eabi-gcc",
-						"--clang-tidy",
-						"--background-index",
-						"--header-insertion=iwyu",
-						"--completion-style=detailed",
-						"--fallback-style=llvm",
+						-- "--clang-tidy",
+						-- "--background-index",
+						-- "--header-insertion=iwyu",
+						-- "--completion-style=detailed",
+						-- -- '--style="{BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 120}"',
+						-- "--fallback-style=Google",
 					},
-					single_file_support = true,
+					single_file_support = true, -- its true by default
 				},
 				cmake = {},
 				marksman = {},
