@@ -180,4 +180,4 @@ export PATH=/home/v/.local/bin/:$PATH
 
 # nvim as default editor
 export EDITOR=nvim
-export PAGER=nvim
+export PAGER=cat
