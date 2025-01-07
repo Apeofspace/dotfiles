@@ -1,0 +1,11 @@
+*
+!.gitignore
+!bash/*
+!git/*
+!kitty/*
+!neovide/*
+!nvim/*
+!wezterm/*
+!yazi/*
+!zellij/*
+
