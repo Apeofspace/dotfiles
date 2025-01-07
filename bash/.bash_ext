@@ -181,3 +181,12 @@ export PATH=/home/v/.local/bin/:$PATH
 # nvim as default editor
 export EDITOR=nvim
 export PAGER=cat
+
+# add zig to path
+export PATH=/home/v/.local/zig/:$PATH
+
+# startup zellij in ghostty automatically
+if [ "$TERM" = "xterm-ghostty" ] || [ "$TERM" = "xterm-kitty" ]; then
+  eval "$(zellij setup --generate-auto-start bash)"
+  eval "$(zellij setup --generate-completion bash)"
+fi
