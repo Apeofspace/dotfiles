@@ -38,6 +38,26 @@ local schemes = {
 		end,
 	},
 	{
+		"philosofonusus/morta.nvim",
+		name = "morta",
+		lazy = true,
+		priority = 1000,
+		opts = {},
+		config = function()
+			vim.cmd.colorscheme("morta")
+		end,
+	},
+	{
+		"ficcdaf/ashen.nvim",
+		lazy = true,
+		name = "ashen",
+		priority = 1000,
+		-- configuration is optional!
+		opts = {
+			-- your settings here
+		},
+	},
+	{
 		"sainnhe/gruvbox-material",
 		name = "gruvbox-material",
 		lazy = true,
