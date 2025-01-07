@@ -1,0 +1,11 @@
+# config-file = themes/ashen # can also add files like this
+theme = ashen
+
+font-family = "Roboto Mono"
+font-size = 13
+
+background-opacity = 0.8
+window-decoration = true
+
+# command = "zellij attach -c main"
+
