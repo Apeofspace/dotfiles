@@ -4,7 +4,8 @@ local M = {
 		enabled = true,
 		cmd = { "DiffviewOpen", "DiffviewFileHistory" },
 		keys = {
-			{ "<Leader>gdh", "<cmd>DiffviewFileHistory %<CR>", desc = "Diff File History" },
+			{ "<Leader>gdf", "<cmd>DiffviewFileHistory %<CR>", desc = "Diff THIS File History" },
+			{ "<Leader>gdh", "<cmd>DiffviewFileHistory", desc = "Diff commits" },
 			{ "<Leader>gdc", "<cmd>DiffviewOpen HEAD<CR>", desc = "Diff View latest commit" },
 			{ "<Leader>gdo", "<cmd>DiffviewOpen<CR>", desc = "Diff View Open (hangs =( ...)))" },
 		},
@@ -37,9 +38,9 @@ local M = {
 						{ "n", "sg", actions.goto_file_split },
 						{ "n", "<C-r>", actions.refresh_files },
 						{ "n", "<Leader>f", actions.toggle_files },
-						{ "n", "co", actions.conflict_choose_all("ours"), { desc = "Choose conflict --ours" } },
-						{ "n", "ct", actions.conflict_choose_all("theirs"), { desc = "Choose conflict --theirs" } },
-						{ "n", "cb", actions.conflict_choose_all("base"), { desc = "Choose conflict --base" } },
+						{ "n", "<leader>gdco", actions.conflict_choose_all("ours"), { desc = "Choose conflict --ours" } },
+						{ "n", "<leader>gdct", actions.conflict_choose_all("theirs"), { desc = "Choose conflict --theirs" } },
+						{ "n", "<leader>gdcb", actions.conflict_choose_all("base"), { desc = "Choose conflict --base" } },
 						{ "n", "s", actions.toggle_stage_entry, { desc = "Stage/unstage the selected entry" } },
 						{ "n", "S", actions.stage_all, { desc = "Stage all entries" } },
 						{ "n", "U", actions.unstage_all, { desc = "Unstage all entries" } },
@@ -99,7 +100,7 @@ local M = {
 	},
 	{
 		"tpope/vim-fugitive",
-		enabled = true,
+		enabled = false,
 		config = function()
 			vim.keymap.set("n", "<leader>gdf", function()
 				local word = vim.fn.input("SHA > ")
