@@ -3,12 +3,6 @@ local running_kitty = (vim.env.TERM_PROGRAM or vim.env.TERM) == "xterm-kitty"
 local running_wezterm = (vim.env.TERM_PROGRAM or vim.env.TERM) == "WezTerm"
 local M = {
 	{
-		"sphamba/smear-cursor.nvim",
-		enabled = not running_neovide and not running_kitty,
-		-- enabled = false,
-		opts = {},
-	},
-	{
 		"karb94/neoscroll.nvim",
 		-- enabled = (not running_neovide) and (not running_wezterm),
 		enabled = not running_neovide,
