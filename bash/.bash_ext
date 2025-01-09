@@ -186,7 +186,19 @@ export PAGER=cat
 export PATH=/home/v/.local/zig/:$PATH
 
 # startup zellij in ghostty automatically
+export ZELLIJ_AUTO_ATTACH=true
 if [ "$TERM" = "xterm-ghostty" ] || [ "$TERM" = "xterm-kitty" ]; then
-  eval "$(zellij setup --generate-auto-start bash)"
+  if [[ -z "$ZELLIJ" ]]; then
+      if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
+          zellij attach -c main
+      else
+          zellij
+      fi
+
+      if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
+          exit
+      fi
+  fi
+  # eval "$(zellij setup --generate-auto-start bash)" # same as above but worse
   eval "$(zellij setup --generate-completion bash)"
 fi
