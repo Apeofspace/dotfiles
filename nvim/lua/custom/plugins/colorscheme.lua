@@ -54,7 +54,7 @@ local schemes = {
 		priority = 1000,
 		-- configuration is optional!
 		opts = {
-			-- your settings here
+			transparent = true,
 		},
 	},
 	{
