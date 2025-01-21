@@ -54,7 +54,14 @@ local schemes = {
 		priority = 1000,
 		-- configuration is optional!
 		opts = {
-			transparent = true,
+			transparent = false,
+			hl = {
+				merge_override = {
+					-- Normal = { "#ffffff", "#202020" }, -- override background to be lighter
+					-- ["@comment"] = { nil, nil, italic = true }, -- italic doesnt work for no reason
+					-- ["@keyword.type"] = {bold = true }, -- shits broken fix your plugin yo
+				},
+			},
 		},
 	},
 	{
@@ -266,9 +273,36 @@ local schemes = {
 			},
 		},
 	},
+	-- {
+	-- 	"navarasu/onedark.nvim",
+	-- 	name = "onedark",
+	-- 	lazy = true,
+	-- 	priority = 1000, -- Ensure it loads first
+	-- 	config = function()
+	-- 		require("onedark").setup({
+	-- 			-- transparent = true,
+	--        style = "warmer",
+	-- 			code_style = {
+	-- 				types = "italic",
+	-- 				methods = "NONE",
+	-- 				numbers = "NONE",
+	-- 				strings = "italic",
+	-- 				comments = "italic",
+	-- 				keywords = "bold,italic",
+	-- 				constants = "NONE",
+	-- 				functions = "italic",
+	-- 				operators = "NONE",
+	-- 				variables = "NONE",
+	-- 				parameters = "NONE",
+	-- 				conditionals = "italic",
+	-- 				virtual_text = "italic",
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"olimorris/onedarkpro.nvim",
-		name = "onedark",
+		name = "onedarkpro",
 		lazy = true,
 		priority = 1000, -- Ensure it loads first
 		config = function()

@@ -143,4 +143,6 @@ return {
 			})
 		end,
 	},
+
+  -- require('mini.comment').setup({})
 }

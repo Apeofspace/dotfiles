@@ -120,6 +120,14 @@ vim.keymap.set({ "v" }, "P", [["_dp]], { noremap = true })
 vim.keymap.set("n", "<leader>pp", [[viw"_dP]], { noremap = true, desc = "Replace word under cursor with buffer" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { noremap = true, desc = "Delete to void" })
 
+-- experimental switch ctrl-d/u and d/u to lower finder stress
+-- this should also be remapped in neoscroll
+-- vim.keymap.set({ "n", "v" }, "d", "<C-d>", { noremap = true })
+-- vim.keymap.set({ "n", "v" }, "u", "<C-u>", { noremap = true })
+-- vim.keymap.set({ "n", "v" }, "<C-d>", "d", { noremap = true })
+-- vim.keymap.set({ "n", "v" }, "<C-u>", "u", { noremap = true })
+
+
 -- save file with < C-s >
 vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>")
 

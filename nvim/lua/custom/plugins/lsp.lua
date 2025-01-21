@@ -124,23 +124,23 @@ return {
 				marksman = {},
 				basedpyright = {
 					settings = {
-						disableOrganizeImports = true, -- ruff
 						basedpyright = {
+							disableOrganizeImports = true, -- ruff
 							analysis = {
 								typeCheckingMode = "basic",
-								diagnosticMode = "openFilesOnly",
-								useLibraryCodeForTypes = true,
-								-- typeCheckingMode = "recommended",
+								diagnosticSeverityOverrides = {
+									reportOptionalMemberAccess = false, -- "warning"
+								},
 							},
 						},
 					},
 				},
-				-- jedi_language_server = {},
 				ruff = {
 					init_options = {
 						settings = {
+							lint = { enable = false }, -- DISABLE LINTING (use pyright)
 							ignore = { "E501", "E231" },
-							formatEnabled = true, -- use conform if false
+							formatEnabled = false, -- use conform if false
 							lineLength = 120,
 						},
 					},

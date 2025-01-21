@@ -51,8 +51,9 @@ local M = {
 				-- 		return { "isort", "black", stop_after_first = false }
 				-- 	end
 				-- end,
-				-- python = { "ruff_format", "ruff_organize_imports"},
-				python = { "ruff_organize_imports", lsp_format = "last" },
+				python = { "ruff_format", "ruff_organize_imports", stop_after_first = false },
+				-- python = { "ruff_organize_imports", lsp_format = "last" },
+				-- python = { "isort", "black", stop_after_first = false },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				yaml = { "prettierd" },
@@ -65,7 +66,7 @@ local M = {
 			formatters = {
 				ruff_format = {
 					-- command = "ruff format",
-					prepend_args = { "--line-length=125", '--indent-style="space"' },
+					prepend_args = { "format", "--line-length=125"},
 				},
 				black = {
 					prepend_args = { "--line-length=125" },
@@ -95,22 +96,22 @@ local M = {
 		},
 	},
 
-	-- automatically download conform formatters with mason
-	{
-		"zapling/mason-conform.nvim",
-		enabled = false,
-		-- WARN: this is disabled due to mason conform not supporting functions
-		-- in formatters table in conform
-		-- check more here
-		-- https://github.com/zapling/mason-conform.nvim/issues/8
-		dependencies = {
-			"williamboman/mason.nvim",
-			"stevearc/conform.nvim",
-		},
-		opts = {
-			ignore_install = { "prettier", "prettierd" }, -- List of formatters to ignore during install
-		},
-	},
+	-- -- automatically download conform formatters with mason
+	-- {
+	-- 	"zapling/mason-conform.nvim",
+	-- 	enabled = false,
+	-- 	-- WARN: this is disabled due to mason conform not supporting functions
+	-- 	-- in formatters table in conform
+	-- 	-- check more here
+	-- 	-- https://github.com/zapling/mason-conform.nvim/issues/8
+	-- 	dependencies = {
+	-- 		"williamboman/mason.nvim",
+	-- 		"stevearc/conform.nvim",
+	-- 	},
+	-- 	opts = {
+	-- 		ignore_install = { "prettier", "prettierd" }, -- List of formatters to ignore during install
+	-- 	},
+	-- },
 }
 
 return M

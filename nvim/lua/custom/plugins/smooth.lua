@@ -15,10 +15,8 @@ local M = {
 				hide_cursor = false,
 				-- mappings = { "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
 			})
-			-- vim.keymap.set({ "n", "v", "x" }, "<C-u>", neoscroll.scroll(-0.5, {move_cursor=true, duration=1000}))
-			-- vim.keymap.set({ "n", "v", "x" }, "<C-d>", neoscroll.scroll(0.5, {move_cursor=true, duration=1000}))
-			-- vim.keymap.set({ "n", "v", "x" }, "<C-u>", neoscroll.scroll(-vim.wo.scroll, true, 350))
-			-- vim.keymap.set({ "n", "v", "x" }, "<C-d>", neoscroll.scroll(vim.wo.scroll, true, 350))
+			-- vim.keymap.set({ "n", "v", "x" }, "u", neoscroll.scroll(-vim.wo.scroll, true, 350))
+			-- vim.keymap.set({ "n", "v", "x" }, "d", neoscroll.scroll(vim.wo.scroll, true, 350))
 		end,
 	},
 }
