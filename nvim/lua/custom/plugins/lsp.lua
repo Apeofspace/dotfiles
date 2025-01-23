@@ -140,8 +140,9 @@ return {
 						settings = {
 							lint = { enable = false }, -- DISABLE LINTING (use pyright)
 							ignore = { "E501", "E231" },
-							formatEnabled = false, -- use conform if false
-							lineLength = 120,
+							formatEnabled = true, -- use conform if false
+							-- formatEnabled = false, -- use conform if false
+							lineLength = 125,
 						},
 					},
 					server_capabilities = {

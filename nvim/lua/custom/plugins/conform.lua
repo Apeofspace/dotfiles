@@ -44,15 +44,8 @@ local M = {
 			formatters_by_ft = {
 				-- Use the "*" filetype to run formatters on all filetypes.
 				lua = { "stylua" },
-				-- python = function(bufnr)
-				-- 	if require("conform").get_formatter_info("ruff_format", bufnr).available then
-				-- 		return { "ruff_fix", "ruff_format", "ruff_organize_imports" }
-				-- 	else
-				-- 		return { "isort", "black", stop_after_first = false }
-				-- 	end
-				-- end,
-				python = { "ruff_format", "ruff_organize_imports", stop_after_first = false },
-				-- python = { "ruff_organize_imports", lsp_format = "last" },
+				-- python = { "ruff_format", "ruff_organize_imports", stop_after_first = false },
+				python = { "ruff_organize_imports", lsp_format = "last" },
 				-- python = { "isort", "black", stop_after_first = false },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
@@ -65,8 +58,7 @@ local M = {
 			},
 			formatters = {
 				ruff_format = {
-					-- command = "ruff format",
-					prepend_args = { "format", "--line-length=125"},
+					prepend_args = { "format", "--line-length=125" },
 				},
 				black = {
 					prepend_args = { "--line-length=125" },

@@ -1,4 +1,31 @@
 local schemes = {
+	{ "catppuccin/nvim", name = "catppuccin", lazy = true, priority = 1000 },
+	{ "loctvl842/monokai-pro.nvim", name = "monokai-pro", lazy = true, priority = 1000 },
+	{ "rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000 },
+	{ "AlexvZyl/nordic.nvim", name = "nordic", lazy = true, priority = 1000 },
+	{ "savq/melange-nvim", name = "melange", lazy = true, priority = 1000 },
+	{ "philosofonusus/morta.nvim", name = "morta", lazy = true, priority = 1000 },
+	{
+		"ficcdaf/ashen.nvim",
+		lazy = true,
+		name = "ashen",
+		priority = 1000,
+		opts = {
+			style_presets = {
+				bold_functions = false,
+				italic_comments = true,
+			},
+			-- hl = {
+			-- 	merge_override = {
+			--        -- this is bugged and doesnt merge shit it completely overrides
+			-- 		["@type"] = { bold = true },
+			-- 		["@type.builtin"] = { bold = true },
+			-- 		["@keyword.modifier"] = { bold = true },
+			-- 		["@type.definition"] = { bold = true },
+			-- 	},
+			-- },
+		},
+	},
 	{
 		"ellisonleao/gruvbox.nvim",
 		name = "gruvbox",
@@ -38,33 +65,6 @@ local schemes = {
 		end,
 	},
 	{
-		"philosofonusus/morta.nvim",
-		name = "morta",
-		lazy = true,
-		priority = 1000,
-		opts = {},
-		config = function()
-			vim.cmd.colorscheme("morta")
-		end,
-	},
-	{
-		"ficcdaf/ashen.nvim",
-		lazy = true,
-		name = "ashen",
-		priority = 1000,
-		-- configuration is optional!
-		opts = {
-			transparent = false,
-			hl = {
-				merge_override = {
-					-- Normal = { "#ffffff", "#202020" }, -- override background to be lighter
-					-- ["@comment"] = { nil, nil, italic = true }, -- italic doesnt work for no reason
-					-- ["@keyword.type"] = {bold = true }, -- shits broken fix your plugin yo
-				},
-			},
-		},
-	},
-	{
 		"sainnhe/gruvbox-material",
 		name = "gruvbox-material",
 		lazy = true,
@@ -94,7 +94,6 @@ local schemes = {
 	{
 		"folke/tokyonight.nvim",
 		name = "tokyonight",
-		-- variants = { "tokyonight-day", "tokyonight-moon", "tokyonight-night", "tokyonight-storm" },
 		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		opts = {
@@ -107,59 +106,12 @@ local schemes = {
 	{
 		"eldritch-theme/eldritch.nvim",
 		name = "eldritch",
-		lazy = true, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
+		lazy = true,
+		priority = 1000,
 		config = function()
 			require("eldritch").setup({
 				transparent = false,
 			})
-		end,
-	},
-	{
-		"loctvl842/monokai-pro.nvim",
-		name = "monokai-pro",
-		-- variants = {
-		-- 	"monokai-pro-classic",
-		-- 	"monokai-pro-machine",
-		-- 	"monokai-pro-default",
-		-- 	"monokai-pro-spectrum",
-		-- 	"monokai-pro-ristretto",
-		-- 	"monokai-pro-machine",
-		-- 	"monokai-pro-octagon",
-		-- },
-		lazy = true, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			require("monokai-pro").setup({
-				filter = "pro",
-			})
-		end,
-	},
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		-- variants = {
-		-- 	"catpuccin",
-		-- 	"catpuccin-frappe",
-		-- 	"catpuccin-mocchiato",
-		-- 	"catpuccin-latte",
-		-- 	"catpuccin-mocha",
-		-- },
-		lazy = true, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			-- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-			-- vim.cmd.colorscheme 'catppuccin-macchiato'
-		end,
-	},
-	{
-		"savq/melange-nvim",
-		name = "melange",
-		lazy = true, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		config = function()
-			-- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-			-- vim.cmd.colorscheme 'melange'
 		end,
 	},
 	{
@@ -183,31 +135,19 @@ local schemes = {
 		name = "kanagawa",
 		lazy = true,
 		priority = 1000,
-		config = function()
-			require("kanagawa").setup({
-				commentStyle = { italic = true },
-				functionStyle = {},
-				keywordStyle = { italic = true },
-				statementStyle = { bold = true },
-				typeStyle = {},
-				transparent = true,
-				theme = "wave", -- Load "wave" theme when 'background' option is not set
-				background = { -- map the value of 'background' option to a theme
-					dark = "wave", -- try "dragon" !
-					light = "lotus",
-				},
-			})
-		end,
-	},
-	{ "rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000 },
-	{
-		"AlexvZyl/nordic.nvim",
-		name = "nordic",
-		lazy = true,
-		priority = 1000,
-		config = function()
-			require("nordic").load()
-		end,
+		opts = {
+			commentStyle = { italic = true },
+			functionStyle = {},
+			keywordStyle = { italic = true },
+			statementStyle = { bold = true },
+			typeStyle = {},
+			-- transparent = true,
+			theme = "wave", -- Load "wave" theme when 'background' option is not set
+			background = { -- map the value of 'background' option to a theme
+				dark = "dragon", -- try "dragon" !
+				light = "lotus",
+			},
+		},
 	},
 	{
 		"neanias/everforest-nvim",
@@ -246,8 +186,8 @@ local schemes = {
 		priority = 1000,
 		opts = {
 			options = {
-
-				transparent = true,
+				transparent = false,
+				-- transparent = true,
 				dim_inactive = false,
 				integrations = {
 					telescope = {
@@ -273,33 +213,6 @@ local schemes = {
 			},
 		},
 	},
-	-- {
-	-- 	"navarasu/onedark.nvim",
-	-- 	name = "onedark",
-	-- 	lazy = true,
-	-- 	priority = 1000, -- Ensure it loads first
-	-- 	config = function()
-	-- 		require("onedark").setup({
-	-- 			-- transparent = true,
-	--        style = "warmer",
-	-- 			code_style = {
-	-- 				types = "italic",
-	-- 				methods = "NONE",
-	-- 				numbers = "NONE",
-	-- 				strings = "italic",
-	-- 				comments = "italic",
-	-- 				keywords = "bold,italic",
-	-- 				constants = "NONE",
-	-- 				functions = "italic",
-	-- 				operators = "NONE",
-	-- 				variables = "NONE",
-	-- 				parameters = "NONE",
-	-- 				conditionals = "italic",
-	-- 				virtual_text = "italic",
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
 	{
 		"olimorris/onedarkpro.nvim",
 		name = "onedarkpro",
@@ -341,15 +254,15 @@ local schemes = {
 		},
 	},
 	{
-		"sainnhe/edge",
-		name = "edge",
+		"ramojus/mellifluous.nvim",
+		name = "mellifluous",
 		lazy = true,
 		priority = 1000,
-		config = function()
-			vim.g.edge_style = "neon"
-			vim.g.edge_enable_italic = true
-			vim.g.edge_current_word = "bold"
-		end,
+		opts = {
+			styles = { -- see :h attr-list for options. set {} for NONE, { option = true } for option
+				main_keywords = { bold = true },
+			},
+		},
 	},
 }
 
