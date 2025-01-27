@@ -9,20 +9,6 @@ return {
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			require("mini.surround").setup()
 
-			-- local function gethomedir()
-			-- 	if vim.loop.os_uname().sysname == "Windows" or vim.loop.os_uname().sysname == "Windows_NT" then
-			-- 		return os.getenv("HOMEPATH")
-			-- 	elseif vim.loop.os_uname().sysname == "Linux" then
-			-- 		return os.getenv("HOME")
-			-- 	end
-			-- end
-			-- require("mini.sessions").setup({
-			-- 	autoread = true,
-			-- 	autowrite = true,
-			-- 	-- directory = os.getenv("HOME") .. "/.nvim/minisesh",
-			-- 	directory = gethomedir() .. "/.nvim/minisesh",
-			-- })
-
 			require("mini.diff").setup({
 				view = {
 					style = "sign",
@@ -135,6 +121,10 @@ return {
 					miniclue.gen_clues.registers(),
 					miniclue.gen_clues.windows(),
 					miniclue.gen_clues.z(),
+					{ mode = "n", keys = "<Leader>g", desc = "GIT" },
+					{ mode = "n", keys = "<Leader>gd", desc = "Git diffview" },
+					{ mode = "n", keys = "<Leader>s", desc = "Telescope" },
+					{ mode = "n", keys = "<Leader>t", desc = "Toggles" },
 				},
 
 				window = {
@@ -144,5 +134,5 @@ return {
 		end,
 	},
 
-  -- require('mini.comment').setup({})
+	-- require('mini.comment').setup({})
 }
