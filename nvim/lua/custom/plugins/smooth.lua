@@ -7,6 +7,7 @@ local M = {
 		-- enabled = (not running_neovide) and (not running_wezterm),
 		enabled = not running_neovide,
 		-- enabled = false,
+		event = "VeryLazy",
 		config = function()
 			local neoscroll = require("neoscroll")
 			neoscroll.setup({

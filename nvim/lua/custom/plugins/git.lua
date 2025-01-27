@@ -87,6 +87,7 @@ local M = {
 			-- Only one of these is needed.
 			"nvim-telescope/telescope.nvim", -- optional
 		},
+		event = "VeryLazy",
 		-- config = true,
 		config = function()
 			local neogit = require("neogit")
