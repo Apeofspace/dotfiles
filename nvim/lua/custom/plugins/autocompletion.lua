@@ -36,7 +36,14 @@ local M = {
 				nerd_font_variant = "mono",
 			},
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = { "lsp", "path", "snippets", "buffer", "markdown" },
+				providers = {
+					markdown = {
+						name = "RenderMarkdown",
+						module = "render-markdown.integ.blink",
+						fallbacks = { "lsp" },
+					},
+				},
 			},
 			signature = { enabled = true }, -- experimental
 			-- completion = {
