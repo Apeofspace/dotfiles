@@ -94,7 +94,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 vim.opt.cpoptions:append("I")
 -- this is hack to automatically indent empty lines with correct indentation
 local autoindent_empty_line = function(key)
-  -- local line = vim.fn.getline(".")
+	-- local line = vim.fn.getline(".")
 	local line = vim.fn.getline("."):gsub("^%s+", "") -- get line and trim whitespaces
 	if line == "" then
 		return '"_cc'
@@ -114,10 +114,11 @@ vim.keymap.set("n", "<leader>gq", vim.diagnostic.setloclist, { desc = "Open diag
 -- vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true })
 -- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true })
 
--- paste by default doesnt copy to buffer (p and P are flipped for visual mode)
-vim.keymap.set({ "v" }, "p", [["_dP]], { noremap = true })
-vim.keymap.set({ "v" }, "P", [["_dp]], { noremap = true })
-vim.keymap.set("n", "<leader>pp", [[viw"_dP]], { noremap = true, desc = "Replace word under cursor with buffer" })
+-- paste by default doesnt copy to buffer 
+vim.keymap.set({ "v" }, "p", [["_dp]], { noremap = true })
+vim.keymap.set({ "v" }, "P", [["_dP]], { noremap = true })
+vim.keymap.set("n", "<leader>pp", [[viw"_dp]], { noremap = true, desc = "Replace word under cursor with buffer" })
+vim.keymap.set("n", "<leader>pP", [[viw"_dP]], { noremap = true, desc = "Replace word under cursor with buffer" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { noremap = true, desc = "Delete to void" })
 
 -- experimental switch ctrl-d/u and d/u to lower finder stress
