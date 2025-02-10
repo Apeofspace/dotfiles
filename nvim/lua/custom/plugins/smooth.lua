@@ -14,6 +14,7 @@ local M = {
 				easing = "quadratic",
 				performance_mode = false, -- disable treesitter
 				hide_cursor = false,
+				-- stop_eof = false,
 				-- mappings = { "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb" },
 			})
 			-- vim.keymap.set({ "n", "v", "x" }, "u", neoscroll.scroll(-vim.wo.scroll, true, 350))
