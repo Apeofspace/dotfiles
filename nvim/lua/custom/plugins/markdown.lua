@@ -5,8 +5,10 @@ local M = {
 		lazy = true,
 		cmd = { "ObsidianSearch", "ObsidianTags", "ObsidianNew" },
 		keys = {
-			{ "<leader>oo", ":ObsidianSearch<CR>", desc = "[O]bsidian [V]ault" },
+      { "<leader>oo", ":ObsidianQuickSwitch<CR>", desc = "[O]bsidian [Q]uick [S]witch" },
+			{ "<leader>os", ":ObsidianSearch<CR>", desc = "[O]bsidian [V]ault" },
 			{ "<leader>ot", ":ObsidianTags<CR>", desc = "[O]bsidian [T]ags" },
+			{ "<leader>on", ":ObsidianNew ", desc = "[O]bsidian [N]ew" },
 		},
 		ft = "markdown",
 		dependencies = {
@@ -19,18 +21,11 @@ local M = {
 		end,
 		opts = {
 			workspaces = {
-				-- {
-				-- 	name = "nvim only",
-				-- 	path = "~/proj/obsidian_vault/",
-				-- },
 				{
 					name = "main",
 					path = "~/Documents/Obsidian Vault",
 				},
 			},
-			--Optional, customize how note file names are generated given the ID, target directory, and title.
-			--@param spec { id: string, dir: obsidian.Path, title: string|? }
-			--@return string|obsidian.Path The full path to the new note.
 			note_path_func = function(spec)
 				local path = spec.dir / tostring(spec.title)
 				return path:with_suffix(".md")
