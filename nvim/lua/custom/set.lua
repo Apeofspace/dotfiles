@@ -1,6 +1,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.bo.commentstring = ""
+
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -130,3 +132,6 @@ vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
 
 -- source current file
 vim.keymap.set({ "n" }, "<leader>x", ":source %<CR>", { desc = "Source this file" })
+
+-- disable s by default
+vim.keymap.set({ "n", "v", "x"}, "s", "<nop>")

@@ -1,12 +1,14 @@
+# ignore all
 *
+# except!
 !.gitignore
-!bash/*
-!git/*
-!kitty/*
-!neovide/*
-!nvim/*
-!wezterm/*
-!yazi/*
-!zellij/*
-!ghostty/*
+!bash/**
+!git/**
+!kitty/**
+!neovide/**
+!nvim/**
+!wezterm/**
+!yazi/**
+!zellij/**
+!ghostty/**
 

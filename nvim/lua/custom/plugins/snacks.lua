@@ -1,3 +1,24 @@
+-- attempts to make dynamic positioning,
+-- but i need position float and not left and right and then do offset somehow
+local function dynamic_picker_pos()
+	-- Get the current window's position and dimensions
+	local winid = vim.api.nvim_get_current_win()
+	local win_config = vim.api.nvim_win_get_config(winid)
+	local win_pos = vim.api.nvim_win_get_position(winid)
+
+	-- Determine if the current window is on the left or right side of the screen
+	local is_left_split = win_pos[2] == 0 -- If the window starts at column 0, it's a left split
+
+	-- Set the picker position based on the current split layout
+	local picker_position
+	if is_left_split then
+		picker_position = "right" -- Open picker on the right if current split is on the left
+	else
+		picker_position = "left" -- Open picker on the left if current split is on the right or no splits
+	end
+	return picker_position
+end
+
 local M = {
 	"folke/snacks.nvim",
 	priority = 1500,
@@ -65,7 +86,19 @@ local M = {
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-    { "<leader>sd", function() Snacks.picker.lsp_symbols({layout = {preset = "vscode", preview = "main", layout = {border = "rounded", height = 0.35, width=0.2, min_width=40}}}) end, desc = "LSP Symbols" },
+    { "<leader>sd", function() Snacks.picker.lsp_symbols(
+      {
+        layout =
+        {preset = "vscode",
+          preview = "main",
+          layout = {
+            backdrop = 50,
+            position ="float",
+            border = "rounded", height = 0.35, width=0.2, min_width=40,
+          }
+        }
+      }
+    ) end, desc = "LSP Symbols" },
     { "<leader>sw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
     -- scratch
     -- { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
