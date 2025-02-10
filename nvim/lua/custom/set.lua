@@ -110,10 +110,6 @@ vim.keymap.set("n", "a", function() return autoindent_empty_line("a") end, { exp
 vim.keymap.set("n", "<leader>ge", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "<leader>gq", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
--- move selected lines up/down (now handled by mini.move)
--- vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { noremap = true })
--- vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { noremap = true })
-
 -- paste by default doesnt copy to buffer 
 vim.keymap.set({ "v" }, "p", [["_dp]], { noremap = true })
 vim.keymap.set({ "v" }, "P", [["_dP]], { noremap = true })
@@ -121,27 +117,8 @@ vim.keymap.set("n", "<leader>pp", [[viw"_dp]], { noremap = true, desc = "Replace
 vim.keymap.set("n", "<leader>pP", [[viw"_dP]], { noremap = true, desc = "Replace word under cursor with buffer" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { noremap = true, desc = "Delete to void" })
 
--- experimental switch ctrl-d/u and d/u to lower finder stress
--- this should also be remapped in neoscroll
--- vim.keymap.set({ "n", "v" }, "d", "<C-d>", { noremap = true })
--- vim.keymap.set({ "n", "v" }, "u", "<C-u>", { noremap = true })
--- vim.keymap.set({ "n", "v" }, "<C-d>", "d", { noremap = true })
--- vim.keymap.set({ "n", "v" }, "<C-u>", "u", { noremap = true })
-
-
 -- save file with < C-s >
 vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>")
-
--- moving splits with leader
-vim.keymap.set({ "n", "v" }, "<leader>h", "<C-w>H", { noremap = true })
-vim.keymap.set({ "n", "v" }, "<leader>j", "<C-w>J", { noremap = true })
-vim.keymap.set({ "n", "v" }, "<leader>k", "<C-w>K", { noremap = true })
-vim.keymap.set({ "n", "v" }, "<leader>l", "<C-w>L", { noremap = true })
--- moving between splits
--- vim.keymap.set({ "n", "v" }, "<C-h>", "<C-w>h", { noremap = true })
--- vim.keymap.set({ "n", "v" }, "<C-j>", "<C-w>j", { noremap = true })
--- vim.keymap.set({ "n", "v" }, "<C-k>", "<C-w>k", { noremap = true })
--- vim.keymap.set({ "n", "v" }, "<C-l>", "<C-w>l", { noremap = true })
 
 --<C-W> to <leader>W
 vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
@@ -153,12 +130,3 @@ vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
 
 -- source current file
 vim.keymap.set({ "n" }, "<leader>x", ":source %<CR>", { desc = "Source this file" })
-
--- use JQ to format json file (who cares honestly)
--- vim.keymap.set({ "n" }, "<leader>gj", [[:%!jq '.'<CR>]], { desc = "Format file with jq" })
--- vim.keymap.set({ "v" }, "<leader>gj", [[:'<,'>!jq '.'<CR>]], { desc = "Format selection with jq" })
-
--- center of screen on halfpage movements
--- vim.keymap.set({ "n", "v" }, "<C-d>", "<C-d>zz", { noremap = true })
--- vim.keymap.set({ "n", "v" }, "<C-u>", "<C-u>zz", { noremap = true })
--- vim.keymap.set({ "n", "v" }, "G", "Gzz", { noremap = true })

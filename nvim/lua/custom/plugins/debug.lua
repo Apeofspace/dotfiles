@@ -19,6 +19,7 @@ local M = {
 					require("dap").continue()
 				end,
         desc = "Debug: Start/Continue", },
+			{ "<F6>", function() require("dap").pause() end, desc = "Debug: Pause", },
 			{ "<F11>", function() require("dap").step_into() end, desc = "Debug: Step Into", },
 			{ "<F10>", function() require("dap").step_over() end, desc = "Debug: Step Over", },
 			{ "<S-F11>", function() require("dap").step_out() end, desc = "Debug: Step Out", },
@@ -53,13 +54,13 @@ local M = {
 				icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
 				controls = {
 					icons = {
-						pause = "⏸",
-						play = "▶",
-						step_into = "⏎",
-						step_over = "⏭",
-						step_out = "⏮",
-						step_back = "b",
-						run_last = "▶▶",
+						pause = "⏸ <F6>",
+						play = "▶ <F5>",
+						step_into = "⏎ Into <F11>",
+						step_over = "⏭ Over <F10>",
+						step_out = "⏮ Out <S-F11>",
+						step_back = "Back",
+						run_last = "▶▶ Last",
 						terminate = "⏹",
 						disconnect = "⏏",
 					},

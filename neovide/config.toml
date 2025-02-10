@@ -17,6 +17,6 @@ wsl = false
   hinting = 'full'
   edging = "antialias"
 [[font.normal]]
-  family = "Victor Mono"
+  family = "Roboto Mono"
   scale = 1
   weight = "Medium"

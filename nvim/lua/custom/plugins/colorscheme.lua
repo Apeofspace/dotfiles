@@ -6,22 +6,29 @@ local schemes = {
 	{ "savq/melange-nvim", name = "melange", lazy = true, priority = 1000 },
 	{ "philosofonusus/morta.nvim", name = "morta", lazy = true, priority = 1000 },
 	{
+		"drewxs/ash.nvim",
+		lazy = true,
+		priority = 1000,
+		name = "ash",
+	},
+	{
 		"ficcdaf/ashen.nvim",
 		lazy = true,
 		name = "ashen",
 		priority = 1000,
 		opts = {
+			transparent = false, -- its transparent anyway
 			style_presets = {
 				bold_functions = false,
 				italic_comments = true,
 			},
 			-- hl = {
 			-- 	merge_override = {
-			--        -- this is bugged and doesnt merge shit it completely overrides
-			-- 		["@type"] = { bold = true },
-			-- 		["@type.builtin"] = { bold = true },
-			-- 		["@keyword.modifier"] = { bold = true },
-			-- 		["@type.definition"] = { bold = true },
+			-- 		-- this doesnt merge, it completely overrides
+			-- 		["@type"] = { nil, nil, { bold = true } },
+			-- 		["@type.builtin"] = { nil, nil, { bold = true } },
+			-- 		["@keyword.modifier"] = { nil, nil, { bold = true } },
+			-- 		["@type.definition"] = { nil, nil, { bold = true } },
 			-- 	},
 			-- },
 		},
