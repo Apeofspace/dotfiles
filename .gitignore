@@ -1,14 +1,26 @@
 # ignore all
 *
+
 # except!
 !.gitignore
+!bash/
 !bash/**
+!git/
 !git/**
+!kitty/
 !kitty/**
+!neovide/
 !neovide/**
+!nvim/
 !nvim/**
+!wezterm/
 !wezterm/**
+!yazi/
 !yazi/**
+!zellij/
 !zellij/**
+!ghostty/
 !ghostty/**
 
+# but ignore these anyway!
+**/*.log
