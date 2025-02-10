@@ -19,6 +19,7 @@ return {
 					"python",
 					"go",
 					"diff",
+					"regex",
 				},
 				-- Autoinstall languages that are not installed
 				auto_install = true,

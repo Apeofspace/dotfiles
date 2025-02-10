@@ -11,7 +11,7 @@ local M = {
 		ft = "markdown",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
+			-- "nvim-telescope/telescope.nvim",
 			-- "hrsh7th/nvim-cmp",
 		},
 		init = function()
