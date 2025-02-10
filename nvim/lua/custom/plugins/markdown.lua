@@ -2,19 +2,32 @@ local M = {
 	{
 		"epwalsh/obsidian.nvim",
 		version = "*", -- recommended, use latest release instead of latest commit
-		lazy = true,
-		cmd = { "ObsidianSearch", "ObsidianTags", "ObsidianNew" },
-		keys = {
-      { "<leader>oo", ":ObsidianQuickSwitch<CR>", desc = "[O]bsidian [Q]uick [S]witch" },
-			{ "<leader>os", ":ObsidianSearch<CR>", desc = "[O]bsidian [V]ault" },
-			{ "<leader>ot", ":ObsidianTags<CR>", desc = "[O]bsidian [T]ags" },
-			{ "<leader>on", ":ObsidianNew ", desc = "[O]bsidian [N]ew" },
-		},
-		ft = "markdown",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
+			"folke/snacks.nvim",
 			-- "nvim-telescope/telescope.nvim",
 			-- "hrsh7th/nvim-cmp",
+		},
+		lazy = true,
+		cmd = { "ObsidianSearch", "ObsidianTags", "ObsidianNew" },
+		ft = "markdown",
+		keys = {
+			{ "<leader>oo", ":ObsidianQuickSwitch<CR>", desc = "[O]bsidian [Q]uick [S]witch" },
+			{ "<leader>os", ":ObsidianSearch<CR>", desc = "[O]bsidian [V]ault" },
+			{ "<leader>ot", ":ObsidianTags<CR>", desc = "[O]bsidian [T]ags" },
+			{
+				"<leader>on",
+				function()
+					vim.ui.input({ prompt = "New obsidian note: " }, function(input)
+						if input and input ~= "" then
+							vim.cmd("ObsidianNew " .. input)
+						else
+							vim.notify("Note not create: name empty", vim.log.levels.WARN)
+						end
+					end)
+				end,
+				desc = "[O]bsidian [N]ew",
+			},
 		},
 		init = function()
 			vim.opt.conceallevel = 1
