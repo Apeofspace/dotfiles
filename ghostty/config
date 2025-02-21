@@ -1,11 +1,22 @@
 # config-file = themes/ashen # can also add files like this
 theme = ashen
 
+# font comparison website
+# https://www.programmingfonts.org/#commit-mono
+
 font-family = "Roboto Mono"
+# font-family = "CommitMono"
+# font-family = "Maple Mono" # this is basically comic sens with cursives
+# font-family = "Cascadia Code" # too strict looking
 font-size = 13
 
 background-opacity = 0.8
 window-decoration = true
+
+# Sizes larger than the screen size will be clamped to the screen size. This
+# can be used to create a maximized-by-default window size.
+# window-height=10000
+# window-width=10000
 
 # command = "zellij attach -c main"
 

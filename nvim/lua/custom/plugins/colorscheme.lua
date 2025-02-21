@@ -12,6 +12,12 @@ local schemes = {
 		name = "ash",
 	},
 	{
+		"Skardyy/makurai-nvim",
+		lazy = true,
+		priority = 1000,
+		name = "makurai",
+	},
+	{
 		"ficcdaf/ashen.nvim",
 		lazy = true,
 		name = "ashen",
@@ -311,29 +317,27 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	end,
 })
 
-vim.keymap.set("n", "<leader>cs", function() --> Show all custom colors in telescope...
-	for _, color in ipairs(schemes) do --> Load all colors in spec....
-		vim.cmd("Lazy load " .. color.name) --> vim colorschemes cannot be required...
-	end
-
-	vim.schedule(function() --> Needs to be scheduled:
-    -- stylua: ignore
-    local builtins = { "zellner", "torte", "slate", "shine", "ron", "quiet", "peachpuff",
-    "pablo", "murphy", "lunaperche", "koehler", "industry", "evening", "elflord",
-    "desert", "delek", "default", "darkblue", "blue", "zaibatsu", "vim", "retrobox",
-			'morning', 'randomhue', 'wildcharm', 'habamax' , 'sorbet', 'minischeme', 'minicyan'}
-
-		local completion = vim.fn.getcompletion
-		---@diagnostic disable-next-line: duplicate-set-field
-		vim.fn.getcompletion = function(pat, type) --> override
-			return vim.tbl_filter(function(color)
-				return not vim.tbl_contains(builtins, color) --
-			end, completion("", "color"))
-		end
-
-		vim.cmd("Telescope colorscheme enable_preview=true")
-		vim.fn.getcompletion = completion --> restore
-	end)
-end, { desc = "Telescope COLORSCHEMES", silent = true })
+-- TELESCOPE PICKER (requires each theme to have a name)
+-- vim.keymap.set("n", "<leader>cs", function() --> Show all custom colors in telescope...
+-- 	for _, color in ipairs(schemes) do --> Load all colors in spec....
+-- 		vim.cmd("Lazy load " .. color.name) --> vim colorschemes cannot be required...
+-- 	end
+-- 	vim.schedule(function() --> Needs to be scheduled:
+--     -- stylua: ignore
+--     local builtins = { "zellner", "torte", "slate", "shine", "ron", "quiet", "peachpuff",
+--     "pablo", "murphy", "lunaperche", "koehler", "industry", "evening", "elflord",
+--     "desert", "delek", "default", "darkblue", "blue", "zaibatsu", "vim", "retrobox",
+-- 			'morning', 'randomhue', 'wildcharm', 'habamax' , 'sorbet', 'minischeme', 'minicyan'}
+-- 		local completion = vim.fn.getcompletion
+-- 		---@diagnostic disable-next-line: duplicate-set-field
+-- 		vim.fn.getcompletion = function(pat, type) --> override
+-- 			return vim.tbl_filter(function(color)
+-- 				return not vim.tbl_contains(builtins, color) --
+-- 			end, completion("", "color"))
+-- 		end
+-- 		vim.cmd("Telescope colorscheme enable_preview=true")
+-- 		vim.fn.getcompletion = completion --> restore
+-- 	end)
+-- end, { desc = "Telescope COLORSCHEMES", silent = true })
 
 return schemes

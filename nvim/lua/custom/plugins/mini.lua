@@ -76,7 +76,7 @@ return {
 			})
 
 			-- make fFtT work between lines
-			-- require("mini.jump").setup()
+			-- require("mini.jump").setup() -- it is useful but looks ugly
 
 			local miniclue = require("mini.clue")
 			miniclue.setup({

@@ -55,10 +55,10 @@ local M = {
 	keys = {
     --stylua: ignore start
     -- find files
-    { "<leader>sf", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+    { "<leader>sF", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
     { "<leader>sb", function() Snacks.picker.buffers() end, desc = "Buffers" },
     { "<leader>sn", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    { "<leader>sF", function() Snacks.picker.files() end, desc = "Find Files" },
+    { "<leader>sf", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>op", function() Snacks.picker.projects() end, desc = "Projects" },
     -- { "<leader>e", function() Snacks.explorer({ sources = { explorer = { follow_file = false, focus = "input", jump = {close = true} } } }) end, desc = "File Explorer" },
     -- git
