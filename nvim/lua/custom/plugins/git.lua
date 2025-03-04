@@ -1,3 +1,15 @@
+local function complete_branches(arg_lead, cmd_line, cursor_pos)
+	local branches = vim.fn.systemlist('git branch --format="%(refname:short)"')
+	local matches = {}
+	for _, branch in ipairs(branches) do
+		if branch:match("^" .. arg_lead) then
+			table.insert(matches, branch)
+		end
+	end
+	return matches
+end
+vim.g.complete_branches = complete_branches -- expose to global namespace
+
 local M = {
 	{
 		"sindrets/diffview.nvim",
@@ -8,6 +20,28 @@ local M = {
 			{ "<Leader>gdh", "<cmd>DiffviewFileHistory<CR>", desc = "Diff commits" },
 			{ "<Leader>gdc", "<cmd>DiffviewOpen HEAD<CR>", desc = "Diff View latest commit" },
 			{ "<Leader>gdo", "<cmd>DiffviewOpen<CR>", desc = "Diff View Open (hangs =( ...)))" },
+			{
+				"<Leader>gdb",
+				-- it seems that vim.ui.input doesnt support completion yet
+				-- function()
+				-- 	vim.ui.input({
+				-- 		prompt = "Branch to compare HEAD to: ",
+				-- 		completion = "customlist",
+				-- 		completion_list = complete_branches,
+				-- 	}, function(input)
+				-- 		if input and input ~= "" then
+				-- 			vim.cmd("DiffviewOpen HEAD.." .. input)
+				-- 		end
+				-- 	end)
+				-- end,
+				function()
+					local branch = vim.fn.input("Branch to compare HEAD to: ", "", "customlist,complete_branches")
+					if branch and branch ~= "" then
+						vim.cmd("DiffviewOpen HEAD.." .. branch)
+					end
+				end,
+				desc = "Compare current branch to ...",
+			},
 		},
 		opts = function()
 			local actions = require("diffview.actions")

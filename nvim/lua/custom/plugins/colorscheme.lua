@@ -1,26 +1,27 @@
 local schemes = {
-	{ "catppuccin/nvim", name = "catppuccin", lazy = true, priority = 1000 },
-	{ "loctvl842/monokai-pro.nvim", name = "monokai-pro", lazy = true, priority = 1000 },
-	{ "rose-pine/neovim", name = "rose-pine", lazy = true, priority = 1000 },
-	{ "AlexvZyl/nordic.nvim", name = "nordic", lazy = true, priority = 1000 },
-	{ "savq/melange-nvim", name = "melange", lazy = true, priority = 1000 },
-	{ "philosofonusus/morta.nvim", name = "morta", lazy = true, priority = 1000 },
+	{ "catppuccin/nvim", lazy = true, priority = 1000 },
+	{ "loctvl842/monokai-pro.nvim", lazy = true, priority = 1000 },
+	{ "rose-pine/neovim", lazy = true, priority = 1000 },
+	{ "AlexvZyl/nordic.nvim", lazy = true, priority = 1000 },
+	{ "savq/melange-nvim", lazy = true, priority = 1000 },
+	{ "philosofonusus/morta.nvim", lazy = true, priority = 1000 },
+	{ "drewxs/ash.nvim", lazy = true, priority = 1000 },
 	{
-		"drewxs/ash.nvim",
+		"alexxGmZ/e-ink.nvim",
 		lazy = true,
 		priority = 1000,
-		name = "ash",
-	},
-	{
-		"Skardyy/makurai-nvim",
-		lazy = true,
-		priority = 1000,
-		name = "makurai",
+		-- config = function()
+		-- 	require("e-ink").setup()
+		-- 	local set_hl = vim.api.nvim_set_hl
+		-- 	local mono = require("e-ink.palette").mono()
+		-- 	local everforest = require("e-ink.palette").everforest()
+		-- 	local mono = require("e-ink.palette").mono()
+		-- 	set_hl(0, "Group", { fg = everforest.green })
+		-- end,
 	},
 	{
 		"ficcdaf/ashen.nvim",
 		lazy = true,
-		name = "ashen",
 		priority = 1000,
 		opts = {
 			transparent = false, -- its transparent anyway
@@ -41,7 +42,6 @@ local schemes = {
 	},
 	{
 		"ellisonleao/gruvbox.nvim",
-		name = "gruvbox",
 		lazy = true,
 		priority = 1000,
 		config = function()
@@ -79,7 +79,6 @@ local schemes = {
 	},
 	{
 		"sainnhe/gruvbox-material",
-		name = "gruvbox-material",
 		lazy = true,
 		priority = 1000,
 		config = function()
@@ -93,7 +92,6 @@ local schemes = {
 	},
 	{
 		"sainnhe/sonokai",
-		name = "sonokai",
 		lazy = true,
 		priority = 1000,
 		config = function()
@@ -106,7 +104,6 @@ local schemes = {
 	},
 	{
 		"folke/tokyonight.nvim",
-		name = "tokyonight",
 		lazy = true, -- make sure we load this during startup if it is your main colorscheme
 		priority = 1000, -- make sure to load this before all the other start plugins
 		opts = {
@@ -118,7 +115,6 @@ local schemes = {
 	},
 	{
 		"eldritch-theme/eldritch.nvim",
-		name = "eldritch",
 		lazy = true,
 		priority = 1000,
 		config = function()
@@ -129,7 +125,6 @@ local schemes = {
 	},
 	{
 		"HoNamDuong/hybrid.nvim",
-		name = "hybrid",
 		lazy = true,
 		priority = 1000,
 		config = function()
@@ -145,7 +140,6 @@ local schemes = {
 	},
 	{
 		"rebelot/kanagawa.nvim",
-		name = "kanagawa",
 		lazy = true,
 		priority = 1000,
 		opts = {
@@ -164,7 +158,6 @@ local schemes = {
 	},
 	{
 		"neanias/everforest-nvim",
-		name = "everforest",
 		version = false,
 		lazy = true,
 		priority = 1000,
@@ -178,7 +171,6 @@ local schemes = {
 	},
 	{
 		"2giosangmitom/nightfall.nvim",
-		name = "nightfall",
 		lazy = true,
 		priority = 1000,
 		opts = {
@@ -194,7 +186,6 @@ local schemes = {
 	},
 	{
 		"EdenEast/nightfox.nvim",
-		name = "nightfox",
 		lazy = true,
 		priority = 1000,
 		opts = {
@@ -228,7 +219,6 @@ local schemes = {
 	},
 	{
 		"olimorris/onedarkpro.nvim",
-		name = "onedarkpro",
 		lazy = true,
 		priority = 1000, -- Ensure it loads first
 		config = function()
@@ -257,7 +247,6 @@ local schemes = {
 	},
 	{
 		"Mofiqul/dracula.nvim",
-		name = "dracula",
 		lazy = true,
 		priority = 1000,
 		opts = {
@@ -268,7 +257,6 @@ local schemes = {
 	},
 	{
 		"ramojus/mellifluous.nvim",
-		name = "mellifluous",
 		lazy = true,
 		priority = 1000,
 		opts = {
