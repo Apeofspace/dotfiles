@@ -44,16 +44,16 @@ return {
 	},
 	{
 		"aaronik/treewalker.nvim",
-    enabled = false, -- honestly I never use this and it takes nice bindings
+    enabled = true, -- honestly I never use this and it takes nice bindings
 		config = function()
 			local tw = require("treewalker")
 			tw.setup({
 				highlight = true, -- default is false
 			})
-			vim.keymap.set({ "n", "v" }, "<leader>h", ":Treewalker Left<CR>", { noremap = true })
-			vim.keymap.set({ "n", "v" }, "<leader>j", ":Treewalker Down<CR>", { noremap = true })
-			vim.keymap.set({ "n", "v" }, "<leader>k", ":Treewalker Up<CR>", { noremap = true })
-			vim.keymap.set({ "n", "v" }, "<leader>l", ":Treewalker Right<CR>", { noremap = true })
+			vim.keymap.set({ "n", "v" }, "<C-h>", ":Treewalker Left<CR>", { noremap = true })
+			vim.keymap.set({ "n", "v" }, "<C-j>", ":Treewalker Down<CR>", { noremap = true })
+			vim.keymap.set({ "n", "v" }, "<C-k>", ":Treewalker Up<CR>", { noremap = true })
+			vim.keymap.set({ "n", "v" }, "<C-l>", ":Treewalker Right<CR>", { noremap = true })
 		end,
 	},
 }

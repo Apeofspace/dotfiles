@@ -142,7 +142,7 @@ return {
 				"codespell",
 				-- "isort",
 				-- "black",
-				"prettierd",
+				-- "prettierd",
 				-- "astyle", -- its not on masons list
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
