@@ -13,17 +13,20 @@ local M = {
 			keymap = {
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide", "fallback" },
+				["<CR>"] = { "accept", "fallback" },
 				["<Tab>"] = {
-					function(cmp)
-						if cmp.snippet_active() then
-							return cmp.accept()
-						else
-							return cmp.select_and_accept()
-						end
-					end,
+					-- function(cmp)
+					-- 	if cmp.snippet_active() then
+					-- 		return cmp.accept()
+					-- 	else
+					-- 		return cmp.select_and_accept()
+					-- 	end
+					-- end,
 					"snippet_forward", -- next snippet element
 					"fallback", -- normal tab basically
 				},
+				["<S-Tab>"] = { "snippet_backward", "fallback" },
+				["<C-y>"] = { "accept", "fallback" },
 				["<C-p>"] = { "select_prev", "fallback" },
 				["<C-n>"] = { "select_next", "fallback" },
 				["<C-b>"] = { "scroll_documentation_up", "fallback" },
@@ -32,11 +35,11 @@ local M = {
 				["<C-l>"] = { "snippet_backward", "fallback" },
 			},
 			appearance = {
-				use_nvim_cmp_as_default = true, -- temp for beta
+				use_nvim_cmp_as_default = false, -- temp for beta
 				nerd_font_variant = "mono",
 			},
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "markdown" },
+				default = { "lsp", "path", "buffer", "snippets", "markdown" },
 				providers = {
 					markdown = {
 						name = "RenderMarkdown",
@@ -52,8 +55,9 @@ local M = {
 		},
 		opts_extend = { "sources.default" },
 	},
-	{
+	{ -- basically thats mini pair with clasp together
 		"altermo/ultimate-autopair.nvim",
+		enabled = false,
 		-- :help ultimate-autopair
 		-- Alt+e for fastwrap
 		opts = {

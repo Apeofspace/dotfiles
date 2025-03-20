@@ -9,6 +9,7 @@ return {
 			-- Add/delete/replace surroundings (brackets, quotes, etc.)
 			require("mini.surround").setup({ mappings = { update_n_lines = "" } })
 
+			-- show git diff and toggle diff overlay
 			require("mini.diff").setup({
 				view = {
 					style = "sign",
@@ -25,8 +26,6 @@ return {
 				vim.cmd("lua MiniDiff.toggle_overlay()")
 				vim.notify("Toggle mini.diff overlay")
 			end, { desc = "Toggle mini.diff overlay" })
-
-			-- require("mini.indentscope").setup({symbol = "│"})
 
 			-- move selection
 			require("mini.move").setup({
@@ -45,7 +44,7 @@ return {
 				-- },
 			})
 
-			-- file navigation
+			-- oily file navigation
 			-- require("mini.files").setup({
 			-- 	vim.keymap.set("n", "<leader>oi", function()
 			-- 		-- set buffer cwd as mini.files cwd
@@ -78,41 +77,35 @@ return {
 			-- make fFtT work between lines
 			-- require("mini.jump").setup() -- it is useful but looks ugly
 
+			-- show keymaps help
 			local miniclue = require("mini.clue")
 			miniclue.setup({
 				triggers = {
 					-- Leader triggers
 					{ mode = "n", keys = "<Leader>" },
 					{ mode = "x", keys = "<Leader>" },
-
 					-- Built-in completion
 					{ mode = "i", keys = "<C-x>" },
-
 					-- `g` key
 					{ mode = "n", keys = "g" },
-					{ mode = "x", keys = "g" },
 
 					-- Marks
 					{ mode = "n", keys = "'" },
 					{ mode = "n", keys = "`" },
 					{ mode = "x", keys = "'" },
 					{ mode = "x", keys = "`" },
-
 					-- Registers
 					{ mode = "n", keys = '"' },
 					{ mode = "x", keys = '"' },
 					{ mode = "i", keys = "<C-r>" },
 					{ mode = "c", keys = "<C-r>" },
-
 					-- Window commands
 					{ mode = "n", keys = "<C-w>" },
 					{ mode = "n", keys = "<Leader>w" },
-
 					-- `z` key
 					{ mode = "n", keys = "z" },
 					{ mode = "x", keys = "z" },
 				},
-
 				clues = {
 					-- Enhance this by adding descriptions for <Leader> mapping groups
 					miniclue.gen_clues.builtin_completion(),
@@ -126,20 +119,45 @@ return {
 					{ mode = "n", keys = "<Leader>s", desc = "Telescope" },
 					{ mode = "n", keys = "<Leader>t", desc = "Toggles" },
 				},
-
 				window = {
 					delay = 0,
 				},
 			})
+
+			-- doesnt do c comments correcttly without ftplugin
+			require("mini.comment").setup({
+				options = {
+					ignore_blank_line = true,
+				},
+			})
+
+			-- similar to substitute. griw to replace word with buffer
+			-- gxx gxx to exhange two lines, collides with open website gx
+			-- g= to evaluate text
+			-- gm to duplicate
+			-- gs to sort (collides with switch header/source)
+			require("mini.operators").setup({ sort = { prefix = "" }, exchange = { prefix = "" } })
+
+			-- AUTOPAIRING. needs xzbdmw/clasp.nvim to replace ultimate-autopair functionality
+			-- it may or may not work with pythons multiline comments
+			require("mini.pairs").setup()
 		end,
 	},
 
-
-  -- doesnt do c comments correcttly
-	require('mini.comment').setup({
-    options = {
-      ignore_blank_line = true,
-    }
-  })
-
+	{
+		"xzbdmw/clasp.nvim", -- it works well I like it
+		config = function()
+			require("clasp").setup({
+				pairs = { ["{"] = "}", ['"'] = '"', ["'"] = "'", ["("] = ")", ["["] = "]", ["<"] = ">" },
+				keep_insert_mode = true,
+				remove_pattern = nil,
+			})
+			vim.keymap.set({ "n", "i" }, "<M-e>", function()
+				require("clasp").wrap("next")
+			end)
+			vim.keymap.set({ "n", "i" }, "<M-E>", function()
+				require("clasp").wrap("prev")
+			end)
+		end,
+	},
 }

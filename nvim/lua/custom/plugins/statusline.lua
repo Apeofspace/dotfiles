@@ -38,8 +38,29 @@ local section_config = {
 }
 
 local winbar_config = {
-	lualine_a = {},
-	lualine_b = {},
+	lualine_a = {
+		function()
+			local cwdpath = vim.uv.cwd()
+			local parts = vim.split(cwdpath, "/", { plain = true })
+			if parts then
+				return parts[#parts]
+			else
+				return ""
+			end
+		end,
+	},
+	lualine_b = {
+		function()
+			local relpath = vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
+			if relpath then
+				local parts = vim.split(relpath, "/", { plain = true })
+				local result = table.concat(parts, "  ", 1, #parts - 1)
+				return result
+			else
+				return ""
+			end
+		end,
+	},
 	lualine_c = { "filename" },
 	lualine_x = {},
 	lualine_y = {},
@@ -55,18 +76,36 @@ local tabline_config = {
 	} },
 }
 
-return {
-	-- https://neoland.dev/plugin/8327
-	"nvim-lualine/lualine.nvim",
-	-- lazy = true,
-	-- event = "User ColorschemeLoaded",
-	event = "VeryLazy",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-	opts = {
-		sections = section_config,
-		inactive_sections = section_config,
-		-- tabline = tabline_config,
-		-- winbar = winbar_config,
-		-- inactive_winbar = winbar_config,
+local M = {
+	{
+		-- https://neoland.dev/plugin/8327
+		"nvim-lualine/lualine.nvim",
+		event = "VeryLazy",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			options = { globalstatus = true }, -- single bar
+			sections = section_config,
+			-- inactive_sections = section_config,
+			-- tabline = tabline_config,
+			-- winbar = winbar_config,
+			-- inactive_winbar = winbar_config,
+		},
+	},
+	{
+		"utilyre/barbecue.nvim",
+		name = "barbecue",
+		enabled = true,
+		version = "*",
+		dependencies = {
+			"SmiteshP/nvim-navic",
+			"nvim-tree/nvim-web-devicons", -- optional dependency
+		},
+		-- config = function ()
+		--   require("nvim-web-devicons").setup()
+		--   require("barbecue").setup()
+		-- end
+		opts = {},
 	},
 }
+
+return M

@@ -43,6 +43,7 @@ local M = {
 		-- scroll = { enabled = not vim.g.neovide, easing = "quadratic" }, -- doesnt look as good as neoscroll, bad at file top and bot
 		-- lazygit = { enabled = false }, -- neogit arguably better
 		-- scratch = { enabled = false },
+		-- dim = { enabled = false },
 		words = { enabled = true }, -- same as * and #
 		input = { enabled = true }, -- doesnt work with vim.fn.input (which is the : )
 		bigfile = { enabled = true },
