@@ -1,3 +1,8 @@
+-- TODO huge idea here.
+-- make a git sync by hand that automatically pulls data from git and pushes 
+-- every time you save a file.
+-- the challenge here will be to resolve merge commits
+
 local M = {
 	{
 		"epwalsh/obsidian.nvim",
@@ -5,8 +10,6 @@ local M = {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"folke/snacks.nvim",
-			-- "nvim-telescope/telescope.nvim",
-			-- "hrsh7th/nvim-cmp",
 		},
 		lazy = true,
 		cmd = { "ObsidianSearch", "ObsidianTags", "ObsidianNew" },
@@ -29,9 +32,9 @@ local M = {
 				desc = "[O]bsidian [N]ew",
 			},
 		},
-		init = function()
-			vim.opt.conceallevel = 1
-		end,
+		-- init = function()
+		-- 	vim.opt.conceallevel = 2
+		-- end,
 		opts = {
 			workspaces = {
 				{
@@ -48,9 +51,9 @@ local M = {
 	},
 	{
 		"OXY2DEV/markview.nvim",
-		enabled = false,
-		lazy = false, -- Recommended
-		-- ft = "markdown" -- If you decide to lazy-load anyway
+		-- enabled = false,
+		-- lazy = false, -- Recommended
+		ft = "markdown", -- If you decide to lazy-load anyway
 
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -59,7 +62,7 @@ local M = {
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		-- enabled = false,
+		enabled = false,
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
 		ft = "markdown",
 		---@module 'render-markdown'
@@ -76,7 +79,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.linebreak = true -- Wrap at word boundaries, not in the middle of a word
 		vim.opt_local.breakindent = true -- Indent wrapped lines to align with the start of the text
 		vim.opt_local.textwidth = 80
-		vim.opt_local.conceallevel = 2
+		vim.opt_local.conceallevel = 2 -- i don't think it cares
 		vim.opt.spell = true
 	end,
 })

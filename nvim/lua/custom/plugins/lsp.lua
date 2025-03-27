@@ -1,3 +1,42 @@
+-- lazy attempt at doing the lsp without lspconfig
+-- ideally i would want to ditch mason and just have all lsp manually installed  
+-- with apt. this is good too because it would allow to reuse same lsps with helix
+-- and zed
+
+-- vim.lsp.config.clangd = {
+-- 	cmd = { "clangd", "--query-driver=/usr/bin/arm-none-eabi-gcc" },
+-- 	filetypes = { "c", "cpp" },
+-- }
+-- vim.lsp.enable({ "clangd" })
+
+-- vim.lsp.config.cmake = {
+-- 	cmd = { "cmake" },
+-- }
+-- vim.lsp.enable({ "cmake" })
+
+-- vim.lsp.config.basedpyright = {
+
+-- 	settings = {
+-- 		basedpyright = {
+-- 			disableOrganizeImports = true, -- ruff
+-- 			analysis = {
+-- 				typeCheckingMode = "basic",
+-- 				diagnosticSeverityOverrides = {
+-- 					reportOptionalMemberAccess = false, -- "warning"
+-- 				},
+-- 			},
+-- 		},
+-- 	},
+-- }
+
+-- return {
+-- 	{
+-- 		"williamboman/mason.nvim",
+-- 		opts = { ensure_installed = { "clangd", "cmake", "marksman", "basedpyright", "ruff", "lua_ls" } },
+-- 	},
+-- 	{ "WhoIsSethDaniel/mason-tool-installer.nvim", opts = { ensure_installed = { "stylua", "codespell" } } },
+-- }
+
 return {
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",

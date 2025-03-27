@@ -1,12 +1,11 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
 -- LANGMAP
 local function escape(str)
-  -- You need to escape these characters to work correctly
-  local escape_chars = [[;,."|\]]
-  return vim.fn.escape(str, escape_chars)
+	-- You need to escape these characters to work correctly
+	local escape_chars = [[;,."|\]]
+	return vim.fn.escape(str, escape_chars)
 end
 
 -- Recommended to use lua template string
@@ -16,12 +15,13 @@ local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
 local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
 
 vim.opt.langmap = vim.fn.join({
-    -- | `to` should be first     | `from` should be second
-    escape(ru_shift) .. ';' .. escape(en_shift),
-    escape(ru) .. ';' .. escape(en),
-}, ',')
+	-- | `to` should be first     | `from` should be second
+	escape(ru_shift)
+		.. ";"
+		.. escape(en_shift),
+	escape(ru) .. ";" .. escape(en),
+}, ",")
 -- LANGMAP
-
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -70,6 +70,12 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
 -- vim.lsp.inlay_hint.enable()
+
+-- multiline diagnostic messages
+vim.diagnostic.config({
+	virtual_text = true, -- oneline
+	-- virtual_lines = true, -- multiline
+})
 
 -- conceal level for obsidian nvim mainly
 vim.opt.conceallevel = 0
