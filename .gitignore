@@ -21,6 +21,8 @@
 !zellij/**
 !ghostty/
 !ghostty/**
+!zed/
+!zed/**
 
 # but ignore these anyway!
 **/*.log

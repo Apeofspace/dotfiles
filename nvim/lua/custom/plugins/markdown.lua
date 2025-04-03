@@ -32,9 +32,9 @@ local M = {
 				desc = "[O]bsidian [N]ew",
 			},
 		},
-		-- init = function()
-		-- 	vim.opt.conceallevel = 2
-		-- end,
+		init = function()
+			vim.opt.conceallevel = 2
+		end,
 		opts = {
 			workspaces = {
 				{
