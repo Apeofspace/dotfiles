@@ -33,7 +33,8 @@ return {
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header
-					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					-- this is also in snacks
+					-- map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 					map("gs", ":ClangdSwitchSourceHeader<CR>", "Switch Source/Header")
 
@@ -139,7 +140,7 @@ return {
 			local ensure_installed = vim.tbl_keys(ensure_installed_servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format lua code
-				"codespell",
+				-- "codespell",
 				-- "isort",
 				-- "black",
 				-- "prettierd",

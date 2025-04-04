@@ -45,18 +45,19 @@ return {
 			})
 
 			-- oily file navigation
-			-- require("mini.files").setup({
-			-- 	vim.keymap.set("n", "<leader>oi", function()
-			-- 		-- set buffer cwd as mini.files cwd
-			-- 		local MiniFiles = require("mini.files")
-			-- 		local _ = MiniFiles.close() or MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-			-- 		vim.schedule(function()
-			-- 			-- vim.defer_fn(function()
-			-- 			MiniFiles.reveal_cwd()
-			-- 		end, 30)
-			-- 	end, { desc = "Find files" }),
-			-- 	-- vim.keymap.set("n", "<leader>oi", "<CMD>lua MiniFiles.open()<CR>", { desc = "Find files" }),
-			-- })
+			require("mini.files").setup({
+				vim.keymap.set("n", "<leader>oi", function()
+					-- set buffer cwd as mini.files cwd
+					local MiniFiles = require("mini.files")
+					local _ = MiniFiles.close() or MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+					vim.schedule(function()
+						-- vim.defer_fn(function()
+						MiniFiles.reveal_cwd()
+					end, 30)
+				end, { desc = "Find files" }),
+				-- vim.keymap.set("n", "<leader>oi", "<CMD>lua MiniFiles.open()<CR>", { desc = "Find files" }),
+				options = { use_as_default_explorer = true },
+			})
 
 			-- highlight patterns
 			local hipatterns = require("mini.hipatterns")

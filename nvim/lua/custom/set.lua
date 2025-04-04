@@ -161,3 +161,7 @@ vim.keymap.set({ "n" }, "<leader>x", ":source %<CR>", { desc = "Source this file
 
 -- disable s by default
 vim.keymap.set({ "n", "v", "x"}, "s", "<nop>")
+
+-- EXPERIMENTAL 
+-- save with enter. it interferes with some stuff
+-- vim.keymap.set({ "n", "v" }, "<CR>", ":w<CR>")

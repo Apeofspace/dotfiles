@@ -3,7 +3,7 @@ return {
 	{
 		-- https://github.com/shellRaining/hlchunk.nvim?tab=readme-ov-file
 		"shellRaining/hlchunk.nvim",
-		enabled = true,
+		enabled = false,
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
 			require("hlchunk").setup({

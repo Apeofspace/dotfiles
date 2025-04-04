@@ -1,6 +1,6 @@
 return {
 	"stevearc/oil.nvim",
-	enabled = true,
+	enabled = false,
 	-- event = "VeryLazy",
 	config = function()
 		local oil = require("oil")
