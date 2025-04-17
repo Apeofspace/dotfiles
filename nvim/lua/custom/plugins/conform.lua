@@ -76,6 +76,7 @@ local M = {
 						"--squeeze-ws",
 						"--squeeze-lines=2", -- anything more than 2 empty lines removed
 						"--break-one-line-headers",
+						"--pad-paren-in", -- pad inside parenteses
 					},
 					clang_format = {
 						prepend_args = {

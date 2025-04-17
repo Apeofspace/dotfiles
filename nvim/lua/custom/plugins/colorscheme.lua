@@ -6,6 +6,8 @@ local schemes = {
 	{ "savq/melange-nvim", lazy = true, priority = 1000 },
 	{ "philosofonusus/morta.nvim", lazy = true, priority = 1000 },
 	{ "drewxs/ash.nvim", lazy = true, priority = 1000 },
+	{ "S-Spektrum-M/odyssey.nvim", lazy = true, priority = 1000},
+	{ "romanaverin/charleston.nvim", lazy = true, priority = 1000},
 	{
 		"alexxGmZ/e-ink.nvim",
 		lazy = true,

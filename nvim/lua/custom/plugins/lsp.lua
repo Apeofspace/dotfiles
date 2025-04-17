@@ -2,44 +2,22 @@ return {
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			-- Automatically install LSPs and related tools to stdpath for neovim
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		config = function()
-			--  This function gets run when an LSP attaches to a particular buffer.
-			--    That is to say, every time a new file is opened that is associated with
-			--    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
-			--    function will be executed to configure the current buffer
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
-					-- Function that lets us more easily define mappings  for LSP
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
-
-					-- Rename the variable under your cursor
-					--  Most Language Servers support renaming across files, etc.
 					map("<F2>", vim.lsp.buf.rename, "[R]e[n]ame")
-
-					-- Execute a code action, usually your cursor needs to be on top of an error
-					-- or a suggestion from your LSP for this to activate.
 					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-					-- Opens a popup that displays documentation about the word under your cursor
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
-
-					-- WARN: This is not Goto Definition, this is Goto Declaration.
-					--  For example, in C this would take you to the header
-					-- this is also in snacks
-					-- map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-
 					map("gs", ":ClangdSwitchSourceHeader<CR>", "Switch Source/Header")
-
-					-- toggle inlay_hints
-					map("<leader>th", function()
+					map("<leader>th", function() -- toggle inlay_hints
 						vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 						if vim.lsp.inlay_hint.is_enabled() == true then
 							vim.notify("Inlay hints enabled")

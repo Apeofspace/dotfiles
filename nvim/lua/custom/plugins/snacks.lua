@@ -37,7 +37,7 @@ local M = {
 		-- dashboard = { enabled = false }, -- what am I gay?
 		-- zen = { enabled = false }, -- lmao my ass
 		-- scope = { enabled = false }, -- bad treewalker
-		-- terminal = { enabled = false }, -- not nice
+		terminal = { enabled = true }, -- not nice
 		rename = { enabled = true }, -- oil does this
 		-- scroll = { enabled = not vim.g.neovide, easing = "quadratic" }, -- doesnt look as good as neoscroll, bad at file top and bot
 		-- lazygit = { enabled = false }, -- neogit arguably better
@@ -66,10 +66,10 @@ local M = {
 	keys = {
     --stylua: ignore start
     -- find files
-    { "/F", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-    { "/b", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "/n", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    { "/f", function() Snacks.picker.files() end, desc = "Find Files" },
+    { "<leader>sF", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+    { "<leader>sb", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>sn", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+    { "<leader>sf", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>op", function() Snacks.picker.projects() end, desc = "Projects" },
     -- { "<leader>e", function() Snacks.explorer({ sources = { explorer = { follow_file = false, focus = "input", jump = {close = true} } } }) end, desc = "File Explorer" },
     -- git
@@ -77,27 +77,27 @@ local M = {
     { "<leader>gh", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
 		-- { "<leader>gG", function() Snacks.lazygit() end, desc = "Lazygit" },
     -- search
-    { "//", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
-    { "/c", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
-    { "/g", function() Snacks.picker.grep() end, desc = "Grep" },
-    { '/s', function() Snacks.picker.search_history() end, desc = "Search History" },
-    { "/e", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
-    { "/h", function() Snacks.picker.help() end, desc = "Help Pages" },
-    { "/H", function() Snacks.picker.highlights() end, desc = "Highlights" },
-    { "/k", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
-    { "/r", function() Snacks.picker.resume() end, desc = "Resume search" },
+    { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+    { "<leader>sc", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+    { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
+    { '<leader>ss', function() Snacks.picker.search_history() end, desc = "Search History" },
+    { "<leader>se", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
+    { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
+    { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
+    { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
+    { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume search" },
     { "<leader>cs", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
-    { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    { '/"', function() Snacks.picker.registers() end, desc = "Registers" },
-    { "/i", function() Snacks.picker.icons() end, desc = "Icons for nerds" },
-    { "/p", function() Snacks.picker.spelling() end, desc = "Spelling" },
+    { "<leader>s:", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
+    { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons for nerds" },
+    { "<leader>sp", function() Snacks.picker.spelling() end, desc = "Spelling" },
     -- LSP
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-    { "/d", function() Snacks.picker.lsp_symbols(
+    { "<leader>sd", function() Snacks.picker.lsp_symbols(
       {
         layout =
         {preset = "vscode",
@@ -110,7 +110,7 @@ local M = {
         }
       }
     ) end, desc = "LSP Symbols" },
-    { "/w", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+    { "<leader>sw", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
     -- scratch
     -- { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
     -- { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
@@ -122,6 +122,8 @@ local M = {
 		-- { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
 		{ "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
 		{ "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
+    { "<leader>tt", function() Snacks.terminal() end , desc = "Toggle terminal", mode = {"n", "t"}}
+,
 	},
 	--stylua: ignore end
 	init = function()
@@ -143,7 +145,7 @@ local M = {
 				Snacks.toggle.treesitter():map("<leader>tT")
 				-- Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uc")
 				-- Snacks.toggle.inlay_hints():map("<leader>uh") -- already do this
-				vim.keymap.set({ "n", "v", "x" }, "/", "<nop>") -- disable normal search
+				-- vim.keymap.set({ "n", "v", "x" }, "/", "<nop>") -- disable normal search
 			end,
 		})
 		-- rename integration with minifiles
