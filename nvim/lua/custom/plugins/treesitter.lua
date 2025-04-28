@@ -1,4 +1,4 @@
-return {
+local M = {
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -47,3 +47,5 @@ return {
 		end,
 	},
 }
+-- return M
+return {}

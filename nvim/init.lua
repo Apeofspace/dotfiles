@@ -24,8 +24,9 @@ else
 		vim.cmd("colorscheme " .. active_scheme)
 	end
 
-	require("custom.lsp")
+	require("custom.lsp") -- native LSP
+	-- require("custom.lsp_old") -- mason and shit
 
 	require("langmapper").automapping({ global = true, buffer = false })
-  -- require("custom.scopehighlight")
+	-- require("custom.scopehighlight")
 end

@@ -197,3 +197,18 @@ for server_name, lsp_executable in pairs(enabled_lsp_servers) do
 		vim.notify(msg, vim.log.levels.WARN, { title = "Nvim-config" })
 	end
 end
+
+-- use nvim-lspconfig for default settings without loading the plugin itself
+-- (i think)
+return {
+	"neovim/nvim-lspconfig",
+	-- No need to load the plugin—since we just want its configs, adding the
+	-- it to the `runtimepath` is enough.
+	lazy = true,
+	init = function() -- use init isntead of config
+		local lspConfigPath = require("lazy.core.config").options.root .. "/nvim-lspconfig"
+		-- INFO `prepend` ensures it is loaded before the user's LSP configs, so
+		-- that the user's configs override nvim-lspconfig.
+		vim.opt.runtimepath:prepend(lspConfigPath)
+	end,
+}
