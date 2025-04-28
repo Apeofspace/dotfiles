@@ -24,7 +24,7 @@ else
 		vim.cmd("colorscheme " .. active_scheme)
 	end
 
-	-- require("custom.lsp")
+	require("custom.lsp")
 
 	require("langmapper").automapping({ global = true, buffer = false })
   -- require("custom.scopehighlight")

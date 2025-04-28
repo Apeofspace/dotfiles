@@ -56,7 +56,7 @@ return {
 					end, 30)
 				end, { desc = "Find files" }),
 				-- vim.keymap.set("n", "<leader>oi", "<CMD>lua MiniFiles.open()<CR>", { desc = "Find files" }),
-				options = { use_as_default_explorer = true },
+				options = { use_as_default_explorer = true }, -- interferess with spellcheck downloading???
 			})
 
 			-- highlight patterns
@@ -65,6 +65,7 @@ return {
 				highlighters = {
 					-- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
 					fixme = { pattern = "%f[%w]()FIX()%f[%W]", group = "MiniHipatternsFixme" },
+					shitcode = { pattern = "%f[%w]()SHITCODE()%f[%W]", group = "MiniHipatternsFixme" },
 					hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
 					todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
 					note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },

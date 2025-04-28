@@ -1,4 +1,4 @@
-return {
+local M = {
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -110,6 +110,7 @@ return {
 						},
 					},
 				},
+				codespell = {},
 			}
 
 			-- Ensure the servers and tools above are installed
@@ -141,3 +142,6 @@ return {
 		end,
 	},
 }
+
+-- return M
+return {}

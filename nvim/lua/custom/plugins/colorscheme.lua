@@ -1,46 +1,54 @@
 local schemes = {
 	{ "catppuccin/nvim", lazy = true, priority = 1000 },
-	{ "loctvl842/monokai-pro.nvim", lazy = true, priority = 1000 },
 	{ "rose-pine/neovim", lazy = true, priority = 1000 },
 	{ "AlexvZyl/nordic.nvim", lazy = true, priority = 1000 },
-	{ "savq/melange-nvim", lazy = true, priority = 1000 },
-	{ "philosofonusus/morta.nvim", lazy = true, priority = 1000 },
-	{ "drewxs/ash.nvim", lazy = true, priority = 1000 },
-	{ "S-Spektrum-M/odyssey.nvim", lazy = true, priority = 1000},
-	{ "romanaverin/charleston.nvim", lazy = true, priority = 1000},
-	{
-		"alexxGmZ/e-ink.nvim",
-		lazy = true,
-		priority = 1000,
-		-- config = function()
-		-- 	require("e-ink").setup()
-		-- 	local set_hl = vim.api.nvim_set_hl
-		-- 	local mono = require("e-ink.palette").mono()
-		-- 	local everforest = require("e-ink.palette").everforest()
-		-- 	local mono = require("e-ink.palette").mono()
-		-- 	set_hl(0, "Group", { fg = everforest.green })
-		-- end,
-	},
+	{ "romanaverin/charleston.nvim", lazy = true, priority = 1000 },
+	{ "alexxGmZ/e-ink.nvim", lazy = true, priority = 1000 },
+	{ "folke/tokyonight.nvim", lazy = true, priority = 1000 },
+	{ "nyngwang/memoonry.nvim", lazy = true, priority = 1000 },
 	{
 		"ficcdaf/ashen.nvim",
 		lazy = true,
 		priority = 1000,
-		opts = {
-			transparent = false, -- its transparent anyway
-			style_presets = {
-				bold_functions = false,
-				italic_comments = true,
-			},
-			-- hl = {
-			-- 	merge_override = {
-			-- 		-- this doesnt merge, it completely overrides
-			-- 		["@type"] = { nil, nil, { bold = true } },
-			-- 		["@type.builtin"] = { nil, nil, { bold = true } },
-			-- 		["@keyword.modifier"] = { nil, nil, { bold = true } },
-			-- 		["@type.definition"] = { nil, nil, { bold = true } },
-			-- 	},
-			-- },
-		},
+		config = function()
+			local ashen = require("ashen")
+			-- local palette = require("ashen.colors")
+			ashen.setup({
+				colors = {
+					-- color stolen from sonokai shusia
+					-- for no good reason it becomes transparent if temrinal bg is same as
+					-- theme bg regardless of transparency option
+					-- background = "#1A181A",
+					background = "#211F22",
+					-- background = "#2D2A2E",
+				},
+				transparent = false,
+				style_presets = {
+					-- bold_functions = true,
+					italic_comments = true,
+				},
+				hl = {
+					merge_override = {
+						["@function"] = { { bold = true } },
+						["@function.call"] = { { bold = false, italic = false } },
+						["@function.method.call"] = { { bold = false, italic = false } },
+						["@function.builtin"] = { { bold = false, italic = false } },
+						-- 		["@attribute"] = { { bold = true, italic = false } },
+						-- 		["@keyword"] = { { bold = true, italic = false } },
+								-- ["@keyword.function"] = {nil, nil, { bold = true, italic = false } },
+						-- 		["@keyword.return"] = { { bold = true, italic = false } },
+						-- 		["@keyword.exception"] = { { bold = true, italic = false } },
+						-- 		["@keyword.repeat"] = { { bold = true, italic = false } },
+						-- 		["@keyword.operator"] = { { bold = true, italic = false } },
+						-- 		["@keyword.conditional"] = { { bold = true, italic = false } },
+						-- 		["@keyword.modifier"] = { { bold = true, italic = false } },
+						-- 		["@keyword.coroutine"] = { { bold = true, italic = false } },
+						-- 		["@keyword.type"] = { { bold = true, italic = false } },
+					},
+				},
+			})
+			ashen.load({})
+		end,
 	},
 	{
 		"ellisonleao/gruvbox.nvim",
@@ -105,38 +113,12 @@ local schemes = {
 		end,
 	},
 	{
-		"folke/tokyonight.nvim",
-		lazy = true, -- make sure we load this during startup if it is your main colorscheme
-		priority = 1000, -- make sure to load this before all the other start plugins
-		opts = {
-			styles = {
-				sidebars = "transparent",
-				floats = "transparent",
-			},
-		},
-	},
-	{
 		"eldritch-theme/eldritch.nvim",
 		lazy = true,
 		priority = 1000,
 		config = function()
 			require("eldritch").setup({
 				transparent = false,
-			})
-		end,
-	},
-	{
-		"HoNamDuong/hybrid.nvim",
-		lazy = true,
-		priority = 1000,
-		config = function()
-			require("hybrid").setup({
-				italic = {
-					strings = true,
-					emphasis = true,
-					comments = true,
-					folds = true,
-				},
 			})
 		end,
 	},
@@ -172,54 +154,6 @@ local schemes = {
 		end,
 	},
 	{
-		"2giosangmitom/nightfall.nvim",
-		lazy = true,
-		priority = 1000,
-		opts = {
-			transparent = true,
-			dim_inactive = true,
-			integrations = {
-				telescope = {
-					enabled = true,
-					style = "bordered",
-				},
-			},
-		},
-	},
-	{
-		"EdenEast/nightfox.nvim",
-		lazy = true,
-		priority = 1000,
-		opts = {
-			options = {
-				transparent = false,
-				-- transparent = true,
-				dim_inactive = false,
-				integrations = {
-					telescope = {
-						enabled = true,
-						style = "bordered",
-					},
-				},
-				styles = { -- Style to be applied to different syntax groups
-					types = "italic",
-					methods = "NONE",
-					numbers = "NONE",
-					strings = "italic",
-					comments = "italic",
-					keywords = "bold,italic",
-					constants = "NONE",
-					functions = "italic",
-					operators = "NONE",
-					variables = "NONE",
-					parameters = "NONE",
-					conditionals = "italic",
-					virtual_text = "italic",
-				},
-			},
-		},
-	},
-	{
 		"olimorris/onedarkpro.nvim",
 		lazy = true,
 		priority = 1000, -- Ensure it loads first
@@ -246,26 +180,6 @@ local schemes = {
 				},
 			})
 		end,
-	},
-	{
-		"Mofiqul/dracula.nvim",
-		lazy = true,
-		priority = 1000,
-		opts = {
-			theme = "dracula-soft",
-			transparent_bg = false,
-			italic_comment = true,
-		},
-	},
-	{
-		"ramojus/mellifluous.nvim",
-		lazy = true,
-		priority = 1000,
-		opts = {
-			styles = { -- see :h attr-list for options. set {} for NONE, { option = true } for option
-				main_keywords = { bold = true },
-			},
-		},
 	},
 }
 

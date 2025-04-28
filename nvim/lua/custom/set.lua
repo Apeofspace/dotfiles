@@ -83,9 +83,9 @@ vim.opt.conceallevel = 0
 -- allow unsaved buffers to be hidden
 vim.opt.hidden = true
 
--- spellchecking
-vim.opt.spell = false
-vim.opt.spelllang = "en,ru" --have netrw enabled to auto download this
+-- spellchecking (honestly more annoying than usefull, use lsp instead)
+-- vim.opt.spell = false
+-- vim.opt.spelllang = "en,ru" --have netrw enabled to auto download this
 
 -- set terminal title to filename and to "bash" when exiting
 vim.opt.titleold = "bash"
@@ -161,7 +161,9 @@ vim.keymap.set({ "n" }, "<leader>x", ":source %<CR>", { desc = "Source this file
 
 -- disable s by default
 vim.keymap.set({ "n", "v", "x"}, "s", "<nop>")
+-- disable  <C-f> by default
+-- vim.keymap.set({ "n", "v", "x"}, "<C-f>", "<nop>")
 
--- EXPERIMENTAL 
+-- EXPERIMENTAL
 -- save with enter. it interferes with some stuff
 -- vim.keymap.set({ "n", "v" }, "<CR>", ":w<CR>")

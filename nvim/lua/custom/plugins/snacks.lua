@@ -40,19 +40,20 @@ local M = {
 		terminal = { enabled = true }, -- not nice
 		rename = { enabled = true }, -- oil does this
 		-- scroll = { enabled = not vim.g.neovide, easing = "quadratic" }, -- doesnt look as good as neoscroll, bad at file top and bot
+		scroll = { enabled = false}, -- doesnt look as good as neoscroll, bad at file top and bot
 		-- lazygit = { enabled = false }, -- neogit arguably better
 		-- scratch = { enabled = false },
 		-- dim = { enabled = false },
 		words = { enabled = true }, -- same as * and #
 		input = { enabled = true }, -- doesnt work with vim.fn.input (which is the : )
-		bigfile = { enabled = true },
+		bigfile = { enabled = false }, -- it messes with decisive
 		picker = { enabled = true },
 		image = { enabled = true }, -- image preview
 		notifier = { enabled = true, style = "compact" },
 		quickfile = { enabled = true },
 		-- explorer = { enabled = true, replace_netrw = true }, -- much worse than both oil and mini.files
 		indent = {
-			enabled = true,
+			enabled = false, -- fucking sucks so much
 			only_scope = true,
 			only_current = true,
 			chunk = {
