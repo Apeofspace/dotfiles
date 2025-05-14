@@ -1,11 +1,10 @@
 local schemes = {
 	{ "catppuccin/nvim", lazy = true, priority = 1000 },
-	{ "rose-pine/neovim", lazy = true, priority = 1000 },
 	{ "AlexvZyl/nordic.nvim", lazy = true, priority = 1000 },
 	{ "romanaverin/charleston.nvim", lazy = true, priority = 1000 },
 	{ "alexxGmZ/e-ink.nvim", lazy = true, priority = 1000 },
 	{ "folke/tokyonight.nvim", lazy = true, priority = 1000 },
-	{ "nyngwang/memoonry.nvim", lazy = true, priority = 1000 },
+	{ "webhooked/kanso.nvim", lazy = true, priority = 1000 },
 	{
 		"ficcdaf/ashen.nvim",
 		lazy = true,
@@ -35,7 +34,7 @@ local schemes = {
 						["@function.builtin"] = { { bold = false, italic = false } },
 						-- 		["@attribute"] = { { bold = true, italic = false } },
 						-- 		["@keyword"] = { { bold = true, italic = false } },
-								-- ["@keyword.function"] = {nil, nil, { bold = true, italic = false } },
+						-- ["@keyword.function"] = {nil, nil, { bold = true, italic = false } },
 						-- 		["@keyword.return"] = { { bold = true, italic = false } },
 						-- 		["@keyword.exception"] = { { bold = true, italic = false } },
 						-- 		["@keyword.repeat"] = { { bold = true, italic = false } },

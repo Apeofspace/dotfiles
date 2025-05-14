@@ -40,19 +40,8 @@ local M = {
 			},
 			sources = {
 				default = { "lsp", "path", "buffer", "snippets" },
-				-- default = { "lsp", "path", "buffer", "snippets", "markdown" },
-				-- providers = {
-					-- markdown = {
-					-- 	name = "RenderMarkdown",
-					-- 	module = "render-markdown.integ.blink",
-					-- 	fallbacks = { "lsp" },
-					-- },
-				-- },
 			},
 			signature = { enabled = true }, -- experimental
-			-- completion = {
-			-- 	ghost_text = { enabled = true },
-			-- },
 		},
 		opts_extend = { "sources.default" },
 	},

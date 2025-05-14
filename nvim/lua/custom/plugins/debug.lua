@@ -1,7 +1,7 @@
 local M = {
 	{
 		"mfussenegger/nvim-dap",
-		enabled = true,
+		enabled = false,
 		dependencies = {
 			{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
 			"williamboman/mason.nvim",

@@ -28,21 +28,7 @@ return {
 			end, { desc = "Toggle mini.diff overlay" })
 
 			-- move selection
-			require("mini.move").setup({
-				-- 	mappings = {
-				-- 		-- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
-				-- 		left = "<C-M-h>",
-				-- 		right = "<C-M-l>",
-				-- 		down = "<C-M-j>",
-				-- 		up = "<C-M-k>",
-				--
-				-- 		-- Move current line in Normal mode
-				-- 		line_left = "<C-M-h>",
-				-- 		line_right = "<C-M-l>",
-				-- 		line_down = "<C-M-j>",
-				-- 		line_up = "<C-M-k>",
-				-- },
-			})
+			require("mini.move").setup({})
 
 			-- oily file navigation
 			require("mini.files").setup({
@@ -132,6 +118,8 @@ return {
 					ignore_blank_line = true,
 				},
 			})
+
+			require("mini.align").setup({}) -- press gA to start
 
 			-- similar to substitute. griw to replace word with buffer
 			-- gxx gxx to exhange two lines, collides with open website gx

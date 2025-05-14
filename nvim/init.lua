@@ -17,7 +17,7 @@ else
 			notify = false,
 		},
 		import = "custom.plugins",
-		-- install = { colorscheme = active_scheme },
+		install = { colorscheme = active_scheme },
 	})
 
 	if active_scheme then
@@ -25,8 +25,9 @@ else
 	end
 
 	require("custom.lsp") -- native LSP
-	-- require("custom.lsp_old") -- mason and shit
+	-- require("custom.lsp_old") -- mason and shit. mason updated so it might not work anymore
 
-	require("langmapper").automapping({ global = true, buffer = false })
+	-- WARN automapping cant handle lazy loaded plugins
+	require("langmapper").automapping({ global = true, buffer = true })
 	-- require("custom.scopehighlight")
 end

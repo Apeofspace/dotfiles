@@ -5,6 +5,8 @@
 
 alias ve='python3 -m venv ./venv'
 alias va='source ./venv/bin/activate'
+alias uve='uv venv'
+alias uva='source ./.venv/bin/activate'
 alias vim='nvim'
 alias nv='neovide'
 alias gits='git status'
@@ -174,20 +176,22 @@ fi
 eval "$(fzf --bash)"
 export FZF_DEFAULT_COMMAND="fdfind . -IH"
 
-# add to path
-export PATH=/home/v/.local/bin/:$PATH
-#export PATH=$(/usr/bin/getconf PATH)
+# Add user-specific .local/bin to PATH
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 # nvim as default editor
 export EDITOR=nvim
 export PAGER=cat
 
-# add zig to path
-export PATH=/home/v/.local/zig/:$PATH
-
-# startup zellij in ghostty automatically
+# startup zellij automatically
+# could also provide a zellij config to always attach to same session
+# need terminal test here to prevent zellij running in nested terminals or tmux etc
+#  -z "$ZELLIJ" checks if variable is empty, this sets when zellij is inside sesh
 export ZELLIJ_AUTO_ATTACH=true
 if [ "$TERM" = "xterm-ghostty" ] || [ "$TERM" = "xterm-kitty" ]; then
+# if not in zellij sesh, connect
   if [[ -z "$ZELLIJ" ]]; then
       if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
           zellij attach -c main
@@ -195,6 +199,7 @@ if [ "$TERM" = "xterm-ghostty" ] || [ "$TERM" = "xterm-kitty" ]; then
           zellij
       fi
 
+      # exit the whole termnal when exiting zellij
       if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
           exit
       fi

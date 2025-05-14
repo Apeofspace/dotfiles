@@ -2,6 +2,19 @@ local get_linecount = function()
 	return vim.fn.line("$") or ""
 end
 
+local function noice_stuff()
+	local ok, noice = pcall(require, "noice")
+	if not ok then
+		return nil
+	end
+
+	return {
+		noice.api.statusline.mode.get,
+		cond = noice.api.statusline.mode.has,
+		color = { fg = "#ff9e64" },
+	}
+end
+
 -- local statusline = require("arrow.statusline")
 
 -- local function get_arrow()
@@ -30,7 +43,7 @@ local section_config = {
 	-- +-------------------------------------------------+
 	lualine_a = { "mode" },
 	lualine_b = { "branch", "filename" },
-	lualine_c = { "diagnostics" },
+	lualine_c = { "diagnostics", noice_stuff() }, -- yeah deal with it
 	-- lualine_c = { "diagnostics", get_arrow },
 	lualine_x = { "encoding", "filesize", "filetype" },
 	lualine_y = { "progress", get_linecount },

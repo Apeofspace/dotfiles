@@ -3,6 +3,8 @@
 -- every time you save a file.
 -- the challenge here will be to resolve merge commits
 
+-- change to this https://github.com/obsidian-nvim/obsidian.nvim 
+
 local M = {
 	{
 		"epwalsh/obsidian.nvim",
@@ -80,7 +82,7 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.opt_local.breakindent = true -- Indent wrapped lines to align with the start of the text
 		vim.opt_local.textwidth = 80
 		vim.opt_local.conceallevel = 2 -- i don't think it cares
-		vim.opt.spell = true
+		-- vim.opt.spell = true
 	end,
 })
 

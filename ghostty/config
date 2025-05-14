@@ -1,5 +1,7 @@
 # config-file = themes/ashen # can also add files like this
-theme = ashen
+theme = nord
+# theme = ashen
+# theme = kanso
 
 # font comparison website
 # https://www.programmingfonts.org/#commit-mono
@@ -10,13 +12,16 @@ font-family = "Roboto Mono"
 # font-family = "Cascadia Code" # too strict looking
 font-size = 13
 
-background-opacity = 0.8
+background-opacity = 0.85
 window-decoration = true
+maximize = true
 
 # Sizes larger than the screen size will be clamped to the screen size. This
 # can be used to create a maximized-by-default window size.
 # window-height=10000
 # window-width=10000
+# window-position-x=0
+# window-position-y=0
 
 # command = "zellij attach -c main"
 

@@ -34,7 +34,7 @@ local M = {
 	},
 	{
 		"aaronik/treewalker.nvim",
-		enabled = true, -- honestly I never use this and it takes nice bindings
+		enabled = false, -- honestly I never use this and it takes nice bindings
 		config = function()
 			local tw = require("treewalker")
 			tw.setup({
@@ -47,5 +47,5 @@ local M = {
 		end,
 	},
 }
--- return M
-return {}
+return M
+-- return {}

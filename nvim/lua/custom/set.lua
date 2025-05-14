@@ -16,9 +16,7 @@ local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТ�
 
 vim.opt.langmap = vim.fn.join({
 	-- | `to` should be first     | `from` should be second
-	escape(ru_shift)
-		.. ";"
-		.. escape(en_shift),
+	escape(ru_shift) .. ";" .. escape(en_shift),
 	escape(ru) .. ";" .. escape(en),
 }, ",")
 -- LANGMAP
@@ -27,7 +25,7 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 
 vim.opt.mouse = "a"
-vim.opt.showmode = false
+vim.opt.showmode = false -- I already show that in lualine
 
 vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim.
 
@@ -41,6 +39,7 @@ end
 -- no swap file, auto sync instances
 vim.opt.autoread = true
 vim.opt.swapfile = false
+vim.opt.updatetime = 250 -- swap file written after than many ms
 
 -- incsearch
 vim.opt.ignorecase = true
@@ -53,7 +52,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.foldcolumn = "auto"
 vim.opt.list = false -- to mark tabs and spaces with symbols
 vim.opt.listchars = { tab = "> ", trail = "·", nbsp = "␣" }
-vim.opt.updatetime = 250 -- swap file written after than many ms
 vim.opt.timeoutlen = 500 -- timeout for a keymap sequence
 vim.opt.splitright = true
 vim.opt.splitbelow = true
