@@ -8,6 +8,7 @@ alias va='source ./venv/bin/activate'
 alias uve='uv venv'
 alias uva='source ./.venv/bin/activate'
 alias vim='nvim'
+alias n='nvim'
 alias nv='neovide'
 alias gits='git status'
 alias gitl='git log -15 --oneline'
@@ -183,6 +184,7 @@ fi
 
 # nvim as default editor
 export EDITOR=nvim
+export SUDO_EDITOR=nvim
 export PAGER=cat
 
 # startup zellij automatically

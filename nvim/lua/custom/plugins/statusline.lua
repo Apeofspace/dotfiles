@@ -45,7 +45,7 @@ local section_config = {
 	lualine_b = { "branch", "filename" },
 	lualine_c = { "diagnostics", noice_stuff() }, -- yeah deal with it
 	-- lualine_c = { "diagnostics", get_arrow },
-	lualine_x = { "encoding", "filesize", "filetype" },
+	lualine_x = { "g:obsidian", "encoding", "filesize", "filetype" },
 	lualine_y = { "progress", get_linecount },
 	lualine_z = { "location" },
 }

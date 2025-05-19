@@ -56,7 +56,7 @@ vim.lsp.config.ruff = {
 				ignore = { "E501", "E231" },
 				formatEnabled = true,
 				-- formatEnabled = false, -- use conform if false
-				lineLength = 125,
+				lineLength = 120,
 			},
 		},
 	},

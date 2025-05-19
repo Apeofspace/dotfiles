@@ -59,7 +59,7 @@ vim.opt.splitbelow = true
 -- vim.opt.scrolloff = 40
 vim.opt.scrolloff = 8
 
-vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "80"
 vim.opt.wrap = false
 
 vim.opt.breakindent = true

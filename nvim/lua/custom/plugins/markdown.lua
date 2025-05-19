@@ -49,6 +49,7 @@ local M = {
 			"folke/snacks.nvim",
 			"saghen/blink.cmp",
 			"OXY2DEV/markview.nvim",
+			-- "MeanderingProgrammer/render-markdown.nvim",
 		},
 		config = function()
 			local obsidian = require("obsidian")
@@ -66,9 +67,11 @@ local M = {
 					return path:with_suffix(".md")
 				end,
 			})
-			Auto_git()
 		end,
 	},
+	init = function()
+		Auto_git() -- do it once on loading the plugin
+	end,
 	{
 		"OXY2DEV/markview.nvim",
 		-- enabled = false,
@@ -200,17 +203,17 @@ function Auto_git()
 	})
 end
 
--- -- Enable soft word wrap for Markdown files
--- vim.api.nvim_create_autocmd("FileType", {
--- 	pattern = "markdown",
--- 	callback = function()
--- 		vim.opt_local.wrap = true -- Enable line wrapping
--- 		vim.opt_local.linebreak = true -- Wrap at word boundaries, not in the middle of a word
--- 		vim.opt_local.breakindent = true -- Indent wrapped lines to align with the start of the text
--- 		vim.opt_local.textwidth = 80
--- 		vim.opt_local.conceallevel = 2 -- i don't think it cares
--- 		-- vim.opt.spell = true
--- 	end,
--- })
+-- Enable soft word wrap for Markdown files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function()
+		vim.opt_local.wrap = true -- Enable line wrapping
+		vim.opt_local.linebreak = true -- Wrap at word boundaries, not in the middle of a word
+		vim.opt_local.breakindent = true -- Indent wrapped lines to align with the start of the text
+		vim.opt_local.textwidth = 80
+		vim.opt_local.conceallevel = 2 -- i don't think it cares
+		-- vim.opt.spell = true
+	end,
+})
 
 return M
