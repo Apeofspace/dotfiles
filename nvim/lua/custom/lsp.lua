@@ -46,6 +46,7 @@ vim.lsp.config.basedpyright = {
 }
 
 vim.lsp.config.ruff = {
+  -- this isnt really lsp just formater/linter. hence the use together with pyright
 	cmd = { "ruff", "server" },
 	filetypes = { "python" },
 	root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
@@ -55,7 +56,6 @@ vim.lsp.config.ruff = {
 				lint = { enable = false }, -- DISABLE LINTING (use basedpyright)
 				ignore = { "E501", "E231" },
 				formatEnabled = true,
-				-- formatEnabled = false, -- use conform if false
 				lineLength = 120,
 			},
 		},
@@ -176,6 +176,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- ENABLE SERVERS
 local enabled_lsp_servers = {
 	clangd = "clangd",
 	cmakels = "cmake-language-server",

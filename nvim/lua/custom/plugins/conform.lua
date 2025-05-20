@@ -45,7 +45,7 @@ local M = {
 				-- Use the "*" filetype to run formatters on all filetypes.
 				lua = { "stylua" },
 				python = { "ruff_format", "ruff_organize_imports", stop_after_first = false },
-				-- python = { "ruff_organize_imports", lsp_format = "last" },
+				-- python = { "ruff_organize_imports", lsp_format = "last" }, -- it seems this ignores the settigns
 				-- python = { "isort", "black", stop_after_first = false },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },

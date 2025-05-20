@@ -28,7 +28,20 @@ return {
 			end, { desc = "Toggle mini.diff overlay" })
 
 			-- move selection
-			require("mini.move").setup({})
+			require("mini.move").setup({
+				mappings = {
+					-- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
+					left = "<S-Left>",
+					right = "<S-Right>",
+					down = "<S-Down>",
+					up = "<S-Up>",
+					-- Move current line in Normal mode
+					line_left = "<S-Left>",
+					line_right = "<S-Right>",
+					line_down = "<S-Down>",
+          line_up = "<S-Up>",
+				},
+			})
 
 			-- oily file navigation
 			require("mini.files").setup({
@@ -142,12 +155,18 @@ return {
 				keep_insert_mode = true,
 				remove_pattern = nil,
 			})
-			vim.keymap.set({ "n", "i" }, "<M-e>", function()
-				require("clasp").wrap("next")
-			end)
-			vim.keymap.set({ "n", "i" }, "<M-E>", function()
-				require("clasp").wrap("prev")
-			end)
+			-- vim.keymap.set({ "n", "i" }, "<M-e>", function()
+			-- 	require("clasp").wrap("next")
+			-- end)
+			-- vim.keymap.set({ "n", "i" }, "<M-E>", function()
+			-- 	require("clasp").wrap("prev")
+			-- end)
+        vim.keymap.set({ "n", "i" }, "<c-l>", function()
+            require("clasp").wrap('next')
+        end)
+        vim.keymap.set({ "n", "i" }, "<c-h>", function()
+            require("clasp").wrap('prev')
+        end)
 		end,
 	},
 }
