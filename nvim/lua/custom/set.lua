@@ -49,7 +49,7 @@ vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>") -- reset hl with esc
 
 vim.opt.signcolumn = "yes"
-vim.opt.foldcolumn = "auto"
+-- vim.opt.foldcolumn = "auto"
 vim.opt.list = false -- to mark tabs and spaces with symbols
 vim.opt.listchars = { tab = "> ", trail = "·", nbsp = "␣" }
 vim.opt.timeoutlen = 500 -- timeout for a keymap sequence

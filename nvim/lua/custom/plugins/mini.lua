@@ -2,6 +2,7 @@ return {
 	{ -- Collection of various small independent plugins/modules
 		"echasnovski/mini.nvim",
 		version = false,
+		-- event = "VeryLazy",
 		config = function()
 			-- Better Around/Inside textobjects
 			require("mini.ai").setup({ n_lines = 500 })
@@ -39,7 +40,7 @@ return {
 					line_left = "<S-Left>",
 					line_right = "<S-Right>",
 					line_down = "<S-Down>",
-          line_up = "<S-Up>",
+					line_up = "<S-Up>",
 				},
 			})
 
@@ -140,33 +141,52 @@ return {
 			-- gm to duplicate
 			-- gs to sort (collides with switch header/source)
 			require("mini.operators").setup({ sort = { prefix = "" }, exchange = { prefix = "" } })
+			-- require("mini.jump2d").setup() -- basically folke flash but better and uglier
 
 			-- AUTOPAIRING. needs xzbdmw/clasp.nvim to replace ultimate-autopair functionality
 			-- it may or may not work with pythons multiline comments
-			require("mini.pairs").setup()
+			-- require("mini.pairs").setup({})
 		end,
 	},
-
 	{
-		"xzbdmw/clasp.nvim", -- it works well I like it
-		config = function()
-			require("clasp").setup({
-				pairs = { ["{"] = "}", ['"'] = '"', ["'"] = "'", ["("] = ")", ["["] = "]", ["<"] = ">" },
-				keep_insert_mode = true,
-				remove_pattern = nil,
-			})
-			-- vim.keymap.set({ "n", "i" }, "<M-e>", function()
-			-- 	require("clasp").wrap("next")
-			-- end)
-			-- vim.keymap.set({ "n", "i" }, "<M-E>", function()
-			-- 	require("clasp").wrap("prev")
-			-- end)
-        vim.keymap.set({ "n", "i" }, "<c-l>", function()
-            require("clasp").wrap('next')
-        end)
-        vim.keymap.set({ "n", "i" }, "<c-h>", function()
-            require("clasp").wrap('prev')
-        end)
-		end,
+		-- so this plugin does three thigns better than clasp + mini.pairs:
+		-- 1) python """ """ work
+		-- 2) can delete pairs even if they arent empty
+		-- 3) fastwarp works predictably incrementally and not within one treesitter node weirdly
+		"altermo/ultimate-autopair.nvim",
+		event = { "InsertEnter", "CmdlineEnter" },
+		branch = "v0.6", -- recommended as each new version will have breaking changes
+		opts = {
+			fastwarp = { -- its WARP not WRAP (ffs smh fr fr wtf ong)
+				map = "<C-l>",
+				rmap = "<C-h>",
+			},
+		},
 	},
+	-- {
+	-- 	"xzbdmw/clasp.nvim", -- use with minipairs
+	-- 	-- enabled = false,
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("clasp").setup({
+	-- 			pairs = {
+	-- 				["{"] = "}",
+	-- 				['"'] = '"',
+	-- 				["'"] = "'",
+	-- 				["("] = ")",
+	-- 				["["] = "]",
+	-- 				["<"] = ">",
+	-- 				['"""'] = '"""',
+	-- 			},
+	-- 			keep_insert_mode = true,
+	-- 			remove_pattern = nil,
+	-- 		})
+	-- 		vim.keymap.set({ "n", "i" }, "<c-l>", function()
+	-- 			require("clasp").wrap("next")
+	-- 		end)
+	-- 		vim.keymap.set({ "n", "i" }, "<c-h>", function()
+	-- 			require("clasp").wrap("prev")
+	-- 		end)
+	-- 	end,
+	-- },
 }

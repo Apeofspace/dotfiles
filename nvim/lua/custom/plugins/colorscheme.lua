@@ -1,5 +1,5 @@
 local schemes = {
-	{ "catppuccin/nvim", lazy = true, priority = 1000 },
+	{ "catppuccin/nvim", name = "catpuccin", lazy = true, priority = 1000 },
 	{ "AlexvZyl/nordic.nvim", lazy = true, priority = 1000 },
 	{ "romanaverin/charleston.nvim", lazy = true, priority = 1000 },
 	{ "alexxGmZ/e-ink.nvim", lazy = true, priority = 1000 },

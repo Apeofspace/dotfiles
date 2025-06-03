@@ -107,6 +107,7 @@ local M = {
 	{
 		"utilyre/barbecue.nvim",
 		name = "barbecue",
+    -- event = "VeryLazy",
 		enabled = true,
 		version = "*",
 		dependencies = {

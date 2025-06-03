@@ -1,9 +1,7 @@
 local M = {
 	{
-		-- WARN this plugin likely to have breaking changes
 		-- https://github.com/Saghen/blink.cmp
 		"saghen/blink.cmp",
-		-- enabled = false,
 		lazy = false, -- lazy loading handled internally
 		dependencies = { "rafamadriz/friendly-snippets" },
 		version = "*",
@@ -44,18 +42,6 @@ local M = {
 			signature = { enabled = true }, -- experimental
 		},
 		opts_extend = { "sources.default" },
-	},
-	{ -- basically thats mini pair with clasp together
-		"altermo/ultimate-autopair.nvim",
-		enabled = false,
-		-- :help ultimate-autopair
-		-- Alt+e for fastwrap
-		opts = {
-			space = {
-				enable = false,
-				check_box_ft = { "markdown", "text" },
-			},
-		},
 	},
 }
 

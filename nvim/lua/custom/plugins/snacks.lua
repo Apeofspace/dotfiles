@@ -24,23 +24,23 @@ local M = {
 	priority = 1500,
 	lazy = false,
 	opts = {
-		-- statuscolumn = {
-		-- 	enabled = false,
-		-- 	left = { "mark", "sign" }, -- priority of signs on the left (high to low)
-		-- 	right = { "fold", "git" }, -- priority of signs on the right (high to low)
-		-- 	folds = {
-		-- 		open = true, -- show open fold icons (doesntwork lmao)
-		-- 		git_hl = true, -- use Git Signs hl for fold icons
-		-- 	},
-		-- 	git = { patterns = { "GitSign", "MiniDiffSign" } },
-		-- }, -- mini.diff does that better
+		statuscolumn = {
+			enabled = true,
+			left = { "mark", "sign" }, -- priority of signs on the left (high to low)
+			right = { "fold", "git" }, -- priority of signs on the right (high to low)
+			folds = {
+				open = true, -- show open fold icons (doesntwork lmao)
+				git_hl = true, -- use Git Signs hl for fold icons
+			},
+			git = { patterns = { "MiniDiffSign", "GitSign" } },
+		},
 		-- dashboard = { enabled = false }, -- what am I gay?
 		-- zen = { enabled = false }, -- lmao my ass
 		-- scope = { enabled = false }, -- bad treewalker
 		terminal = { enabled = true }, -- not nice
 		rename = { enabled = true }, -- oil does this
 		-- scroll = { enabled = not vim.g.neovide, easing = "quadratic" }, -- doesnt look as good as neoscroll, bad at file top and bot
-		scroll = { enabled = false}, -- doesnt look as good as neoscroll, bad at file top and bot
+		scroll = { enabled = false }, -- doesnt look as good as neoscroll, bad at file top and bot
 		-- lazygit = { enabled = false }, -- neogit arguably better
 		-- scratch = { enabled = false },
 		-- dim = { enabled = false },

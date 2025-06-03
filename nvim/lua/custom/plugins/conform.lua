@@ -69,7 +69,7 @@ local M = {
 					prepend_args = {
 						"--style=google",
 						"--indent=spaces=2 ",
-						"--max-code-length=120",
+						"--max-code-length=125",
 						"--pad-oper",
 						"--pad-comma",
 						"--pad-header",
@@ -80,7 +80,7 @@ local M = {
 					},
 					clang_format = {
 						prepend_args = {
-							'--style="{BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 120}"',
+							'--style="{BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 125}"',
 							"--fallback-style=Google",
 						},
 					},
