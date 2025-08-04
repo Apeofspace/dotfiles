@@ -35,6 +35,7 @@ local M = {
 			git = { patterns = { "MiniDiffSign", "GitSign" } },
 		},
 		-- dashboard = { enabled = false }, -- what am I gay?
+    -- dim = { enabled = false }, -- same as before
 		-- zen = { enabled = false }, -- lmao my ass
 		-- scope = { enabled = false }, -- bad treewalker
 		terminal = { enabled = true }, -- not nice
@@ -42,18 +43,17 @@ local M = {
 		-- scroll = { enabled = not vim.g.neovide, easing = "quadratic" }, -- doesnt look as good as neoscroll, bad at file top and bot
 		scroll = { enabled = false }, -- doesnt look as good as neoscroll, bad at file top and bot
 		-- lazygit = { enabled = false }, -- neogit arguably better
-		-- scratch = { enabled = false },
-		-- dim = { enabled = false },
-		words = { enabled = true }, -- same as * and #
+		-- scratch = { enabled = false }, -- useless obsidian
+		words = { enabled = true }, -- same as * and # why does it even exist
 		input = { enabled = true }, -- doesnt work with vim.fn.input (which is the : )
 		bigfile = { enabled = false }, -- it messes with decisive
-		picker = { enabled = true },
+		picker = { enabled = true }, -- the only non useless part of this
 		image = { enabled = true }, -- image preview
-		notifier = { enabled = true, style = "compact" },
+		notifier = { enabled = true, style = "compact" }, -- worse than fidget bacause you can switch to it
 		quickfile = { enabled = true },
 		-- explorer = { enabled = true, replace_netrw = true }, -- much worse than both oil and mini.files
 		indent = {
-			enabled = false, -- fucking sucks so much
+			enabled = false, -- fucking sucks so much. worse than hl chunk in every way
 			only_scope = true,
 			only_current = true,
 			chunk = {
@@ -75,13 +75,14 @@ local M = {
     -- { "<leader>e", function() Snacks.explorer({ sources = { explorer = { follow_file = false, focus = "input", jump = {close = true} } } }) end, desc = "File Explorer" },
     -- git
     { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
-    { "<leader>gh", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
+    { "<leader>gdd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
 		-- { "<leader>gG", function() Snacks.lazygit() end, desc = "Lazygit" },
     -- search
     { "<leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
+    { "<leader><leader>", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sc", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
     { "<leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
-    { '<leader>ss', function() Snacks.picker.search_history() end, desc = "Search History" },
+    { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
     { "<leader>se", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
     { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },

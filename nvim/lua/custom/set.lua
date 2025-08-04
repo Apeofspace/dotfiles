@@ -154,8 +154,8 @@ vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 -- remap ctrl-ы to nothing (to avoid undoing while trying to save)
 vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
 
--- source current file
-vim.keymap.set({ "n" }, "<leader>x", ":source %<CR>", { desc = "Source this file" })
+-- source current file (fuck this)
+-- vim.keymap.set({ "n" }, "<leader>x", ":source %<CR>", { desc = "Source this file" })
 
 -- disable s by default
 vim.keymap.set({ "n", "v", "x"}, "s", "<nop>")

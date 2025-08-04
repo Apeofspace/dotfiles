@@ -1,4 +1,30 @@
-local vault_path = vim.fn.expand("~/Documents/Obsidian Vault")
+local vault_path = vim.fn.expand("~/Obsidian Vault")
+
+local create_note = function()
+	vim.ui.input({ prompt = "New obsidian note: " }, function(input)
+		if input and input ~= "" then
+			vim.cmd("Obsidian new " .. input)
+		else
+			vim.notify("Note not create: name empty", vim.log.levels.WARN)
+		end
+	end)
+end
+
+local obs_picker = function()
+	Snacks.picker.files({
+		cwd = vault_path,
+		matcher = {
+			frecency = true,
+			sort_empty = true,
+		},
+		win = {
+			input = {
+				keys = { ["<C-n>"] = { "create_note", mode = { "n", "i" } } },
+			},
+		},
+	})
+end
+
 local M = {
 	{
 		"obsidian-nvim/obsidian.nvim",
@@ -6,57 +32,16 @@ local M = {
 		lazy = true,
 		ft = "markdown",
 		keys = {
-			{ "<leader>oo", ":ObsidianQuickSwitch<CR>", desc = "[O]bsidian [Q]uick [S]witch" },
-			{
-				"<leader>os",
-				function()
-					Snacks.picker.pick("grep", {
-						cwd = vault_path,
-						actions = {
-							create_note = function(picker, item)
-								picker:close()
-								vim.cmd("ObsidianNew " .. picker.finder.filter.search)
-							end,
-						},
-						win = {
-							input = {
-								keys = {
-									["<c-x>"] = { "create_note", desc = "Create new note", mode = { "i", "n" } },
-								},
-							},
-						},
-					})
-				end,
-			},
-			{ "<leader>ot", ":ObsidianTags<CR>", desc = "[O]bsidian [T]ags" },
-			{
-				"<leader>on",
-				function()
-					vim.ui.input({ prompt = "New obsidian note: " }, function(input)
-						if input and input ~= "" then
-							vim.cmd("ObsidianNew " .. input)
-						else
-							vim.notify("Note not create: name empty", vim.log.levels.WARN)
-						end
-					end)
-				end,
-				desc = "[O]bsidian [N]ew",
-			},
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- Required.
-			"nvim-treesitter/nvim-treesitter",
-			"folke/snacks.nvim",
-			"saghen/blink.cmp",
-			"OXY2DEV/markview.nvim",
-			-- "MeanderingProgrammer/render-markdown.nvim",
+			{ "<leader>oo", obs_picker, desc = "[O]bsidian [S]earch" },
+			{ "<leader>ot", ":Obsidian tags<CR>", desc = "[O]bsidian [T]ags" },
+			{ "<leader>on", create_note, desc = "[O]bsidian [N]ew" },
 		},
 		config = function()
 			local obsidian = require("obsidian")
 			obsidian.setup({
 				workspaces = {
 					{
-						name = "personal",
+						name = "work",
 						path = vault_path,
 					},
 				},
@@ -68,24 +53,12 @@ local M = {
 				end,
 			})
 		end,
-	},
-	init = function()
-		Auto_git() -- do it once on loading the plugin
-	end,
-	{
-		"OXY2DEV/markview.nvim",
-		-- enabled = false,
-		-- lazy = false, -- Recommended
-		ft = "markdown", -- If you decide to lazy-load anyway
-
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
+		init = function()
+			Auto_git_start() -- enable autogit on loading the plugin
+		end,
 	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		enabled = false,
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
 		ft = "markdown",
 		---@module 'render-markdown'
@@ -94,7 +67,8 @@ local M = {
 	},
 }
 
-function Auto_git()
+-- NOTE this needs plenary to work
+function Auto_git_start()
 	-- Set up auto pull and commit
 	local group_id = vim.api.nvim_create_augroup("obsidian-git", { clear = true })
 
@@ -207,12 +181,10 @@ end
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "markdown",
 	callback = function()
-		vim.opt_local.wrap = true -- Enable line wrapping
+		vim.opt_local.wrap = true -- Enable soft line wrapping
 		vim.opt_local.linebreak = true -- Wrap at word boundaries, not in the middle of a word
 		vim.opt_local.breakindent = true -- Indent wrapped lines to align with the start of the text
-		vim.opt_local.textwidth = 80
 		vim.opt_local.conceallevel = 2 -- i don't think it cares
-		-- vim.opt.spell = true
 	end,
 })
 

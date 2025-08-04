@@ -154,6 +154,7 @@ return {
 		-- 2) can delete pairs even if they arent empty
 		-- 3) fastwarp works predictably incrementally and not within one treesitter node weirdly
 		"altermo/ultimate-autopair.nvim",
+		-- enabled = false,
 		event = { "InsertEnter", "CmdlineEnter" },
 		branch = "v0.6", -- recommended as each new version will have breaking changes
 		opts = {
@@ -163,30 +164,32 @@ return {
 			},
 		},
 	},
-	-- {
-	-- 	"xzbdmw/clasp.nvim", -- use with minipairs
-	-- 	-- enabled = false,
-	-- 	event = "VeryLazy",
-	-- 	config = function()
-	-- 		require("clasp").setup({
-	-- 			pairs = {
-	-- 				["{"] = "}",
-	-- 				['"'] = '"',
-	-- 				["'"] = "'",
-	-- 				["("] = ")",
-	-- 				["["] = "]",
-	-- 				["<"] = ">",
-	-- 				['"""'] = '"""',
-	-- 			},
-	-- 			keep_insert_mode = true,
-	-- 			remove_pattern = nil,
-	-- 		})
-	-- 		vim.keymap.set({ "n", "i" }, "<c-l>", function()
-	-- 			require("clasp").wrap("next")
-	-- 		end)
-	-- 		vim.keymap.set({ "n", "i" }, "<c-h>", function()
-	-- 			require("clasp").wrap("prev")
-	-- 		end)
-	-- 	end,
-	-- },
+	{
+    -- it doesnt work in a lot of cases like it cant move { in teh right position : f"{}x"  
+    -- and it also doesnt move above the node if you want to clasp several nodes that are across lines
+		"xzbdmw/clasp.nvim", -- use with minipairs
+		enabled = false,
+		event = "VeryLazy",
+		config = function()
+			require("clasp").setup({
+				pairs = {
+					["{"] = "}",
+					['"'] = '"',
+					["'"] = "'",
+					["("] = ")",
+					["["] = "]",
+					["<"] = ">",
+					['"""'] = '"""',
+				},
+				keep_insert_mode = true,
+				remove_pattern = nil,
+			})
+			vim.keymap.set({ "n", "i" }, "<c-l>", function()
+				require("clasp").wrap("next")
+			end)
+			vim.keymap.set({ "n", "i" }, "<c-h>", function()
+				require("clasp").wrap("prev")
+			end)
+		end,
+	},
 }

@@ -25,7 +25,6 @@ else
 	end
 
 	require("custom.lsp") -- native LSP
-	-- require("custom.lsp_old") -- mason and shit. mason updated so it might not work anymore
 
 	-- WARN automapping cant handle lazy loaded plugins
 	require("langmapper").automapping({ global = true, buffer = true })

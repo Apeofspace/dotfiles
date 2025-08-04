@@ -45,27 +45,6 @@ vim.lsp.config.basedpyright = {
 	},
 }
 
-vim.lsp.config.ruff = {
-  -- this isnt really lsp just formater/linter. hence the use together with pyright
-	cmd = { "ruff", "server" },
-	filetypes = { "python" },
-	root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
-	settings = {
-		init_options = {
-			settings = {
-				lint = { enable = false }, -- DISABLE LINTING (use basedpyright)
-				ignore = { "E501", "E231" },
-				formatEnabled = true,
-				lineLength = 120,
-			},
-		},
-	},
-	capabilities = {
-		hoverProvider = false, -- pyright
-		signatureHelpProvider = false, -- pyright (not sure if this even works)
-	},
-}
-
 vim.lsp.config.luals = {
 	cmd = { "lua-language-server" },
 	filetypes = { "lua" },
@@ -176,6 +155,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+vim.lsp.config.zls = {
+	cmd = { "zls" },
+	filetypes = { "zig" },
+	-- root_dir = { "zls.json", "build.zig", ".git" },
+	single_file_support = true,
+}
+
 -- ENABLE SERVERS
 local enabled_lsp_servers = {
 	clangd = "clangd",
@@ -183,7 +169,8 @@ local enabled_lsp_servers = {
 	basedpyright = "basedpyright-langserver",
 	ruff = "ruff check",
 	luals = "lua-language-server",
-	marksman = "marksman",
+	zls = "zls",
+	-- marksman = "marksman", -- honestly what does it even do
 }
 
 for server_name, lsp_executable in pairs(enabled_lsp_servers) do
