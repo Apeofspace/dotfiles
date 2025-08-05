@@ -55,7 +55,7 @@ vim.lsp.config.ruff = {
 }
 check_installed_and_enable("ruff", "ruff")
 
-vim.lsp.config.luals = {
+vim.lsp.config.lua_ls = {
   formatters = {
     ignoreComments = false,
   },
@@ -75,7 +75,7 @@ vim.lsp.config.luals = {
     },
   },
 }
-check_installed_and_enable("luals", "lua-language-server")
+check_installed_and_enable("lua_ls", "lua-language-server")
 
 vim.lsp.config.zls = {
   single_file_support = true,

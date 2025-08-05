@@ -1,27 +1,50 @@
-# config-file = themes/ashen # can also add files like this
 theme = nord
-# theme = ashen
-# theme = kanso
 
 # font comparison website
 # https://www.programmingfonts.org/#commit-mono
 
 font-family = "Roboto Mono"
-# font-family = "CommitMono"
-# font-family = "Maple Mono" # this is basically comic sens with cursives
-# font-family = "Cascadia Code" # too strict looking
 font-size = 13
 
 background-opacity = 0.85
 window-decoration = true
 maximize = true
+app-notifications=false
+shell-integration-features=true
+window-save-state=always
 
-# Sizes larger than the screen size will be clamped to the screen size. This
-# can be used to create a maximized-by-default window size.
-# window-height=10000
-# window-width=10000
-# window-position-x=0
-# window-position-y=0
+# shaders 
+# https://github.com/hackrmomo/ghostty-shaders
+# https://github.com/KroneCorylus/ghostty-shader-playground
+# custom-shader = shaders/bettercrt.glsl 
+# custom-shader = shaders/retro-terminal.glsl 
+# custom-shader = shaders/cursor_blaze.glsl 
 
-# command = "zellij attach -c main"
+# keymaps
+#  splits
+keybind = alt+left=goto_split:left
+keybind = alt+down=goto_split:bottom
+keybind = alt+up=goto_split:top
+keybind = alt+right=goto_split:right
+keybind = alt+h=goto_split:left
+keybind = alt+j=goto_split:bottom
+keybind = alt+k=goto_split:top
+keybind = alt+l=goto_split:right
 
+keybind = alt+==equalize_splits
+
+keybind = alt+w=new_split:auto
+keybind = alt+shift+h=new_split:left
+keybind = alt+shift+j=new_split:down
+keybind = alt+shift+k=new_split:up
+keybind = alt+shift+l=new_split:right
+
+# close
+keybind = alt+q=close_surface
+
+# tabs
+keybind = alt+t=new_tab
+keybind = alt+n=next_tab
+keybind = alt+p=previous_tab
+
+keybind = alt+r=reload_config
