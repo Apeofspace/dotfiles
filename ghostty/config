@@ -6,11 +6,9 @@ theme = nord
 font-family = "Roboto Mono"
 font-size = 13
 
-background-opacity = 0.85
 window-decoration = true
 maximize = true
 app-notifications=false
-shell-integration-features=true
 window-save-state=always
 
 # shaders 
