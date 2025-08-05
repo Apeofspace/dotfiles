@@ -24,7 +24,7 @@ else
 		vim.cmd("colorscheme " .. active_scheme)
 	end
 
-	require("custom.lsp") -- native LSP
+	require("custom.lsp") -- config LSP servers
 
 	-- WARN automapping cant handle lazy loaded plugins
 	require("langmapper").automapping({ global = true, buffer = true })

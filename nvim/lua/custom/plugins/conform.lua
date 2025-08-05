@@ -1,6 +1,8 @@
+-- https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 local M = {
 	"stevearc/conform.nvim",
 	cmd = { "ConformInfo" },
+  enabled = false,
 	keys = {
 		{
 			"<leader>f",
@@ -30,7 +32,8 @@ local M = {
 			yaml = { "prettierd" },
 			json = { "prettierd", "prettier", stop_after_first = true },
 			jsonc = { "prettierd", "prettier", stop_after_first = true },
-			c = { "astyle", "clang-format", stop_after_first = true },
+			c = { "clang-format", stop_after_first = true, lsp_format = "never" },
+			-- c = { "astyle", "clang-format", stop_after_first = true },
 			cpp = { "astyle", "clang-format", stop_after_first = true },
 		},
 		formatters = {
@@ -55,15 +58,12 @@ local M = {
 					"--break-one-line-headers",
 					"--pad-paren-in", -- pad inside parenteses
 				},
-				clang_format = {
-					prepend_args = {
-						'--style="{BasedOnStyle: Google, IndentWidth: 2, ColumnLimit: 125}"',
-						"--fallback-style=Google",
-					},
-				},
+			},
+			clang_format = {
+				prepend_args = "--style=file",
+				-- prepend_args = clang_styles,
 			},
 		},
 	},
 }
-
 return M

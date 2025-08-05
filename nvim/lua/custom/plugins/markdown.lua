@@ -10,7 +10,7 @@ local create_note = function()
 	end)
 end
 
-local obs_picker = function()
+local snacks_picker = function()
 	Snacks.picker.files({
 		cwd = vault_path,
 		matcher = {
@@ -32,7 +32,7 @@ local M = {
 		lazy = true,
 		ft = "markdown",
 		keys = {
-			{ "<leader>oo", obs_picker, desc = "[O]bsidian [S]earch" },
+			{ "<leader>oo", snacks_picker, desc = "[O]bsidian [S]earch" },
 			{ "<leader>ot", ":Obsidian tags<CR>", desc = "[O]bsidian [T]ags" },
 			{ "<leader>on", create_note, desc = "[O]bsidian [N]ew" },
 		},
@@ -57,14 +57,15 @@ local M = {
 			Auto_git_start() -- enable autogit on loading the plugin
 		end,
 	},
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-		ft = "markdown",
-		---@module 'render-markdown'
-		---@type render.md.UserConfig
-		opts = {},
-	},
+	-- {
+	-- 	"MeanderingProgrammer/render-markdown.nvim",
+	-- 	dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+	-- 	ft = "markdown",
+	--    enabled = false,
+	-- 	---@module 'render-markdown'
+	-- 	---@type render.md.UserConfig
+	-- 	opts = {},
+	-- },
 }
 
 -- NOTE this needs plenary to work
