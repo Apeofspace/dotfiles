@@ -41,8 +41,7 @@ keybind = alt+shift+l=new_split:right
 keybind = alt+q=close_surface
 
 # tabs
-keybind = alt+t=new_tab
-keybind = alt+n=next_tab
-keybind = alt+p=previous_tab
+keybind = alt+n=new_tab
+keybind = alt+t=next_tab
 
 keybind = alt+r=reload_config
