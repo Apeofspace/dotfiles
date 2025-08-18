@@ -8,8 +8,10 @@ font-size = 13
 
 window-decoration = true
 maximize = true
-app-notifications=false
-window-save-state=always
+app-notifications = false
+window-save-state = always
+background-opacity = 0.85
+copy-on-select = clipboard
 
 # shaders 
 # https://github.com/hackrmomo/ghostty-shaders

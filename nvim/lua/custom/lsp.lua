@@ -34,24 +34,30 @@ check_installed_and_enable("clangd", "clangd")
 vim.lsp.config.basedpyright = {
   settings = {
     basedpyright = {
-      disableOrganizeImports = true,   -- ruff organizes imports
-      analysis = { ignore = { '*' } }, -- ruff does linting
-      -- analysis = {
-      --   autoSearchPaths = true,
-      --   useLibraryCodeForTypes = true,
-      --   diagnosticMode = "openFilesOnly",
-      --   typeCheckingMode = "basic",
-      --   diagnosticSeverityOverrides = {
-      --     reportOptionalMemberAccess = false, -- "warning"
-      --   },
-      -- },
+      disableOrganizeImports = true, -- ruff organizes imports
+      -- analysis = { ignore = { '*' } }, -- ruff does linting
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "openFilesOnly",
+        typeCheckingMode = "basic",
+        diagnosticSeverityOverrides = {
+          reportOptionalMemberAccess = false, -- "warning"
+        },
+      },
     },
   },
 }
 check_installed_and_enable("basedpyright", "basedpyright-langserver")
 
 vim.lsp.config.ruff = {
-  settings = {},
+  init_options = {
+    settings = {
+      lint = {
+        enable = false, -- use basedpyright for linting, ruff for formatting
+      }
+    },
+  }
 }
 check_installed_and_enable("ruff", "ruff")
 
