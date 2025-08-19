@@ -7,6 +7,7 @@ local schemes = {
 	{ "webhooked/kanso.nvim", lazy = true, priority = 1000 },
 	{ "github-main-user/lytmode.nvim", lazy = true, priority = 1000 },
 	{ "mcauley-penney/techbase.nvim", lazy = true, priority = 1000 },
+	{ "Mitch1000/backpack", lazy = true, priority = 1000 },
 	{
 		"ficcdaf/ashen.nvim",
 		lazy = true,

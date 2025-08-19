@@ -12,7 +12,14 @@ local M = {
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
         ["<C-e>"] = { "hide", "fallback" },
         ["<CR>"] = {
-          "accept",
+          function(cmp) -- accept THEN show signature
+            local accepted = cmp.accept()
+            if accepted then
+              cmp.show_signature()
+            end
+            return accepted
+          end,
+          -- "accept",
           "fallback",
         },
         ["<Tab>"] = {
@@ -42,11 +49,13 @@ local M = {
       sources = {
         default = { "lsp", "path", "buffer", "snippets" },
       },
-      signature = { enabled = false }, -- for no reason whatsoever falkes noice already shows those
-      -- signature = { enabled = true },
+      -- signature = { enabled = false }, -- for no reason whatsoever falkes noice already shows those
+      signature = {
+        enabled = true,
+        window = { show_documentation = false }
+      },
     },
     opts_extend = { "sources.default" },
   }
 }
-
 return M

@@ -107,4 +107,3 @@ vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
 vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
 vim.keymap.set({ "n", "v", "x" }, "s", "<nop>")
-
