@@ -4,6 +4,10 @@
 
 keybinds clear-defaults=true {
     normal {
+        bind "Alt q" { Quit; }
+
+    }
+    shared_among "locked" "normal" {
         bind "Alt z" {
             LaunchOrFocusPlugin "session-manager" {
                 floating true
@@ -11,9 +15,6 @@ keybinds clear-defaults=true {
             }
             SwitchToMode "normal"
         }
-        // bind "Alt x" { CloseFocus; SwitchToMode "normal"; }
-        bind "Alt q" { Quit; }
-
     }
     locked {
         bind "Alt g" { SwitchToMode "normal"; }

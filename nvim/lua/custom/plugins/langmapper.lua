@@ -1,4 +1,6 @@
 -- this doens't work properly with zellij
+
+
 return {
   'Wansmer/langmapper.nvim',
   lazy = false,

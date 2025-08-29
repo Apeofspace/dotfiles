@@ -2,7 +2,7 @@ return {
 	{
 		"utilyre/barbecue.nvim",
 		name = "barbecue",
-		-- event = "VeryLazy",
+		-- event = "VeryLazy", -- if its very lazy it doesnt load side buffer
 		enabled = true,
 		version = "*",
 		dependencies = {

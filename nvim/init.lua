@@ -1,4 +1,5 @@
 require("custom.set")
+require("custom.neovide") -- config neovide
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -26,4 +27,3 @@ require("custom.lsp") -- config LSP servers
 -- require("custom.scopehighlight") -- testing
 
 require("langmapper").automapping({ buffer = false })
-

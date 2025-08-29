@@ -13,14 +13,16 @@ local M = {
     --stylua: ignore start
     -- PICKERS
     -- find files
+    { "<leader>ss",       function() Snacks.picker.pickers() end,                                 desc = "All pickers" },
     { "<leader>sF",       function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
     { "<leader>sb",       function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
     { "<leader>sn",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
     { "<leader>sf",       function() Snacks.picker.files() end,                                   desc = "Find Files" },
+    { "ff",               function() Snacks.picker.files() end,                                   desc = "Find Files" },
     -- { "<leader>op",       function() Snacks.picker.projects() end,                                desc = "Projects" },
     -- git
     -- { "<leader>gl",       function() Snacks.picker.git_log() end,                                 desc = "Git Log" },
-    { "<leader>gdd",      function() Snacks.picker.git_diff() end,                                desc = "Git Diff (Hunks)" },
+    { "<leader>gdd",      function() Snacks.picker.git_diff() end,                                desc = "Git changes (hunks)" },
     -- search
     -- { "<leader>/",        function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
     { "<leader><leader>", function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
@@ -44,7 +46,19 @@ local M = {
     { "gI",               function() Snacks.picker.lsp_implementations() end,                     desc = "Goto Implementation" },
     { "gy",               function() Snacks.picker.lsp_type_definitions() end,                    desc = "Goto T[y]pe Definition" },
     { "<leader>N",        function() Snacks.notifier.show_history() end,                          desc = "Notification History" },
-    { "<leader>sw",       function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
+    {
+      "<leader>sw",
+      function()
+        Snacks.picker.lsp_workspace_symbols(
+        -- {
+        --   matcher = {
+        --     sort_empty = true, -- somehow doesnt do anything
+        --   },
+        -- }
+        )
+      end,
+      desc = "LSP Workspace Symbols"
+    },
     {
       "<leader>sd",
       function()

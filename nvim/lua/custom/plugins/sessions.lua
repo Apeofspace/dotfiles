@@ -8,5 +8,8 @@ return {
       autoload = true,
       use_git_branch = true,
     },
+    init = function()
+      vim.keymap.set("n", "<leader>os", "<cmd>SessionSelect<CR>") -- this is basically for neovide
+    end
   }
 }
