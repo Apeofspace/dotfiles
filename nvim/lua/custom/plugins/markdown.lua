@@ -3,7 +3,8 @@ local vault_path = vim.fn.expand("~/Obsidian Vault")
 local create_note = function()
   vim.ui.input({ prompt = "New obsidian note: " }, function(input)
     if input and input ~= "" then
-      vim.cmd("Obsidian new " .. input)
+      vim.cmd("Obsidian new " .. vim.fn.fnameescape(input))
+      -- vim.cmd("Obsidian new " .. string.format("%q", input))
     else
       vim.notify("Note not create: name empty", vim.log.levels.WARN)
     end
@@ -78,6 +79,7 @@ local M = {
           },
         },
         completion = { nvim_cmp = false, blink = true },
+        legacy_commands = false, -- getting rid of errors. this is temp
         disable_frontmatter = true,
         note_path_func = function(spec)
           local path = spec.dir / tostring(spec.title)

@@ -24,6 +24,7 @@ local M = {
         sync_install = true,
         highlight = { enable = true },
         indent = { enable = true },
+        -- fold = { enable = false }
       })
     end,
   },

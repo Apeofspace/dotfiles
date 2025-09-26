@@ -8,6 +8,7 @@ local schemes = {
 	{ "github-main-user/lytmode.nvim", lazy = true, priority = 1000 },
 	{ "mcauley-penney/techbase.nvim", lazy = true, priority = 1000 },
 	{ "Mitch1000/backpack", lazy = true, priority = 1000 },
+	{ "darianmorat/gruvdark.nvim", lazy = true, priority = 1000 },
 	{
 		"ficcdaf/ashen.nvim",
 		lazy = true,

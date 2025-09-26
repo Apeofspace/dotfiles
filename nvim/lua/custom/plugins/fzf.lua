@@ -2,9 +2,9 @@
 -- it also doesn't have frecency built-in so its a deal breaker
 
 -- problems rn:
--- notifications history
 -- icons
 -- obsidian with frecency
+-- bit fugly
 
 return {
   "ibhagwan/fzf-lua",
@@ -28,5 +28,6 @@ return {
     vim.keymap.set("n", "<leader>sp", fzf_lua.spell_suggest, { desc = "Spellcheck" })
     vim.keymap.set("n", "<leader>cs", fzf_lua.colorschemes, { desc = "Colorschemes" })
     vim.keymap.set("n", "<leader>sn", function() fzf_lua.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "FZF" })
+    vim.keymap.set("n", "<leader>N", ":messages<CR>", { desc = "Message history" })
   end
 }

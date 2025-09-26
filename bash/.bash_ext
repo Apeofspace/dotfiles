@@ -189,6 +189,7 @@ export PAGER=cat
 # need terminal test here to prevent zellij running in nested terminals or tmux etc
  # -z "$ZELLIJ" checks if variable is empty, this sets when zellij is inside sesh
 export ZELLIJ_AUTO_ATTACH=true
+
 # THIS HERE below is taken from zellij setup --generate-auto-start but extra term check is added
 if [ "$TERM" = "xterm-kitty" ]; then # disable ghostty for now
 # if [ "$TERM" = "xterm-ghostty" ] || [ "$TERM" = "xterm-kitty" ]; then

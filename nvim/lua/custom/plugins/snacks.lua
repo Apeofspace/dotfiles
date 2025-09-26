@@ -1,3 +1,22 @@
+local lsp_symbols_this_file = function()
+  Snacks.picker.lsp_symbols(
+    {
+      layout = {
+        preset = "vscode",
+        preview = "main",
+        layout = {
+          backdrop = 50,
+          position = "float",
+          border = "rounded",
+          height = 0.35,
+          width = 0.2,
+          min_width = 40,
+        }
+      }
+    }
+  )
+end
+
 local M = {
   "folke/snacks.nvim",
   priority = 1500,
@@ -24,8 +43,7 @@ local M = {
     -- { "<leader>gl",       function() Snacks.picker.git_log() end,                                 desc = "Git Log" },
     { "<leader>gdd",      function() Snacks.picker.git_diff() end,                                desc = "Git changes (hunks)" },
     -- search
-    -- { "<leader>/",        function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
-    { "<leader><leader>", function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
+    { "<leader>/",        function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
     { "<leader>sc",       function() Snacks.picker.grep_word() end,                               desc = "Visual selection or word", mode = { "n", "x" } },
     { "<leader>sg",       function() Snacks.picker.grep() end,                                    desc = "Grep" },
     { "<leader>se",       function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
@@ -46,41 +64,9 @@ local M = {
     { "gI",               function() Snacks.picker.lsp_implementations() end,                     desc = "Goto Implementation" },
     { "gy",               function() Snacks.picker.lsp_type_definitions() end,                    desc = "Goto T[y]pe Definition" },
     { "<leader>N",        function() Snacks.notifier.show_history() end,                          desc = "Notification History" },
-    {
-      "<leader>sw",
-      function()
-        Snacks.picker.lsp_workspace_symbols(
-        -- {
-        --   matcher = {
-        --     sort_empty = true, -- somehow doesnt do anything
-        --   },
-        -- }
-        )
-      end,
-      desc = "LSP Workspace Symbols"
-    },
-    {
-      "<leader>sd",
-      function()
-        Snacks.picker.lsp_symbols(
-          {
-            layout = {
-              preset = "vscode",
-              preview = "main",
-              layout = {
-                backdrop = 50,
-                position = "float",
-                border = "rounded",
-                height = 0.35,
-                width = 0.2,
-                min_width = 40,
-              }
-            }
-          }
-        )
-      end,
-      desc = "LSP Symbols"
-    },
+    { "<leader>sw",       function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
+    { "<leader>sd",       lsp_symbols_this_file,                                                            desc = "LSP Symbols" },
+    { "<leader><leader>", lsp_symbols_this_file,                                                            desc = "LSP Symbols" },
   },
   --stylua: ignore end
 }

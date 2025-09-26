@@ -17,7 +17,8 @@ return {
     for i = 1, 9 do
       vim.keymap.set("n", "<leader>" .. i, function() harpoon:list():select(i) end, { desc = "Harpoon file " .. i })
       -- these Ctrl mappings are added to compensate corne being ligma
-      vim.keymap.set("n", "<C-" .. i .. ">", function() harpoon:list():select(i) end, { desc = "Harpoon file + Ligma " .. i })
+      vim.keymap.set("n", "<C-" .. i .. ">", function() harpoon:list():select(i) end,
+        { desc = "Harpoon file + Ligma " .. i })
     end
     --stylua: ignore end
 

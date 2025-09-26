@@ -5,7 +5,6 @@
 keybinds clear-defaults=true {
     normal {
         bind "Alt q" { Quit; }
-
     }
     shared_among "locked" "normal" {
         bind "Alt z" {

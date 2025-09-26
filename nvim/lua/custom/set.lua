@@ -29,6 +29,7 @@ vim.opt.shiftwidth = 2
 vim.opt.mouse = "a"
 vim.opt.showmode = false          -- I already show that in lualine
 vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim.
+vim.opt.foldmethod = "manual"
 
 -- save undo history to a file
 vim.opt.undofile = true
