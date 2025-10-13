@@ -27,6 +27,7 @@ local M = {
     picker = { enabled = true },                      -- the only non useless part of this
     notifier = { enabled = true, style = "compact" }, -- worse than fidget bacause you can switch to it
     quickfile = { enabled = true },                   -- When doing nvim somefile.txt, it will render the file as quickly as possible, before loading your plugins.
+    indent = { enabled = true, indent = { enabled = false }, scope = { only_current = true }, animate = { enabled = false } },
   },
   keys = {
     --stylua: ignore start
@@ -65,8 +66,9 @@ local M = {
     { "gy",               function() Snacks.picker.lsp_type_definitions() end,                    desc = "Goto T[y]pe Definition" },
     { "<leader>N",        function() Snacks.notifier.show_history() end,                          desc = "Notification History" },
     { "<leader>sw",       function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
-    { "<leader>sd",       lsp_symbols_this_file,                                                            desc = "LSP Symbols" },
-    { "<leader><leader>", lsp_symbols_this_file,                                                            desc = "LSP Symbols" },
+    { "<leader>sd",       lsp_symbols_this_file,                                                  desc = "LSP Symbols" },
+    { "<leader><leader>", lsp_symbols_this_file,                                                  desc = "LSP Symbols" },
+    -- { "S",                function() Snacks.scratch() end,                                 desc = "Select Scratch Buffer" },
   },
   --stylua: ignore end
 }

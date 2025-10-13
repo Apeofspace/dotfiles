@@ -8,7 +8,7 @@ return {
       require("mini.ai").setup({ n_lines = 500 })
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      require("mini.surround").setup({ mappings = { update_n_lines = "" } })
+      -- require("mini.surround").setup({ mappings = { update_n_lines = "" } })
 
       -- show git diff and toggle diff overlay
       require("mini.diff").setup({
@@ -44,20 +44,20 @@ return {
         },
       })
 
-      -- oily file navigation
-      require("mini.files").setup({
-        vim.keymap.set("n", "<leader>oi", function()
-          -- set buffer cwd as mini.files cwd
-          local MiniFiles = require("mini.files")
-          local _ = MiniFiles.close() or MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-          vim.schedule(function()
-            -- vim.defer_fn(function()
-            MiniFiles.reveal_cwd()
-          end, 30)
-        end, { desc = "Find files" }),
-        -- vim.keymap.set("n", "<leader>oi", "<CMD>lua MiniFiles.open()<CR>", { desc = "Find files" }),
-        options = { use_as_default_explorer = true }, -- interferess with spellcheck downloading???
-      })
+      -- -- oily file navigation
+      -- require("mini.files").setup({
+      --   vim.keymap.set("n", "<leader>oi", function()
+      --     -- set buffer cwd as mini.files cwd
+      --     local MiniFiles = require("mini.files")
+      --     local _ = MiniFiles.close() or MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+      --     vim.schedule(function()
+      --       -- vim.defer_fn(function()
+      --       MiniFiles.reveal_cwd()
+      --     end, 30)
+      --   end, { desc = "Find files" }),
+      --   -- vim.keymap.set("n", "<leader>oi", "<CMD>lua MiniFiles.open()<CR>", { desc = "Find files" }),
+      --   options = { use_as_default_explorer = true }, -- interferess with spellcheck downloading???
+      -- })
 
       -- highlight patterns
       local hipatterns = require("mini.hipatterns")

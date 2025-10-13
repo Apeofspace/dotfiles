@@ -20,40 +20,41 @@ local snacks_picker = function()
     },
     win = {
       input = {
-        keys = { ["<C-n>"] = { "create_note", mode = { "n", "i" } } },
+        keys = { ["<C-n>"] = { "create_note", mode = { "n", "i" } } }, -- doesn't work
       },
     },
   })
 end
+vim.keymap.set("n", "<leader>oo", snacks_picker, { desc = "[O]bsidian [S]earch" })
 
-local fzf_picker = function()
-  -- ai generated slop that doesnt work (frecency doesnt work)
-  local fzf = require("fzf-lua")
-  fzf.files({
-    cwd = vault_path,
-    -- enable frecency sorting
-    fd_opts = "--type f --hidden --follow --exclude .git",
-    oldfiles = true,      -- merge in oldfiles for frecency
-    frecency = true,      -- use frecency scoring
-    sort_lastused = true, -- prioritize recently used
-    actions = {
-      -- add a custom action <C-n> to "create note"
-      ["ctrl-n"] = function(selected, opts)
-        local new_name = vim.fn.input("New note name: ")
-        if new_name ~= "" then
-          local note_path = vault_path .. "/" .. new_name .. ".md"
-          vim.cmd("edit " .. note_path)
-        end
-      end,
-    },
-  })
-end
+-- local fzf_picker = function()
+--   -- ai generated slop that doesnt work (frecency doesnt work)
+--   local fzf = require("fzf-lua")
+--   fzf.files({
+--     cwd = vault_path,
+--     -- enable frecency sorting
+--     fd_opts = "--type f --hidden --follow --exclude .git",
+--     oldfiles = true,      -- merge in oldfiles for frecency
+--     frecency = true,      -- use frecency scoring
+--     sort_lastused = true, -- prioritize recently used
+--     actions = {
+--       -- add a custom action <C-n> to "create note"
+--       ["ctrl-n"] = function(selected, opts)
+--         local new_name = vim.fn.input("New note name: ")
+--         if new_name ~= "" then
+--           local note_path = vault_path .. "/" .. new_name .. ".md"
+--           vim.cmd("edit " .. note_path)
+--         end
+--       end,
+--     },
+--   })
+-- end
 
-local fff_picker = function()
-  local fff = require("fff")
-  -- somehow this fucks the whole fff to be in this directory now
-  fff.find_files_in_dir(vault_path)
-end
+-- local fff_picker = function()
+--   local fff = require("fff")
+--   -- somehow this fucks the whole fff to be in this directory now
+--   fff.find_files_in_dir(vault_path)
+-- end
 
 
 local M = {
@@ -85,21 +86,18 @@ local M = {
           local path = spec.dir / tostring(spec.title)
           return path:with_suffix(".md")
         end,
+        checkbox = {
+          enabled = true,
+          create_new = true,
+          order = { " ", "x" },
+        },
+        footer = { enabled = false },
       })
     end,
     init = function()
       Auto_git_start() -- enable autogit on loading the plugin
     end,
   },
-  -- {
-  -- 	"MeanderingProgrammer/render-markdown.nvim",
-  -- 	dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-  -- 	ft = "markdown",
-  --    enabled = false,
-  -- 	---@module 'render-markdown'
-  -- 	---@type render.md.UserConfig
-  -- 	opts = {},
-  -- },
 }
 
 -- NOTE this needs plenary to work
@@ -219,7 +217,7 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.wrap = true        -- Enable soft line wrapping
     vim.opt_local.linebreak = true   -- Wrap at word boundaries, not in the middle of a word
     vim.opt_local.breakindent = true -- Indent wrapped lines to align with the start of the text
-    -- vim.opt_local.conceallevel = 2   -- man I hate conceal
+    -- vim.opt_local.conceallevel = 2   --  I hate conceal
     vim.opt_local.conceallevel = 1
   end,
 })

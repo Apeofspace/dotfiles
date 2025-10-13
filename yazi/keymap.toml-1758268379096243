@@ -1,0 +1,15 @@
+# Since Yazi selects the first matching key to run, 
+# prepend always has a higher priority than default,
+# and append always has a lower priority than default
+
+# default keymaps here:
+# https://github.com/sxyazi/yazi/blob/shipped/yazi-config/preset/keymap.toml
+
+[manager]
+prepend_keymap = [
+{ on = [ "y", "y" ], run = "yank",                  desc = "Yank selected files (copy)" },
+{ on = [ "y", "c" ], run = "copy path",             desc = "Copy the file path" },
+{ on = [ "y", "d" ], run = "copy dirname",          desc = "Copy the directory path" },
+{ on = [ "y", "f" ], run = "copy filename",         desc = "Copy the filename" },
+{ on = [ "y", "n" ], run = "copy name_without_ext", desc = "Copy the filename without extension" },
+]

@@ -123,10 +123,11 @@ vim.keymap.set({ "n", "v" }, "<leader>x", [["_x]], { noremap = true, desc = "Del
 
 -- shortcuts
 vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>", { desc = "Save" })
-vim.keymap.set({ "n", "v" }, "<C-q>", ":qa<CR>", { desc = "Quit" })
+-- vim.keymap.set({ "n", "v" }, "<C-q>", ":qa<CR>", { desc = "Quit" })
 vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove normal mapping
 
 -- remap to nothing
 vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
-vim.keymap.set({ "n", "v", "x" }, "s", "<nop>")
+vim.keymap.set({ "n", "v", "x" }, "s", "<nop>") -- s does nothing as its the same as c

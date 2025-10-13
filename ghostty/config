@@ -1,11 +1,16 @@
-theme = nord
+# theme = nord
 
 # font comparison website
 # https://www.programmingfonts.org/#commit-mono
 
-font-family = "Roboto Mono"
-font-size = 13
+# font-family = "Roboto Mono"
+# font-family = "Monaspace Radon NF"
+font-family = "Monaspace Argon NF"
+font-size = 13.5
 
+
+# window-width = 3000
+# window-height = 2000
 maximize = true
 # fullscreen = true
 app-notifications = false

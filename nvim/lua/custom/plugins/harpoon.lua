@@ -1,3 +1,8 @@
+-- I have a seriously big idea here. (not stolen from prowl at all)
+-- What if instead of leader I just use some other leader key lmao like ;
+-- But then the problem is that I add files numerically...USE PROWL instead!
+-- okay prowl sucks because it works with open buffers of which i have too many
+
 return {
   "ThePrimeagen/harpoon",
   branch = "harpoon2",
