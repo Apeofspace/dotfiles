@@ -1,3 +1,5 @@
+-- if i use this with kitty sessions then I dont ever need any special picker or headackes with creating notes etc
+
 local vault_path = vim.fn.expand("~/Obsidian Vault")
 
 local create_note = function()

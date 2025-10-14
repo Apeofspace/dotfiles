@@ -19,13 +19,17 @@ return {
     vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(require("harpoon"):list()) end,
       { desc = "Harpoon list" })
     vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon add" })
-    for i = 1, 9 do
-      vim.keymap.set("n", "<leader>" .. i, function() harpoon:list():select(i) end, { desc = "Harpoon file " .. i })
-      -- these Ctrl mappings are added to compensate corne being ligma
-      vim.keymap.set("n", "<C-" .. i .. ">", function() harpoon:list():select(i) end,
-        { desc = "Harpoon file + Ligma " .. i })
-    end
+    -- for i = 1, 9 do
+    --   vim.keymap.set("n", "<leader>" .. i, function() harpoon:list():select(i) end, { desc = "Harpoon file " .. i })
+    --   -- these Ctrl mappings are added to compensate corne being ligma
+    --   vim.keymap.set("n", "<C-" .. i .. ">", function() harpoon:list():select(i) end,
+    --     { desc = "Harpoon file + Ligma " .. i })
+    -- end
     --stylua: ignore end
+    vim.keymap.set("n", "<M-a>", function() harpoon:list():select(1) end)
+    vim.keymap.set("n", "<M-s>", function() harpoon:list():select(2) end)
+    vim.keymap.set("n", "<M-d>", function() harpoon:list():select(3) end)
+    vim.keymap.set("n", "<M-f>", function() harpoon:list():select(4) end)
 
     -- hotkeys when harpoon window is open only
     vim.api.nvim_create_autocmd("FileType", {
