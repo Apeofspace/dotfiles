@@ -1,6 +1,3 @@
 layout tall
 cd ~/proj/kpa-ubru/client2/
 launch --title "KPA Nvim" nvim
-new_tab KPA Make
-cd ~/proj/kpa-ubru/client2/
-focus_matching_window var:window=first
