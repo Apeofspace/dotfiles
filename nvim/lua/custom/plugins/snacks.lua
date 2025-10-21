@@ -31,6 +31,7 @@ local M = {
   },
   keys = {
     --stylua: ignore start
+    -- { "<leader>tt",       function() Snacks.toggle.treesitter() end,                              desc = "Toggle Treesitter" },
     -- PICKERS
     -- find files
     { "<leader>ss",       function() Snacks.picker.pickers() end,                                 desc = "All pickers" },

@@ -71,6 +71,7 @@ return {
           todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
           note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
           warn = { pattern = "%f[%w]()WARN()%f[%W]", group = "MiniHipatternsHack" },
+          important = { pattern = "%f[%w]()IMPORTANT()%f[%W]", group = hipatterns.compute_hex_color_group("#FF5C00", 'bg') },
 
           -- Highlight hex color strings (`#rrggbb`) using that color
           hex_color = hipatterns.gen_highlighter.hex_color(),
