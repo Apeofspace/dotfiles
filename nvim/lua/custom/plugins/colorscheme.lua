@@ -1,53 +1,81 @@
 local schemes = {
-  -- { "catppuccin/nvim",               name = "catppuccin",  lazy = true,    priority = 1000 },
-  { "AlexvZyl/nordic.nvim",          lazy = true, priority = 1000 },
-  { "romanaverin/charleston.nvim",   lazy = true, priority = 1000 },
-  { "alexxGmZ/e-ink.nvim",           lazy = true, priority = 1000 },
-  { "folke/tokyonight.nvim",         lazy = true, priority = 1000 },
-  { "github-main-user/lytmode.nvim", lazy = true, priority = 1000 },
-  { "mcauley-penney/techbase.nvim",  lazy = true, priority = 1000 },
-  { "darianmorat/gruvdark.nvim",     lazy = true, priority = 1000 },
-  { "lucasadelino/conifer.nvim",     lazy = true, priority = 1000 },
-  { "santhosh-tekuri/silence.nvim",  lazy = true, priority = 1000 },
-  { "webhooked/kanso.nvim",          lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
-  { "eldritch-theme/eldritch.nvim",  lazy = true, priority = 1000, opts = { transparent = false } },
-  { "neanias/everforest-nvim",       lazy = true, priority = 1000, opts = { background = "hard", italics = true } },
+  { "AlexvZyl/nordic.nvim",   lazy = true, priority = 1000 },
+  { "folke/tokyonight.nvim",  lazy = true, priority = 1000 },
+  { "webhooked/kanso.nvim",   lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
+  { "alexxGmZ/e-ink.nvim",    lazy = true, priority = 1000, },
+  { "EdenEast/nightfox.nvim", lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
+  {
+    "neanias/everforest-nvim",
+    lazy = true,
+    priority = 1000,
+    -- opts = {},
+    config = function() -- this themes likes config rather than opts for some reason
+      local everforest = require("everforest")
+      everforest.setup({
+        -- background = "hard",
+        italics = true,
+        on_highlights = function(hl, palette)
+          hl.TSString = { fg = palette.aqua, italic = true } -- default
+          -- hl.TSString = { fg = "#a9bda2", italic = true }
+          -- hl.TSVariable = { fg = "#c9bc9f" }
+          hl.TSPunctBracket = { fg = "#96938a" } -- slightly more mellow
+        end,
+      })
+    end
+    -- as I understand it pickes up LSP color first and then falls back to treesitter
+    -- should make my own color fg1 that is slightly more grey and fg2 that
+    -- is even more so and override some highlights such as @variable @function.call @punctuation.bracket
+    -- local base_palette = {
+    --   light = {
+    --     fg = "#5c6a72",
+    --     red = "#f85552",
+    --     orange = "#f57d26",
+    --     yellow = "#dfa000",
+    --     green = "#8da101",
+    --     aqua = "#35a77c",
+    --     blue = "#3a94c5",
+    --     purple = "#df69ba",
+    --     grey0 = "#a6b0a0",
+    --     grey1 = "#939f91",
+    --     grey2 = "#829181",
+    --     statusline1 = "#93b259",
+    --     statusline2 = "#708089",
+    --     statusline3 = "#e66868",
+    --     none = "NONE",
+    --   },
+    --   dark = {
+    --     fg = "#d3c6aa",
+    --     red = "#e67e80",
+    --     orange = "#e69875",
+    --     yellow = "#dbbc7f",
+    --     green = "#a7c080",
+    --     aqua = "#83c092",
+    --     blue = "#7fbbb3",
+    --     purple = "#d699b6",
+    --     grey0 = "#7a8478",
+    --     grey1 = "#859289",
+    --     grey2 = "#9da9a0",
+    --     statusline1 = "#a7c080",
+    --     statusline2 = "#d3c6aa",
+    --     statusline3 = "#e67e80",
+    --     none = "NONE",
+    --   },
+  },
   {
     "ficcdaf/ashen.nvim",
     lazy = true,
     priority = 1000,
     opts = {
-      colors = {
-        -- color stolen from sonokai shusia
-        -- for no good reason it becomes transparent if temrinal bg is same as
-        -- theme bg regardless of transparency option
-        -- background = "#1A181A",
-        background = "#211F22",
-        -- background = "#2D2A2E",
-      },
-      transparent = false,
-      style_presets = {
-        -- bold_functions = true,
-        italic_comments = true,
-      },
+      colors = { background = "#2D2A2E" }, -- color stolen from sonokai shusia
+      -- transparent = true,
+      style_presets = { italic_comments = true },
       hl = {
         merge_override = {
           ["@function"] = { { bold = true } },
           ["@function.call"] = { { bold = false, italic = false } },
           ["@function.method.call"] = { { bold = false, italic = false } },
           ["@function.builtin"] = { { bold = false, italic = false } },
-
-          -- ["@attribute"] = { nil, nil, { bold = true, italic = false } },
-          -- ["@keyword"] = { { nil, nil, bold = true, italic = false } },
-          -- ["@keyword.function"] = { nil, nil, { bold = true, italic = false } },
-          -- ["@keyword.return"] = { { nil, nil, bold = true, italic = false } },
-          -- ["@keyword.exception"] = { nil, nil, { bold = true, italic = false } },
-          -- ["@keyword.repeat"] = { { nil, nil, bold = true, italic = false } },
-          -- ["@keyword.operator"] = { nil, nil, { bold = true, italic = false } },
-          -- ["@keyword.conditional"] = { nil, nil, { bold = true, italic = false } },
-          -- ["@keyword.modifier"] = { nil, nil, { bold = true, italic = false } },
-          -- ["@keyword.coroutine"] = { nil, nil, { bold = true, italic = false } },
-          -- ["@keyword.type"] = { nil, nil, { bold = true, italic = false } },
+          ["@string"] = { "red_glowing", nil, { italic = true } },
         },
       },
     }
@@ -112,52 +140,6 @@ local schemes = {
       vim.g.sonokai_transparent_background = false
       vim.g.sonokai_current_word = "bold"
       vim.g.sonokai_better_performance = 1
-    end,
-  },
-  {
-    "rebelot/kanagawa.nvim",
-    lazy = true,
-    priority = 1000,
-    opts = {
-      commentStyle = { italic = true },
-      functionStyle = {},
-      keywordStyle = { italic = true },
-      statementStyle = { bold = true },
-      typeStyle = {},
-      -- transparent = true,
-      theme = "wave",    -- Load "wave" theme when 'background' option is not set
-      background = {     -- map the value of 'background' option to a theme
-        dark = "dragon", -- try "dragon" !
-        light = "lotus",
-      },
-    },
-  },
-  {
-    "olimorris/onedarkpro.nvim",
-    lazy = true,
-    priority = 1000, -- Ensure it loads first
-    config = function()
-      require("onedarkpro").setup({
-        options = {
-          -- transparency = true,
-          lualine_transparency = true,
-        },
-        styles = {
-          types = "italic",
-          methods = "NONE",
-          numbers = "NONE",
-          strings = "italic",
-          comments = "italic",
-          keywords = "bold,italic",
-          constants = "NONE",
-          functions = "italic",
-          operators = "NONE",
-          variables = "NONE",
-          parameters = "NONE",
-          conditionals = "italic",
-          virtual_text = "italic",
-        },
-      })
     end,
   },
 }

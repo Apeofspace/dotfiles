@@ -7,21 +7,17 @@ return {
     oil.setup({
       delete_to_trash = true,
       view_options = {
-        -- Show files and directories that start with "."
         show_hidden = true,
       },
       float = {
-        -- Padding around the floating window
         padding = 2,
         max_width = 90,
-        max_height = 0,
+        max_height = 40,
         border = "rounded",
         win_options = {
           winblend = 15,
         },
       },
-      -- Optional dependencies
-      dependencies = { "nvim-tree/nvim-web-devicons" },
     })
     vim.keymap.set("n", "<leader>oi", function()
       -- oil.open()
