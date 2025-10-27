@@ -83,7 +83,7 @@ local M = {
         },
         completion = { nvim_cmp = false, blink = true },
         legacy_commands = false, -- getting rid of errors. this is temp
-        disable_frontmatter = true,
+        frontmatter = { enabled = false },
         note_path_func = function(spec)
           local path = spec.dir / tostring(spec.title)
           return path:with_suffix(".md")
