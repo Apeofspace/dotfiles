@@ -4,6 +4,7 @@ local schemes = {
   { "webhooked/kanso.nvim",   lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
   { "alexxGmZ/e-ink.nvim",    lazy = true, priority = 1000, },
   { "EdenEast/nightfox.nvim", lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
+  { "rakr/vim-two-firewatch", lazy = true, priority = 1000 }, -- this is VIM theme so no LSP or plugin support
   {
     "neanias/everforest-nvim",
     lazy = true,

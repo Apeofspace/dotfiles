@@ -40,7 +40,11 @@ local M = {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require("lualine").setup({
-        options = { globalstatus = true }, -- single bar
+        options = {
+          globalstatus = true,
+          section_separators = { left = '', right = '' },
+          component_separators = { left = '', right = '' }
+        }, -- single bar
         sections = section_config,
         tabline = tabline_config,
       })
