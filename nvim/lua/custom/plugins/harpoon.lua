@@ -16,9 +16,9 @@ return {
     -- REQUIRED
 
     --stylua: ignore start
-    vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(require("harpoon"):list()) end,
+    vim.keymap.set("n", "<leader>hl", function() harpoon.ui:toggle_quick_menu(require("harpoon"):list()) end,
       { desc = "Harpoon list" })
-    vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "Harpoon add" })
+    vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Harpoon add" })
     -- for i = 1, 9 do
     --   vim.keymap.set("n", "<leader>" .. i, function() harpoon:list():select(i) end, { desc = "Harpoon file " .. i })
     --   -- these Ctrl mappings are added to compensate corne being ligma
