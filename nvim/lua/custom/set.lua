@@ -84,14 +84,15 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- highlight briefly when yanking
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
+-- NOTE this is done now by "rachartier/tiny-glimmer.nvim"
+-- -- highlight briefly when yanking
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--   desc = "Highlight when yanking (copying) text",
+--   group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+--   callback = function()
+--     vim.highlight.on_yank()
+--   end,
+-- })
 
 -- don't remove autoindent when changing lines on empty line
 vim.opt.cpoptions:append("I")
