@@ -42,6 +42,7 @@ end
 -- no swap file, auto sync instances
 vim.opt.autoread = true
 vim.opt.swapfile = false
+vim.opt.updatetime = 60 -- this both for swapfile (which is disabled) and CursorHold which is used for some plugins
 
 -- incsearch
 vim.opt.inccommand = "split" -- preview replace changes on a split

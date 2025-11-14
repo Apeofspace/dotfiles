@@ -1,132 +1,95 @@
--- if i use this with kitty sessions then I dont ever need any special picker or headackes with creating notes etc
-
 local vault_path = vim.fn.expand("~/Obsidian Vault")
 
-local create_note = function()
-  vim.ui.input({ prompt = "New obsidian note: " }, function(input)
-    if input and input ~= "" then
-      vim.cmd("Obsidian new " .. vim.fn.fnameescape(input))
-      -- vim.cmd("Obsidian new " .. string.format("%q", input))
-    else
-      vim.notify("Note not create: name empty", vim.log.levels.WARN)
-    end
-  end)
-end
-
-local snacks_picker = function()
-  Snacks.picker.files({
-    cwd = vault_path,
-    matcher = {
-      frecency = true,
-      sort_empty = true,
-    },
-    win = {
-      input = {
-        keys = { ["<C-n>"] = { "create_note", mode = { "n", "i" } } }, -- doesn't work
-      },
-    },
-  })
-end
-vim.keymap.set("n", "<leader>oo", snacks_picker, { desc = "[O]bsidian [S]earch" })
-
--- local fzf_picker = function()
---   -- ai generated slop that doesnt work (frecency doesnt work)
---   local fzf = require("fzf-lua")
---   fzf.files({
---     cwd = vault_path,
---     -- enable frecency sorting
---     fd_opts = "--type f --hidden --follow --exclude .git",
---     oldfiles = true,      -- merge in oldfiles for frecency
---     frecency = true,      -- use frecency scoring
---     sort_lastused = true, -- prioritize recently used
---     actions = {
---       -- add a custom action <C-n> to "create note"
---       ["ctrl-n"] = function(selected, opts)
---         local new_name = vim.fn.input("New note name: ")
---         if new_name ~= "" then
---           local note_path = vault_path .. "/" .. new_name .. ".md"
---           vim.cmd("edit " .. note_path)
---         end
---       end,
---     },
---   })
--- end
-
--- local fff_picker = function()
---   local fff = require("fff")
---   -- somehow this fucks the whole fff to be in this directory now
---   fff.find_files_in_dir(vault_path)
--- end
-
-
 local M = {
+  -- {
+  --   "obsidian-nvim/obsidian.nvim",
+  --   version = "*", -- recommended, use latest release instead of latest commit
+  --   lazy = true,
+  --   ft = "markdown",
+  --   keys = {
+  --     -- { "<leader>oo", fzf_picker,           desc = "[O]bsidian [S]earch" },
+  --     -- { "<leader>oo", fff_picker,        desc = "[O]bsidian [S]earch" },
+  --     { "<leader>oo", snacks_picker,        desc = "[O]bsidian [S]earch" },
+  --     { "<leader>ot", ":Obsidian tags<CR>", desc = "[O]bsidian [T]ags" },
+  --     { "<leader>on", create_note,          desc = "[O]bsidian [N]ew" },
+  --   },
+  --   config = function()
+  --     local obsidian = require("obsidian")
+  --     obsidian.setup({
+  --       workspaces = {
+  --         {
+  --           name = "work",
+  --           path = vault_path,
+  --         },
+  --       },
+  --       completion = { nvim_cmp = false, blink = true },
+  --       legacy_commands = false, -- getting rid of errors. this is temp
+  --       frontmatter = { enabled = false },
+  --       note_path_func = function(spec)
+  --         local path = spec.dir / tostring(spec.title)
+  --         return path:with_suffix(".md")
+  --       end,
+  --       checkbox = {
+  --         enabled = true,
+  --         create_new = true,
+  --         order = { " ", "x" },
+  --       },
+  --       footer = { enabled = false },
+  --     })
+  --   end,
+  --   init = function()
+  --     Auto_git_start() -- enable autogit on loading the plugin
+  --   end,
+  -- },
   {
-    "obsidian-nvim/obsidian.nvim",
-    version = "*", -- recommended, use latest release instead of latest commit
-    lazy = true,
-    ft = "markdown",
-    keys = {
-      -- { "<leader>oo", fzf_picker,           desc = "[O]bsidian [S]earch" },
-      -- { "<leader>oo", fff_picker,        desc = "[O]bsidian [S]earch" },
-      { "<leader>oo", snacks_picker,        desc = "[O]bsidian [S]earch" },
-      { "<leader>ot", ":Obsidian tags<CR>", desc = "[O]bsidian [T]ags" },
-      { "<leader>on", create_note,          desc = "[O]bsidian [N]ew" },
-    },
+    "yousefhadder/markdown-plus.nvim",
+    ft = "markdown", -- Load on markdown files by default
     config = function()
-      local obsidian = require("obsidian")
-      obsidian.setup({
-        workspaces = {
-          {
-            name = "work",
-            path = vault_path,
+      require("markdown-plus").setup({
+        -- Configuration options (all optional)
+        enabled = true,
+        features = {
+          list_management = true, -- List management features
+          text_formatting = true, -- Text formatting features
+          headers_toc = true,     -- Headers + TOC features
+          links = true,           -- Link management features
+          images = true,          -- Image link management features
+          quotes = true,          -- Blockquote toggling feature
+          callouts = true,        -- GFM callouts/admonitions feature
+          code_block = true,      -- Code block conversion feature
+          table = true,           -- Table support features
+        },
+        keymaps = {
+          enabled = true, -- Enable default keymaps (<Plug> available for custom)
+        },
+        toc = {           -- TOC window configuration
+          initial_depth = 2,
+        },
+        callouts = {         -- Callouts configuration
+          default_type = "NOTE",
+          custom_types = {}, -- Add custom types like { "DANGER", "SUCCESS" }
+        },
+        table = {            -- Table sub-configuration
+          auto_format = true,
+          default_alignment = "left",
+          confirm_destructive = true, -- Confirm before transpose/sort operations
+          keymaps = {
+            enabled = true,
+            prefix = "<leader>t",
+            insert_mode_navigation = true, -- Alt+hjkl cell navigation
           },
         },
-        completion = { nvim_cmp = false, blink = true },
-        legacy_commands = false, -- getting rid of errors. this is temp
-        frontmatter = { enabled = false },
-        note_path_func = function(spec)
-          local path = spec.dir / tostring(spec.title)
-          return path:with_suffix(".md")
-        end,
-        checkbox = {
-          enabled = true,
-          create_new = true,
-          order = { " ", "x" },
-        },
-        footer = { enabled = false },
+        filetypes = { "markdown" }, -- Filetypes to enable the plugin for
       })
     end,
-    init = function()
-      Auto_git_start() -- enable autogit on loading the plugin
-    end,
-  },
+    -- Auto_git_start() -- enable autogit on loading the plugin
+  }
 }
-
--- local M = {
---   "yousefhadder/markdown-plus.nvim",
---   ft = "markdown", -- Load on markdown files by default
---   config = function()
---     require("markdown-plus").setup({
---       -- Configuration options (all optional)
---       enabled = true,
---       features = {
---         list_management = true, -- Enable list management features
---         text_formatting = true, -- Enable text formatting features
---         headers_toc = true,     -- Enable headers and TOC features
---         links = true,           -- Enable link management features
---       },
---       keymaps = {
---         enabled = true,           -- Enable default keymaps
---       },
---       filetypes = { "markdown" }, -- Filetypes to enable the plugin for
---     })
---   end,
--- }
 
 -- NOTE this needs plenary to work
 function Auto_git_start()
   -- Set up auto pull and commit
-  local group_id = vim.api.nvim_create_augroup("obsidian-git", { clear = true })
+  local group_id = vim.api.nvim_create_augroup("notes-git", { clear = true })
 
   -- Create auto pull on open
   local autopull = function()

@@ -28,17 +28,17 @@ local M = {
     notifier = { enabled = true, style = "compact" }, -- worse than fidget bacause you can switch to it
     quickfile = { enabled = true },                   -- When doing nvim somefile.txt, it will render the file as quickly as possible, before loading your plugins.
     indent = { enabled = true, indent = { enabled = false }, scope = { only_current = true }, animate = { enabled = false } },
+    statuscolumn = { enabled = true, folds = { open = true } },
   },
   keys = {
     --stylua: ignore start
     -- PICKERS
     -- find files
     { "<leader>ss",       function() Snacks.picker.pickers() end,                                 desc = "All pickers" },
-    { "<leader>sF",       function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
+    { "<leader>sf",       function() Snacks.picker.files() end,                                   desc = "Find Files" },
     { "<leader>sb",       function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
     { "<leader>sn",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    { "<leader>sf",       function() Snacks.picker.files() end,                                   desc = "Find Files" },
-    { "ff",               function() Snacks.picker.files() end,                                   desc = "Find Files" },
+    { "ff",               function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
     -- { "<leader>op",       function() Snacks.picker.projects() end,                                desc = "Projects" },
     -- git
     -- { "<leader>gl",       function() Snacks.picker.git_log() end,                                 desc = "Git Log" },

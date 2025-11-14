@@ -1,10 +1,32 @@
 local schemes = {
-  { "AlexvZyl/nordic.nvim",   lazy = true, priority = 1000 },
-  { "folke/tokyonight.nvim",  lazy = true, priority = 1000 },
-  { "webhooked/kanso.nvim",   lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
-  { "alexxGmZ/e-ink.nvim",    lazy = true, priority = 1000, },
-  { "EdenEast/nightfox.nvim", lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
-  { "rakr/vim-two-firewatch", lazy = true, priority = 1000 }, -- this is VIM theme so no LSP or plugin support
+  { "AlexvZyl/nordic.nvim",         lazy = true, priority = 1000 },
+  { "folke/tokyonight.nvim",        lazy = true, priority = 1000 },
+  { "webhooked/kanso.nvim",         lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
+  { "alexxGmZ/e-ink.nvim",          lazy = true, priority = 1000, },
+  { "EdenEast/nightfox.nvim",       lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
+  { "zenbones-theme/zenbones.nvim", lazy = true, priority = 1000, dependencies = { "rktjmp/lush.nvim" } }, -- less clown version of other themes
+  {
+    "Kaikacy/Lemons.nvim",
+    lazy = true,
+    priority = 1000,
+    config = function()
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        -- this to ensure I change highlight after it loads
+        group = vim.api.nvim_create_augroup("lemonsfix", {}),
+        pattern = "*",
+        callback = function()
+          vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3d41" })
+          vim.api.nvim_del_augroup_by_name("lemonsfix")
+        end,
+      })
+      require("lemons.colors")["black"] = "#1d1f21"
+      require("lemons").setup({ undercurl = true })
+      require("lemons").load()
+    end
+  },
+  { "nyoom-engineering/oxocarbon.nvim", lazy = true, priority = 1000 },
+  { "slugbyte/lackluster.nvim",         lazy = true, priority = 1000 },
+  { "armannikoyan/rusty",               lazy = true, priority = 1000 }, -- super nice actually
   {
     "neanias/everforest-nvim",
     lazy = true,
@@ -13,7 +35,7 @@ local schemes = {
     config = function() -- this themes likes config rather than opts for some reason
       local everforest = require("everforest")
       everforest.setup({
-        -- background = "hard",
+        background = "hard",
         italics = true,
         on_highlights = function(hl, palette)
           hl.TSString = { fg = palette.aqua, italic = true } -- default
@@ -23,52 +45,15 @@ local schemes = {
         end,
       })
     end
-    -- as I understand it pickes up LSP color first and then falls back to treesitter
-    -- should make my own color fg1 that is slightly more grey and fg2 that
-    -- is even more so and override some highlights such as @variable @function.call @punctuation.bracket
-    -- local base_palette = {
-    --   light = {
-    --     fg = "#5c6a72",
-    --     red = "#f85552",
-    --     orange = "#f57d26",
-    --     yellow = "#dfa000",
-    --     green = "#8da101",
-    --     aqua = "#35a77c",
-    --     blue = "#3a94c5",
-    --     purple = "#df69ba",
-    --     grey0 = "#a6b0a0",
-    --     grey1 = "#939f91",
-    --     grey2 = "#829181",
-    --     statusline1 = "#93b259",
-    --     statusline2 = "#708089",
-    --     statusline3 = "#e66868",
-    --     none = "NONE",
-    --   },
-    --   dark = {
-    --     fg = "#d3c6aa",
-    --     red = "#e67e80",
-    --     orange = "#e69875",
-    --     yellow = "#dbbc7f",
-    --     green = "#a7c080",
-    --     aqua = "#83c092",
-    --     blue = "#7fbbb3",
-    --     purple = "#d699b6",
-    --     grey0 = "#7a8478",
-    --     grey1 = "#859289",
-    --     grey2 = "#9da9a0",
-    --     statusline1 = "#a7c080",
-    --     statusline2 = "#d3c6aa",
-    --     statusline3 = "#e67e80",
-    --     none = "NONE",
-    --   },
   },
   {
     "ficcdaf/ashen.nvim",
+    -- no matter what I do it just sucks. some color is always off and merging barely works
     lazy = true,
     priority = 1000,
     opts = {
-      colors = { background = "#2D2A2E" }, -- color stolen from sonokai shusia
-      -- transparent = true,
+      -- colors = { background = "#2D2A2E" }, -- color stolen from sonokai shusia
+      colors = { background = "#1d1f21" }, -- color stolen from rusty colorscheme and I love it
       style_presets = { italic_comments = true },
       hl = {
         merge_override = {

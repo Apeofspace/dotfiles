@@ -2,7 +2,6 @@ return {
   { -- Collection of various small independent plugins/modules
     "nvim-mini/mini.nvim",
     version = false,
-    -- event = "VeryLazy",
     config = function()
       -- Better Around/Inside textobjects
       require("mini.ai").setup({ n_lines = 500 })
@@ -11,22 +10,22 @@ return {
       -- require("mini.surround").setup({ mappings = { update_n_lines = "" } })
 
       -- show git diff and toggle diff overlay
-      require("mini.diff").setup({
-        view = {
-          style = "sign",
-          signs = {
-            add = "+",
-            change = "~",
-            delete = "_",
-            topdelete = "‾",
-            changedelete = "~",
-          },
-        },
-      })
-      vim.keymap.set("n", "<leader>to", function()
-        vim.cmd("lua MiniDiff.toggle_overlay()")
-        vim.notify("Toggle mini.diff overlay")
-      end, { desc = "Toggle mini.diff overlay" })
+      -- require("mini.diff").setup({
+      --   view = {
+      --     style = "sign",
+      --     signs = {
+      --       add = "+",
+      --       change = "~",
+      --       delete = "_",
+      --       topdelete = "‾",
+      --       changedelete = "~",
+      --     },
+      --   },
+      -- })
+      -- vim.keymap.set("n", "<leader>to", function()
+      --   vim.cmd("lua MiniDiff.toggle_overlay()")
+      --   vim.notify("Toggle mini.diff overlay")
+      -- end, { desc = "Toggle mini.diff overlay" })
 
       -- move selection
       require("mini.move").setup({
