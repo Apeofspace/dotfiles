@@ -20,6 +20,7 @@ local schemes = {
         end,
       })
       require("lemons.colors")["black"] = "#1d1f21"
+      require("lemons.colors")["white"] = "#e5e5e5" -- less bright white
       require("lemons").setup({ undercurl = true })
       require("lemons").load()
     end
