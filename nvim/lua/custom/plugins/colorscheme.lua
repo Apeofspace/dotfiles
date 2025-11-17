@@ -12,17 +12,23 @@ local schemes = {
     config = function()
       vim.api.nvim_create_autocmd("ColorScheme", {
         -- this to ensure I change highlight after it loads
-        group = vim.api.nvim_create_augroup("lemonsfix", {}),
         pattern = "*",
+        once = true, -- the config is only called the first time =(
         callback = function()
           vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3d41" })
-          vim.api.nvim_del_augroup_by_name("lemonsfix")
+          vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3a3d41" })
         end,
       })
-      require("lemons.colors")["black"] = "#1d1f21"
-      require("lemons.colors")["white"] = "#e5e5e5" -- less bright white
-      require("lemons").setup({ undercurl = true })
-      require("lemons").load()
+      local opts = {
+        undercurl = true,
+        colors_override = {
+          black = "#1d1f21",
+          white = "#e5e5e5"
+        }
+      }
+      require("lemons").setup(opts)
+      --   require("lemons.colors")["black"] = "#1d1f21" -- olde more universal way to do that
+      --   require("lemons.colors")["white"] = "#e5e5e5" -- less bright white
     end
   },
   { "nyoom-engineering/oxocarbon.nvim", lazy = true, priority = 1000 },
@@ -40,8 +46,6 @@ local schemes = {
         italics = true,
         on_highlights = function(hl, palette)
           hl.TSString = { fg = palette.aqua, italic = true } -- default
-          -- hl.TSString = { fg = "#a9bda2", italic = true }
-          -- hl.TSVariable = { fg = "#c9bc9f" }
           hl.TSPunctBracket = { fg = "#96938a" } -- slightly more mellow
         end,
       })
@@ -63,6 +67,7 @@ local schemes = {
           ["@function.method.call"] = { { bold = false, italic = false } },
           ["@function.builtin"] = { { bold = false, italic = false } },
           ["@string"] = { "red_glowing", nil, { italic = true } },
+          ["WinSeparator"] = { "grey", nil, nil },
         },
       },
     }
