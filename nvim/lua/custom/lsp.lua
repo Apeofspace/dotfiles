@@ -121,7 +121,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     -- clangd switch header
     if client.name == "clangd" then
-      map("gs", ":LspClangdSwitchSourceHeader<CR>", "Switch Source/Header")
+      map("gh", ":LspClangdSwitchSourceHeader<CR>", "Switch Source/Header")
     end
 
     if client.name == 'ruff' then
