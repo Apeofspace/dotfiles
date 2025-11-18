@@ -17,6 +17,10 @@ local schemes = {
         callback = function()
           vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3d41" })
           vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3a3d41" })
+          -- neogit colors
+          vim.api.nvim_set_hl(0, "NeogitDiffDelete", { fg = "#e74c3c" })
+          vim.api.nvim_set_hl(0, "NeogitDiffDeleteHighlight", { fg = "#e74c3c" })
+          vim.api.nvim_set_hl(0, "NeogitDiffDeleteCursor", { fg = "#e74c3c" })
         end,
       })
       local opts = {
@@ -38,7 +42,6 @@ local schemes = {
     "neanias/everforest-nvim",
     lazy = true,
     priority = 1000,
-    -- opts = {},
     config = function() -- this themes likes config rather than opts for some reason
       local everforest = require("everforest")
       everforest.setup({
