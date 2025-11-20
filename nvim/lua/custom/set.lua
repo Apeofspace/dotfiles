@@ -133,3 +133,16 @@ vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove nor
 vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
 vim.keymap.set({ "n", "v", "x" }, "s", "<nop>") -- s does nothing as its the same as c
+
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	desc = "Always move help buffers to a vertical split on the right",
+	pattern = "*",
+	callback = function()
+		if vim.bo.filetype == "help" or vim.bo.filetype == "man" then
+			vim.schedule(function()
+				vim.cmd("wincmd L")
+			end)
+		end
+	end,
+})
