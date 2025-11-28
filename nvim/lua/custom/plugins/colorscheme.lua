@@ -5,6 +5,7 @@ local schemes = {
   { "alexxGmZ/e-ink.nvim",          lazy = true, priority = 1000, },
   { "EdenEast/nightfox.nvim",       lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
   { "zenbones-theme/zenbones.nvim", lazy = true, priority = 1000, dependencies = { "rktjmp/lush.nvim" } }, -- less clown version of other themes
+  { "adibhanna/yukinord.nvim",      lazy = true, priority = 1000, },
   {
     "Kaikacy/Lemons.nvim",
     lazy = true,
@@ -49,7 +50,7 @@ local schemes = {
         italics = true,
         on_highlights = function(hl, palette)
           hl.TSString = { fg = palette.aqua, italic = true } -- default
-          hl.TSPunctBracket = { fg = "#96938a" } -- slightly more mellow
+          hl.TSPunctBracket = { fg = "#96938a" }             -- slightly more mellow
         end,
       })
     end

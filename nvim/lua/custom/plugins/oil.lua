@@ -38,7 +38,21 @@ return {
     "A7Lavinraj/fyler.nvim",
     dependencies = { "nvim-mini/mini.icons" },
     branch = "stable",
-    opts = {}
+    opts = {
+      mappings = {
+        -- I hate these
+        ["q"] = "CloseView",
+        ["<CR>"] = "Select",
+        ["-"] = "GotoParent",
+        ["="] = "GotoCwd",
+        ["<C-t>"] = nil,
+        ["|"] = nil,
+        ["^"] = nil,
+        ["."] = nil,
+        ["#"] = nil,
+        ["<BS>"] = "CollapseNode",
+      },
+    }
   },
   vim.keymap.set("n", "<leader>oi", ":Fyler kind=float<CR>", { desc = "Fyler" })
 }

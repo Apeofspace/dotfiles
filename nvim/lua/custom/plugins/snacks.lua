@@ -50,6 +50,7 @@ local M = {
     { "<leader>se",       function() Snacks.picker.diagnostics() end,                             desc = "Diagnostics" },
     { "<leader>sh",       function() Snacks.picker.help() end,                                    desc = "Help Pages" },
     { "<leader>sr",       function() Snacks.picker.resume() end,                                  desc = "Resume search" },
+    { "<leader>sm",       function() Snacks.picker.marks() end,                                   desc = "Marks" },
     { "<leader>cs",       function() Snacks.picker.colorschemes() end,                            desc = "Colorschemes" },
     { '<leader>s"',       function() Snacks.picker.registers() end,                               desc = "Registers" },
     { "<leader>si",       function() Snacks.picker.icons() end,                                   desc = "Icons for nerds" },
