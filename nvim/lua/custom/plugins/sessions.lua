@@ -4,13 +4,14 @@ return {
     -- It works really well with no config and has no errors that other sessionizers have
     -- the only problem with autoload is that it loads when piping into nvim like echo asd | nvim -
     "olimorris/persisted.nvim",
-    opts = {
-      autoload = true,
-      use_git_branch = true,
-    },
-    init = function()
+    lazy = false,
+    config = function()
+      require("persisted").setup({
+        autoload = true,
+        use_git_branch = true,
+      })
       vim.keymap.set("n", "<leader>os", "<cmd>SessionSelect<CR>") -- this is basically for neovide
-    end
+    end,
   },
   {
     -- close unused buffers after 20 min

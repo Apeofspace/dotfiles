@@ -12,7 +12,12 @@ local check_installed_and_enable = function(name, executable)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("blink.cmp").get_lsp_capabilities(capabilities) -- this extends
+local blink_installed, blink = pcall(require, "blink.cmp")
+if blink_installed then
+  capabilities = blink.get_lsp_capabilities(capabilities) -- this extends
+else
+  vim.notify("Blink not found when configuring LSP")
+end
 
 vim.lsp.config("*", {
   capabilities = capabilities,
