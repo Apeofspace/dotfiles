@@ -4,7 +4,6 @@ return {
     version = false,
     config = function()
       require("mini.ai").setup({ n_lines = 500 })
-
       -- move selection (there is some built in way to do that but I forgot)
       require("mini.move").setup({
         mappings = {

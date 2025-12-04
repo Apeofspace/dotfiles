@@ -1,46 +1,6 @@
 local vault_path = vim.fn.expand("~/Obsidian Vault")
 
 local M = {
-  -- {
-  --   "obsidian-nvim/obsidian.nvim",
-  --   version = "*", -- recommended, use latest release instead of latest commit
-  --   lazy = true,
-  --   ft = "markdown",
-  --   keys = {
-  --     -- { "<leader>oo", fzf_picker,           desc = "[O]bsidian [S]earch" },
-  --     -- { "<leader>oo", fff_picker,        desc = "[O]bsidian [S]earch" },
-  --     { "<leader>oo", snacks_picker,        desc = "[O]bsidian [S]earch" },
-  --     { "<leader>ot", ":Obsidian tags<CR>", desc = "[O]bsidian [T]ags" },
-  --     { "<leader>on", create_note,          desc = "[O]bsidian [N]ew" },
-  --   },
-  --   config = function()
-  --     local obsidian = require("obsidian")
-  --     obsidian.setup({
-  --       workspaces = {
-  --         {
-  --           name = "work",
-  --           path = vault_path,
-  --         },
-  --       },
-  --       completion = { nvim_cmp = false, blink = true },
-  --       legacy_commands = false, -- getting rid of errors. this is temp
-  --       frontmatter = { enabled = false },
-  --       note_path_func = function(spec)
-  --         local path = spec.dir / tostring(spec.title)
-  --         return path:with_suffix(".md")
-  --       end,
-  --       checkbox = {
-  --         enabled = true,
-  --         create_new = true,
-  --         order = { " ", "x" },
-  --       },
-  --       footer = { enabled = false },
-  --     })
-  --   end,
-  --   init = function()
-  --     Auto_git_start() -- enable autogit on loading the plugin
-  --   end,
-  -- },
   {
     "yousefhadder/markdown-plus.nvim",
     ft = "markdown", -- Load on markdown files by default
