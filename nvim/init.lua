@@ -25,8 +25,6 @@ if active_scheme then
   vim.cmd("colorscheme " .. active_scheme)
 end
 
-require("custom.lsp") -- config LSP servers in a lazy way
-
 -- require("custom.scopehighlight") -- testing
 
 require("langmapper").automapping({ buffer = false })

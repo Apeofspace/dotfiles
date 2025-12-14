@@ -28,6 +28,8 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.mouse = "a"
 vim.opt.showmode = false          -- I already show that in lualine
+
+-- vim.cmd("set clipboard+=unnamedplus")
 vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim.
 vim.opt.foldmethod = "manual"
 

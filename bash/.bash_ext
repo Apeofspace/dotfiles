@@ -5,7 +5,12 @@
 
 # zoxide 
 eval "$(zoxide init bash)"
-# alias cd='z'
+
+#this Add user-specific .local/bin to PATH
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
 
 # fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -221,5 +226,6 @@ alias gitc='git commit'
 alias r='. ranger'
 alias vzf='vim $(fzf)'
 alias y='yy'
+# alias z='zoxide'
 alias ze='zellij attach -c main'
 

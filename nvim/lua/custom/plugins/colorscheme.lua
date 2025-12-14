@@ -6,7 +6,7 @@ local schemes = {
   { "EdenEast/nightfox.nvim",       lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
   { "zenbones-theme/zenbones.nvim", lazy = true, priority = 1000, dependencies = { "rktjmp/lush.nvim" } }, -- less clown version of other themes
   { "adibhanna/yukinord.nvim",      lazy = true, priority = 1000, },
-  { "nendix/zen.nvim", lazy = true, priority = 1000, },
+  { "nendix/zen.nvim",              lazy = true, priority = 1000, },
   {
     "Kaikacy/Lemons.nvim",
     lazy = true,
@@ -23,6 +23,10 @@ local schemes = {
           vim.api.nvim_set_hl(0, "NeogitDiffDelete", { fg = "#e74c3c" })
           vim.api.nvim_set_hl(0, "NeogitDiffDeleteHighlight", { fg = "#e74c3c" })
           vim.api.nvim_set_hl(0, "NeogitDiffDeleteCursor", { fg = "#e74c3c" })
+          -- document highlight
+          vim.api.nvim_set_hl(0, "LspReferenceText", { bold = true })
+          vim.api.nvim_set_hl(0, "LspReferenceRead", { bold = true })
+          vim.api.nvim_set_hl(0, "LspReferenceWrite", { bold = true })
         end,
       })
       local opts = {
