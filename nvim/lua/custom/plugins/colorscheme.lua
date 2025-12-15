@@ -17,8 +17,6 @@ local schemes = {
         pattern = "*",
         once = true, -- the config is only called the first time =(
         callback = function()
-          vim.api.nvim_set_hl(0, "Visual", { bg = "#3a3d41" })
-          vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3a3d41" })
           -- neogit colors
           vim.api.nvim_set_hl(0, "NeogitDiffDelete", { fg = "#e74c3c" })
           vim.api.nvim_set_hl(0, "NeogitDiffDeleteHighlight", { fg = "#e74c3c" })
@@ -33,12 +31,12 @@ local schemes = {
         undercurl = true,
         colors_override = {
           black = "#1d1f21",
-          white = "#e5e5e5"
+          white = "#e5e5e5",
+          gray = "#3a3d41",
+          darkgray = "#303030",
         }
       }
       require("lemons").setup(opts)
-      --   require("lemons.colors")["black"] = "#1d1f21" -- olde more universal way to do that
-      --   require("lemons.colors")["white"] = "#e5e5e5" -- less bright white
     end
   },
   { "nyoom-engineering/oxocarbon.nvim", lazy = true, priority = 1000 },

@@ -3,9 +3,7 @@ return {
     "nvim-mini/mini.nvim",
     version = false,
     config = function()
-      require("mini.ai").setup({ n_lines = 500 })
-      -- move selection (there is some built in way to do that but I forgot)
-      require("mini.move").setup({
+      local moveopts = {
         mappings = {
           -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
           left = "<C-Left>",
@@ -18,13 +16,9 @@ return {
           line_down = "<C-Down>",
           line_up = "<C-Up>",
         },
-      })
-
-      -- highlight patterns
-      local hipatterns = require("mini.hipatterns")
-      hipatterns.setup({
+      }
+      local hipatternsopts = {
         highlighters = {
-          -- Highlight standalone 'FIXME', 'HACK', 'TODO', 'NOTE'
           fixme = { pattern = "%f[%w]()FIX()%f[%W]", group = "MiniHipatternsFixme" },
           shitcode = { pattern = "%f[%w]()SHITCODE()%f[%W]", group = "MiniHipatternsFixme" },
           hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
@@ -32,16 +26,12 @@ return {
           todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
           note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
           warn = { pattern = "%f[%w]()WARN()%f[%W]", group = "MiniHipatternsHack" },
-          important = { pattern = "%f[%w]()IMPORTANT()%f[%W]", group = hipatterns.compute_hex_color_group("#FF5C00", 'bg') },
-
-          -- Highlight hex color strings (`#rrggbb`) using that color
-          hex_color = hipatterns.gen_highlighter.hex_color(),
+          important = { pattern = "%f[%w]()IMPORTANT()%f[%W]", group = require("mini.hipatterns").compute_hex_color_group("#FF5C00", 'bg') },
+          hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
         },
-      })
-
-      -- show keymaps help
+      }
       local miniclue = require("mini.clue")
-      miniclue.setup({
+      local clueopts = {
         triggers = {
           -- Leader triggers
           { mode = "n", keys = "<Leader>" },
@@ -63,7 +53,6 @@ return {
           { mode = "c", keys = "<C-r>" },
           -- Window commands
           { mode = "n", keys = "<C-w>" },
-          -- { mode = "n", keys = "<Leader>w" }, -- doesnt work dunno why
           -- `z` key
           { mode = "n", keys = "z" },
           { mode = "x", keys = "z" },
@@ -80,15 +69,19 @@ return {
           { mode = "n", keys = "<Leader>gd", desc = "Git diffview" },
           { mode = "n", keys = "<Leader>s",  desc = "PICKERS" },
           { mode = "n", keys = "<Leader>t",  desc = "Toggles" },
+          { mode = "n", keys = "<Leader>w",  desc = "doesnt work for some reason" },
         },
         window = {
           delay = 0,
         },
-      })
+      }
+
+      require("mini.ai").setup({ n_lines = 500 })
       require("mini.align").setup({}) -- press gA to start
-      -- similar to substitute. griw to replace word with buffer
-      -- gs to sort (collides with switch header/source)
       require("mini.operators").setup({ exchange = { prefix = "" } })
+      require("mini.move").setup(moveopts)
+      require("mini.hipatterns").setup(hipatternsopts)
+      require("mini.clue").setup(clueopts)
     end,
   },
   {

@@ -19,7 +19,6 @@ vim.opt.langmap = vim.fn.join({
 -- LANGMAP
 
 vim.g.mapleader = " "
-
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
@@ -119,9 +118,6 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 -- paste by default doesnt copy to buffer
 vim.keymap.set({ "v" }, "p", [["_dp]], { noremap = true })
 vim.keymap.set({ "v" }, "P", [["_dP]], { noremap = true })
--- i use mini.operators instead
--- vim.keymap.set("n", "<leader>pp", [[viw"_dp]], { noremap = true, desc = "Replace word under cursor with buffer" })
--- vim.keymap.set("n", "<leader>pP", [[viw"_dP]], { noremap = true, desc = "Replace word under cursor with buffer" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { noremap = true, desc = "Delete to void" })
 vim.keymap.set({ "n", "v" }, "<leader>x", [["_x]], { noremap = true, desc = "Delete to void" })
 
@@ -129,22 +125,27 @@ vim.keymap.set({ "n", "v" }, "<leader>x", [["_x]], { noremap = true, desc = "Del
 vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>", { desc = "Save" })
 -- vim.keymap.set({ "n", "v" }, "<C-q>", ":qa<CR>", { desc = "Quit" })
 vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
-vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove normal mapping
+vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove normal mapping (doesnt work lol)
 
 -- remap to nothing
 vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
-vim.keymap.set({ "n", "v", "x" }, "s", "<nop>") -- s does nothing as its the same as c
+vim.keymap.set({ "n", "v", "x" }, "s", "<nop>")                 -- s does nothing as its the same as c
+vim.keymap.set({ "n", "v", "x" }, "S", "<nop>")                 -- use it for something else instead 
+vim.keymap.set({ "n", "v", "x" }, "q:", ":q")                   -- fuck that
 
+vim.keymap.set({ "n", "v", "x" }, "q", "<nop>")                 -- macro on Q
+vim.keymap.set({ "n", "v", "x" }, "Q", "q", { noremap = true }) -- macro on Q
 
+-- somehow it doesnt work properly on load. something with sessions again
 vim.api.nvim_create_autocmd("BufWinEnter", {
-	desc = "Always move help buffers to a vertical split on the right",
-	pattern = "*",
-	callback = function()
-		if vim.bo.filetype == "help" or vim.bo.filetype == "man" then
-			vim.schedule(function()
-				vim.cmd("wincmd L")
-			end)
-		end
-	end,
+  desc = "Always move help buffers to a vertical split on the right",
+  pattern = "*",
+  callback = function()
+    if vim.bo.filetype == "help" or vim.bo.filetype == "man" then
+      vim.schedule(function()
+        vim.cmd("wincmd L")
+      end)
+    end
+  end,
 })
