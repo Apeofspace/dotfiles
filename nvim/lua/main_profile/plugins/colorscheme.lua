@@ -148,7 +148,7 @@ local schemes = {
 ------------------------------------------------------------------
 
 -- Path to the file where the colorscheme will be saved
-local colorscheme_file = vim.fn.stdpath("config") .. "/lua/custom/colorscheme.txt"
+local colorscheme_file = vim.fn.stdpath("config") .. "/lua/main_profile/colorscheme.txt"
 
 function schemes.read_colorscheme()
   local f = io.open(colorscheme_file, "r")

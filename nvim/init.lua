@@ -1,8 +1,8 @@
 -- old lazy setup
 ------------------------------------------------
 
-require("custom.set")
-require("custom.neovide") -- config neovide
+require("main_profile.set")
+require("main_profile.neovide") -- config neovide
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -11,13 +11,13 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
-local active_scheme = require("custom.plugins.colorscheme").read_colorscheme()
+local active_scheme = require("main_profile.plugins.colorscheme").read_colorscheme()
 
 require("lazy").setup({
   change_detection = {
     notify = false,
   },
-  import = "custom.plugins",
+  import = "main_profile.plugins",
   install = { colorscheme = active_scheme },
 })
 
