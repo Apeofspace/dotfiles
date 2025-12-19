@@ -1,21 +1,18 @@
 return {
   "stevearc/oil.nvim",
-  config = function()
-    local oil = require("oil")
-    oil.setup({
-      delete_to_trash = true,
-      view_options = { show_hidden = true, },
-      float = {
-        padding = 2,
-        max_width = 90,
-        max_height = 40,
-        border = "rounded",
-        win_options = { winblend = 15, },
-      },
-      keymaps = { ["q"] = { "actions.close", mode = "n" }, }
-    })
-    vim.keymap.set("n", "<leader>oi", function() oil.open_float() end, { desc = "[O]il" })
-  end,
+  opts = {
+    delete_to_trash = true,
+    view_options = { show_hidden = true, },
+    float = {
+      padding = 2,
+      max_width = 90,
+      max_height = 40,
+      border = "rounded",
+      win_options = { winblend = 15, },
+    },
+    keymaps = { ["q"] = { "actions.close", mode = "n" }, },
+    vim.keymap.set("n", "<leader>oi", function() require("oil").open_float() end, { desc = "[O]il" })
+  },
 }
 
 --

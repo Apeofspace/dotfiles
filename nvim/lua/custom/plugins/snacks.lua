@@ -39,9 +39,6 @@ local M = {
     { "<leader>sf",       function() Snacks.picker.smart() end,                                   desc = "Smart Find Files" },
     { "<leader>sb",       function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
     { "<leader>sn",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    -- { "<leader>op",       function() Snacks.picker.projects() end,                                desc = "Projects" },
-    -- git
-    -- { "<leader>gl",       function() Snacks.picker.git_log() end,                                 desc = "Git Log" },
     { "<leader>gdd",      function() Snacks.picker.git_diff() end,                                desc = "Git changes (hunks)" },
     -- search
     { "<leader>/",        function() Snacks.picker.lines() end,                                   desc = "Buffer Lines" },
@@ -69,46 +66,7 @@ local M = {
     { "<leader>sw",       function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
     { "<leader>sd",       lsp_symbols_this_file,                                                  desc = "LSP Symbols" },
     { "<leader><leader>", lsp_symbols_this_file,                                                  desc = "LSP Symbols" },
-    -- { "S",                function() Snacks.scratch() end,                                 desc = "Select Scratch Buffer" },
   },
-  --stylua: ignore end
-  -- init = function()
-  --   vim.api.nvim_create_autocmd("User", {
-  --     pattern = "VeryLazy",
-  --     callback = function()
-  --       -- Setup some globals for debugging (lazy-loaded)
-  --       _G.dd = function(...)
-  --         Snacks.debug.inspect(...)
-  --       end
-  --       _G.bt = function()
-  --         Snacks.debug.backtrace()
-  --       end
-
-  --       -- Override print to use snacks for `:=` command
-  --       if vim.fn.has("nvim-0.11") == 1 then
-  --         vim._print = function(_, ...)
-  --           dd(...)
-  --         end
-  --       else
-  --         vim.print = _G.dd
-  --       end
-
-  --       -- Create some toggle mappings
-  --       -- Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>us")
-  --       -- Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
-  --       -- Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>uL")
-  --       -- Snacks.toggle.diagnostics():map("<leader>ud")
-  --       -- Snacks.toggle.line_number():map("<leader>tL")
-  --       -- Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map(
-  --       -- "<leader>uc")
-  --       Snacks.toggle.treesitter():map("<leader>tT")
-  --       -- Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>ub")
-  --       -- Snacks.toggle.inlay_hints():map("<leader>uh")
-  --       -- Snacks.toggle.indent():map("<leader>ug")
-  --       -- Snacks.toggle.dim():map("<leader>uD")
-  --     end,
-  --   })
-  -- end,
 }
 
 return M

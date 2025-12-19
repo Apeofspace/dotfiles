@@ -86,7 +86,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- NOTE this is done now by "rachartier/tiny-glimmer.nvim"
+-- -- NOTE this is done now by "rachartier/tiny-glimmer.nvim"
 -- -- highlight briefly when yanking
 -- vim.api.nvim_create_autocmd("TextYankPost", {
 --   desc = "Highlight when yanking (copying) text",
@@ -130,8 +130,8 @@ vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove nor
 -- remap to nothing
 vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
-vim.keymap.set({ "n", "v", "x" }, "s", "<nop>")  -- s does nothing as its the same as c
-vim.keymap.set({ "n", "v", "x" }, "S", "<nop>")  -- use it for something else instead
+vim.keymap.set({ "n", "v", "x" }, "s", "<nop>") -- s does nothing as its the same as c
+vim.keymap.set({ "n", "v", "x" }, "S", "<nop>") -- use it for something else instead
 -- vim.keymap.set({ "n", "v", "x" }, "q:", ":q")                   -- fuck that
 -- remapping q works different from other keymaps. because q: nonremapped doesnt wait for : input
 -- if you remap however it starts waiting which is annoying
@@ -151,6 +151,3 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end
   end,
 })
-
--- check out this shit. its better than noice
--- https://neovim.io/doc/user/cmdline.html#cmdline-autocompletion
