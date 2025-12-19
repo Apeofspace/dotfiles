@@ -17,6 +17,12 @@ local M = {
   },
 }
 
+vim.lsp.config.clangd = {
+  -- for reasons unknown to men, settings cmd is impossible via lsp/clangd.lua
+  -- only the settings = {...} table gets passed. and so I have to put it here again
+  cmd = { "clangd", "--query-driver=/usr/bin/arm-none-eabi-gcc", "--fallback-style=google" },
+}
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("cool-lsp-attach", { clear = true }),
   callback = function(event)
