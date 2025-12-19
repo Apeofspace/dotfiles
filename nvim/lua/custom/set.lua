@@ -26,7 +26,7 @@ vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.mouse = "a"
-vim.opt.showmode = false          -- I already show that in lualine
+vim.opt.showmode = false -- I already show that in lualine
 
 -- vim.cmd("set clipboard+=unnamedplus")
 vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim.
@@ -130,9 +130,11 @@ vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove nor
 -- remap to nothing
 vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
-vim.keymap.set({ "n", "v", "x" }, "s", "<nop>")                 -- s does nothing as its the same as c
-vim.keymap.set({ "n", "v", "x" }, "S", "<nop>")                 -- use it for something else instead 
-vim.keymap.set({ "n", "v", "x" }, "q:", ":q")                   -- fuck that
+vim.keymap.set({ "n", "v", "x" }, "s", "<nop>")  -- s does nothing as its the same as c
+vim.keymap.set({ "n", "v", "x" }, "S", "<nop>")  -- use it for something else instead
+-- vim.keymap.set({ "n", "v", "x" }, "q:", ":q")                   -- fuck that
+-- remapping q works different from other keymaps. because q: nonremapped doesnt wait for : input
+-- if you remap however it starts waiting which is annoying
 
 vim.keymap.set({ "n", "v", "x" }, "q", "<nop>")                 -- macro on Q
 vim.keymap.set({ "n", "v", "x" }, "Q", "q", { noremap = true }) -- macro on Q
@@ -149,3 +151,6 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end
   end,
 })
+
+-- check out this shit. its better than noice
+-- https://neovim.io/doc/user/cmdline.html#cmdline-autocompletion
