@@ -7,24 +7,25 @@ local schemes = {
   { "zenbones-theme/zenbones.nvim", lazy = true, priority = 1000, dependencies = { "rktjmp/lush.nvim" } }, -- less clown version of other themes
   { "adibhanna/yukinord.nvim",      lazy = true, priority = 1000, },
   { "nendix/zen.nvim",              lazy = true, priority = 1000, },
+  { "tommarien/github-plus.nvim",   lazy = true, priority = 1000, },
   {
     "Kaikacy/Lemons.nvim",
     lazy = true,
     priority = 1000,
     config = function()
-      vim.api.nvim_create_autocmd("ColorScheme", {
-        -- this to ensure I change highlight after it loads
+      vim.api.nvim_create_autocmd("colorscheme", {
+        -- this to ensure i change highlight after it loads
         pattern = "*",
         once = true, -- the config is only called the first time =(
         callback = function()
           -- neogit colors
-          vim.api.nvim_set_hl(0, "NeogitDiffDelete", { fg = "#e74c3c" })
-          vim.api.nvim_set_hl(0, "NeogitDiffDeleteHighlight", { fg = "#e74c3c" })
-          vim.api.nvim_set_hl(0, "NeogitDiffDeleteCursor", { fg = "#e74c3c" })
+          vim.api.nvim_set_hl(0, "neogitdiffdelete", { fg = "#e74c3c" })
+          vim.api.nvim_set_hl(0, "neogitdiffdeletehighlight", { fg = "#e74c3c" })
+          vim.api.nvim_set_hl(0, "neogitdiffdeletecursor", { fg = "#e74c3c" })
           -- document highlight
-          vim.api.nvim_set_hl(0, "LspReferenceText", { bold = true })
-          vim.api.nvim_set_hl(0, "LspReferenceRead", { bold = true })
-          vim.api.nvim_set_hl(0, "LspReferenceWrite", { bold = true })
+          vim.api.nvim_set_hl(0, "lspreferencetext", { bold = true })
+          vim.api.nvim_set_hl(0, "lspreferenceread", { bold = true })
+          vim.api.nvim_set_hl(0, "lspreferencewrite", { bold = true })
         end,
       })
       local opts = {
@@ -39,6 +40,7 @@ local schemes = {
       require("lemons").setup(opts)
     end
   },
+  { "alexpasmantier/hubbamax.nvim",     lazy = true, priority = 1000 },
   { "nyoom-engineering/oxocarbon.nvim", lazy = true, priority = 1000 },
   { "slugbyte/lackluster.nvim",         lazy = true, priority = 1000 },
   { "armannikoyan/rusty",               lazy = true, priority = 1000 }, -- super nice actually
