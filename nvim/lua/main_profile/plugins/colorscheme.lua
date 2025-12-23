@@ -4,7 +4,7 @@ local schemes = {
   { "webhooked/kanso.nvim",         lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
   { "alexxGmZ/e-ink.nvim",          lazy = true, priority = 1000, },
   { "EdenEast/nightfox.nvim",       lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
-  { "zenbones-theme/zenbones.nvim", lazy = true, priority = 1000, dependencies = { "rktjmp/lush.nvim" } }, -- less clown version of other themes
+  -- { "zenbones-theme/zenbones.nvim", lazy = true, priority = 1000, dependencies = { "rktjmp/lush.nvim" } }, -- less clown version of other themes
   { "adibhanna/yukinord.nvim",      lazy = true, priority = 1000, },
   { "nendix/zen.nvim",              lazy = true, priority = 1000, },
   { "tommarien/github-plus.nvim",   lazy = true, priority = 1000, },
