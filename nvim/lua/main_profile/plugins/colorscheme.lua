@@ -136,8 +136,9 @@ local schemes = {
     lazy = true,
     priority = 1000,
     config = function()
-      vim.g.sonokai_style = "shusia"
+      -- vim.g.sonokai_style = "shusia"
       vim.g.sonokai_enable_italic = true
+      -- vim.g.sonokai_colors_override = {'bg0': ['#1e222a', '235'], 'bg2': ['#282c34', '236']}
       vim.g.sonokai_transparent_background = false
       vim.g.sonokai_current_word = "bold"
       vim.g.sonokai_better_performance = 1
@@ -147,44 +148,101 @@ local schemes = {
 
 ------------------------------------------------------------------
 
--- Path to the file where the colorscheme will be saved
-local colorscheme_file = vim.fn.stdpath("config") .. "/lua/main_profile/colorscheme.txt"
+local function get_user_schemes()
+  local vimruntime = vim.env.VIMRUNTIME
+  local seen = {}
+  local schemes = {}
 
-function schemes.read_colorscheme()
-  local f = io.open(colorscheme_file, "r")
-  if f then
-    local colorscheme = f:read("*l")
-    f:close()
-    return colorscheme
-  end
-  return nil
-end
+  for _, name in ipairs(vim.fn.getcompletion("", "color")) do
+    local files = vim.api.nvim_get_runtime_file("colors/" .. name .. ".*", false)
 
-local function write_colorscheme(colorscheme)
-  local f = io.open(colorscheme_file, "w")
-  if f then
-    f:write(colorscheme)
-    f:close()
-  end
-end
+    local path = files[1]
 
-function schemes.SetColorschemeFromFile()
-  local active_scheme = schemes.read_colorscheme()
-  if active_scheme then
-    local ok, mod = pcall(require, active_scheme)
-    if ok and type(mod) == "table" then
-      mod.setup()
+    -- this is supposed to filter out the default ones
+    -- which is a great idea.
+    if not vim.startswith(path, vimruntime) and not seen[name] then
+      seen[name] = true
+      table.insert(schemes, name)
     end
-    vim.cmd("colorscheme " .. active_scheme)
   end
+
+  table.sort(schemes)
+  return schemes
 end
 
--- write on loading scheme
-vim.api.nvim_create_autocmd("ColorScheme", {
+-- this is kinda stolen from telescope. it doesnt work yet and you need to apply filtering from above to it
+local function get_user_schemes2()
+  local colors = opts.colors or { before_color }
+  if not vim.tbl_contains(colors, before_color) then
+    table.insert(colors, 1, before_color)
+  end
+
+  colors = vim.list_extend(
+    colors,
+    vim.tbl_filter(function(color)
+      return not vim.tbl_contains(colors, color)
+    end, vim.fn.getcompletion("", "color"))
+  )
+  local lazy = package.loaded["lazy.core.util"]
+  if lazy and lazy.get_unloaded_rtp then
+    local paths = lazy.get_unloaded_rtp ""
+    local all_files = vim.fn.globpath(table.concat(paths, ","), "colors/*", 1, 1)
+    for _, f in ipairs(all_files) do
+      local color = vim.fn.fnamemodify(f, ":t:r")
+      if not vim.tbl_contains(colors, color) then
+        table.insert(colors, color)
+      end
+    end
+  end
+  return colors
+end
+
+local function snacks_theme_picker()
+  local ok, Snacks = pcall(require, "snacks")
+  if not ok then
+    return
+  end
+  -- local schemes = get_all_schemes()
+  -- local schemes = get_user_schemes2()
+  -- local items = vim.tbl_map(function(s) return { text = s } end, schemes) -- these needs to be tables, duh
+  local items = get_user_schemes2()
+  Snacks.picker.pick({
+    items = items,
+    title = "Colorschemes, ayyy",
+    format = "text",
+    preview = "colorscheme",
+    preset = "vertical",
+    confirm = function(picker, item)
+      if item then
+        picker.preview.state.colorscheme = nil
+        vim.schedule(function()
+          vim.cmd("colorscheme " .. item.text)
+        end)
+      end
+      picker:close()
+    end,
+  })
+end
+
+vim.keymap.set("n", "<leader>sC", snacks_theme_picker, { desc = "my cewl pickar" })
+
+
+-- autoload from shada on requiring this file
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  nested = true,
   callback = function()
-    local current_scheme = vim.g.colors_name
-    write_colorscheme(current_scheme)
+    if vim.g.COLOR_OF_MY_PANTS then
+      vim.cmd('colorscheme ' .. vim.g.COLOR_OF_MY_PANTS)
+    end
   end,
+})
+
+-- autosave to shada on changing the scheme
+vim.api.nvim_create_autocmd('ColorScheme', {
+  callback = function()
+    vim.g.COLOR_OF_MY_PANTS = vim.g.colors_name
+  end
 })
 
 return schemes

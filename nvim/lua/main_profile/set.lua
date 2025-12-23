@@ -139,15 +139,15 @@ vim.keymap.set({ "n", "v", "x" }, "S", "<nop>") -- use it for something else ins
 vim.keymap.set({ "n", "v", "x" }, "q", "<nop>")                 -- macro on Q
 vim.keymap.set({ "n", "v", "x" }, "Q", "q", { noremap = true }) -- macro on Q
 
--- somehow it doesnt work properly on load. something with sessions again
-vim.api.nvim_create_autocmd("BufWinEnter", {
-  desc = "Always move help buffers to a vertical split on the right",
-  pattern = "*",
-  callback = function()
-    if vim.bo.filetype == "help" or vim.bo.filetype == "man" then
-      vim.schedule(function()
-        vim.cmd("wincmd L")
-      end)
-    end
-  end,
-})
+-- -- somehow it doesnt work properly on load. something with sessions again
+-- vim.api.nvim_create_autocmd("BufWinEnter", {
+--   desc = "Always move help buffers to a vertical split on the right",
+--   pattern = "*",
+--   callback = function()
+--     if vim.bo.filetype == "help" or vim.bo.filetype == "man" then
+--       vim.schedule(function()
+--         vim.cmd("wincmd L")
+--       end)
+--     end
+--   end,
+-- })

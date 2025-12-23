@@ -19,7 +19,6 @@ local M = {
       { "<Leader>gdh", "<cmd>DiffviewFileHistory<CR>",   desc = "Commits history" },
       { "<Leader>gdo", "<cmd>DiffviewOpen<CR>",          desc = "Current changes" },
       { "<Leader>gdf", "<cmd>DiffviewFileHistory %<CR>", desc = "THIS Files History" },
-      -- { "<Leader>gdc", "<cmd>DiffviewOpen HEAD<CR>", desc = "Diff View latest commit" },
       {
         "<Leader>gdb",
         function()
@@ -82,14 +81,6 @@ local M = {
         },
       }
     end,
-    -- Examples:
-    -- :DiffviewOpen
-    -- :DiffviewOpen HEAD~2
-    -- :DiffviewOpen HEAD~4..HEAD~2
-    -- :DiffviewOpen d4a7b0d
-    -- :DiffviewOpen d4a7b0d^!
-    -- :DiffviewOpen d4a7b0d..519b30e
-    -- :DiffviewOpen origin/main...HEAD
   },
   {
     "NeogitOrg/neogit",
@@ -107,7 +98,7 @@ local M = {
     -- experimental plugin. looks cool af but not yet as powerful as diffview.
     -- switch to it when its good enough
     "esmuellert/vscode-diff.nvim",
-    -- enabled = false,
+    event = "VeryLazy",
     dependencies = { "MunifTanjim/nui.nvim" },
   }
 }
