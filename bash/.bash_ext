@@ -189,43 +189,10 @@ export EDITOR=nvim
 export SUDO_EDITOR=nvim
 export PAGER=cat
 
-# startup zellij automatically
-# could also provide a zellij config to always attach to same session
-# need terminal test here to prevent zellij running in nested terminals or tmux etc
- # -z "$ZELLIJ" checks if variable is empty, this sets when zellij is inside sesh
-export ZELLIJ_AUTO_ATTACH=true
-
-# # THIS HERE below is taken from zellij setup --generate-auto-start but extra term check is added
-# if [ "$TERM" = "xterm-kitty" ]; then # disable ghostty for now
-# # if [ "$TERM" = "xterm-ghostty" ] || [ "$TERM" = "xterm-kitty" ]; then
-#   if [[ -z "$ZELLIJ" ]]; then # if not already inside a zellij session 
-#       if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-#           zellij attach -c main
-#       else
-#           zellij
-#       fi
-#       # exit the whole termnal when exiting zellij
-#       if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-#           exit
-#       fi
-#   fi
-#   # not entirely sure what this does
-#   eval "$(zellij setup --generate-completion bash)"
-# fi
-
-alias ve='python3 -m venv ./venv'
-alias va='source ./venv/bin/activate'
-alias uve='uv venv'
-alias uva='source ./.venv/bin/activate'
-alias vim='nvim'
 alias n='nvim'
 alias nv='neovide'
 alias gits='git status'
 alias gitl='git log -15 --oneline --branches'
-alias gitc='git commit'
-alias r='. ranger'
 alias vzf='vim $(fzf)'
 alias y='yy'
-# alias z='zoxide'
-alias ze='zellij attach -c main'
-
+alias ll='ls -la'
