@@ -7,8 +7,6 @@ local M = {
     config = function()
       ---@diagnostic disable-next-line: missing-fields
       local ts = require("nvim-treesitter")
-      local ts_cfg = require("nvim-treesitter.config")
-      local parsers = require("nvim-treesitter.parsers")
       local ensure_installed = {
         "bash",
         "c",
@@ -28,7 +26,20 @@ local M = {
         "yaml",
         "zig",
       }
-      local ignored_ft = { "checkhealth", "lazy", "mason", "undotree", }
+      local ignored_ft = {
+        "blink-cmp-menu",
+        "checkhealth",
+        "lazy",
+        "mason",
+        "mason_backdrop",
+        "noice",
+        "snacks_dashboard",
+        "snacks_input",
+        "snacks_notif",
+        "snacks_picker_input",
+        "snacks_win",
+        "undotree",
+      }
 
       ts.install(ensure_installed)
 
@@ -46,6 +57,11 @@ local M = {
           local lang = vim.treesitter.language.get_lang(ft) or ft
           local buf = ev.buf
           pcall(vim.treesitter.start, buf, lang)
+          -- local success, _ = pcall(vim.treesitter.start, buf, lang)
+          -- if not success then
+          --   -- this here runs too much
+          --   vim.notify("Failed to start treesitter " .. lang)
+          -- end
 
           vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
           vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
