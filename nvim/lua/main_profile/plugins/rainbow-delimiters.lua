@@ -12,7 +12,7 @@ local M = {
       end
 
       -- set up a binding to toggle it
-      vim.keymap.set("n", "<leader>td", function()
+      vim.keymap.set("n", "<leader>tD", function()
         if rd.is_enabled() then
           rd.disable()
           vim.notify("Rainbow-Delimiters disabled for the buffer")

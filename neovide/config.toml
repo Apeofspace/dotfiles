@@ -16,6 +16,6 @@ wsl = false
   hinting = 'full'
   edging = "antialias"
 [[font.normal]]
-  family = "Roboto Mono"
+  family = "RobotoMono Nerd Font"
   scale = 1
   weight = "Medium"

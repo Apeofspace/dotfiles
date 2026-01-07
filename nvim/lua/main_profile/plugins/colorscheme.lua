@@ -1,13 +1,13 @@
 local schemes = {
-  { "AlexvZyl/nordic.nvim",         lazy = true, priority = 1000 },
-  { "folke/tokyonight.nvim",        lazy = true, priority = 1000 },
-  { "webhooked/kanso.nvim",         lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
-  { "alexxGmZ/e-ink.nvim",          lazy = true, priority = 1000, },
-  { "EdenEast/nightfox.nvim",       lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
+  { "AlexvZyl/nordic.nvim",       lazy = true, priority = 1000 },
+  { "folke/tokyonight.nvim",      lazy = true, priority = 1000 },
+  { "webhooked/kanso.nvim",       lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
+  { "alexxGmZ/e-ink.nvim",        lazy = true, priority = 1000, },
+  { "EdenEast/nightfox.nvim",     lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
   -- { "zenbones-theme/zenbones.nvim", lazy = true, priority = 1000, dependencies = { "rktjmp/lush.nvim" } }, -- less clown version of other themes
-  { "adibhanna/yukinord.nvim",      lazy = true, priority = 1000, },
-  { "nendix/zen.nvim",              lazy = true, priority = 1000, },
-  { "tommarien/github-plus.nvim",   lazy = true, priority = 1000, },
+  { "adibhanna/yukinord.nvim",    lazy = true, priority = 1000, },
+  { "nendix/zen.nvim",            lazy = true, priority = 1000, },
+  { "tommarien/github-plus.nvim", lazy = true, priority = 1000, },
   {
     "Kaikacy/Lemons.nvim",
     lazy = true,
@@ -18,6 +18,7 @@ local schemes = {
         pattern = "*",
         once = true, -- the config is only called the first time =(
         callback = function()
+          local c = require("lemons.colors").colors
           -- neogit colors
           vim.api.nvim_set_hl(0, "neogitdiffdelete", { fg = "#e74c3c" })
           vim.api.nvim_set_hl(0, "neogitdiffdeletehighlight", { fg = "#e74c3c" })
@@ -26,6 +27,10 @@ local schemes = {
           vim.api.nvim_set_hl(0, "lspreferencetext", { bold = true })
           vim.api.nvim_set_hl(0, "lspreferenceread", { bold = true })
           vim.api.nvim_set_hl(0, "lspreferencewrite", { bold = true })
+          -- markdown code block
+          vim.api.nvim_set_hl(0, "markdownCode", { italic = true })
+          vim.api.nvim_set_hl(0, "markdownCodeBlock", { fg = c.lime })
+          vim.api.nvim_set_hl(0, "markdownCodeDelimiter", { fg = c.lime })
         end,
       })
       local opts = {

@@ -20,7 +20,7 @@ vim.opt.langmap = vim.fn.join({
 
 vim.g.mapleader = " "
 vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.opt.scrolloff = 8
 vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.tabstop = 2
