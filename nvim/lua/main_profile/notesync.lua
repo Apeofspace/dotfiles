@@ -58,16 +58,16 @@ local function create_autocmds(config)
   local group = vim.api.nvim_create_augroup("notes-sync", { clear = true })
 
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    pattern = { string.match(config.local_path, "^(.*)/") .. "/*.md" },
+    pattern = { string.match(config.local_path, "^(.*)/") .. "/**" },
     group = group,
     callback = function()
       -- horrible mess of nested async functions callbacks below
       -- I don't know how to format uv async in a nice way
-      vim.notify("Pull started...", vim.log.levels.INFO)
+      vim.notify("Pull started...", vim.log.levels.INFO, { title = "Notes" })
       vim.system(construct_cmd(config, "check_local"), function(res_checklocal)
         if res_checklocal.code ~= 0 then
           vim.notify("Checking local failed: " .. tostring(res_checklocal.code),
-            vim.log.levels.ERROR)
+            vim.log.levels.ERROR, { title = "Notes" })
         else
           local cmd_output = vim.split(res_checklocal.stdout, "\n")
           local incoming = {}
@@ -78,13 +78,16 @@ local function create_autocmds(config)
           end
           if #incoming > 0 then
             vim.notify("Aborting pull: local contains newer files! " ..
-              table.concat(incoming, "/n"), vim.log.levels.ERROR)
+              table.concat(incoming, "/n"), vim.log.levels.ERROR,
+              { title = "Notes" })
           else
             vim.system(construct_cmd(config, "pull"), function(res_pull)
               if res_pull.code ~= 0 then
-                vim.notify("Pull failed: ", vim.log.levels.ERROR)
+                vim.notify("Pull failed: ", vim.log.levels.ERROR,
+                  { title = "Notes" })
               else
-                vim.notify("Pull completed", vim.log.levels.INFO)
+                vim.notify("Pull completed", vim.log.levels.INFO,
+                  { title = "Notes" })
               end
             end)
           end
@@ -94,16 +97,16 @@ local function create_autocmds(config)
   })
 
   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-    pattern = { string.match(config.local_path, "^(.*)/") .. "/*.md" },
+    pattern = { string.match(config.local_path, "^(.*)/") .. "/**" },
     group = group,
     callback = function()
       -- horrible mess of nested async functions callbacks below
       -- I don't know how to format uv async in a nice way
-      vim.notify("Push started...", vim.log.levels.INFO)
+      vim.notify("Push started...", vim.log.levels.INFO, { title = "Notes" })
       vim.system(construct_cmd(config, "check_remote"), function(res_checkremote)
         if res_checkremote.code ~= 0 then
           vim.notify("Checking remote failed: " .. tostring(res_checkremote.code),
-            vim.log.levels.ERROR)
+            vim.log.levels.ERROR, { title = "Notes" })
         else
           local cmd_output = vim.split(res_checkremote.stdout, "\n")
           local incoming = {}
@@ -114,13 +117,16 @@ local function create_autocmds(config)
           end
           if #incoming > 0 then
             vim.notify("Aborting push: remote contains newer files:\n" ..
-              table.concat(incoming, "/n"), vim.log.levels.ERROR)
+              table.concat(incoming, "/n"), vim.log.levels.ERROR,
+              { title = "Notes" })
           else
             vim.system(construct_cmd(config, "push"), function(res_push)
               if res_push.code ~= 0 then
-                vim.notify("Push failed: ", vim.log.levels.ERROR)
+                vim.notify("Push failed: ", vim.log.levels.ERROR,
+                  { title = "Notes" })
               else
-                vim.notify("Push completed", vim.log.levels.INFO)
+                vim.notify("Push completed", vim.log.levels.INFO,
+                  { title = "Notes" })
               end
             end)
           end
@@ -131,11 +137,19 @@ local function create_autocmds(config)
 end
 
 -- this here creates nvim autocommands to push and pull notes
-function Sync_auto(user_config)
+function Sync_setup(user_config)
   local config = vim.tbl_extend("force", default_config, user_config or {})
+  config.local_path = vim.fn.expand(config.local_path)
+
+  if vim.fn.isdirectory(config.local_path) == 0 then
+    vim.notify("Not a dir: " .. config.local_path, vim.log.levels.ERROR,
+      { title = "Notes" })
+    return
+  end
 
   if vim.fn.executable("rsync") ~= 1 then
-    vim.notify("rsync not found in PATH", vim.log.levels.ERROR)
+    vim.notify("rsync not found in PATH", vim.log.levels.ERROR,
+      { title = "Notes" })
     return
   end
 
@@ -154,14 +168,14 @@ function Sync_auto(user_config)
   -- if ssh is needed, check that its installed, check connection to server
   -- then run create_autocmds
   if vim.fn.executable("ssh") ~= 1 then
-    vim.notify("ssh not found in PATH", vim.log.levels.ERROR)
+    vim.notify("ssh not found in PATH", vim.log.levels.ERROR, { title = "Notes" })
     return
   end
   local ssh_check = { "ssh", "-o batchMode=yes", "-o ConnectTimeout=5", addr, "true" }
   vim.system(ssh_check, function(out)
     if out.code ~= 0 then
       vim.notify("Can't connect with SSH: " .. tostring(out.code),
-        vim.log.levels.ERROR)
+        vim.log.levels.ERROR, { title = "Notes" })
     else
       vim.schedule(function() create_autocmds(config) end)
     end
@@ -174,12 +188,12 @@ end
 --   local_path = "/home/v/proj/test/vault_local/",
 --   remote_path = "/home/v/proj/test/vault_remote/",
 -- }
--- Sync_auto(test_config)
-
+-- Sync_setup(test_config)
+--
 -------------- real deal ------------
 
 local real_config = {
   remote_path = "vault:/backups/vault/",
   local_path = "/home/v/ObsidianVault/",
 }
-Sync_auto(real_config)
+-- Sync_setup(real_config)
