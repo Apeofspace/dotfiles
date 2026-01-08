@@ -97,9 +97,9 @@ local M = {
   {
     -- experimental plugin. looks cool af but not yet as powerful as diffview.
     -- switch to it when its good enough
-    "esmuellert/vscode-diff.nvim",
-    event = "VeryLazy",
+    "esmuellert/codediff.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
+    cmd = "CodeDiff",
   }
 }
 return M
