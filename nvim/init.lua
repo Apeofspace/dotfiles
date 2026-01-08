@@ -16,7 +16,8 @@ require("lazy").setup({
   import = "main_profile.plugins",
 })
 
--- require("custom.scopehighlight") -- testing
+-- require("main_profile.scopehighlight") -- testing
+require("main_profile.notesync") -- testing
 
 require("langmapper").automapping({ buffer = false })
 
