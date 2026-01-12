@@ -1,15 +1,16 @@
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 return {
   {
-    -- this is a fork of folkes persistence.
-    -- It works really well with no config and has no errors that other sessionizers have
-    -- the only problem with autoload is that it loads when piping into nvim like echo asd | nvim -
-    "olimorris/persisted.nvim",
+    "rmagatti/auto-session",
     lazy = false,
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
     opts = {
-      autoload = true,
-      use_git_branch = true,
+      suppressed_dirs = { "~/", "~/Downloads", "/" },
+      -- log_level = 'debug',
     },
-    vim.keymap.set("n", "<leader>os", "<cmd>SessionSelect<CR>") -- this is basically for neovide
   },
   {
     -- close unused buffers after 20 min

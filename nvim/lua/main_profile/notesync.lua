@@ -182,18 +182,23 @@ function Sync_setup(user_config)
   end)
 end
 
+-- what i need to do here is i need to manually get the list of files that need to be rsynced
+-- based on modification time
+-- I need to keep that cached in a file somewhere and check against that to determine conflicts
+-- doesn't help resolve them tho, but will let me reliably detect and avoid conflicts
+
 -------------- testing --------------
 
--- local test_config = {
---   local_path = "/home/v/proj/test/vault_local/",
---   remote_path = "/home/v/proj/test/vault_remote/",
--- }
--- Sync_setup(test_config)
---
+local test_config = {
+  local_path = "/home/v/proj/test/vault_local/",
+  remote_path = "/home/v/proj/test/vault_remote/",
+}
+Sync_setup(test_config)
+
 -------------- real deal ------------
 
-local real_config = {
-  remote_path = "vault:/backups/vault/",
-  local_path = "/home/v/ObsidianVault/",
-}
+-- local real_config = {
+--   remote_path = "vault:/backups/vault/",
+--   local_path = "/home/v/ObsidianVault/",
+-- }
 -- Sync_setup(real_config)

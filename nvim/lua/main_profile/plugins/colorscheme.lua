@@ -8,6 +8,7 @@ local schemes = {
   { "adibhanna/yukinord.nvim",    lazy = true, priority = 1000, },
   { "nendix/zen.nvim",            lazy = true, priority = 1000, },
   { "tommarien/github-plus.nvim", lazy = true, priority = 1000, },
+  { "serhez/teide.nvim",          lazy = true, priority = 1000, }, -- i really lke the red and the green form here but not the blue
   {
     "Kaikacy/Lemons.nvim",
     lazy = true,
