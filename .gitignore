@@ -13,12 +13,12 @@
 !neovide/**
 !nvim/
 !nvim/**
-!wezterm/
-!wezterm/**
+# !wezterm/ # fuck they
+# !wezterm/**
 !yazi/
 !yazi/**
-!zellij/
-!zellij/**
+# !zellij/ # fuck they
+# !zellij/**
 !ghostty/
 !ghostty/**
 !zed/
@@ -29,3 +29,6 @@
 ~                                                                                                                                                                                                                                             
 ~                                                                                                                                                                                                                                             
 ~                                                                                                                                                                                                                                             
+
+# this is for work onleyh
+kitty/work_env.conf
