@@ -40,7 +40,7 @@ local M = {
     { "<leader>sf",       function() Snacks.picker.smart() end,                                                      desc = "Smart Find Files" },
     { "<leader>sb",       function() Snacks.picker.buffers() end,                                                    desc = "Buffers" },
     { "<leader>sn",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,                    desc = "Find Config File" },
-    { "<leader>gdd",      function() Snacks.picker.git_diff() end,                                                   desc = "Git changes (hunks)" },
+    { "<leader>sd",       function() Snacks.picker.git_diff() end,                                                   desc = "Git changes (hunks)" },
     -- search
     { "<leader>/",        function() Snacks.picker.lines() end,                                                      desc = "Buffer Lines" },
     { "<leader>sc",       function() Snacks.picker.grep_word() end,                                                  desc = "Visual selection or word", mode = { "n", "x" } },
@@ -65,7 +65,6 @@ local M = {
     { "gy",               function() Snacks.picker.lsp_type_definitions() end,                                       desc = "Goto T[y]pe Definition" },
     { "<leader>N",        function() Snacks.notifier.show_history() end,                                             desc = "Notification History" },
     { "<leader>sw",       function() Snacks.picker.lsp_workspace_symbols() end,                                      desc = "LSP Workspace Symbols" },
-    { "<leader>sd",       lsp_symbols_this_file,                                                                     desc = "LSP Symbols" },
     { "<leader><leader>", lsp_symbols_this_file,                                                                     desc = "LSP Symbols" },
     -- terminal
     { "<leader>tt",       function() Snacks.terminal(nil, { cwd = vim.uv.fs_realpath(vim.fn.expand('%:p:h')) }) end, desc = "Toggle Terminal" },

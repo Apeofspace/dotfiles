@@ -182,10 +182,13 @@ function Sync_setup(user_config)
   end)
 end
 
--- what i need to do here is i need to manually get the list of files that need to be rsynced
+-- what I need to do here is I need to manually get the list of files that need to be rsynced
 -- based on modification time
 -- I need to keep that cached in a file somewhere and check against that to determine conflicts
 -- doesn't help resolve them tho, but will let me reliably detect and avoid conflicts
+
+-- Need to find a way to get file date. which is easy. i would also need a dir akin to .git
+-- something like .sync. Not a fan. but ohwell. What else should I keep in there?
 
 -------------- testing --------------
 
