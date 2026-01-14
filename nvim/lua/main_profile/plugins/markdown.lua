@@ -6,6 +6,17 @@ local M = {
     ft = "markdown", -- Load on markdown files by default
     opts = {},
     -- Auto_git_start() -- enable autogit on loading the plugin
+  },
+  {
+    'MeanderingProgrammer/render-markdown.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },
+    ft = "markdown",
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      restart_highlighter = false,
+      completions = { lsp = { enabled = true } },
+    },
   }
 }
 
