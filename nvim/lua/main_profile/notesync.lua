@@ -96,6 +96,8 @@ local function create_autocmds(config)
     end
   })
 
+
+  -- NOTE jobs stop when neovim leaves
   vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     pattern = { string.match(config.local_path, "^(.*)/") .. "/**" },
     group = group,
@@ -189,6 +191,15 @@ end
 
 -- Need to find a way to get file date. which is easy. i would also need a dir akin to .git
 -- something like .sync. Not a fan. but ohwell. What else should I keep in there?
+
+-- okay lets think about what to do when there is a conflict. First of all, I have the exact list of 
+-- conflicting files. So you shouldn't let them be pushed, thats for sure. No push on conflicting files.
+-- when pulling, they can be pulled to maybe ./conflicts/ and that directory should be excluded from 
+-- normal operation. And then how do i resolve the conflict? Lets say i reviewed the pulled files.
+
+-- instead of calling functions directly, i should register user commands.
+-- there should be commands for setup_auto, push, pull, push_force, pull_force
+
 
 -------------- testing --------------
 

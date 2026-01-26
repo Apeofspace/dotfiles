@@ -18,6 +18,7 @@ require("lazy").setup({
 
 -- require("main_profile.scopehighlight") -- testing
 -- require("main_profile.notesync") -- testing
+-- require("main_profile.cmdline") -- testing
 
 require("langmapper").automapping({ buffer = false })
 

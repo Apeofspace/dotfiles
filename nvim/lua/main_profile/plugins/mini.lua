@@ -75,19 +75,21 @@ return {
           delay = 0,
         },
       }
-
       require("mini.ai").setup({ n_lines = 500 })
       require("mini.align").setup({}) -- press gA to start
       require("mini.operators").setup({ exchange = { prefix = "" } })
       require("mini.move").setup(moveopts)
       require("mini.hipatterns").setup(hipatternsopts)
       require("mini.clue").setup(clueopts)
+      -- require("mini.pairs").setup() -- too basic in many ways
+      require("mini.surround").setup()
     end,
   },
   {
     "altermo/ultimate-autopair.nvim",
     event = { "InsertEnter", "CmdlineEnter" },
-    branch = "v0.6", -- recommended as each new version will have breaking changes
+    -- enabled = false,
+    -- branch = "v0.6", -- recommended as each new version will have breaking changes
     opts = {
       fastwarp = {   -- its WARP not WRAP (ffs smh fr fr wtf ong)
         map = "<C-l>",

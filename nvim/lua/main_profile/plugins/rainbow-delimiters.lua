@@ -2,6 +2,7 @@ local M = {
   {
     "https://gitlab.com/HiPhish/rainbow-delimiters.nvim",
     event = "VeryLazy",
+    enabled = false, -- This is a very inpleasant plugin, although helpful
     config = function()
       local rd = require("rainbow-delimiters")
 

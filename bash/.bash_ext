@@ -22,6 +22,15 @@ enc-fix-keil ()
     find . -name '*.c' -exec iconv --verbose -f windows-1251 -t utf-8 -o {} {} \;
 }
 
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+	    cd -- "$cwd"
+		fi
+		rm -f -- "$tmp"
+}
+
 export VISUAL=nvim
 export EDITOR=nvim
 export SUDO_EDITOR=nvim

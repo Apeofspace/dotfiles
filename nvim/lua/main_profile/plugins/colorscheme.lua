@@ -1,14 +1,13 @@
 local schemes = {
-  { "AlexvZyl/nordic.nvim",       lazy = true, priority = 1000 },
-  { "folke/tokyonight.nvim",      lazy = true, priority = 1000 },
-  { "webhooked/kanso.nvim",       lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
-  { "alexxGmZ/e-ink.nvim",        lazy = true, priority = 1000, },
-  { "EdenEast/nightfox.nvim",     lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
-  -- { "zenbones-theme/zenbones.nvim", lazy = true, priority = 1000, dependencies = { "rktjmp/lush.nvim" } }, -- less clown version of other themes
-  { "adibhanna/yukinord.nvim",    lazy = true, priority = 1000, },
-  { "nendix/zen.nvim",            lazy = true, priority = 1000, },
-  { "tommarien/github-plus.nvim", lazy = true, priority = 1000, },
-  { "serhez/teide.nvim",          lazy = true, priority = 1000, }, -- i really lke the red and the green form here but not the blue
+  { "AlexvZyl/nordic.nvim",            lazy = true, priority = 1000 },
+  { "folke/tokyonight.nvim",           lazy = true, priority = 1000 },
+  { "webhooked/kanso.nvim",            lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
+  { "alexxGmZ/e-ink.nvim",             lazy = true, priority = 1000, },
+  { "EdenEast/nightfox.nvim",          lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
+  { "adibhanna/yukinord.nvim",         lazy = true, priority = 1000, },
+  { "nendix/zen.nvim",                 lazy = true, priority = 1000, },
+  { "tommarien/github-plus.nvim",      lazy = true, priority = 1000, },
+  { "serhez/teide.nvim",               lazy = true, priority = 1000, }, -- i really lke the red and the green form here but not the blue
   {
     "Kaikacy/Lemons.nvim",
     lazy = true,

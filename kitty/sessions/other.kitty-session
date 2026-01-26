@@ -2,10 +2,30 @@
 new_tab
 layout tall
 enabled_layouts tall,grid
-set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [5], "window_groups": [{"id": 5, "window_ids": [5]}]}}
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [4], "window_groups": [{"id": 4, "window_ids": [4]}]}}
 cd ../../nvim
 
-launch 'kitty-unserialize-data={"id": 5, "cmd_at_shell_startup": "n"}'
+launch 'kitty-unserialize-data={"id": 4, "cmd_at_shell_startup": ["/home/v/.local/nvim-linux-x86_64/bin/nvim"]}'
 focus
 
-focus_tab 3
+new_tab
+layout tall
+enabled_layouts tall,grid
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [5], "window_groups": [{"id": 5, "window_ids": [5]}]}}
+cd ../../../proj/testingstuff/test1
+
+launch 'kitty-unserialize-data={"id": 5, "cmd_at_shell_startup": ["/home/v/.local/nvim-linux-x86_64/bin/nvim"]}'
+focus
+
+new_tab
+layout tall
+enabled_layouts tall,grid
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 1, "active_group_history": [6, 7, 8], "window_groups": [{"id": 6, "window_ids": [6]}, {"id": 7, "window_ids": [7]}, {"id": 8, "window_ids": [8]}]}}
+cd ../../../proj/testingstuff/test1
+
+launch 'kitty-unserialize-data={"id": 6}'
+launch 'kitty-unserialize-data={"id": 7}' --cwd=../../../proj/testingstuff/test2
+focus
+launch 'kitty-unserialize-data={"id": 8}' --cwd=../../../proj/testingstuff/test2backup
+
+focus_tab 4
