@@ -28,9 +28,7 @@ vim.opt.shiftwidth = 2
 vim.opt.mouse = "a"
 vim.opt.showmode = false -- I already show that in lualine
 
--- vim.cmd("set clipboard+=unnamedplus")
 vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim.
-vim.opt.foldmethod = "manual"
 
 -- save undo history to a file
 vim.opt.undofile = true
@@ -41,7 +39,6 @@ elseif vim.loop.os_uname().sysname == "Linux" then
 end
 
 -- no swap file, auto sync instances
-vim.opt.autoread = true
 vim.opt.swapfile = false
 vim.opt.updatetime = 60 -- this both for swapfile (which is disabled) and CursorHold which is used for some plugins
 
@@ -49,11 +46,9 @@ vim.opt.updatetime = 60 -- this both for swapfile (which is disabled) and Cursor
 vim.opt.inccommand = "split" -- preview replace changes on a split
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>") -- reset hl with esc
 
 vim.opt.signcolumn = "yes"
--- vim.opt.foldcolumn = "auto"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.wrap = false
@@ -78,27 +73,13 @@ local title = function()
 end
 vim.opt.titlestring = title()
 
--- don't continue comment when hitting newline
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    vim.opt_local.formatoptions:remove({ "r", "o" })
-  end,
-})
+-- this hack here is to preserve whitespaces when using o<Esc> in order to paste on new line
+vim.opt.cpoptions:append("I") -- don't remove autoindent when changing lines on empty line
+vim.keymap.set("n", "o", "o<Up><Down>", { noremap = true })
+vim.keymap.set("n", "O", "o<Down><Up>", { noremap = true })
 
--- -- NOTE this is done now by "rachartier/tiny-glimmer.nvim"
--- -- highlight briefly when yanking
--- vim.api.nvim_create_autocmd("TextYankPost", {
---     callback = function()
---         vim.hl.on_yank({ timeout = 100 })
---     end,
--- })
-
--- don't remove autoindent when changing lines on empty line
-vim.opt.cpoptions:append("I")
--- this is hack to automatically indent empty lines with correct indentation
+-- this is hack to automatically indent empty lines with correct indentation when going to insert mode
 local autoindent_empty_line = function(key)
-  -- local line = vim.fn.getline(".")
   local line = vim.fn.getline("."):gsub("^%s+", "") -- get line and trim whitespaces
   if line == "" then
     return '"_cc'
@@ -121,11 +102,9 @@ vim.keymap.set({ "n", "v" }, "<leader>x", [["_x]], { noremap = true, desc = "Del
 
 -- shortcuts
 vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>", { desc = "Save" })
--- vim.keymap.set({ "n", "v" }, "<C-q>", ":qa<CR>", { desc = "Quit" })
 vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove normal mapping (doesnt work lol)
 
--- remap to nothing
 vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
 vim.keymap.set({ "n" }, "1099;133u", "<nop>", { desc = "fucking nothing" })
 vim.keymap.set({ "n", "v", "x" }, "s", "<nop>") -- s does nothing as its the same as c
@@ -136,16 +115,3 @@ vim.keymap.set({ "n", "v", "x" }, "S", "<nop>") -- use it for something else ins
 
 vim.keymap.set({ "n", "v", "x" }, "q", "<nop>")                 -- macro on Q
 vim.keymap.set({ "n", "v", "x" }, "Q", "q", { noremap = true }) -- macro on Q
-
--- -- somehow it doesnt work properly on load. something with sessions again
--- vim.api.nvim_create_autocmd("BufWinEnter", {
---   desc = "Always move help buffers to a vertical split on the right",
---   pattern = "*",
---   callback = function()
---     if vim.bo.filetype == "help" or vim.bo.filetype == "man" then
---       vim.schedule(function()
---         vim.cmd("wincmd L")
---       end)
---     end
---   end,
--- })
