@@ -82,7 +82,7 @@ return {
       require("mini.hipatterns").setup(hipatternsopts)
       require("mini.clue").setup(clueopts)
       -- require("mini.pairs").setup() -- too basic in many ways
-      require("mini.surround").setup()
+      -- require("mini.surround").setup()
     end,
   },
   {

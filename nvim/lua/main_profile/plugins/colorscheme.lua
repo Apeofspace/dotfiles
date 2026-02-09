@@ -1,13 +1,14 @@
 local schemes = {
-  { "AlexvZyl/nordic.nvim",            lazy = true, priority = 1000 },
-  { "folke/tokyonight.nvim",           lazy = true, priority = 1000 },
-  { "webhooked/kanso.nvim",            lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
-  { "alexxGmZ/e-ink.nvim",             lazy = true, priority = 1000, },
-  { "EdenEast/nightfox.nvim",          lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
-  { "adibhanna/yukinord.nvim",         lazy = true, priority = 1000, },
-  { "nendix/zen.nvim",                 lazy = true, priority = 1000, },
-  { "tommarien/github-plus.nvim",      lazy = true, priority = 1000, },
-  { "serhez/teide.nvim",               lazy = true, priority = 1000, }, -- i really lke the red and the green form here but not the blue
+  { "AlexvZyl/nordic.nvim",                         lazy = true, priority = 1000 },
+  { "folke/tokyonight.nvim",                        lazy = true, priority = 1000 },
+  { "webhooked/kanso.nvim",                         lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
+  { "alexxGmZ/e-ink.nvim",                          lazy = true, priority = 1000, },
+  { "EdenEast/nightfox.nvim",                       lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
+  { "adibhanna/yukinord.nvim",                      lazy = true, priority = 1000, },
+  { "nendix/zen.nvim",                              lazy = true, priority = 1000, },
+  { "tommarien/github-plus.nvim",                   lazy = true, priority = 1000, },
+  { "serhez/teide.nvim",                            lazy = true, priority = 1000, }, -- i really lke the red and the green form here but not the blue
+  { "https://gitlab.com/motaz-shokry/gruvbox.nvim", lazy = true, priority = 1000 },
   {
     "Kaikacy/Lemons.nvim",
     lazy = true,
@@ -86,43 +87,43 @@ local schemes = {
       },
     }
   },
-  {
-    "ellisonleao/gruvbox.nvim",
-    lazy = true,
-    priority = 1000,
-    config = function()
-      local gruvbox = require("gruvbox")
-      local palette = gruvbox.palette
-      gruvbox.setup({
-        undercurl = true,
-        underline = true,
-        bold = true,
-        italic = {
-          strings = true,
-          emphasis = true,
-          comments = true,
-          operators = false,
-          folds = true,
-        },
-        strikethrough = true,
-        dim_inactive = false,
-        transparent_mode = false,
-        overrides = {
-          ["@attribute"] = { italic = true },
-          ["@keyword"] = { italic = true, bold = false, fg = palette.bright_red },
-          ["@keyword.function"] = { italic = true, bold = true, fg = palette.bright_red },
-          ["@keyword.return"] = { italic = true, bold = true, fg = palette.bright_red },
-          ["@keyword.exception"] = { italic = true, bold = true, fg = palette.bright_red },
-          ["@keyword.repeat"] = { italic = true, bold = false, fg = palette.bright_red },
-          ["@keyword.operator"] = { italic = true, bold = false, fg = palette.bright_red },
-          ["@keyword.conditional"] = { italic = true, bold = false, fg = palette.bright_red },
-          ["@keyword.modifier"] = { italic = true, fg = palette.bright_red },
-          ["@keyword.coroutine"] = { italic = true, fg = palette.bright_red },
-          ["@keyword.type"] = { italic = true, bold = true, fg = palette.bright_red },
-        },
-      })
-    end,
-  },
+  -- {
+  --   "ellisonleao/gruvbox.nvim",
+  --   lazy = true,
+  --   priority = 1000,
+  --   config = function()
+  --     local gruvbox = require("gruvbox")
+  --     local palette = gruvbox.palette
+  --     gruvbox.setup({
+  --       undercurl = true,
+  --       underline = true,
+  --       bold = true,
+  --       italic = {
+  --         strings = true,
+  --         emphasis = true,
+  --         comments = true,
+  --         operators = false,
+  --         folds = true,
+  --       },
+  --       strikethrough = true,
+  --       dim_inactive = false,
+  --       transparent_mode = false,
+  --       overrides = {
+  --         ["@attribute"] = { italic = true },
+  --         ["@keyword"] = { italic = true, bold = false, fg = palette.bright_red },
+  --         ["@keyword.function"] = { italic = true, bold = true, fg = palette.bright_red },
+  --         ["@keyword.return"] = { italic = true, bold = true, fg = palette.bright_red },
+  --         ["@keyword.exception"] = { italic = true, bold = true, fg = palette.bright_red },
+  --         ["@keyword.repeat"] = { italic = true, bold = false, fg = palette.bright_red },
+  --         ["@keyword.operator"] = { italic = true, bold = false, fg = palette.bright_red },
+  --         ["@keyword.conditional"] = { italic = true, bold = false, fg = palette.bright_red },
+  --         ["@keyword.modifier"] = { italic = true, fg = palette.bright_red },
+  --         ["@keyword.coroutine"] = { italic = true, fg = palette.bright_red },
+  --         ["@keyword.type"] = { italic = true, bold = true, fg = palette.bright_red },
+  --       },
+  --     })
+  --   end,
+  -- },
   {
     "sainnhe/gruvbox-material",
     lazy = true,
