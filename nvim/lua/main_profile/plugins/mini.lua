@@ -51,8 +51,6 @@ return {
           { mode = "x", keys = '"' },
           { mode = "i", keys = "<C-r>" },
           { mode = "c", keys = "<C-r>" },
-          -- Window commands
-          { mode = "n", keys = "<C-w>" },
           -- `z` key
           { mode = "n", keys = "z" },
           { mode = "x", keys = "z" },
@@ -83,6 +81,7 @@ return {
       require("mini.clue").setup(clueopts)
       -- require("mini.pairs").setup() -- too basic in many ways
       -- require("mini.surround").setup()
+      -- require("mini.animate").setup({}) -- kinda like neoscroll + smear?
     end,
   },
   {
@@ -91,7 +90,7 @@ return {
     -- enabled = false,
     -- branch = "v0.6", -- recommended as each new version will have breaking changes
     opts = {
-      fastwarp = {   -- its WARP not WRAP (ffs smh fr fr wtf ong)
+      fastwarp = { -- its WARP not WRAP (ffs smh fr fr wtf ong)
         map = "<C-l>",
         rmap = "<C-h>",
       },

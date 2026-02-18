@@ -63,8 +63,8 @@ local M = {
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim",    -- required
-      "sindrets/diffview.nvim",   -- optional - Diff integration
+      "nvim-lua/plenary.nvim",  -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
     },
     event = "VeryLazy",
     config = function()
@@ -76,7 +76,6 @@ local M = {
     -- experimental plugin. looks cool af but not yet as powerful as diffview.
     -- switch to it when its good enough
     -- the main hindrance is that neogit doesn't integrate with it
-    -- the other annoying hindrance is breadcrumbs
     -- another thing is that diffview has g? to show help and this doesn't
     "esmuellert/codediff.nvim",
     dependencies = { "MunifTanjim/nui.nvim" },
@@ -84,7 +83,7 @@ local M = {
     keys = {
       { "<Leader>gdo", "<cmd>CodeDiff<CR>", desc = "Current changes" },
     },
+    opts = { explorer = { view_mode = "tree" }, } -- change with "i" keybind
   },
-  opts = { explorer = { view_mode = "tree" }, }   -- change with "i" keybind
 }
 return M

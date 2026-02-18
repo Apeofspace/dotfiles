@@ -7,6 +7,10 @@ local M = {
     opts = {},
     -- Auto_git_start() -- enable autogit on loading the plugin
   },
+  -- { -- this just CAN'T render tables properly
+  --   "OXY2DEV/markview.nvim",
+  --   lazy = false,
+  -- },
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },
@@ -16,6 +20,11 @@ local M = {
     opts = {
       restart_highlighter = false,
       completions = { lsp = { enabled = true } },
+      bullet = {
+        left_pad = 1,
+        right_pad = 1,
+        icons = { '◆', '◇' },
+      },
     },
   }
 }

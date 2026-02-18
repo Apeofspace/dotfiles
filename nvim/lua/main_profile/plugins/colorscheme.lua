@@ -7,8 +7,21 @@ local schemes = {
   { "adibhanna/yukinord.nvim",                      lazy = true, priority = 1000, },
   { "nendix/zen.nvim",                              lazy = true, priority = 1000, },
   { "tommarien/github-plus.nvim",                   lazy = true, priority = 1000, },
-  { "serhez/teide.nvim",                            lazy = true, priority = 1000, }, -- i really lke the red and the green form here but not the blue
+  { "serhez/teide.nvim",                            lazy = true, priority = 1000, },                                 -- i really lke the red and the green form here but not the blue
   { "https://gitlab.com/motaz-shokry/gruvbox.nvim", lazy = true, priority = 1000 },
+  { "connormxfadden/petrolnoir.nvim",               lazy = true, priority = 1000, config = { transparent = true } }, -- cant see shit on a sunny day
+  {
+    "oskarnurm/koda.nvim",
+    lazy = true,
+    priority = 1000,
+    opts = {
+      -- on_highlights = function(hl, c)
+      --   hl.DiagnosticUnderlineError = { fg = c.danger, underline = false, undercurl = true }
+      -- end,
+      transparent = true,
+      colors = { border = "#444444", bg = "#202020", dim = "#101010", fg = "#c0c0c0", line = "#373737" }
+    }
+  },
   {
     "Kaikacy/Lemons.nvim",
     lazy = true,
@@ -25,9 +38,12 @@ local schemes = {
           vim.api.nvim_set_hl(0, "neogitdiffdeletehighlight", { fg = "#e74c3c" })
           vim.api.nvim_set_hl(0, "neogitdiffdeletecursor", { fg = "#e74c3c" })
           -- document highlight
-          vim.api.nvim_set_hl(0, "lspreferencetext", { bold = true })
-          vim.api.nvim_set_hl(0, "lspreferenceread", { bold = true })
-          vim.api.nvim_set_hl(0, "lspreferencewrite", { bold = true })
+          -- vim.api.nvim_set_hl(0, "lspreferencetext", { bold = true })
+          -- vim.api.nvim_set_hl(0, "lspreferenceread", { bold = true })
+          -- vim.api.nvim_set_hl(0, "lspreferencewrite", { bold = true })
+          vim.api.nvim_set_hl(0, "lspreferencetext", { bg = c.gray })
+          vim.api.nvim_set_hl(0, "lspreferenceread", { bg = c.gray })
+          vim.api.nvim_set_hl(0, "lspreferencewrite", { bg = c.gray })
           -- markdown code block
           vim.api.nvim_set_hl(0, "markdownCode", { italic = true })
           vim.api.nvim_set_hl(0, "markdownCodeBlock", { fg = c.lime })

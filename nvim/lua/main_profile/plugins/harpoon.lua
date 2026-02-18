@@ -2,7 +2,7 @@ return {
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
-    enabled = false, -- we use haunt, bitch
+    -- enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
     config = function()

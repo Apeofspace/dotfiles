@@ -77,8 +77,6 @@ vim.opt.titlestring = title()
 vim.opt.cpoptions:append("I") -- don't remove autoindent when changing lines on empty line
 vim.keymap.set("n", "o", "o<Up><Down>", { noremap = true })
 vim.keymap.set("n", "O", "O<Down><Up>", { noremap = true })
--- vim.keymap.set("i", "<CR>", "<CR><Up><Down>", { noremap = true }) -- doesn't work for some reason
-
 -- this is hack to automatically indent empty lines with correct indentation when going to insert mode
 local autoindent_empty_line = function(key)
   local line = vim.fn.getline("."):gsub("^%s+", "") -- get line and trim whitespaces
