@@ -114,3 +114,11 @@ vim.keymap.set({ "n", "v", "x" }, "S", "<nop>") -- use it for something else ins
 
 vim.keymap.set({ "n", "v", "x" }, "q", "<nop>")                 -- macro on Q
 vim.keymap.set({ "n", "v", "x" }, "Q", "q", { noremap = true }) -- macro on Q
+
+-- better movement in wrapped text
+vim.keymap.set("n", "j", function()
+  return vim.v.count == 0 and "gj" or "j"
+end, { expr = true, silent = true, noremap = true, desc = "Down" })
+vim.keymap.set("n", "k", function()
+  return vim.v.count == 0 and "gk" or "k"
+end, { expr = true, silent = true, noremap = true, desc = "Up" })
