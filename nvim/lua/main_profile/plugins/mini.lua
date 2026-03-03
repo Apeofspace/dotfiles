@@ -73,6 +73,19 @@ return {
           delay = 0,
         },
       }
+      local surroundopts = {
+        mappings = {
+          add = 'Sa',        -- Add surrounding in Normal and Visual modes
+          delete = 'Sd',     -- Delete surrounding
+          find = 'Sf',       -- Find surrounding (to the right)
+          find_left = 'SF',  -- Find surrounding (to the left)
+          highlight = 'Sh',  -- Highlight surrounding
+          replace = 'Sr',    -- Replace surrounding
+
+          suffix_last = 'l', -- Suffix to search with "prev" method
+          suffix_next = 'n', -- Suffix to search with "next" method
+        },
+      }
       require("mini.ai").setup({ n_lines = 500 })
       require("mini.align").setup({}) -- press gA to start
       require("mini.operators").setup({ exchange = { prefix = "" } })
@@ -80,7 +93,7 @@ return {
       require("mini.hipatterns").setup(hipatternsopts)
       require("mini.clue").setup(clueopts)
       -- require("mini.pairs").setup() -- too basic in many ways
-      -- require("mini.surround").setup()
+      require("mini.surround").setup(surroundopts)
       -- require("mini.animate").setup({}) -- kinda like neoscroll + smear?
     end,
   },
@@ -90,6 +103,7 @@ return {
     -- enabled = false,
     -- branch = "v0.6", -- recommended as each new version will have breaking changes
     opts = {
+      pair_cmap=false,
       fastwarp = { -- its WARP not WRAP (ffs smh fr fr wtf ong)
         map = "<C-l>",
         rmap = "<C-h>",

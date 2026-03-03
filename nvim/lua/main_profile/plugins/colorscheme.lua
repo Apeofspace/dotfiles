@@ -9,7 +9,7 @@ local schemes = {
   { "tommarien/github-plus.nvim",                   lazy = true, priority = 1000, },
   { "serhez/teide.nvim",                            lazy = true, priority = 1000, },                                 -- i really lke the red and the green form here but not the blue
   { "https://gitlab.com/motaz-shokry/gruvbox.nvim", lazy = true, priority = 1000 },
-  { "connormxfadden/petrolnoir.nvim",               lazy = true, priority = 1000, config = { transparent = true } }, -- cant see shit on a sunny day
+  { "connormxfadden/petrolnoir.nvim",               lazy = true, priority = 1000, config = { transparent = false } }, -- cant see shit on a sunny day
   {
     "oskarnurm/koda.nvim",
     lazy = true,
@@ -18,8 +18,9 @@ local schemes = {
       -- on_highlights = function(hl, c)
       --   hl.DiagnosticUnderlineError = { fg = c.danger, underline = false, undercurl = true }
       -- end,
-      transparent = true,
-      colors = { border = "#444444", bg = "#202020", dim = "#101010", fg = "#c0c0c0", line = "#373737" }
+      -- transparent = true,
+      -- colors = { border = "#444444", bg = "#202020", dim = "#101010", fg = "#c0c0c0", line = "#373737" }
+      colors = { border = "#444444" }
     }
   },
   {

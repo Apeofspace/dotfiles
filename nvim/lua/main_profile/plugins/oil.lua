@@ -11,7 +11,8 @@ return {
       win_options = { winblend = 15, },
     },
     keymaps = { ["q"] = { "actions.close", mode = "n" }, },
-    vim.keymap.set("n", "<leader>oi", function() require("oil").open_float() end, { desc = "[O]il" })
+    vim.keymap.set("n", "<leader>of", function() require("oil").open_float() end, { desc = "[O]il" }),
+    vim.keymap.set("n", "<leader>oi", function() require("oil").open() end, { desc = "[O]il" })
   },
 }
 
