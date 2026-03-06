@@ -1,13 +1,9 @@
 local schemes = {
   { "AlexvZyl/nordic.nvim",                         lazy = true, priority = 1000 },
-  { "folke/tokyonight.nvim",                        lazy = true, priority = 1000 },
-  { "webhooked/kanso.nvim",                         lazy = true, priority = 1000, opts = { background = { dark = "mist" } } },
   { "alexxGmZ/e-ink.nvim",                          lazy = true, priority = 1000, },
-  { "EdenEast/nightfox.nvim",                       lazy = true, priority = 1000, opts = { options = { styles = { comments = "italic", strings = "italic" } } } },
   { "adibhanna/yukinord.nvim",                      lazy = true, priority = 1000, },
-  { "nendix/zen.nvim",                              lazy = true, priority = 1000, },
   { "tommarien/github-plus.nvim",                   lazy = true, priority = 1000, },
-  { "serhez/teide.nvim",                            lazy = true, priority = 1000, },                                 -- i really lke the red and the green form here but not the blue
+  { "serhez/teide.nvim",                            lazy = true, priority = 1000, },                                  -- i really lke the red and the green form here but not the blue
   { "https://gitlab.com/motaz-shokry/gruvbox.nvim", lazy = true, priority = 1000 },
   { "connormxfadden/petrolnoir.nvim",               lazy = true, priority = 1000, config = { transparent = false } }, -- cant see shit on a sunny day
   {
@@ -63,10 +59,6 @@ local schemes = {
       require("lemons").setup(opts)
     end
   },
-  { "alexpasmantier/hubbamax.nvim",     lazy = true, priority = 1000 },
-  { "nyoom-engineering/oxocarbon.nvim", lazy = true, priority = 1000 },
-  { "slugbyte/lackluster.nvim",         lazy = true, priority = 1000 },
-  { "armannikoyan/rusty",               lazy = true, priority = 1000 }, -- super nice actually
   {
     "neanias/everforest-nvim",
     lazy = true,
@@ -85,62 +77,40 @@ local schemes = {
   },
   {
     "ficcdaf/ashen.nvim",
-    -- no matter what I do it just sucks. some color is always off and merging barely works
     lazy = true,
     priority = 1000,
-    opts = {
-      -- colors = { background = "#2D2A2E" }, -- color stolen from sonokai shusia
-      colors = { background = "#1d1f21" }, -- color stolen from rusty colorscheme and I love it
-      style_presets = { italic_comments = true },
-      hl = {
-        merge_override = {
-          ["@function"] = { { bold = true } },
-          ["@function.call"] = { { bold = false, italic = false } },
-          ["@function.method.call"] = { { bold = false, italic = false } },
-          ["@function.builtin"] = { { bold = false, italic = false } },
-          ["@string"] = { "red_glowing", nil, { italic = true } },
-          ["WinSeparator"] = { "grey", nil, nil },
+    config = function()
+      local ashen = require("ashen")
+      local colors = require("ashen.colors")
+      local opts = {
+        colors = { background = "#1d1f21", blue = colors["orange_blaze"] },
+        style_presets = { italic_comments = true },
+        hl = {
+          merge_override = {
+            ["@function"] = { "g_0", { bold = true } },
+            ["@function.call"] = { "g_0", { bold = true } },
+            ["@function.builtin"] = { "g_0", { bold = true } },
+            ["@function.method.call"] = { "g_0", { bold = true } },
+            ["@string"] = { "green_light" },
+            ["@operator"] = { "g_6" },
+            ["@type"] = { "g_6" },
+            ["@keyword.type"] = { "g_2" },
+            ["@lsp.type.namespace"] = {},
+            ["@lsp.type.property"] = { "g_4" },
+            ["@lsp.type.enum"] = { "grey" },
+            ["WinSeparator"] = { "grey" },
+            ["@punctuation.delimiter"] = {"g_5"},
+            ["RenderMarkdownChecked"] = {"green_light"},
+          },
+          link = {
+            ["@type.builtin"] = "@type",
+            ["@keyword.modifier"] = "@keyword.type",
+          },
         },
-      },
-    }
+      }
+      ashen.setup(opts)
+    end,
   },
-  -- {
-  --   "ellisonleao/gruvbox.nvim",
-  --   lazy = true,
-  --   priority = 1000,
-  --   config = function()
-  --     local gruvbox = require("gruvbox")
-  --     local palette = gruvbox.palette
-  --     gruvbox.setup({
-  --       undercurl = true,
-  --       underline = true,
-  --       bold = true,
-  --       italic = {
-  --         strings = true,
-  --         emphasis = true,
-  --         comments = true,
-  --         operators = false,
-  --         folds = true,
-  --       },
-  --       strikethrough = true,
-  --       dim_inactive = false,
-  --       transparent_mode = false,
-  --       overrides = {
-  --         ["@attribute"] = { italic = true },
-  --         ["@keyword"] = { italic = true, bold = false, fg = palette.bright_red },
-  --         ["@keyword.function"] = { italic = true, bold = true, fg = palette.bright_red },
-  --         ["@keyword.return"] = { italic = true, bold = true, fg = palette.bright_red },
-  --         ["@keyword.exception"] = { italic = true, bold = true, fg = palette.bright_red },
-  --         ["@keyword.repeat"] = { italic = true, bold = false, fg = palette.bright_red },
-  --         ["@keyword.operator"] = { italic = true, bold = false, fg = palette.bright_red },
-  --         ["@keyword.conditional"] = { italic = true, bold = false, fg = palette.bright_red },
-  --         ["@keyword.modifier"] = { italic = true, fg = palette.bright_red },
-  --         ["@keyword.coroutine"] = { italic = true, fg = palette.bright_red },
-  --         ["@keyword.type"] = { italic = true, bold = true, fg = palette.bright_red },
-  --       },
-  --     })
-  --   end,
-  -- },
   {
     "sainnhe/gruvbox-material",
     lazy = true,

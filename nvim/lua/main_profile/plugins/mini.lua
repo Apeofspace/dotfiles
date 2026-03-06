@@ -103,7 +103,7 @@ return {
     -- enabled = false,
     -- branch = "v0.6", -- recommended as each new version will have breaking changes
     opts = {
-      pair_cmap=false,
+      pair_cmap = false,
       fastwarp = { -- its WARP not WRAP (ffs smh fr fr wtf ong)
         map = "<C-l>",
         rmap = "<C-h>",
