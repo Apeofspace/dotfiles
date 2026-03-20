@@ -8,7 +8,8 @@ local M = {
       ensure_installed = {
         "lua_ls",
         "clangd",
-        "basedpyright",
+        -- "basedpyright",
+        "ty", -- instead of pyright
         "ruff",
         "zls"
       }
