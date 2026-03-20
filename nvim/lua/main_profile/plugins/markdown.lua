@@ -7,10 +7,6 @@ local M = {
     opts = {},
     -- Auto_git_start() -- enable autogit on loading the plugin
   },
-  -- { -- this just CAN'T render tables properly
-  --   "OXY2DEV/markview.nvim",
-  --   lazy = false,
-  -- },
   {
     'MeanderingProgrammer/render-markdown.nvim',
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-mini/mini.nvim' },
@@ -138,18 +134,5 @@ local M = {
 --     group = group_id,
 --   })
 -- end
-
--- Enable soft word wrap for Markdown files
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "markdown",
-  callback = function()
-    vim.g.maplocalleader = " "
-    vim.opt_local.wrap = true        -- Enable soft line wrapping
-    vim.opt_local.linebreak = true   -- Wrap at word boundaries, not in the middle of a word
-    vim.opt_local.breakindent = true -- Indent wrapped lines to align with the start of the text
-    -- vim.opt_local.conceallevel = 2   --  I hate conceal
-    vim.opt_local.conceallevel = 1
-  end,
-})
 
 return M

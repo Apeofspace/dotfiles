@@ -63,6 +63,7 @@ return {
           miniclue.gen_clues.registers(),
           miniclue.gen_clues.windows(),
           miniclue.gen_clues.z(),
+          { mode = "n", keys = "<Leader>m",  desc = "Markdown" },
           { mode = "n", keys = "<Leader>g",  desc = "GIT" },
           { mode = "n", keys = "<Leader>gd", desc = "Git diffview" },
           { mode = "n", keys = "<Leader>s",  desc = "PICKERS" },

@@ -19,6 +19,7 @@ vim.opt.langmap = vim.fn.join({
 -- LANGMAP
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.scrolloff = 8
