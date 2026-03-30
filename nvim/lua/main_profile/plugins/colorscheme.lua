@@ -83,7 +83,7 @@ local schemes = {
       local ashen = require("ashen")
       local colors = require("ashen.colors")
       local opts = {
-        colors = { background = "#1d1f21", blue = colors["orange_blaze"], g_0 = "#f0f0f0" },
+        colors = { background = "#1d1f21", blue = colors["orange_blaze"], g_0 = "#f0f0f0", g_10 = "#1d1d1c" },
         style_presets = { italic_comments = true },
         hl = {
           merge_override = {
@@ -102,6 +102,7 @@ local schemes = {
             ["@constructor"] = { "orange_glow" },
             ["WinSeparator"] = { "grey" },
             ["@punctuation.delimiter"] = { "g_5" },
+            -- ["@markup.raw"] = { "bg0" },
             ["RenderMarkdownChecked"] = { "green_light" },
             ["RenderMarkdownCodeInline"] = { "orange_glow" },
           },
