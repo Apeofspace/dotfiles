@@ -87,7 +87,17 @@ return {
           suffix_next = 'n', -- Suffix to search with "next" method
         },
       }
-      require("mini.ai").setup({ n_lines = 500 })
+      local aiopts = {
+        n_lines = 500,
+        mappings = {
+          -- disable these to get way for build-in incremental selection
+          around_next = '',
+          inside_next = '',
+          around_last = '',
+          inside_last = '',
+        }
+      }
+      require("mini.ai").setup(aiopts)
       require("mini.align").setup({}) -- press gA to start
       require("mini.operators").setup({ exchange = { prefix = "" } })
       require("mini.move").setup(moveopts)

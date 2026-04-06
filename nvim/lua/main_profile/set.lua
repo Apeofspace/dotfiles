@@ -38,6 +38,8 @@ if vim.loop.os_uname().sysname == "Windows" or vim.loop.os_uname().sysname == "W
 elseif vim.loop.os_uname().sysname == "Linux" then
   vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 end
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<leader>u", require("undotree").open)
 
 -- no swap file, auto sync instances
 vim.opt.swapfile = false
