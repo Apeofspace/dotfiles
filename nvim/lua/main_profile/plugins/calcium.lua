@@ -1,6 +1,6 @@
 return {
   "necrom4/calcium.nvim",
-  enabled = false, -- this plugin is very cool but I've used it 0 times
+  -- enabled = false, -- this plugin is very cool but I've used it 0 times
   cmd = { "Calcium" },
   opts = {},
   keys = {

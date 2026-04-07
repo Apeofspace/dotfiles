@@ -1,9 +1,12 @@
 local M = {
   { "neovim/nvim-lspconfig" },
   { "mason-org/mason.nvim", opts = {} },
-  -- {"WhoIsSethDaniel/mason-tool-installer.nvim"},
   {
     "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "mason-org/mason.nvim",
+    },
     opts = {
       ensure_installed = {
         "lua_ls",
@@ -29,7 +32,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- MAPPINGS
     local map = function(keys, func, desc)
       vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-    end 
+    end
     -- map("<leader>r", vim.lsp.buf.rename, "[R]ename") -- grn default
     -- map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction") -- gra default
     map("K", vim.lsp.buf.hover, "Hover Documentation")
