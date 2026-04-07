@@ -97,9 +97,17 @@ return {
           inside_last = '',
         }
       }
+      local operatoropts = {
+        { exchange = { prefix = "" } },
+        replace = {
+          prefix = 's',
+          -- prefix = '<leader>r',
+          -- reindent_linewise = true, -- Whether to reindent new text to match previous indent
+        },
+      }
       require("mini.ai").setup(aiopts)
       require("mini.align").setup({}) -- press gA to start
-      require("mini.operators").setup({ exchange = { prefix = "" } })
+      require("mini.operators").setup(operatoropts)
       require("mini.move").setup(moveopts)
       require("mini.hipatterns").setup(hipatternsopts)
       require("mini.clue").setup(clueopts)

@@ -29,9 +29,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- MAPPINGS
     local map = function(keys, func, desc)
       vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-    end
-    map("<leader>r", vim.lsp.buf.rename, "[R]ename")
-    map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+    end 
+    -- map("<leader>r", vim.lsp.buf.rename, "[R]ename") -- grn default
+    -- map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction") -- gra default
     map("K", vim.lsp.buf.hover, "Hover Documentation")
     map("<leader>th", function() -- toggle inlay_hints
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())

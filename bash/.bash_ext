@@ -7,6 +7,8 @@ if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
 
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+
 eval "$(fzf --bash)"
 export FZF_DEFAULT_COMMAND="fdfind . -IH"
 eval "$(zoxide init bash)"

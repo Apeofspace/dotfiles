@@ -45,11 +45,12 @@ local M = {
     config = function()
       require("lualine").setup({
         options = {
-          globalstatus = true,
+          -- globalstatus = true, -- uncomment for single bar
           section_separators = { left = '', right = '' },
           component_separators = { left = '', right = '' }
-        }, -- single bar (unfortunately only works for bottom statusbar and not winbar)
+        }, -- single bar unfortunately only works for bottom statusbar and not winbar
         sections = section_config,
+        inactive_sections = section_config, -- comment out for single bar
         -- winbar = { lualine_c = { "filename" } },
         -- inactive_winbar = { lualine_c = { "filename" } },
         tabline = tabline_config,
@@ -59,18 +60,18 @@ local M = {
       vim.opt.showtabline = 1
     end,
   },
-  {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    -- event = "VeryLazy", -- if its very lazy it doesnt load side buffer
-    -- enabled = false,
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {},
-  },
+  -- {
+  --   "utilyre/barbecue.nvim",
+  --   name = "barbecue",
+  --   -- event = "VeryLazy", -- if its very lazy it doesnt load side buffer
+  --   -- enabled = false,
+  --   version = "*",
+  --   dependencies = {
+  --     "SmiteshP/nvim-navic",
+  --     "nvim-tree/nvim-web-devicons", -- optional dependency
+  --   },
+  --   opts = {},
+  -- },
 }
 
 return M
