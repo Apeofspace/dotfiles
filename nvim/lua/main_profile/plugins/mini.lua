@@ -105,15 +105,22 @@ return {
           -- reindent_linewise = true, -- Whether to reindent new text to match previous indent
         },
       }
+      local commentopts = {
+        options = {
+          ignore_blank_line = true,
+        },
+      }
       require("mini.ai").setup(aiopts)
       require("mini.align").setup({}) -- press gA to start
       require("mini.operators").setup(operatoropts)
       require("mini.move").setup(moveopts)
       require("mini.hipatterns").setup(hipatternsopts)
       require("mini.clue").setup(clueopts)
-      -- require("mini.pairs").setup() -- too basic in many ways
+      -- require("mini.pairs").setup() -- too basic in many ways. sucks
       require("mini.surround").setup(surroundopts)
       -- require("mini.animate").setup({}) -- kinda like neoscroll + smear?
+      -- doesnt do c comments correcttly without ftplugin
+      require("mini.comment").setup(commentopts)
     end,
   },
   {

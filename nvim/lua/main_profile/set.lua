@@ -62,6 +62,22 @@ vim.diagnostic.config({
   -- virtual_lines = true, -- multiline
 })
 
+-- -- don't continue comment when hitting newline
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "*",
+--   callback = function()
+--     vim.opt_local.formatoptions:remove({ "r", "o" })
+--   end,
+-- })
+
+-- -- NOTE this is done now by "rachartier/tiny-glimmer.nvim"
+-- -- highlight briefly when yanking
+-- vim.api.nvim_create_autocmd("TextYankPost", {
+--     callback = function()
+--         vim.hl.on_yank({ timeout = 100 })
+--     end,
+-- })
+
 -- set terminal title to filename and to "bash" when exiting
 vim.opt.titleold = "bash"
 vim.opt.title = true

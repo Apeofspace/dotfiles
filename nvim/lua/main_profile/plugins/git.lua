@@ -16,9 +16,9 @@ local M = {
     dependencies = { "MunifTanjim/nui.nvim" },
     cmd = "CodeDiff",
     keys = {
-      { "<Leader>gdo", "<cmd>CodeDiff<CR>", desc = "Current changes" },
-      { "<Leader>gdh", "<cmd>CodeDiff history <CR>",   desc = "Commits history" },
-      -- { "<Leader>gdf", "", desc = "THIS Files History" }, -- don't think its doable yet
+      { "<Leader>gdo", "<cmd>CodeDiff<CR>",           desc = "Current changes" },
+      { "<Leader>gdh", "<cmd>CodeDiff history <CR>",  desc = "Commits history" },
+      { "<Leader>gdf", "<cmd>CodeDiff history %<CR>", desc = "THIS Files History" },
     },
     config = function()
       local opts = { explorer = { view_mode = "tree" }, } -- change with "i" keybind

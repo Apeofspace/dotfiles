@@ -6,7 +6,9 @@
 
 -- TODO check out this shit. its better than noice
 -- https://neovim.io/doc/user/cmdline.html#cmdline-autocompletion
-
+-- 
+-- require('vim._core.ui2').enable({})
+-- 
 return {
   "folke/noice.nvim",
   event = "VeryLazy",
