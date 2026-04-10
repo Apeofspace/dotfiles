@@ -41,14 +41,16 @@ local M = {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
     -- enabled = false,
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-mini/mini.nvim" },
     config = function()
+      require("mini.icons").setup()
+      require("mini.icons").mock_nvim_web_devicons()
       require("lualine").setup({
         options = {
           -- globalstatus = true, -- uncomment for single bar
           section_separators = { left = '', right = '' },
           component_separators = { left = '', right = '' }
-        }, -- single bar unfortunately only works for bottom statusbar and not winbar
+        },                                  -- single bar unfortunately only works for bottom statusbar and not winbar
         sections = section_config,
         inactive_sections = section_config, -- comment out for single bar
         -- winbar = { lualine_c = { "filename" } },

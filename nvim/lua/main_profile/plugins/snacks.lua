@@ -65,8 +65,8 @@ local M = {
     { "gy",               function() Snacks.picker.lsp_type_definitions() end,                    desc = "Goto T[y]pe Definition" },
     { "<leader>N",        function() Snacks.notifier.show_history() end,                          desc = "Notification History" },
     { "<leader>sw",       function() Snacks.picker.lsp_workspace_symbols() end,                   desc = "LSP Workspace Symbols" },
-    { "<leader>op",       function() Snacks.picker.projects() end,                                desc = "LSP Workspace Symbols" },
-    { "<leader><leader>", lsp_symbols_this_file,                                                  desc = "PROJECTS" },
+    { "<leader>op",       function() Snacks.picker.projects() end,                                desc = "PROJECTS" },
+    { "<leader><leader>", lsp_symbols_this_file,                                                  desc = "LSP Workspace Symbols" },
     -- terminal
     -- { "<leader>tt",       function() Snacks.terminal(nil, { cwd = vim.uv.fs_realpath(vim.fn.expand('%:p:h')) }) end, desc = "Toggle Terminal" },
   },

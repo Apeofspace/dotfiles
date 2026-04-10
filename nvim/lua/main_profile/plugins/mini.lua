@@ -68,7 +68,7 @@ return {
           { mode = "n", keys = "<Leader>gd", desc = "Git diffview" },
           { mode = "n", keys = "<Leader>s",  desc = "PICKERS" },
           { mode = "n", keys = "<Leader>t",  desc = "Toggles" },
-          { mode = "n", keys = "<Leader>w",  desc = "doesnt work for some reason" },
+          { mode = "n", keys = "<Leader>w" },
         },
         window = {
           delay = 0,
@@ -102,7 +102,7 @@ return {
         replace = {
           prefix = 's',
           -- prefix = '<leader>r',
-          -- reindent_linewise = true, -- Whether to reindent new text to match previous indent
+          reindent_linewise = true, -- Whether to reindent new text to match previous indent
         },
       }
       local commentopts = {

@@ -26,20 +26,20 @@ local M = {
         "yaml",
         "zig",
       }
-      local ignored_ft = {
-        "blink-cmp-menu",
-        "checkhealth",
-        "lazy",
-        "mason",
-        "mason_backdrop",
-        "noice",
-        "snacks_dashboard",
-        "snacks_input",
-        "snacks_notif",
-        "snacks_picker_input",
-        "snacks_win",
-        "undotree",
-      }
+      -- local ignored_ft = {
+      --   "blink-cmp-menu",
+      --   "checkhealth",
+      --   "lazy",
+      --   "mason",
+      --   "mason_backdrop",
+      --   "noice",
+      --   "snacks_dashboard",
+      --   "snacks_input",
+      --   "snacks_notif",
+      --   "snacks_picker_input",
+      --   "snacks_win",
+      --   "undotree",
+      -- }
 
       ts.install(ensure_installed)
 
@@ -50,9 +50,10 @@ local M = {
         callback = function(ev)
           local ft = ev.match
 
-          if vim.tbl_contains(ignored_ft, ft) then
-            return
-          end
+          -- seems this is not needed anymore
+          -- if vim.tbl_contains(ignored_ft, ft) then
+          --   return
+          -- end
 
           local lang = vim.treesitter.language.get_lang(ft) or ft
           local buf = ev.buf

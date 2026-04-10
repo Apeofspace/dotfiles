@@ -39,7 +39,7 @@ elseif vim.loop.os_uname().sysname == "Linux" then
   vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 end
 vim.cmd("packadd nvim.undotree")
-vim.keymap.set("n", "<leader>u", require("undotree").open)
+vim.keymap.set("n", "<leader>u", require("undotree").open, { desc = "Undotree" })
 
 -- no swap file, auto sync instances
 vim.opt.swapfile = false
@@ -62,21 +62,20 @@ vim.diagnostic.config({
   -- virtual_lines = true, -- multiline
 })
 
--- -- don't continue comment when hitting newline
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "*",
---   callback = function()
---     vim.opt_local.formatoptions:remove({ "r", "o" })
---   end,
--- })
+-- don't continue comment when hitting newline
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "r", "o" })
+  end,
+})
 
--- -- NOTE this is done now by "rachartier/tiny-glimmer.nvim"
--- -- highlight briefly when yanking
--- vim.api.nvim_create_autocmd("TextYankPost", {
---     callback = function()
---         vim.hl.on_yank({ timeout = 100 })
---     end,
--- })
+-- highlight briefly when yanking
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.hl.on_yank({ timeout = 100 })
+    end,
+})
 
 -- set terminal title to filename and to "bash" when exiting
 vim.opt.titleold = "bash"
@@ -120,7 +119,7 @@ vim.keymap.set({ "n", "v" }, "<leader>x", [["_x]], { noremap = true, desc = "Del
 
 -- shortcuts
 vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>", { desc = "Save" })
-vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
+vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true, desc = "Window" })
 vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove normal mapping (doesnt work lol)
 
 vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
