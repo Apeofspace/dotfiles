@@ -1,23 +1,3 @@
--- LANGMAP
-local function escape(str)
-  -- You need to escape these characters to work correctly
-  local escape_chars = [[;,."|\]]
-  return vim.fn.escape(str, escape_chars)
-end
-
--- Recommended to use lua template string
-local en = [[`qwertyuiop[]asdfghjkl;'zxcvbnm]]
-local ru = [[ёйцукенгшщзхъфывапролджэячсмить]]
-local en_shift = [[~QWERTYUIOP{}ASDFGHJKL:"ZXCVBNM<>]]
-local ru_shift = [[ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ]]
-
-vim.opt.langmap = vim.fn.join({
-  -- | `to` should be first     | `from` should be second
-  escape(ru_shift) .. ";" .. escape(en_shift),
-  escape(ru) .. ";" .. escape(en),
-}, ",")
--- LANGMAP
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.number = true
@@ -39,7 +19,7 @@ elseif vim.loop.os_uname().sysname == "Linux" then
   vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 end
 vim.cmd("packadd nvim.undotree")
-vim.keymap.set("n", "<leader>u", require("undotree").open, { desc = "Undotree" })
+vim.keymap.set("n", "<leader>u", require("undotree").open)
 
 -- no swap file, auto sync instances
 vim.opt.swapfile = false
@@ -62,14 +42,8 @@ vim.diagnostic.config({
   -- virtual_lines = true, -- multiline
 })
 
--- don't continue comment when hitting newline
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
-  callback = function()
-    vim.opt_local.formatoptions:remove({ "r", "o" })
-  end,
-})
 
+-- NOTE this is done now by "rachartier/tiny-glimmer.nvim"
 -- highlight briefly when yanking
 vim.api.nvim_create_autocmd("TextYankPost", {
     callback = function()
@@ -119,7 +93,7 @@ vim.keymap.set({ "n", "v" }, "<leader>x", [["_x]], { noremap = true, desc = "Del
 
 -- shortcuts
 vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>", { desc = "Save" })
-vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true, desc = "Window" })
+vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove normal mapping (doesnt work lol)
 
 vim.keymap.set({ "i" }, "<C-u>", "<nop>", { desc = "fucking nothing" })
@@ -140,3 +114,8 @@ end, { expr = true, silent = true, noremap = true, desc = "Down" })
 vim.keymap.set("n", "k", function()
   return vim.v.count == 0 and "gk" or "k"
 end, { expr = true, silent = true, noremap = true, desc = "Up" })
+
+-- cewl cursor shader
+if vim.g.neovide then
+  vim.g.neovide_cursor_vfx_mode = "pixiedust"
+end

@@ -1,4 +1,4 @@
-local M = {
+return {
   settings = {
     init_options = {
       settings = {
@@ -15,5 +15,3 @@ local M = {
     end
   end
 }
-
-return M

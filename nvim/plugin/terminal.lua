@@ -1,10 +1,7 @@
--- nice for neovide
-local M = {
-  "ruicsh/termite.nvim",
-  opts = {}
-}
-
-return M
+vim.schedule(function()
+  vim.pack.add({ "https://github.com/ruicsh/termite.nvim" })
+  require("termite").setup({})
+end)
 
 -- Mode 	Key 	Action
 -- Terminal 	<C-\> 	Toggle all terminals (smart: focus back)

@@ -1,4 +1,4 @@
-local M = {
+return {
   settings = {
     ty = {
       configuration = {
@@ -9,5 +9,3 @@ local M = {
     },
   }
 }
-
-return M

@@ -1,25 +1,19 @@
-local M = {
-  { "neovim/nvim-lspconfig" },
-  { "mason-org/mason.nvim", opts = {} },
-  {
-    "mason-org/mason-lspconfig.nvim",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "mason-org/mason.nvim",
-    },
-    opts = {
-      ensure_installed = {
-        "lua_ls",
-        "clangd",
-        -- "basedpyright",
-        "ty", -- instead of pyright
-        "ruff",
-        "zls"
-      }
-    }
+vim.pack.add({
+  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/mason-org/mason.nvim" },
+  { src = "https://github.com/mason-org/mason-lspconfig.nvim" }
+})
 
-  },
+local ensure_installed = {
+  "lua_ls",
+  "clangd",
+  "ty",
+  "ruff",
+  "zls"
 }
+
+require("mason").setup({})
+require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("cool-lsp-attach", { clear = true }),
@@ -33,10 +27,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local map = function(keys, func, desc)
       vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
     end
-    -- map("<leader>r", vim.lsp.buf.rename, "[R]ename") -- grn default
-    -- map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction") -- gra default
     map("K", vim.lsp.buf.hover, "Hover Documentation")
-    map("<leader>th", function() -- toggle inlay_hints
+    map("<leader>th", function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
       if vim.lsp.inlay_hint.is_enabled() == true then
         vim.notify("Inlay hints enabled")
@@ -77,6 +69,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
-
-
-return M
