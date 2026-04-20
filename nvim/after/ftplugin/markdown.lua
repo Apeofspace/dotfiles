@@ -5,22 +5,26 @@ vim.opt_local.breakindent = true -- Indent wrapped lines to align with the start
 -- vim.opt_local.conceallevel = 2   --  I hate conceal
 vim.opt_local.conceallevel = 1
 
-vim.pack.add({
-  "nvim-treesitter/nvim-treesitter",
-  "nvim-mini/mini.nvim",
-  "https://github.com/yousefhadder/markdown-plus.nvim",
-  "https://github.com/MeanderingProgrammer/render-markdown.nvim" }
-)
-require("markdown-plus").setup({})
-require("render-markdown").setup({
-  restart_highlighter = false,
-  completions = { lsp = { enabled = true } },
-  bullet = {
-    left_pad = 1,
-    right_pad = 1,
-    icons = { '◆', '◇' },
-  },
-})
+local ok_mdp, mdp = pcall(require, "markdown-plus")
+if ok_mdp then
+  mdp.setup({})
+end
+local ok_rm, rm = pcall(require, "render-markdown")
+if ok_rm then
+  local rmopts = {
+    restart_highlighter = false,
+    completions = { lsp = { enabled = true } },
+    bullet = {
+      left_pad = 1,
+      right_pad = 1,
+      icons = { '◆', '◇' },
+    },
+  }
+  rm.setup(rmopts)
+end
+
+-- require("markdown-plus").setup({})
+-- require("render-markdown").setup(rmopts)
 
 -- local md_augroup = vim.api.nvim_create_augroup("mdpluginsload", { clear = true })
 -- vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {

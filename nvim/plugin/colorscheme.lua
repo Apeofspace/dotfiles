@@ -39,3 +39,6 @@ local opts = {
 -- ashen.setup({})
 ashen.setup(opts)
 ashen.load()
+
+-- vim.pack.add({ "https://github.com/ember-theme/nvim" })
+-- vim.cmd.colorscheme("ember")

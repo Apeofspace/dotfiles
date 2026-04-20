@@ -6,26 +6,13 @@ local get_linecount = function()
   return thisline .. "/" .. totallines .. ":" .. col
 end
 
--- this makes some text appear like recording macro etc
-local function noice_stuff()
-  local ok, noice = pcall(require, "noice")
-  if not ok then
-    return nil
-  end
-  return {
-    noice.api.statusline.mode.get,
-    cond = noice.api.statusline.mode.has,
-    color = { fg = "#ff9e64" },
-  }
-end
-
 local section_config = {
   -- +-------------------------------------------------+
   -- | A | B | C                             X | Y | Z |
   -- +-------------------------------------------------+
   lualine_a = { "mode" },
   lualine_b = { "branch", "filename" },
-  lualine_c = { "diagnostics", noice_stuff() }, -- yeah deal with it
+  lualine_c = { "diagnostics" },
   lualine_x = { "lsp_status", "encoding", "filetype" },
   lualine_y = {},
   lualine_z = { get_linecount },
@@ -38,8 +25,8 @@ local tabline_config = {
 -------------------------------------------------------
 
 vim.pack.add({
-  { src = "https://github.com/nvim-mini/mini.nvim" },
-  { src = "https://github.com/nvim-lualine/lualine.nvim" },
+  "https://github.com/nvim-mini/mini.nvim",
+  "https://github.com/nvim-lualine/lualine.nvim",
 })
 
 -- it normally uses nvim_web_devicons but we make it use mini.icons
@@ -60,6 +47,7 @@ require("lualine").setup({
 })
 
 
--- the reason config is used here is that lualine overrites showtabline to 2
--- so I need to manually reset it to 1 AFTER it loads
-vim.opt.showtabline = 1
+vim.schedule(function()
+  -- lualine overrites showtabline to 2. Manually reset to 1 AFTER it loads
+  vim.opt.showtabline = 1
+end)
