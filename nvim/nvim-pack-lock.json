@@ -21,9 +21,17 @@
       "rev": "8afc229d38dc13ce71b2ffbb860084b2c726e061",
       "src": "https://github.com/esmuellert/codediff.nvim"
     },
+    "ember": {
+      "rev": "9d22ec7b126d75274a4525840501bf8da55c75f1",
+      "src": "https://github.com/ember-theme/nvim"
+    },
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "fzf-lua": {
+      "rev": "beaa4e83e6be4174af291a464e4f49548c943963",
+      "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "harpoon": {
       "rev": "87b1a3506211538f460786c23f98ec63ad9af4e5",

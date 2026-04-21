@@ -12,6 +12,7 @@ vim.schedule(function()
     easing = "quadratic",
     performance_mode = false, -- disable treesitter
     hide_cursor = false,
+    stop_eof = false,
   }
   )
 end)

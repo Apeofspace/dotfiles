@@ -122,41 +122,43 @@ require("mini.comment").setup(commentopts)
 -- require("mini.animate").setup({}) -- kinda like neoscroll + smear?
 
 
-local pick = require("mini.pick")
-local extra = require("mini.extra")
-extra.setup({})
-pick.setup({})
--- pick.setup({ source = { show = pick.default_show } })
-vim.keymap.set("n", "<leader>sf",
-  function() pick.builtin.cli({ command = { "rg", "--files", "--color=never", "-uu" } }) end,
-  { desc = "PICK: files" }) -- modify to search hidden
-vim.keymap.set("n", "ff", pick.builtin.files, { desc = "PICK: project files" })
-vim.keymap.set("n", "<leader>sg", pick.builtin.grep_live, { desc = "PICK: grep LIVE" })
-vim.keymap.set("n", "<leader>sr", pick.builtin.resume, { desc = "PICK: resume" })
-vim.keymap.set("n", "<leader>sb", pick.builtin.buffers, { desc = "PICK: buffers" })
-vim.keymap.set("n", "<leader>sh", pick.builtin.help, { desc = "PICK: help" })
-vim.keymap.set("n", "<leader>sk", extra.pickers.keymaps, { desc = "PICK: keymaps" })
+-- local pick = require("mini.pick")
+-- local extra = require("mini.extra")
+-- extra.setup({})
+-- pick.setup({})
+-- -- pick.setup({ source = { show = pick.default_show } })
+-- vim.keymap.set("n", "<leader>sf",
+--   function() pick.builtin.cli({ command = { "rg", "--files", "--color=never", "-uu" } }) end,
+--   { desc = "PICK: files" }) -- modify to search hidden
+-- vim.keymap.set("n", "ff", pick.builtin.files, { desc = "PICK: project files" })
+-- vim.keymap.set("n", "<leader>sg", pick.builtin.grep_live, { desc = "PICK: grep LIVE" })
+-- vim.keymap.set("n", "<leader>sr", pick.builtin.resume, { desc = "PICK: resume" })
+-- vim.keymap.set("n", "<leader>sb", pick.builtin.buffers, { desc = "PICK: buffers" })
+-- vim.keymap.set("n", "<leader>sh", pick.builtin.help, { desc = "PICK: help" })
+-- vim.keymap.set("n", "<leader>sk", extra.pickers.keymaps, { desc = "PICK: keymaps" })
+-- vim.keymap.set("n", "<leader>cs", extra.pickers.colorschemes, { desc = "PICK: colorschemes" })
+-- vim.keymap.set("n", "<leader>st", extra.pickers.hipatterns, { desc = "PICK: TODO" })
 
-vim.keymap.set("n", "<leader><leader>", function()
-  extra.pickers.lsp({ scope = "workspace_symbol_live" })
-end, { desc = "PICK: symbols" })
+-- vim.keymap.set("n", "<leader><leader>", function()
+--   extra.pickers.lsp({ scope = "workspace_symbol_live" })
+-- end, { desc = "PICK: symbols" })
 
-vim.keymap.set("n", "<leader>sc", function()
-  extra.pickers.lsp({ scope = "references" })
-end, { desc = "PICK: references" })
+-- vim.keymap.set("n", "<leader>sc", function()
+--   extra.pickers.lsp({ scope = "references" })
+-- end, { desc = "PICK: references" })
 
-vim.keymap.set("n", "gd", function()
-  extra.pickers.lsp({ scope = "definition" })
-end, { desc = "PICK: definition" })
+-- vim.keymap.set("n", "gd", function()
+--   extra.pickers.lsp({ scope = "definition" })
+-- end, { desc = "PICK: definition" })
 
-vim.keymap.set("n", "<leader>se", function()
-  extra.pickers.diagnostic({ scope = "all" }) -- or "current"
-end, { desc = "PICK: diagnostics" })
+-- vim.keymap.set("n", "<leader>se", function()
+--   extra.pickers.diagnostic({ scope = "all" }) -- or "current"
+-- end, { desc = "PICK: diagnostics" })
 
-vim.keymap.set("n", "<leader>sp", function()
-  extra.pickers.spellsuggest()
-end, { desc = "PICK: spelling" })
+-- vim.keymap.set("n", "<leader>sp", function()
+--   extra.pickers.spellsuggest()
+-- end, { desc = "PICK: spelling" })
 
-vim.keymap.set("n", "<leader>sn", function()
-  pick.builtin.cli({ command = { "rg", "--files", "--color=never", "-uu", vim.fn.stdpath("config") } })
-end, { desc = "PICK: nvim config" })
+-- vim.keymap.set("n", "<leader>sn", function()
+--   pick.builtin.cli({ command = { "rg", "--files", "--color=never", "-uu", vim.fn.stdpath("config") } })
+-- end, { desc = "PICK: nvim config" })

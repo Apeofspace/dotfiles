@@ -1,7 +1,7 @@
 vim.pack.add({ "https://github.com/ficcdaf/ashen.nvim" })
 local ashen = require("ashen")
 local colors = require("ashen.colors")
-local opts = {
+local ashen_opts = {
   colors = { background = "#1d1f21", blue = colors["orange_blaze"], g_0 = "#f0f0f0", g_10 = "#1d1d1c" },
   style_presets = { italic_comments = true },
   hl = {
@@ -36,9 +36,8 @@ local opts = {
     },
   },
 }
--- ashen.setup({})
-ashen.setup(opts)
-ashen.load()
+ashen.setup(ashen_opts)
+vim.cmd.colorscheme("ashen")
 
--- vim.pack.add({ "https://github.com/ember-theme/nvim" })
+vim.pack.add({ { src = "https://github.com/ember-theme/nvim", name = "ember" } })
 -- vim.cmd.colorscheme("ember")
