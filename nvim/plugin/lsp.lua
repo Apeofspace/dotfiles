@@ -28,23 +28,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
     end
     map("K", vim.lsp.buf.hover, "Hover Documentation")
-    map("<leader>th", function()
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-      if vim.lsp.inlay_hint.is_enabled() == true then
-        vim.notify("Inlay hints enabled")
-      else
-        vim.notify("Inlay hints disabled")
-      end
-    end, "[T]oggle Inlay [H]ints")
 
-    map("<leader>tl", function()
-      vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
-      if vim.lsp.codelens.is_enabled() == true then
-        vim.notify("CodeLens enabled")
-      else
-        vim.notify("CodeLens disabled")
-      end
-    end, "[T]oggle Code[L]ens")
+    if client:supports_method("textDocument/inlayHint") then
+      map("<leader>th", function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        if vim.lsp.inlay_hint.is_enabled() == true then
+          vim.notify("Inlay hints enabled")
+        else
+          vim.notify("Inlay hints disabled")
+        end
+      end, "[T]oggle Inlay [H]ints")
+    end
+
+    if client:supports_method("textDocument/codeLens") then
+      map("<leader>tl", function()
+        vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
+        if vim.lsp.codelens.is_enabled() == true then
+          vim.notify("CodeLens enabled")
+        else
+          vim.notify("CodeLens disabled")
+        end
+      end, "[T]oggle Code[L]ens")
+    end
 
     -- format with LSP
     if client.server_capabilities.documentFormattingProvider then
