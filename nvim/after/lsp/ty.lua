@@ -5,7 +5,8 @@ return {
         rules = {
           ["invalid-method-override"] = "warn"
         }
-      }
+      },
+      diagnosticMode = "workspace",
     },
   }
 }

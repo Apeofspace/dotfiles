@@ -19,7 +19,7 @@ elseif vim.loop.os_uname().sysname == "Linux" then
   vim.opt.undodir = os.getenv("HOME") .. "/.nvim/undodir"
 end
 vim.cmd("packadd nvim.undotree")
-vim.keymap.set("n", "<leader>u", require("undotree").open)
+vim.keymap.set("n", "<leader>u", require("undotree").open, {desc = "Undotree"})
 
 -- no swap file, auto sync instances
 vim.opt.swapfile = false
@@ -46,9 +46,9 @@ vim.diagnostic.config({
 -- NOTE this is done now by "rachartier/tiny-glimmer.nvim"
 -- highlight briefly when yanking
 vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function()
-        vim.hl.on_yank({ timeout = 100 })
-    end,
+  callback = function()
+    vim.hl.on_yank({ timeout = 100 })
+  end,
 })
 
 -- set terminal title to filename and to "bash" when exiting

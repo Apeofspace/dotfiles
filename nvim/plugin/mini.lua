@@ -30,6 +30,7 @@ local hipatternsopts = {
 local miniclue = require("mini.clue")
 local clueopts = {
   triggers = {
+    -- These are automatic triggers
     -- Leader triggers
     { mode = "n", keys = "<Leader>" },
     { mode = "x", keys = "<Leader>" },
@@ -37,7 +38,6 @@ local clueopts = {
     { mode = "i", keys = "<C-x>" },
     -- `g` key
     { mode = "n", keys = "g" },
-
     -- Marks
     { mode = "n", keys = "'" },
     { mode = "n", keys = "`" },
@@ -53,13 +53,14 @@ local clueopts = {
     { mode = "x", keys = "z" },
   },
   clues = {
-    -- Enhance this by adding descriptions for <Leader> mapping groups
+    -- These are custom triggers that are manually added
     miniclue.gen_clues.builtin_completion(),
     miniclue.gen_clues.g(),
     miniclue.gen_clues.marks(),
     miniclue.gen_clues.registers(),
     miniclue.gen_clues.windows(),
     miniclue.gen_clues.z(),
+    { mode = "n", keys = "<Leader>o",  desc = "Oil" },
     { mode = "n", keys = "<Leader>m",  desc = "Markdown" },
     { mode = "n", keys = "<Leader>g",  desc = "GIT" },
     { mode = "n", keys = "<Leader>gd", desc = "Git diffview" },
@@ -108,7 +109,6 @@ local commentopts = {
   },
 }
 
-
 require("mini.icons").setup({})
 require("mini.ai").setup(aiopts)
 require("mini.align").setup({}) -- press gA to start
@@ -118,6 +118,7 @@ require("mini.hipatterns").setup(hipatternsopts)
 require("mini.clue").setup(clueopts)
 require("mini.surround").setup(surroundopts)
 require("mini.comment").setup(commentopts)
+require("mini.splitjoin").setup({}) -- gS to toggle line/column for lists
 -- require("mini.pairs").setup() -- too basic in many ways. sucks
 -- require("mini.animate").setup({}) -- kinda like neoscroll + smear?
 

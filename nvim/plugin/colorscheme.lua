@@ -36,6 +36,7 @@ local ashen_opts = {
     },
   },
 }
+vim.opt.winborder = "rounded" -- borders for completion and hover
 ashen.setup(ashen_opts)
 vim.cmd.colorscheme("ashen")
 

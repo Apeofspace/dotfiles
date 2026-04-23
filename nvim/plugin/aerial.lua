@@ -12,8 +12,8 @@ vim.schedule(function()
     layout = { placement = "edge", default_direction = "prefer_left" },
     autojump = false,       -- jump when cursor moves (nice with flash) default: false
     on_attach = function(bufnr)
-      vim.keymap.set("n", "<leader><Up>", "<cmd>AerialPrev<CR>", { buffer = bufnr })
-      vim.keymap.set("n", "<leader><Down>", "<cmd>AerialNext<CR>", { buffer = bufnr })
+      vim.keymap.set("n", "<leader><Up>", "<cmd>AerialPrev<CR>", { buffer = bufnr, desc = "Aerial UP" })
+      vim.keymap.set("n", "<leader><Down>", "<cmd>AerialNext<CR>", { buffer = bufnr, desc = "Aerial DOWN" })
     end,
   })
   vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>", { desc = "Aerial open" })

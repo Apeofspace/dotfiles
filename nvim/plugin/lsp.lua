@@ -36,6 +36,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
         vim.notify("Inlay hints disabled")
       end
     end, "[T]oggle Inlay [H]ints")
+
+    map("<leader>tl", function()
+      vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
+      if vim.lsp.codelens.is_enabled() == true then
+        vim.notify("CodeLens enabled")
+      else
+        vim.notify("CodeLens disabled")
+      end
+    end, "[T]oggle Code[L]ens")
+
     -- format with LSP
     if client.server_capabilities.documentFormattingProvider then
       map("<leader>f", vim.lsp.buf.format, "Format with LSP")
