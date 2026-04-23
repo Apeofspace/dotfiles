@@ -22,8 +22,9 @@ local ashen_opts = {
       ["WinSeparator"] = { "grey" },
       ["@punctuation.delimiter"] = { "g_5" },
       -- ["@markup.raw"] = { "bg0" },
-      ["RenderMarkdownChecked"] = { "green_light" },
-      ["RenderMarkdownCodeInline"] = { "orange_glow" },
+      ["@markup.list"] = { "orange_smolder" },
+      ["@markup.list.checked"] = { "green_light" },
+      ["@markup.list.unchecked"] = { "orange_smolder" },
     },
     link = {
       ["@boolean"] = "@constant",
