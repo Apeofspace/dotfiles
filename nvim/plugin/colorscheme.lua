@@ -25,6 +25,15 @@ local ashen_opts = {
       ["@markup.list"] = { "orange_smolder" },
       ["@markup.list.checked"] = { "green_light" },
       ["@markup.list.unchecked"] = { "orange_smolder" },
+
+      -- straight up doesn't work
+      -- ["@markup.heading"] = { "red_ember" },
+      -- ["@markup.heading.1"] = { "red_ember" },
+      -- ["@markup.heading.2"] = { "orange_blaze" },
+      -- ["@markup.heading.3"] = { "orange_golden" },
+      -- ["@markup.heading.4"] = { "green_light" },
+      -- ["@markup.heading.5"] = { "blue_dark" },
+
     },
     link = {
       ["@boolean"] = "@constant",
