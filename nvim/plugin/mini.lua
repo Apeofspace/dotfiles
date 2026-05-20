@@ -34,6 +34,8 @@ local clueopts = {
     -- Leader triggers
     { mode = "n", keys = "<Leader>" },
     { mode = "x", keys = "<Leader>" },
+    -- { mode = "n", keys = "<LocalLeader>" },
+    -- { mode = "x", keys = "<LocalLeader>" },
     -- Built-in completion
     { mode = "i", keys = "<C-x>" },
     -- `g` key
@@ -70,6 +72,7 @@ local clueopts = {
   },
   window = {
     delay = 0,
+    width = 'auto',
   },
 }
 local surroundopts = {
@@ -121,6 +124,13 @@ require("mini.comment").setup(commentopts)
 require("mini.splitjoin").setup({}) -- gS to toggle line/column for lists
 -- require("mini.pairs").setup() -- too basic in many ways. sucks
 -- require("mini.animate").setup({}) -- kinda like neoscroll + smear?
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "markdown",
+--   callback = function(args)
+--     require("mini.clue").ensure_buf_triggers(args.buf) -- doesn't work
+--   end,
+-- })
 
 
 -- local pick = require("mini.pick")

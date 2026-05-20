@@ -82,5 +82,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end,
       })
     end
+    vim.opt_local.fo:remove({ "r", "o" }) -- make comments not continue on newline
+    -- this is here because some LSPs overwrite it
   end,
 })

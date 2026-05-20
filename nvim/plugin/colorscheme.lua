@@ -4,6 +4,7 @@ local colors = require("ashen.colors")
 local ashen_opts = {
   colors = { background = "#1d1f21", blue = colors["orange_blaze"], g_0 = "#f0f0f0", g_10 = "#1d1d1c" },
   style_presets = { italic_comments = true },
+  transparent = false, -- linenumber may be hard to see if you do this
   hl = {
     merge_override = {
       ["@constant"] = { "orange_smolder" },

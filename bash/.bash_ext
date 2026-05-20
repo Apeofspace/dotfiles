@@ -36,7 +36,6 @@ function y() {
 export VISUAL=nvim
 export EDITOR=nvim
 export SUDO_EDITOR=nvim
-export PAGER=cat
 
 alias n='nvim'
 alias nv='neovide'

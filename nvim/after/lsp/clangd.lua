@@ -8,8 +8,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 return {
-  cmd = { "clangd", "--query-driver=/usr/bin/arm-none-eabi-gcc",
-    "--fallback-style=google" },
+  cmd = {
+    "clangd",
+    "--query-driver=/usr/bin/arm-none-eabi-gcc",
+    "--fallback-style=google",
+    "--header-insertion=never", -- ПОЛНОСТЬЮ ОТКЛЮЧАЕТ АВТОИМПОРТ ХЕДЕРОВ
+  },
 }
 
 

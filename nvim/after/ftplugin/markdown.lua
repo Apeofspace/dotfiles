@@ -5,9 +5,13 @@ vim.opt_local.breakindent = true -- Indent wrapped lines to align with the start
 -- vim.opt_local.conceallevel = 2   --  I hate conceal
 vim.opt_local.conceallevel = 1
 
+
 local ok_mdp, mdp = pcall(require, "markdown-plus")
 if ok_mdp then
-  mdp.setup({})
+  mdp.setup({
+    -- filetypes = { 'markdown', 'text', 'txt' },
+  })
+  -- vim.schedule(function() MiniClue.ensure_buf_triggers() end) -- doesn't work
 end
 local ok_rm, rm = pcall(require, "render-markdown")
 if ok_rm then

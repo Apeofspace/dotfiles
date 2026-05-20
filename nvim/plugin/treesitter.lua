@@ -1,4 +1,7 @@
-vim.pack.add({ "https://github.com/nvim-treesitter/nvim-treesitter" })
+vim.pack.add({
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/yorickpeterse/nvim-tree-pairs",
+})
 
 local ensure_installed = {
   "bash",
@@ -20,8 +23,8 @@ local ensure_installed = {
   "zig"
 }
 
-local ts = require("nvim-treesitter")
-ts.install(ensure_installed)
+require("nvim-treesitter").install(ensure_installed)
+require('tree-pairs').setup()
 
 -- it must be in a group. also this is the only way it works for some reason
 local group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true })
