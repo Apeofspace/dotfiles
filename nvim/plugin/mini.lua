@@ -69,6 +69,7 @@ local clueopts = {
     { mode = "n", keys = "<Leader>s",  desc = "PICKERS" },
     { mode = "n", keys = "<Leader>t",  desc = "Toggles" },
     { mode = "n", keys = "<Leader>w",  desc = "doesnt work for some reason" },
+    { mode = "n", keys = "<Leader>D",  desc = "DEBUG" },
   },
   window = {
     delay = 0,

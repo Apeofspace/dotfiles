@@ -35,6 +35,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.wrap = false
+vim.opt.linebreak = true -- when wrap is enabled, wrap whole words
 
 -- multiline diagnostic messages
 vim.diagnostic.config({
@@ -90,6 +91,10 @@ vim.keymap.set({ "v" }, "p", [["_dp]], { noremap = true })
 vim.keymap.set({ "v" }, "P", [["_dP]], { noremap = true })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { noremap = true, desc = "Delete to void" })
 vim.keymap.set({ "n", "v" }, "<leader>x", [["_x]], { noremap = true, desc = "Delete to void" })
+
+
+-- trigger softwrap for the current buffer
+vim.keymap.set('n', '<leader>tw', ':setlocal wrap!<CR>', { desc = 'Toggle soft wrap' })
 
 -- shortcuts
 vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>", { desc = "Save" })
