@@ -3,7 +3,8 @@ vim.pack.add({
   { src = "https://github.com/Saghen/blink.cmp",              version = vim.version.range("*") },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/mason-org/mason.nvim" },
-  { src = "https://github.com/mason-org/mason-lspconfig.nvim" }
+  { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+  { src = "https://github.com/jay-babu/mason-nvim-dap.nvim" }, -- automason daps
 })
 
 local ensure_installed = {
@@ -16,6 +17,11 @@ local ensure_installed = {
 
 require("mason").setup({})
 require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
+require("mason-nvim-dap").setup({
+  automatic_installation = true,
+  ensure_installed = { "python", "cortex-debug" }
+})
+
 
 -- local lspconfig = require('lspconfig')
 -- for server, config in pairs(require("mason-lspconfig").get_installed_servers(), vim.lsp.get_configs()) do
