@@ -11,7 +11,7 @@ require("mason").setup({})
 require("mason-nvim-dap").setup({
   automatic_installation = true,
   ensure_installed = { "python", "cortex-debug" }
-})
+}) -- weirldy this doesn't work
 
 vim.keymap.set("n", "<leader>bb", require("dap").toggle_breakpoint, { desc = "Breakpoint toggle" })
 vim.keymap.set("n", "<leader>bc", require("dap").continue, { desc = "Connect/Continue" })
@@ -41,3 +41,4 @@ end
 
 -- Language specific
 require("dap-python").setup("uv")
+require('dap-cortex-debug').setup()
