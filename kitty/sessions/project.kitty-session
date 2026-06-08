@@ -2,10 +2,37 @@
 new_tab
 layout tall
 enabled_layouts tall,grid
-set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [], "window_groups": [{"id": 3, "window_ids": [3]}]}}
-cd ../../../proj/kpa-ubru/client2
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [13], "window_groups": [{"id": 13, "window_ids": [16]}]}}
+cd ../../../proj/RATEP
 
-launch 'kitty-unserialize-data={"id": 3}' --hold nvim
+launch 'kitty-unserialize-data={"id": 16, "cmd_at_shell_startup": "fg"}'
 focus
 
-focus_tab 2
+new_tab
+layout tall
+enabled_layouts tall,grid
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [16], "window_groups": [{"id": 16, "window_ids": [22]}]}}
+cd ../../../proj/Protazan/BRP/transiever
+
+launch 'kitty-unserialize-data={"id": 22, "cmd_at_shell_startup": "n"}'
+focus
+
+new_tab
+layout tall
+enabled_layouts tall,grid
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [18], "window_groups": [{"id": 18, "window_ids": [24]}]}}
+cd ../../../proj/Protazan/StandSLIR238b/box
+
+launch 'kitty-unserialize-data={"id": 24, "cmd_at_shell_startup": "n"}'
+focus
+
+new_tab
+layout tall
+enabled_layouts tall,grid
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [19], "window_groups": [{"id": 19, "window_ids": [25]}]}}
+cd ../../../proj/kpa-ubru/firmware
+
+launch 'kitty-unserialize-data={"id": 25, "cmd_at_shell_startup": "n"}'
+focus
+
+focus_tab 6

@@ -7,7 +7,9 @@ vim.opt.expandtab = true -- use spaces instead of tabs
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.mouse = "a"
-vim.opt.showmode = false          -- I already show that in lualine
+vim.opt.showmode = false -- I already show that in lualine
+
+-- vim.opt.shortmess = vim.opt.shortmess .. "u" -- this should work in new neovim version to remove the undo msg
 
 vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim.
 

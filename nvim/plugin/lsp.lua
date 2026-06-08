@@ -1,4 +1,6 @@
 vim.pack.add({
+  { src = "https://github.com/rafamadriz/friendly-snippets" },
+  { src = "https://github.com/Saghen/blink.cmp",              version = vim.version.range("*") },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/mason-org/mason.nvim" },
   { src = "https://github.com/mason-org/mason-lspconfig.nvim" }
@@ -14,6 +16,11 @@ local ensure_installed = {
 
 require("mason").setup({})
 require("mason-lspconfig").setup({ ensure_installed = ensure_installed })
+
+-- local lspconfig = require('lspconfig')
+-- for server, config in pairs(require("mason-lspconfig").get_installed_servers(), vim.lsp.get_configs()) do
+--   print(server .. " " ..config)
+-- end
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("cool-lsp-attach", { clear = true }),

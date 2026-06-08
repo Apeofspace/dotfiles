@@ -2,10 +2,46 @@
 new_tab
 layout tall
 enabled_layouts tall,grid
-set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [3], "window_groups": [{"id": 3, "window_ids": [3]}]}}
-cd ../../../proj/kpa-ubru-eth/eth743
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [], "window_groups": [{"id": 10, "window_ids": [15]}]}}
+cd ../../../proj/Protazan/BRP/GUI_tool
 
-launch 'kitty-unserialize-data={"id": 3}'
+launch 'kitty-unserialize-data={"id": 15, "cmd_at_shell_startup": ["/opt/nvim-linux-x86_64/bin/nvim"]}'
 focus
 
-focus_tab 2
+new_tab
+layout tall
+enabled_layouts tall,grid
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [16], "window_groups": [{"id": 11, "window_ids": [16]}]}}
+cd ../../../proj/Protazan/BRP/transiever
+
+launch 'kitty-unserialize-data={"id": 16, "cmd_at_shell_startup": ["/opt/nvim-linux-x86_64/bin/nvim"]}'
+focus
+
+new_tab
+layout tall
+enabled_layouts tall,grid
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [], "window_groups": [{"id": 12, "window_ids": [17]}]}}
+cd ../../../proj/Protazan/BRP/brp_firmware_new
+
+launch 'kitty-unserialize-data={"id": 17, "cmd_at_shell_startup": ["/opt/nvim-linux-x86_64/bin/nvim"]}'
+focus
+
+new_tab
+layout tall
+enabled_layouts tall,grid
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [18], "window_groups": [{"id": 13, "window_ids": [18]}]}}
+cd ../../../proj/Protazan/StandSLIR238b/box
+
+launch 'kitty-unserialize-data={"id": 18, "cmd_at_shell_startup": "fg"}'
+focus
+
+new_tab
+layout tall
+enabled_layouts tall,grid
+set_layout_state {"main_bias": [0.5, 0.5], "biased_map": {}, "opts": {"full_size": 1, "bias": 50, "mirrored": "n"}, "class": "Tall", "all_windows": {"active_group_idx": 0, "active_group_history": [19], "window_groups": [{"id": 14, "window_ids": [19]}]}}
+cd ../../../proj/Protazan/StandSLIR238b/client
+
+launch 'kitty-unserialize-data={"id": 19}'
+focus
+
+focus_tab 5
