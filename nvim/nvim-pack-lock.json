@@ -8,11 +8,6 @@
       "rev": "6cde3874a9283c2db55627acca5f28e4fa402320",
       "src": "https://github.com/rmagatti/auto-session"
     },
-    "avante.nvim": {
-      "rev": "e7a167e5bf7de92d406e371d500c803603ec642f",
-      "src": "https://github.com/yetone/avante.nvim",
-      "version": "'main'"
-    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/Saghen/blink.cmp",

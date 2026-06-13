@@ -634,7 +634,7 @@ require("tiny-cmdline").setup({
 
 -- AVANTE / AI
 
--- -- build step for avante
+-- build step for avante
 -- vim.api.nvim_create_autocmd("PackChanged", {
 --   callback = function(ev)
 --     local name, kind = ev.data.spec.name, ev.data.kind
@@ -659,11 +659,10 @@ require("tiny-cmdline").setup({
 --     providers = {
 --       ollama = {
 --         endpoint = "http://127.0.0.1:11434",
---         model = "qwen2.5-coder:7b",
+--         model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest",
 --         extra_request_body = { options = { num_ctx = 32768, }, },
---         -- model = "qwen2.5-coder:14b",
---         -- extra_request_body = { options = { num_ctx = 8196, }, },
 --         is_env_set = require("avante.providers.ollama").check_endpoint_alive,
+--         disable_tools = true,
 --       },
 --     },
 --   })
@@ -673,14 +672,41 @@ require("tiny-cmdline").setup({
 local q2514 = { adapter = "ollama", model = "qwen2.5-coder:14b", }
 local q257 = { adapter = "ollama", model = "qwen2.5-coder:7b", }
 local q35weird = { adapter = "ollama", model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest", }
+local omnicoder = { adapter = "lmstudio" }
 
 require("codecompanion").setup({
   opts = { log_level = "DEBUG" },
+  adapters = {
+    http = {
+      lmstudio = function()
+        return require("codecompanion.adapters").extend("openai_compatible", {
+          name = "lmstudio",
+          env = {
+            url = "http://localhost:1234", -- LM Studio server URL
+          },
+          schema = {
+            model = {
+              -- This can technically be anything since LM Studio auto-detects
+              -- whichever model is currently loaded in the UI GUI.
+              default = "tesslate_omnicoder-9b",
+            },
+            num_ctx = {
+              default = 32768, -- Match the context window you set in LM Studio
+            },
+          },
+        })
+      end,
+    },
+  },
   interactions = {
-    chat = q35weird,
-    inline = q35weird,
-    cmd = q35weird,
-    background = q35weird,
+    chat = omnicoder,
+    inline = omnicoder,
+    cmd = omnicoder,
+    background = omnicoder,
+    -- chat = q35weird,
+    -- inline = q35weird,
+    -- cmd = q35weird,
+    -- background = q35weird,
   },
   rules = {
     default = {
@@ -688,9 +714,8 @@ require("codecompanion").setup({
         "AGENT.md"
       }
     }
-  }
+  },
 })
-
 vim.api.nvim_set_keymap('n', '<leader>a', '<cmd>CodeCompanionChat Toggle<cr>', { desc = "Open AI chat" })
 vim.api.nvim_set_keymap('v', '<leader>a', '<cmd>CodeCompanionChat Add<cr>', { desc = "Add selection to AI chat" })
 vim.api.nvim_set_keymap('n', 'grA', '<cmd>CodeCompanionActions<CR>', { desc = "AI code actions" })
