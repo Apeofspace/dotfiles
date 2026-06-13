@@ -20,6 +20,7 @@ elseif vim.loop.os_uname().sysname == "Linux" then
 end
 vim.cmd("packadd nvim.undotree")
 vim.keymap.set("n", "<leader>u", require("undotree").open, { desc = "Undotree" })
+-- vim.opt.shortmess = vim.opt.shortmess + 'u'
 
 -- no swap file, auto sync instances
 vim.opt.swapfile = false
@@ -97,7 +98,7 @@ vim.keymap.set({ "n", "v" }, "<leader>x", [["_x]], { noremap = true, desc = "Del
 vim.keymap.set('n', '<leader>tw', ':setlocal wrap!<CR>', { desc = 'Toggle soft wrap' })
 
 -- shortcuts
-vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>", { desc = "Save" })
+-- vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>", { desc = "Save" })
 vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove normal mapping (doesnt work lol)
 

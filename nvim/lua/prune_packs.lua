@@ -10,25 +10,25 @@ vim.api.nvim_create_user_command("PrunePacks",
       return
     end
 
-    vim.ui.select(inactive, {
-      prompt = string.format("Delete %d inactive plugin(s)?", #inactive),
-      format_item = function(item)
-        return item
-      end,
-    }, function(choice)
-      if not choice then
-        vim.notify("Prune cancelled.", vim.log.levels.WARN)
-        return
-      end
+    local prompt = string.format("Delete %d inactive plugin(s)?\n%s", #inactive, table.concat(inactive, "\n"))
+    local choice = vim.fn.input(prompt .. " (y/n): ")
 
-      local ok, err = pcall(vim.pack.del, { choice })
-      if ok then
-        vim.notify("Successfully pruned: " .. choice, vim.log.levels.INFO)
+    if choice:lower() ~= "y" then
+      vim.notify("Prune cancelled.", vim.log.levels.WARN)
+      return
+    end
+
+    for _, plugin in ipairs(inactive) do
+      local ok, err = pcall(vim.pack.del, { plugin })
+      if not ok then
+        vim.notify("Failed to prune " .. plugin .. "\n" .. (err or ""), vim.log.levels.ERROR)
       else
-        vim.notify("Failed to prune " .. choice .. "\n" .. (err or ""), vim.log.levels.ERROR)
+        vim.notify("Successfully pruned: " .. plugin, vim.log.levels.INFO)
       end
-    end)
+    end
+
+    vim.notify("All inactive plugins have been pruned.", vim.log.levels.INFO)
   end, {
-    desc = "Prune inactive vim.pack plugins",
+    desc = "Prune all inactive vim.pack plugins",
     nargs = 0,
   })
