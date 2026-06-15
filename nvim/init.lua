@@ -1,6 +1,5 @@
-require("options")
 require("langmap_config")
-require("prune_packs")
+require("options")
 
 -- After much consideration I've decided to have a singular init.lua file with most config,
 -- and only just a few extra files
@@ -631,6 +630,10 @@ vim.pack.add({ "https://github.com/rachartier/tiny-cmdline.nvim" })
 require("tiny-cmdline").setup({
   position = { y = "10%" }
 })
+-- Silence normal mode undo and redo messages (until shortmess can do that)
+vim.keymap.set("n", "u", ":silent undo<CR>", { silent = true })
+vim.keymap.set("n", "<C-r>", ":silent redo<CR>", { silent = true })
+
 
 -- AVANTE / AI
 
@@ -669,56 +672,57 @@ require("tiny-cmdline").setup({
 -- end)
 
 -- CODECOMPANION / AI
-local q2514 = { adapter = "ollama", model = "qwen2.5-coder:14b", }
-local q257 = { adapter = "ollama", model = "qwen2.5-coder:7b", }
-local q35weird = { adapter = "ollama", model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest", }
-local omnicoder = { adapter = "lmstudio" }
-
-require("codecompanion").setup({
-  opts = { log_level = "DEBUG" },
-  adapters = {
-    http = {
-      lmstudio = function()
-        return require("codecompanion.adapters").extend("openai_compatible", {
-          name = "lmstudio",
-          env = {
-            url = "http://localhost:1234", -- LM Studio server URL
-          },
-          schema = {
-            model = {
-              -- This can technically be anything since LM Studio auto-detects
-              -- whichever model is currently loaded in the UI GUI.
-              default = "tesslate_omnicoder-9b",
+vim.schedule(function()
+  local q2514 = { adapter = "ollama", model = "qwen2.5-coder:14b", }
+  local q257 = { adapter = "ollama", model = "qwen2.5-coder:7b", }
+  local q35weird = { adapter = "ollama", model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest", }
+  local omnicoder = { adapter = "lmstudio" }
+  require("codecompanion").setup({
+    opts = { log_level = "DEBUG" },
+    adapters = {
+      http = {
+        lmstudio = function()
+          return require("codecompanion.adapters").extend("openai_compatible", {
+            name = "lmstudio",
+            env = {
+              url = "http://localhost:1234", -- LM Studio server URL
             },
-            num_ctx = {
-              default = 32768, -- Match the context window you set in LM Studio
+            schema = {
+              model = {
+                -- This can technically be anything since LM Studio auto-detects
+                -- whichever model is currently loaded in the UI GUI.
+                default = "tesslate_omnicoder-9b",
+              },
+              num_ctx = {
+                default = 32768, -- Match the context window you set in LM Studio
+              },
             },
-          },
-        })
-      end,
+          })
+        end,
+      },
     },
-  },
-  interactions = {
-    chat = omnicoder,
-    inline = omnicoder,
-    cmd = omnicoder,
-    background = omnicoder,
-    -- chat = q35weird,
-    -- inline = q35weird,
-    -- cmd = q35weird,
-    -- background = q35weird,
-  },
-  rules = {
-    default = {
-      files = {
-        "AGENT.md"
+    interactions = {
+      chat = omnicoder,
+      inline = omnicoder,
+      cmd = omnicoder,
+      background = omnicoder,
+      -- chat = q35weird,
+      -- inline = q35weird,
+      -- cmd = q35weird,
+      -- background = q35weird,
+    },
+    rules = {
+      default = {
+        files = {
+          "AGENT.md"
+        }
       }
-    }
-  },
-})
-vim.api.nvim_set_keymap('n', '<leader>a', '<cmd>CodeCompanionChat Toggle<cr>', { desc = "Open AI chat" })
-vim.api.nvim_set_keymap('v', '<leader>a', '<cmd>CodeCompanionChat Add<cr>', { desc = "Add selection to AI chat" })
-vim.api.nvim_set_keymap('n', 'grA', '<cmd>CodeCompanionActions<CR>', { desc = "AI code actions" })
+    },
+  })
+  vim.api.nvim_set_keymap('n', '<leader>a', '<cmd>CodeCompanionChat Toggle<cr>', { desc = "Open AI chat" })
+  vim.api.nvim_set_keymap('v', '<leader>a', '<cmd>CodeCompanionChat Add<cr>', { desc = "Add selection to AI chat" })
+  vim.api.nvim_set_keymap('n', 'grA', '<cmd>CodeCompanionActions<CR>', { desc = "AI code actions" })
+end)
 
 -- LANGMAPPER should be last
 require("langmapper").setup({})
