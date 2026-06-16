@@ -39,7 +39,6 @@ vim.pack.add({
   { src = "https://github.com/jay-babu/mason-nvim-dap.nvim" }, -- automason daps
   { src = "https://github.com/mfussenegger/nvim-dap-python" },
   { src = "https://github.com/jedrzejboczar/nvim-dap-cortex-debug" },
-  { src = "https://github.com/iilw/nui-diagnostic.nvim" },
 
   -- diff
   { src = "https://github.com/esmuellert/codediff.nvim" },
@@ -54,6 +53,7 @@ vim.pack.add({
   { src = "https://github.com/ruicsh/termite.nvim" },
   { src = "https://github.com/rachartier/tiny-cmdline.nvim" },
   -- { src = "https://github.com/stevearc/aerial.nvim" },
+  -- { src = "https://github.com/iilw/nui-diagnostic.nvim" },
 
   -- AI
   -- { src = "https://github.com/yetone/avante.nvim" },
@@ -550,8 +550,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 
 -- DIAGNOSTICS
-require("nui-diagnostic").setup({})
-vim.keymap.set("n", "<leader>e", require("nui-diagnostic").open, { desc = "Show diagnostic [E]rror messages" })
+-- require("nui-diagnostic").setup({})
+-- vim.keymap.set("n", "<leader>e", require("nui-diagnostic").open, { desc = "Show diagnostic [E]rror messages" })
 
 
 -- DEBUGGING / DAP

@@ -30,7 +30,7 @@ vim.opt.updatetime = 60 -- this both for swapfile (which is disabled) and Cursor
 vim.opt.inccommand = "split" -- preview replace changes on a split
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>") -- reset hl with esc
+vim.keymap.set("n", "<Esc>", "<CMD>nohlsearch<CR>") -- reset hl with esc
 
 vim.opt.signcolumn = "yes"
 vim.opt.splitright = true
