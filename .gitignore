@@ -13,24 +13,17 @@
 !neovide/**
 !nvim/
 !nvim/**
-# !wezterm/ # fuck they
-# !wezterm/**
 !yazi/
 !yazi/**
-# !zellij/ # fuck they
-# !zellij/**
 !ghostty/
 !ghostty/**
 !zed/
 !zed/**
+!opencode/**
 
 # but ignore these anyway!
 **/*.log~                                                                                                                                                                                                                                             
-~                                                                                                                                                                                                                                             
-~                                                                                                                                                                                                                                             
-~                                                                                                                                                                                                                                             
 
 # this is for work onleyh
 kitty/work_env.conf
-
 nvim/nvim-pack-lock.json

@@ -676,7 +676,9 @@ vim.schedule(function()
   local q2514 = { adapter = "ollama", model = "qwen2.5-coder:14b", }
   local q257 = { adapter = "ollama", model = "qwen2.5-coder:7b", }
   local q35weird = { adapter = "ollama", model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest", }
-  local omnicoder = { adapter = "lmstudio" }
+  local q36 = { adapter = "ollama", model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest", }
+  -- local opencode = { adapter = "opencode", model = "qwen/qwen3.6-35b-a3b" }
+  local lmstudio = { adapter = "lmstudio" }
   require("codecompanion").setup({
     opts = { log_level = "DEBUG" },
     adapters = {
@@ -691,7 +693,8 @@ vim.schedule(function()
               model = {
                 -- This can technically be anything since LM Studio auto-detects
                 -- whichever model is currently loaded in the UI GUI.
-                default = "tesslate_omnicoder-9b",
+                -- default = "tesslate_omnicoder-9b",
+                -- default = "qwen/qwen3.6-35b-a3b",
               },
               num_ctx = {
                 default = 32768, -- Match the context window you set in LM Studio
@@ -702,10 +705,10 @@ vim.schedule(function()
       },
     },
     interactions = {
-      chat = omnicoder,
-      inline = omnicoder,
-      cmd = omnicoder,
-      background = omnicoder,
+      chat = lmstudio,
+      inline = lmstudio,
+      cmd = lmstudio,
+      background = lmstudio,
       -- chat = q35weird,
       -- inline = q35weird,
       -- cmd = q35weird,

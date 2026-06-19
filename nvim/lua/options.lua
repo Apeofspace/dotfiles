@@ -98,7 +98,7 @@ vim.keymap.set({ "n", "v" }, "<leader>x", [["_x]], { noremap = true, desc = "Del
 vim.keymap.set('n', '<leader>tw', ':setlocal wrap!<CR>', { desc = 'Toggle soft wrap' })
 
 -- shortcuts
--- vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>", { desc = "Save" })
+vim.keymap.set({ "n", "v" }, "<C-s>", ":w<CR>", { desc = "Save" })
 vim.keymap.set({ "n", "v" }, "<leader>w", "<C-w>", { noremap = true })
 vim.keymap.set({ "n", "v" }, "<C-w>", "<nop>", { noremap = true }) -- remove normal mapping (doesnt work lol)
 
