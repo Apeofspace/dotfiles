@@ -634,7 +634,6 @@ require("tiny-cmdline").setup({
 vim.keymap.set("n", "u", ":silent undo<CR>", { silent = true })
 vim.keymap.set("n", "<C-r>", ":silent redo<CR>", { silent = true })
 
-
 -- AVANTE / AI
 
 -- build step for avante
@@ -673,10 +672,10 @@ vim.keymap.set("n", "<C-r>", ":silent redo<CR>", { silent = true })
 
 -- CODECOMPANION / AI
 vim.schedule(function()
-  local q2514 = { adapter = "ollama", model = "qwen2.5-coder:14b", }
-  local q257 = { adapter = "ollama", model = "qwen2.5-coder:7b", }
-  local q35weird = { adapter = "ollama", model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest", }
-  local q36 = { adapter = "ollama", model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest", }
+  -- local q2514 = { adapter = "ollama", model = "qwen2.5-coder:14b", }
+  -- local q257 = { adapter = "ollama", model = "qwen2.5-coder:7b", }
+  -- local q35weird = { adapter = "ollama", model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest", }
+  -- local q36 = { adapter = "ollama", model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest", }
   -- local opencode = { adapter = "opencode", model = "qwen/qwen3.6-35b-a3b" }
   local lmstudio = { adapter = "lmstudio" }
   require("codecompanion").setup({
