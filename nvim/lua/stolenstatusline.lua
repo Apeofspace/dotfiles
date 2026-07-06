@@ -17,13 +17,84 @@ _G.tools = {
       info = "󰌶 ",
     },
     kind_icons = {
-      -- ... (your kind_icons table unchanged)
-      Array = " 󰅪 ", BlockMappingPair = " 󰅩 ", Boolean = "  ",
-      -- (rest omitted for brevity - keep your original table)
+      Array = " 󰅪 ",
+      BlockMappingPair = " 󰅩 ",
+      Boolean = "  ",
+      BreakStatement = " 󰙧 ",
+      Call = " 󰃷 ",
+      CaseStatement = " 󰨚 ",
+      Class = "  ",
+      Color = "  ",
+      Constant = "  ",
+      Constructor = " 󰆧 ",
+      ContinueStatement = "  ",
+      Copilot = "  ",
+      Declaration = " 󰙠 ",
+      Delete = " 󰩺 ",
+      DoStatement = " 󰑖 ",
+      Element = " 󰅩 ",
+      Enum = "  ",
+      EnumMember = "  ",
+      Event = "  ",
+      Field = "  ",
+      File = "  ",
+      Folder = "  ",
+      ForStatement = "󰑖 ",
+      Function = " 󰆧 ",
+      GotoStatement = " 󰁔 ",
+      Identifier = " 󰀫 ",
+      IfStatement = " 󰇉 ",
+      Interface = "  ",
+      Keyword = "  ",
+      List = " 󰅪 ",
+      Log = " 󰦪 ",
+      Lsp = "  ",
+      Macro = " 󰁌 ",
+      MarkdownH1 = " 󰉫 ",
+      MarkdownH2 = " 󰉬 ",
+      MarkdownH3 = " 󰉭 ",
+      MarkdownH4 = " 󰉮 ",
+      MarkdownH5 = " 󰉯 ",
+      MarkdownH6 = " 󰉰 ",
+      Method = " 󰆧 ",
+      Module = " 󰅩 ",
+      Namespace = " 󰅩 ",
+      Null = " 󰢤 ",
+      Number = " 󰎠 ",
+      Object = " 󰅩 ",
+      Operator = "  ",
+      Package = " 󰆧 ",
+      Pair = " 󰅪 ",
+      Property = "  ",
+      Reference = "  ",
+      Regex = "  ",
+      Repeat = " 󰑖 ",
+      Return = " 󰌑 ",
+      RuleSet = " 󰅩 ",
+      Scope = " 󰅩 ",
+      Section = " 󰅩 ",
+      Snippet = "  ",
+      Specifier = " 󰦪 ",
+      Statement = " 󰅩 ",
+      String = "  ",
+      Struct = "  ",
+      SwitchStatement = " 󰨙 ",
+      Table = " 󰅩 ",
+      Terminal = "  ",
+      Text = " 󰀬 ",
+      Type = "  ",
+      TypeParameter = "  ",
+      Unit = "  ",
+      Value = "  ",
+      Variable = "  ",
+      WhileStatement = " 󰑖 ",
     },
   },
   nonprog_modes = {
-    ["markdown"] = true, ["org"] = true, ["orgagenda"] = true, ["text"] = true,
+    ["markdown"] = true,
+    ["org"] = true,
+    ["orgagenda"] = true,
+    ["text"] = true,
   },
 }
 
@@ -36,7 +107,7 @@ _G.tools.ui.kind_icons_spaced = icons_spaced
 -- Cache with longer lifetime
 local git_info_cache = setmetatable({}, { __mode = "k" })
 local last_git_update = 0
-local GIT_UPDATE_INTERVAL = 2000  -- ms (update git info max every 2 seconds)
+local GIT_UPDATE_INTERVAL = 2000 -- ms (update git info max every 2 seconds)
 
 tools.get_path_root = function(path)
   if path == "" then return nil end
@@ -63,14 +134,14 @@ local function get_git_info(root)
   end
 
   local remote = git_cmd(root, "config", "--get", "remote.origin.url")
-                 or git_cmd(root, "config", "--get", "remote.upstream.url")
+      or git_cmd(root, "config", "--get", "remote.upstream.url")
 
   if remote then
     remote = remote:gsub(":", "/"):gsub("%.git$", ""):match("([^/]+/[^/]+)$") or remote
   end
 
   local branch = git_cmd(root, "rev-parse", "--abbrev-ref", "HEAD")
-              or git_cmd(root, "symbolic-ref", "--short", "HEAD")
+      or git_cmd(root, "symbolic-ref", "--short", "HEAD")
 
   if branch == "HEAD" or not branch then
     local commit = git_cmd(root, "rev-parse", "--short", "HEAD")

@@ -394,45 +394,66 @@ vim.api.nvim_create_autocmd('PackChanged', {
 
 
 -- STATUSLINE / LUALINE
--- local get_linecount = function()
---   -- return vim.fn.line("$") .. " lines" or ""
---   local totallines = vim.fn.line("$")
---   local thisline   = string.format("%" .. #tostring(totallines) .. "s", vim.fn.line(".")) -- right-aligned padded to #totallines
---   local col        = string.format("%-3s", vim.fn.col("."))                               -- left-aligned padded to 3
---   return thisline .. "/" .. totallines .. ":" .. col
--- end
--- local section_config = {
---   -- +-------------------------------------------------+
---   -- | A | B | C                             X | Y | Z |
---   -- +-------------------------------------------------+
---   lualine_a = { "mode" },
---   lualine_b = { "branch", "filename" },
---   lualine_c = { "diagnostics" },
---   lualine_x = { "lsp_status", "encoding", "filetype" },
---   lualine_y = {},
---   lualine_z = { get_linecount },
--- }
--- local tabline_config = {
---   lualine_a = { { "tabs", mode = 2 } },
--- }
--- require("lualine").setup({
---   options = {
---     -- globalstatus = true, -- uncomment for single bar
---     section_separators = { left = '', right = '' },
---     component_separators = { left = '', right = '' }
---   },                                  -- single bar unfortunately only works for bottom statusbar and not winbar
---   sections = section_config,
---   inactive_sections = section_config, -- comment out for single bar
---   -- winbar = { lualine_c = { "filename" } },
---   -- inactive_winbar = { lualine_c = { "filename" } },
---   tabline = tabline_config,
--- })
--- vim.schedule(function()
---   -- lualine overrites showtabline to 2. Manually reset to 1 AFTER it loads
---   vim.opt.showtabline = 1
--- end)
+local get_linecount = function()
+  -- return vim.fn.line("$") .. " lines" or ""
+  local totallines = vim.fn.line("$")
+  local thisline   = string.format("%" .. #tostring(totallines) .. "s", vim.fn.line(".")) -- right-aligned padded to #totallines
+  local col        = string.format("%-3s", vim.fn.col("."))                               -- left-aligned padded to 3
+  return thisline .. "/" .. totallines .. ":" .. col
+end
 
-local ssline = require("stolenstatusline")
+local function scrollbar_widget()
+  local SBAR = { "▔", "🮂", "🬂", "🮃", "▀", "▄", "▃", "🬭", "▂", "▁" }
+  local winid = vim.g.statusline_winid
+  if not winid or not vim.api.nvim_win_is_valid(winid) then
+    winid = 0
+  end
+  local buf = vim.api.nvim_win_get_buf(winid)
+  local cur = vim.api.nvim_win_get_cursor(winid)[1]
+  local total = vim.api.nvim_buf_line_count(buf)
+  if total == 0 then
+    return "▔▔"
+  end
+  local progress = (cur - 1) / total
+  local idx = math.floor(progress * (#SBAR - 1)) + 1
+  local bar_char = SBAR[idx]
+  return bar_char:rep(2)
+end
+
+local section_config = {
+  -- +-------------------------------------------------+
+  -- | A | B | C                             X | Y | Z |
+  -- +-------------------------------------------------+
+  lualine_a = { "mode" },
+  lualine_b = { "branch", "filename" },
+  lualine_c = { "diagnostics" },
+  lualine_x = { "lsp_status", "encoding" },
+  lualine_y = { get_linecount, scrollbar_widget },
+  lualine_z = {},
+}
+local tabline_config = {
+  lualine_a = { { "tabs", mode = 2 } },
+}
+require("lualine").setup({
+  options = {
+    -- globalstatus = true, -- uncomment for single bar
+    section_separators = { left = '', right = '' },
+    component_separators = { left = '', right = '' }
+  },                                  -- single bar unfortunately only works for bottom statusbar and not winbar
+  sections = section_config,
+  inactive_sections = section_config, -- comment out for single bar
+  -- winbar = { lualine_c = { "filename" } },
+  -- inactive_winbar = { lualine_c = { "filename" } },
+  tabline = tabline_config,
+})
+vim.schedule(function()
+  -- lualine overrites showtabline to 2. Manually reset to 1 AFTER it loads
+  vim.opt.showtabline = 1
+end)
+
+-- alternative. doesn't fully properly work.
+-- stolen from  https://github.com/mcauley-penney/nvim/tree/main with shakalington from grok
+-- local ssline = require("stolenstatusline")
 
 -- COMPLETION / BLINK
 local blinkopts = {
