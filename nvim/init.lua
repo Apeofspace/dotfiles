@@ -54,9 +54,9 @@ vim.pack.add({
   { src = "https://github.com/rachartier/tiny-cmdline.nvim" },
   -- { src = "https://github.com/stevearc/aerial.nvim" },
   -- { src = "https://github.com/iilw/nui-diagnostic.nvim" },
+  { src = "https://github.com/Bekaboo/dropbar.nvim" },
 
   -- AI
-  -- { src = "https://github.com/yetone/avante.nvim" },
   { src = "https://github.com/olimorris/codecompanion.nvim" },
 
   -- langmapper
@@ -220,7 +220,6 @@ local ashen_opts = {
       ["@markup.list"] = { "orange_smolder" },
       ["@markup.list.checked"] = { "green_light" },
       ["@markup.list.unchecked"] = { "orange_smolder" },
-
     },
     link = {
       ["@boolean"] = "@constant",
@@ -395,44 +394,45 @@ vim.api.nvim_create_autocmd('PackChanged', {
 
 
 -- STATUSLINE / LUALINE
-local get_linecount = function()
-  -- return vim.fn.line("$") .. " lines" or ""
-  local totallines = vim.fn.line("$")
-  local thisline   = string.format("%" .. #tostring(totallines) .. "s", vim.fn.line(".")) -- right-aligned padded to #totallines
-  local col        = string.format("%-3s", vim.fn.col("."))                               -- left-aligned padded to 3
-  return thisline .. "/" .. totallines .. ":" .. col
-end
-local section_config = {
-  -- +-------------------------------------------------+
-  -- | A | B | C                             X | Y | Z |
-  -- +-------------------------------------------------+
-  lualine_a = { "mode" },
-  lualine_b = { "branch", "filename" },
-  lualine_c = { "diagnostics" },
-  lualine_x = { "lsp_status", "encoding", "filetype" },
-  lualine_y = {},
-  lualine_z = { get_linecount },
-}
-local tabline_config = {
-  lualine_a = { { "tabs", mode = 2 } },
-}
-require("lualine").setup({
-  options = {
-    -- globalstatus = true, -- uncomment for single bar
-    section_separators = { left = '', right = '' },
-    component_separators = { left = '', right = '' }
-  },                                  -- single bar unfortunately only works for bottom statusbar and not winbar
-  sections = section_config,
-  inactive_sections = section_config, -- comment out for single bar
-  -- winbar = { lualine_c = { "filename" } },
-  -- inactive_winbar = { lualine_c = { "filename" } },
-  tabline = tabline_config,
-})
-vim.schedule(function()
-  -- lualine overrites showtabline to 2. Manually reset to 1 AFTER it loads
-  vim.opt.showtabline = 1
-end)
+-- local get_linecount = function()
+--   -- return vim.fn.line("$") .. " lines" or ""
+--   local totallines = vim.fn.line("$")
+--   local thisline   = string.format("%" .. #tostring(totallines) .. "s", vim.fn.line(".")) -- right-aligned padded to #totallines
+--   local col        = string.format("%-3s", vim.fn.col("."))                               -- left-aligned padded to 3
+--   return thisline .. "/" .. totallines .. ":" .. col
+-- end
+-- local section_config = {
+--   -- +-------------------------------------------------+
+--   -- | A | B | C                             X | Y | Z |
+--   -- +-------------------------------------------------+
+--   lualine_a = { "mode" },
+--   lualine_b = { "branch", "filename" },
+--   lualine_c = { "diagnostics" },
+--   lualine_x = { "lsp_status", "encoding", "filetype" },
+--   lualine_y = {},
+--   lualine_z = { get_linecount },
+-- }
+-- local tabline_config = {
+--   lualine_a = { { "tabs", mode = 2 } },
+-- }
+-- require("lualine").setup({
+--   options = {
+--     -- globalstatus = true, -- uncomment for single bar
+--     section_separators = { left = '', right = '' },
+--     component_separators = { left = '', right = '' }
+--   },                                  -- single bar unfortunately only works for bottom statusbar and not winbar
+--   sections = section_config,
+--   inactive_sections = section_config, -- comment out for single bar
+--   -- winbar = { lualine_c = { "filename" } },
+--   -- inactive_winbar = { lualine_c = { "filename" } },
+--   tabline = tabline_config,
+-- })
+-- vim.schedule(function()
+--   -- lualine overrites showtabline to 2. Manually reset to 1 AFTER it loads
+--   vim.opt.showtabline = 1
+-- end)
 
+local ssline = require("stolenstatusline")
 
 -- COMPLETION / BLINK
 local blinkopts = {
@@ -623,6 +623,13 @@ require("termite").setup({})
 -- })
 -- vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>", { desc = "Aerial open" })
 
+-- MISC / dropbar
+vim.api.nvim_set_hl(0, "WinBar", { bg = normal_bg })
+vim.api.nvim_set_hl(0, "WinBarNC", { bg = normal_bg })
+require("dropbar").setup({})
+local dropbar_api = require('dropbar.api')
+vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in winbar' })
+
 -- UI2 stuff
 require('vim._core.ui2').enable({})
 vim.o.cmdheight = 0
@@ -634,41 +641,6 @@ require("tiny-cmdline").setup({
 vim.keymap.set("n", "u", ":silent undo<CR>", { silent = true })
 vim.keymap.set("n", "<C-r>", ":silent redo<CR>", { silent = true })
 
--- AVANTE / AI
-
--- build step for avante
--- vim.api.nvim_create_autocmd("PackChanged", {
---   callback = function(ev)
---     local name, kind = ev.data.spec.name, ev.data.kind
---     vim.notify(name .. " " .. kind)
---     if name == "avante.nvim" and (kind == "install" or kind == "update") then
---       if not ev.data.active then vim.cmd.packadd("avante.nvim") end
---       vim.system({ 'make' }, { cwd = ev.data.path }):wait()
---     end
---   end
--- })
--- vim.schedule(function()
---   local avante = require("avante")
---   avante.setup({
---     selector = {
---       --- @alias avante.SelectorProvider "native" | "fzf_lua" | "mini_pick" | "snacks" | "telescope" | fun(selector: avante.ui.Selector): nil
---       --- @type avante.SelectorProvider
---       provider = "fzf_lua",
---       provider_opts = {},
---     },
---     instructions_file = "avante.md",
---     provider = "ollama",
---     providers = {
---       ollama = {
---         endpoint = "http://127.0.0.1:11434",
---         model = "Qwen3.5-35B-A3B-UD-Q4_K_XL:latest",
---         extra_request_body = { options = { num_ctx = 32768, }, },
---         is_env_set = require("avante.providers.ollama").check_endpoint_alive,
---         disable_tools = true,
---       },
---     },
---   })
--- end)
 
 -- CODECOMPANION / AI
 vim.schedule(function()

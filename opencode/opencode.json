@@ -13,6 +13,9 @@
         },
         "qwen/qwen3.6-35b-a3b": {
           "name": "qwen/qwen3.6-35b-a3b"
+        },
+        "tesslate_omnicoder-9b": {
+          "name": "tesslate_omnicoder-9b"
         }
       }
     }
