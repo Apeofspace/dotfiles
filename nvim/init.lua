@@ -39,6 +39,7 @@ vim.pack.add({
   { src = "https://github.com/igorlfs/nvim-dap-view",                    version = vim.version.range("1.*") },
   { src = "https://github.com/mfussenegger/nvim-dap-python" },
   { src = "https://github.com/jedrzejboczar/nvim-dap-cortex-debug" },
+  { src = "https://github.com/Jorenar/nvim-dap-disasm" },
 
   -- diff
   { src = "https://github.com/esmuellert/codediff.nvim" },
@@ -570,11 +571,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 
--- DIAGNOSTICS
--- require("nui-diagnostic").setup({})
--- vim.keymap.set("n", "<leader>e", require("nui-diagnostic").open, { desc = "Show diagnostic [E]rror messages" })
-
-
 -- DEBUGGING / DAP
 require("mason-nvim-dap").setup({
   automatic_installation = true,
@@ -606,10 +602,11 @@ for type, icon in pairs(breakpoint_icons) do
   vim.fn.sign_define(tp, { text = icon, texthl = hl, numhl = hl })
 end
 
--- Language specific
 require("dap-python").setup("uv")
 require('dap-cortex-debug').setup()
 
+require("dap-view").setup({ winbar = { sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "disassembly", }, } })
+require("dap-disasm").setup({})
 
 -- DIFF / GIT
 local neogit = require("neogit")
