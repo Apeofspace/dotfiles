@@ -23,10 +23,10 @@ vim.pack.add({
   { src = "https://github.com/ficcdaf/ashen.nvim" },
   { src = "https://github.com/karb94/neoscroll.nvim" },
   { src = "https://github.com/stevearc/oil.nvim" },
+  { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/ThePrimeagen/harpoon",                     version = "harpoon2" },
   { src = "https://github.com/MunsMan/kitty-navigator.nvim" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
-  { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/stevearc/quicker.nvim" },
 
   -- completion

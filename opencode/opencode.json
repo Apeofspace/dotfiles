@@ -16,6 +16,9 @@
         },
         "tesslate_omnicoder-9b": {
           "name": "tesslate_omnicoder-9b"
+        },
+        "omnicoder-qwen3.5-9b-claude-4.6-opus-uncensored-v2": {
+          "name": "omnicoder-qwen3.5-9b-claude-4.6-opus-uncensored-v2"
         }
       }
     }
