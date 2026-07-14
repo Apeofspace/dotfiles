@@ -13,6 +13,11 @@ vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/MunifTanjim/nui.nvim" },
 
+  -- colorschemes
+  { src = "https://github.com/ficcdaf/ashen.nvim" },
+  { src = "https://github.com/ember-theme/nvim",                         name = "ember" },
+  { src = "https://github.com/oskarnurm/koda.nvim" },
+
   -- must have
   { src = "https://github.com/rmagatti/auto-session" },
   { src = "https://github.com/ficcdaf/ashen.nvim" },
@@ -22,6 +27,7 @@ vim.pack.add({
   { src = "https://github.com/MunsMan/kitty-navigator.nvim" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   { src = "https://github.com/ibhagwan/fzf-lua" },
+  { src = "https://github.com/stevearc/quicker.nvim" },
 
   -- completion
   { src = "https://github.com/rafamadriz/friendly-snippets" },
@@ -56,6 +62,7 @@ vim.pack.add({
   -- { src = "https://github.com/stevearc/aerial.nvim" },
   -- { src = "https://github.com/iilw/nui-diagnostic.nvim" },
   { src = "https://github.com/Bekaboo/dropbar.nvim" },
+  -- { src = "https://github.com/cvlmtg/inline-diff.nvim" },
 
   -- AI
   { src = "https://github.com/olimorris/codecompanion.nvim" },
@@ -189,11 +196,13 @@ require("mini.clue").setup(clueopts)
 require("mini.surround").setup(surroundopts)
 require("mini.comment").setup(commentopts)
 require("mini.splitjoin").setup({}) -- gS to toggle line/column for lists
+require("mini.diff").setup({})
 
+vim.keymap.set("n", "<leader>td", require("mini.diff").toggle_overlay, { desc = "Toggle inline diff" })
 require("mini.icons").mock_nvim_web_devicons()
 
 
--- COLORSCHEME
+-- COLORSCHEMES
 local ashen = require("ashen")
 local colors = require("ashen.colors")
 local ashen_opts = {
@@ -221,6 +230,16 @@ local ashen_opts = {
       ["@markup.list"] = { "orange_smolder" },
       ["@markup.list.checked"] = { "green_light" },
       ["@markup.list.unchecked"] = { "orange_smolder" },
+      -- MiniDiff integration
+      ["MiniDiffSignAdd"] = { fg = colors["olive_blaze"], bg = "#1d2f1e" },
+      ["MiniDiffSignChange"] = { fg = colors["gold_glare"], bg = "#302a1c" },
+      ["MiniDiffSignDelete"] = { fg = colors["rose_cinder"], bg = "#2f1d1d" },
+      ["MiniDiffOverAdd"] = { fg = colors["olive_blaze"] },
+      ["MiniDiffOverChange"] = { fg = colors["gold_glare"] },
+      ["MiniDiffOverChangeBuf"] = { fg = colors["fg"] },
+      ["MiniDiffOverContext"] = { fg = colors["base6"] },
+      ["MiniDiffOverContextBuf"] = { fg = colors["fg"] },
+      ["MiniDiffOverDelete"] = { fg = colors["rose_cinder"] },
     },
     link = {
       ["@boolean"] = "@constant",
@@ -234,8 +253,15 @@ local ashen_opts = {
   },
 }
 vim.opt.winborder = "rounded" -- borders for completion and hover
+
 ashen.setup(ashen_opts)
 vim.cmd.colorscheme("ashen")
+
+-- require("ember").setup({ variant = "ember-soft" })
+-- vim.cmd.colorscheme("ember")
+
+-- require("koda").setup({ theme = { dark = "moss", light = "glade" } })
+-- vim.cmd("colorscheme koda") -- auto-switches between 'moss' and 'glade'
 
 
 -- TREESITTER
@@ -456,6 +482,14 @@ end)
 -- stolen from  https://github.com/mcauley-penney/nvim/tree/main with shakalington from grok
 -- local ssline = require("stolenstatusline")
 
+-- QUICKER
+local quicker = require("quicker")
+quicker.setup()
+vim.keymap.set("n", "<leader>q", quicker.toggle, { desc = "[Q]uickfix list" })
+vim.keymap.set("n", "<leader>Q", function()
+  quicker.toggle({ loclist = true })
+end, { desc = "Loclist" })
+
 -- COMPLETION / BLINK
 local blinkopts = {
   keymap = {
@@ -609,15 +643,16 @@ require("dap-view").setup({ winbar = { sections = { "watches", "scopes", "except
 require("dap-disasm").setup({})
 
 -- DIFF / GIT
-local neogit = require("neogit")
-neogit.setup({})
-vim.keymap.set("n", "<leader>gg", neogit.open, { desc = "NEOGIT" })
-
 local codediff = require("codediff")
 codediff.setup({ explorer = { view_mode = "tree" } })
 vim.keymap.set("n", "<Leader>gdo", "<cmd>CodeDiff<CR>", { desc = "Current changes" })
 vim.keymap.set("n", "<Leader>gdh", "<cmd>CodeDiff history <CR>", { desc = "Commits history" })
 vim.keymap.set("n", "<Leader>gdf", "<cmd>CodeDiff history %<CR>", { desc = "THIS Files History" })
+
+local neogit = require("neogit")
+neogit.setup({})
+vim.keymap.set("n", "<leader>gg", neogit.open, { desc = "NEOGIT" })
+
 
 -- MARKDOWN / render-markdown
 require("render-markdown").setup({

@@ -85,7 +85,6 @@ vim.keymap.set("n", "a", function() return autoindent_empty_line("a") end, { exp
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- paste by default doesnt copy to buffer
 vim.keymap.set({ "v" }, "p", [["_dp]], { noremap = true })
