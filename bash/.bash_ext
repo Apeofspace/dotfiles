@@ -43,3 +43,6 @@ alias gits='git status'
 alias gitl='git log -15 --oneline --decorate --graph --branches'
 alias zfzf='z $(fzf)'
 alias ll='ls -la'
+
+# force all games to run on wayland (may break steam overlay)
+export PROTON_ENABLE_WAYLAND=1
