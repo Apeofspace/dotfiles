@@ -125,3 +125,8 @@ end, { expr = true, silent = true, noremap = true, desc = "Up" })
 if vim.g.neovide then
   vim.g.neovide_cursor_vfx_mode = "pixiedust"
 end
+
+-- jq format this file
+vim.keymap.set("n", "<leader>jq", function()
+  vim.cmd([[:%!jq .]])
+end, { desc = "Format JSON file with jq" })

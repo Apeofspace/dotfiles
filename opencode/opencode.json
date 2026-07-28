@@ -8,6 +8,9 @@
         "baseURL": "http://127.0.0.1:1234/v1"
       },
       "models": {
+        "qwen3.6-35b-a3b-mtp": {
+          "name": "qwen3.6-35b-a3b-mtp"
+        },
         "unsloth/qwen3.6-35b-a3b": {
           "name": "unsloth/qwen3.6-35b-a3b"
         },
@@ -19,6 +22,21 @@
         },
         "omnicoder-qwen3.5-9b-claude-4.6-opus-uncensored-v2": {
           "name": "omnicoder-qwen3.5-9b-claude-4.6-opus-uncensored-v2"
+        }
+      }
+    },
+    "llama-server": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Llama Server (Router)",
+      "options": {
+        "baseURL": "http://127.0.0.1:8080"
+      },
+      "models": {
+        "qwen-35-3-mtp": {
+          "name": "qwen-35-3-mtp"
+        },
+        "qwen-35-3": {
+          "name": "qwen-35-3"
         }
       }
     }
