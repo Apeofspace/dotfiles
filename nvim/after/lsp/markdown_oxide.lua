@@ -26,6 +26,9 @@ return {
       vim.keymap.set("n", "<leader>nd", "<cmd>Daily today<CR>", { desc = "NOTES: DAILY" })
       vim.keymap.set("n", "<leader>ny", "<cmd>Daily yesterday<CR>", { desc = "NOTES: YESTERDAY" })
       vim.keymap.set("n", "<leader>nt", "<cmd>Daily tomorrow<CR>", { desc = "NOTES: TOMORROW" })
+      if client:supports_method("textDocument/codeLens") then
+        vim.lsp.codelens.enable(true)
+      end
     end
   end
 }

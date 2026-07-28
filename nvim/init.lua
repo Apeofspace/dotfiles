@@ -431,6 +431,26 @@ local get_linecount = function()
   return thisline .. "/" .. totallines .. ":" .. col
 end
 
+local function inline_hints_status()
+  local icon = "󰖷"
+  if vim.lsp.inlay_hint then
+    if vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }) then
+      return icon
+    end
+  end
+  return ""
+end
+
+local function codelens_status()
+  local icon = "󰈈"
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens) then
+      return icon
+    end
+  end
+  return ""
+end
+
 local function scrollbar_widget()
   local SBAR = { "▔", "🮂", "🬂", "🮃", "▀", "▄", "▃", "🬭", "▂", "▁" }
   local winid = vim.g.statusline_winid
@@ -456,7 +476,13 @@ local section_config = {
   lualine_a = { "mode" },
   lualine_b = { "branch", "filename" },
   lualine_c = { "diagnostics" },
-  lualine_x = { "lsp_status", "encoding" },
+  -- lualine_x = { inline_hints_status, codelens_status, "lsp_status", "encoding" },
+  lualine_x = {
+    { inline_hints_status, separator = "" },
+    { codelens_status,     separator = "" },
+    { "lsp_status",        separator = "" },
+    "encoding",
+  },
   lualine_y = { get_linecount, scrollbar_widget },
   lualine_z = {},
 }
