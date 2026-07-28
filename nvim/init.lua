@@ -17,10 +17,10 @@ vim.pack.add({
   { src = "https://github.com/ficcdaf/ashen.nvim" },
   { src = "https://github.com/ember-theme/nvim",                         name = "ember" },
   { src = "https://github.com/oskarnurm/koda.nvim" },
+  { src = "https://github.com/g-kirti/hardhat.nvim" },
 
   -- must have
   { src = "https://github.com/rmagatti/auto-session" },
-  { src = "https://github.com/ficcdaf/ashen.nvim" },
   { src = "https://github.com/karb94/neoscroll.nvim" },
   { src = "https://github.com/stevearc/oil.nvim" },
   { src = "https://github.com/ibhagwan/fzf-lua" },
@@ -231,15 +231,15 @@ local ashen_opts = {
       ["@markup.list.checked"] = { "green_light" },
       ["@markup.list.unchecked"] = { "orange_smolder" },
       -- MiniDiff integration
-      ["MiniDiffSignAdd"] = { fg = colors["olive_blaze"], bg = "#1d2f1e" },
-      ["MiniDiffSignChange"] = { fg = colors["gold_glare"], bg = "#302a1c" },
-      ["MiniDiffSignDelete"] = { fg = colors["rose_cinder"], bg = "#2f1d1d" },
-      ["MiniDiffOverAdd"] = { fg = colors["olive_blaze"] },
-      ["MiniDiffOverChange"] = { fg = colors["gold_glare"] },
-      ["MiniDiffOverChangeBuf"] = { fg = colors["fg"] },
-      ["MiniDiffOverContext"] = { fg = colors["base6"] },
-      ["MiniDiffOverContextBuf"] = { fg = colors["fg"] },
-      ["MiniDiffOverDelete"] = { fg = colors["rose_cinder"] },
+      -- ["MiniDiffSignAdd"] = { fg = colors["olive_blaze"], bg = "#1d2f1e" },
+      -- ["MiniDiffSignChange"] = { fg = colors["gold_glare"], bg = "#302a1c" },
+      -- ["MiniDiffSignDelete"] = { fg = colors["rose_cinder"], bg = "#2f1d1d" },
+      -- ["MiniDiffOverAdd"] = { fg = colors["olive_blaze"] },
+      -- ["MiniDiffOverChange"] = { fg = colors["gold_glare"] },
+      -- ["MiniDiffOverChangeBuf"] = { fg = colors["fg"] },
+      -- ["MiniDiffOverContext"] = { fg = colors["base6"] },
+      -- ["MiniDiffOverContextBuf"] = { fg = colors["fg"] },
+      -- ["MiniDiffOverDelete"] = { fg = colors["rose_cinder"] },
     },
     link = {
       ["@boolean"] = "@constant",
@@ -262,6 +262,8 @@ vim.cmd.colorscheme("ashen")
 
 -- require("koda").setup({ theme = { dark = "moss", light = "glade" } })
 -- vim.cmd("colorscheme koda") -- auto-switches between 'moss' and 'glade'
+
+-- vim.cmd("colorscheme hardhat")
 
 
 -- TREESITTER
@@ -528,7 +530,8 @@ require("mason-lspconfig").setup({
     "clangd",
     "ty",
     "ruff",
-    "zls"
+    "zls",
+    "markdown_oxide"
   }
 })
 

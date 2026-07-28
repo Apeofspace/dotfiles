@@ -20,6 +20,8 @@
 !zed/
 !zed/**
 !opencode/**
+!moxide/
+!moxide/**
 
 # but ignore these anyway!
 **/*.log~                                                                                                                                                                                                                                             

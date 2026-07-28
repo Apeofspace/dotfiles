@@ -10,6 +10,7 @@ vim.opt.mouse = "a"
 vim.opt.showmode = false          -- I already show that in lualine
 
 vim.opt.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim.
+-- if this doesnt work do sudo pacman -S wl-clipboard
 
 -- save undo history to a file
 vim.opt.undofile = true

@@ -1,4 +1,4 @@
 layout tall
-cd ~/ObsidianVault
+cd ~/Notes
 launch --title "Notes" nvim
 

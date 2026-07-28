@@ -1,0 +1,3 @@
+new_file_folder_path = "~/Notes/"
+daily_notes_folder = "~/Notes/Daily/"
+dailynote = "%Y-%b-%d-%a"
