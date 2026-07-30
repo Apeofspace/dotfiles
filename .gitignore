@@ -26,6 +26,8 @@
 !waybar/**
 !hypr/
 !hypr/**
+!rofi/
+!rofi/**
 
 kitty/session/**
 

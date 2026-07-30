@@ -1,0 +1,9 @@
+configuration {
+ modi: "window,drun,run,ssh,combi,calc";
+ // font: "hack 10";
+ combi-modi: "drun,calc";
+ // icon-theme: "Papirus";
+ }
+//@theme "/usr/share/rofi/themes/Arc-Dark.rasi"
+
+@theme "/home/valera/.local/share/rofi/themes/spotlight-dark.rasi"
