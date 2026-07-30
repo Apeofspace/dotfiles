@@ -22,6 +22,10 @@
 !opencode/**
 !moxide/
 !moxide/**
+!waybar/
+!waybar/**
+!hypr/
+!hypr/**
 
 kitty/session/**
 
