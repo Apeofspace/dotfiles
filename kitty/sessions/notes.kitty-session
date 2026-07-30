@@ -1,4 +1,0 @@
-layout tall
-cd ~/Notes
-launch --title "Notes" nvim
-

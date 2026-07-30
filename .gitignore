@@ -23,6 +23,8 @@
 !moxide/
 !moxide/**
 
+kitty/session/**
+
 # but ignore these anyway!
 **/*.log~                                                                                                                                                                                                                                             
 

@@ -16,15 +16,13 @@ vim.pack.add({
   -- colorschemes
   { src = "https://github.com/ficcdaf/ashen.nvim" },
   { src = "https://github.com/ember-theme/nvim",                         name = "ember" },
-  { src = "https://github.com/oskarnurm/koda.nvim" },
-  { src = "https://github.com/g-kirti/hardhat.nvim" },
 
   -- must have
   { src = "https://github.com/rmagatti/auto-session" },
   { src = "https://github.com/karb94/neoscroll.nvim" },
   { src = "https://github.com/stevearc/oil.nvim" },
   { src = "https://github.com/ibhagwan/fzf-lua" },
-  { src = "https://github.com/ThePrimeagen/harpoon",                     version = "harpoon2" },
+  -- { src = "https://github.com/ThePrimeagen/harpoon",                     version = "harpoon2" },
   { src = "https://github.com/MunsMan/kitty-navigator.nvim" },
   { src = "https://github.com/nvim-lualine/lualine.nvim" },
   { src = "https://github.com/stevearc/quicker.nvim" },
@@ -59,10 +57,9 @@ vim.pack.add({
   { src = "https://github.com/chrisgrieser/nvim-early-retirement" },
   { src = "https://github.com/ruicsh/termite.nvim" },
   { src = "https://github.com/rachartier/tiny-cmdline.nvim" },
-  -- { src = "https://github.com/stevearc/aerial.nvim" },
-  -- { src = "https://github.com/iilw/nui-diagnostic.nvim" },
   { src = "https://github.com/Bekaboo/dropbar.nvim" },
-  -- { src = "https://github.com/cvlmtg/inline-diff.nvim" },
+  { src = "https://github.com/jackMort/tide.nvim" },
+
 
   -- AI
   { src = "https://github.com/olimorris/codecompanion.nvim" },
@@ -260,11 +257,6 @@ vim.cmd.colorscheme("ashen")
 -- require("ember").setup({ variant = "ember-soft" })
 -- vim.cmd.colorscheme("ember")
 
--- require("koda").setup({ theme = { dark = "moss", light = "glade" } })
--- vim.cmd("colorscheme koda") -- auto-switches between 'moss' and 'glade'
-
--- vim.cmd("colorscheme hardhat")
-
 
 -- TREESITTER
 local ensure_installed_ts = {
@@ -380,33 +372,33 @@ require("oil").setup({
 vim.keymap.set("n", "<leader>oi", function() require("oil").open() end, { desc = "[O]il" })
 
 
--- HARPOON
-vim.schedule(function()
-  vim.pack.add({
-    { src = "https://github.com/nvim-lua/plenary.nvim" },
-    { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" }
-  })
-  local harpoon = require("harpoon")
-  harpoon:setup()
+-- -- HARPOON
+-- vim.schedule(function()
+--   vim.pack.add({
+--     { src = "https://github.com/nvim-lua/plenary.nvim" },
+--     { src = "https://github.com/ThePrimeagen/harpoon", version = "harpoon2" }
+--   })
+--   local harpoon = require("harpoon")
+--   harpoon:setup()
 
-  vim.keymap.set("n", "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
-    { desc = "Harpoon list" })
-  vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Harpoon add" })
-  vim.keymap.set("n", "<M-a>", function() harpoon:list():select(1) end, { desc = "Harpoon 1" })
-  vim.keymap.set("n", "<M-s>", function() harpoon:list():select(2) end, { desc = "Harpoon 2" })
-  vim.keymap.set("n", "<M-d>", function() harpoon:list():select(3) end, { desc = "Harpoon 3" })
-  vim.keymap.set("n", "<M-f>", function() harpoon:list():select(4) end, { desc = "Harpoon 4" })
-  vim.keymap.set("n", "<M-g>", function() harpoon:list():select(5) end, { desc = "Harpoon 5" })
+--   vim.keymap.set("n", "<leader>hh", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+--     { desc = "Harpoon list" })
+--   vim.keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "Harpoon add" })
+--   vim.keymap.set("n", "<M-a>", function() harpoon:list():select(1) end, { desc = "Harpoon 1" })
+--   vim.keymap.set("n", "<M-s>", function() harpoon:list():select(2) end, { desc = "Harpoon 2" })
+--   vim.keymap.set("n", "<M-d>", function() harpoon:list():select(3) end, { desc = "Harpoon 3" })
+--   vim.keymap.set("n", "<M-f>", function() harpoon:list():select(4) end, { desc = "Harpoon 4" })
+--   vim.keymap.set("n", "<M-g>", function() harpoon:list():select(5) end, { desc = "Harpoon 5" })
 
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "harpoon" },
-    callback = function()
-      for i = 1, 9 do
-        vim.keymap.set("n", tostring(i), function() harpoon:list():select(i) end, { buffer = true })
-      end
-    end,
-  })
-end)
+--   vim.api.nvim_create_autocmd("FileType", {
+--     pattern = { "harpoon" },
+--     callback = function()
+--       for i = 1, 9 do
+--         vim.keymap.set("n", tostring(i), function() harpoon:list():select(i) end, { buffer = true })
+--       end
+--     end,
+--   })
+-- end)
 
 
 -- KITTY-NAV INTEGRATION
@@ -443,11 +435,12 @@ end
 
 local function codelens_status()
   local icon = "󰈈"
-  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-    if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens) then
-      return icon
-    end
-  end
+  -- for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+  --   if client:supports_method(vim.lsp.protocol.Methods.textDocument_codeLens) then
+  --     if vim.lsp.codelens.is_enabled() then return icon end
+  --   end
+  -- end
+  if vim.lsp.codelens.is_enabled() then return icon end
   return ""
 end
 
@@ -694,16 +687,6 @@ require("render-markdown").setup({
 -- MISC / early retirement termite aerial
 require("early-retirement").setup({})
 require("termite").setup({})
--- require("aerial").setup({
---   attach_mode = "global",
---   layout = { placement = "edge", default_direction = "prefer_left" },
---   autojump = false, -- jump when cursor moves (nice with flash) default: false
---   on_attach = function(bufnr)
---     vim.keymap.set("n", "<leader><Up>", "<cmd>AerialPrev<CR>", { buffer = bufnr, desc = "Aerial UP" })
---     vim.keymap.set("n", "<leader><Down>", "<cmd>AerialNext<CR>", { buffer = bufnr, desc = "Aerial DOWN" })
---   end,
--- })
--- vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>", { desc = "Aerial open" })
 
 -- MISC / dropbar
 vim.api.nvim_set_hl(0, "WinBar", { bg = normal_bg })
@@ -711,6 +694,27 @@ vim.api.nvim_set_hl(0, "WinBarNC", { bg = normal_bg })
 require("dropbar").setup({})
 local dropbar_api = require('dropbar.api')
 vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in winbar' })
+
+-- Tide
+local tide = require("tide")
+vim.schedule(function()
+  tide.setup({
+    keys = {
+      leader = ";",              -- Leader key to prefix all Tide commands
+      panel = ";",               -- Open the panel (uses leader key as prefix)
+      add_item = "a",            -- Add a new item to the list (leader + 'a')
+      delete = "d",              -- Remove an item from the list (leader + 'd')
+      clear_all = "x",           -- Clear all items (leader + 'x')
+      horizontal = "s",          -- Split window horizontally (leader + '-')
+      vertical = "v",            -- Split window vertically (leader + '|')
+    },
+    animation_duration = 180,    -- Animation duration in milliseconds
+    animation_fps = 30,          -- Frames per second for animations
+    hints = {
+      dictionary = "hjklyuionm,.", -- Key hints for quick access
+    },
+  })
+end)
 
 -- UI2 stuff
 require('vim._core.ui2').enable({})
