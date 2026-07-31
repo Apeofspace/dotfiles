@@ -12,9 +12,12 @@ local calc        = "rofi -show calc"
 
 
 -- OPEN PROGRAMS
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
 hl.bind(doubleMod .. " + T", hl.dsp.exec_cmd(terminal))
-hl.bind(doubleMod .. " + B", hl.dsp.exec_cmd(browser))
-hl.bind(doubleMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser))
+hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
+hl.bind("XF86Calculator", hl.dsp.exec_cmd(calc))
+hl.bind("SHIFT + XF86Calculator", hl.dsp.exec_cmd("kcalc"))
 hl.bind("ALT + Space", hl.dsp.exec_cmd(launcher))
 hl.bind("ALT + SHIFT + Space", hl.dsp.exec_cmd(runner))
 hl.bind("ALT + F4", hl.dsp.window.close())
@@ -28,7 +31,6 @@ hl.bind(mainMod .. " + Backspace",
 for i = 1, 10 do
   local key = i % 10 -- 10 maps to key 0
   hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-  hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
 -- focus
@@ -42,6 +44,9 @@ hl.bind(mainMod .. " + h", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
+
+-- SCRATCHPAD
+hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
 
 -- move windows
 hl.bind("ALT + M", hl.dsp.submap("move"))
@@ -57,6 +62,13 @@ hl.define_submap("move", function()
   hl.bind("down", hl.dsp.window.move({ direction = "down" }), opts)
   hl.bind("up", hl.dsp.window.move({ direction = "up" }), opts)
   hl.bind("right", hl.dsp.window.move({ direction = "right" }), opts)
+  -- Number keys
+  for i = 1, 10 do
+    local key = i % 10 -- 10 maps to key 0
+    hl.bind(key, hl.dsp.window.move({ workspace = i }))
+  end
+  -- scratchpad
+  hl.bind("S", hl.dsp.window.move({ workspace = "special:magic" }))
   -- Exit
   hl.bind("escape", hl.dsp.submap("reset"))
   hl.bind("ALT + M", hl.dsp.submap("reset"))
@@ -84,7 +96,7 @@ end)
 
 -- weird shit
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ action = "toggle" }))
-hl.bind(mainMod .. " + T", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.layout("togglesplit")) -- dwindle only
 
 -- Scroll through existing workspaces with mainMod + scroll
@@ -96,10 +108,6 @@ hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })   -- 
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true }) -- rmb
 -- hl.bind(" + mouse:274", hl.dsp.window.drag(), { mouse = true })              -- mmb
 
-
--- SCRATCHPAD
-hl.bind(doubleMod .. " + H", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(doubleMod .. " + SHIFT + H", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- MEDIA KEYS
 -- Laptop multimedia keys for volume and LCD brightness
