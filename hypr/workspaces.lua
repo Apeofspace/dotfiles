@@ -29,11 +29,11 @@ hl.workspace_rule({ workspace = "2", monitor = mon1, persistent = true })
 hl.workspace_rule({ workspace = "3", monitor = mon1, persistent = true })
 hl.workspace_rule({ workspace = "4", monitor = mon1, persistent = true })
 hl.workspace_rule({ workspace = "5", monitor = mon1, persistent = true })
--- hl.workspace_rule({ workspace = "6", monitor = mon2, persistent = true })
--- hl.workspace_rule({ workspace = "7", monitor = mon2, persistent = true })
--- hl.workspace_rule({ workspace = "8", monitor = mon2, persistent = true })
--- hl.workspace_rule({ workspace = "9", monitor = mon2, persistent = true })
--- hl.workspace_rule({ workspace = "10", monitor = mon2, persistent = true })
+hl.workspace_rule({ workspace = "6", monitor = mon2, persistent = true })
+hl.workspace_rule({ workspace = "7", monitor = mon2, persistent = true })
+hl.workspace_rule({ workspace = "8", monitor = mon2, persistent = true })
+hl.workspace_rule({ workspace = "9", monitor = mon2, persistent = true })
+hl.workspace_rule({ workspace = "10", monitor = mon2, persistent = true })
 
 -- WORKSPACE RELATED KEYMAPS
 local mainMod   = "SUPER"
@@ -61,8 +61,8 @@ hl.bind(mainMod .. " + l", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + k", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + j", hl.dsp.focus({ direction = "down" }))
 
--- SCRATCHPAD
-hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
+-- HIDDEN
+hl.bind(mainMod .. " + H", hl.dsp.workspace.toggle_special("magic"))
 
 -- move windows
 hl.bind("ALT + M", hl.dsp.submap("move"))
@@ -83,8 +83,8 @@ hl.define_submap("move", function()
     local key = i % 10 -- 10 maps to key 0
     hl.bind(key, hl.dsp.window.move({ workspace = i }))
   end
-  -- scratchpad
-  hl.bind("S", hl.dsp.window.move({ workspace = "special:magic" }))
+  -- HIDDEN
+  hl.bind("H", hl.dsp.window.move({ workspace = "special:magic" }))
   -- Exit
   hl.bind("escape", hl.dsp.submap("reset"))
   hl.bind("ALT + M", hl.dsp.submap("reset"))
@@ -103,7 +103,6 @@ hl.define_submap("resize", function()
   hl.bind("left", hl.dsp.window.resize({ x = -50, y = 0, relative = true }), opts)
   hl.bind("down", hl.dsp.window.resize({ x = 0, y = -50, relative = true }), opts)
   hl.bind("up", hl.dsp.window.resize({ x = 0, y = 50, relative = true }), opts)
-  hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
   hl.bind("right", hl.dsp.window.resize({ x = 50, y = 0, relative = true }), opts)
   -- Exit
   hl.bind("escape", hl.dsp.submap("reset"))
@@ -122,4 +121,3 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 -- Move/resize windows with mainMod + LMB/RMB and dragging
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })   -- lmb
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true }) -- rmb
--- hl.bind(" + mouse:274", hl.dsp.window.drag(), { mouse = true })              -- mmb
