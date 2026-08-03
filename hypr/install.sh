@@ -1,1 +1,1 @@
-sudo pacman -Sy wofi hyprpaper waybar htop btop
+sudo pacman -Sy rofi waybar btop

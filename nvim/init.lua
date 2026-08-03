@@ -16,6 +16,8 @@ vim.pack.add({
   -- colorschemes
   { src = "https://github.com/ficcdaf/ashen.nvim" },
   { src = "https://github.com/ember-theme/nvim",                         name = "ember" },
+  { src = "https://github.com/Aejkatappaja/cendre" },
+  { src = "https://github.com/ThorstenRhau/token" },
 
   -- must have
   { src = "https://github.com/rmagatti/auto-session" },

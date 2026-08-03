@@ -8,6 +8,7 @@
     "clock"
   ],
   "modules-right": [
+    "tray",
     "hyprland/submap",
     "group/volume",
     "bluetooth",
@@ -15,7 +16,6 @@
     // "cpu",
     // "memory",
     "hyprland/language",
-    "tray",
     "custom/power"
   ],
   "hyprland/window": {
@@ -122,7 +122,7 @@
   },
   "pulseaudio": {
     "format": "{volume}% {icon}",
-    "format-muted": "",
+    "format-muted": "Muted 󰖁",
     "format-icons": {
       "default": [
         "",
