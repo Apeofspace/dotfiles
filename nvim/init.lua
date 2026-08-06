@@ -16,8 +16,6 @@ vim.pack.add({
   -- colorschemes
   { src = "https://github.com/ficcdaf/ashen.nvim" },
   { src = "https://github.com/ember-theme/nvim",                         name = "ember" },
-  { src = "https://github.com/Aejkatappaja/cendre" },
-  { src = "https://github.com/ThorstenRhau/token" },
 
   -- must have
   { src = "https://github.com/rmagatti/auto-session" },
@@ -40,7 +38,6 @@ vim.pack.add({
   { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 
   -- dap
-  { src = "https://github.com/jay-babu/mason-nvim-dap.nvim" }, -- automason daps
   { src = "https://github.com/mfussenegger/nvim-dap" },
   { src = "https://github.com/igorlfs/nvim-dap-view",                    version = vim.version.range("1.*") },
   { src = "https://github.com/mfussenegger/nvim-dap-python" },
@@ -556,6 +553,17 @@ require("mason-lspconfig").setup({
   }
 })
 
+-- install extra non-lsp stuff through mason directly
+local registry = require("mason-registry")
+registry.refresh(function()
+  local ensure_installed = { "cortex-debug", "debugpy" }
+  for _, pkg in ipairs(ensure_installed) do
+    if not registry.is_installed(pkg) then
+      registry.get_package(pkg):install()
+    end
+  end
+end)
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("cool-lsp-attach", { clear = true }),
   callback = function(event)
@@ -629,12 +637,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 
--- DEBUGGING / DAP
-require("mason-nvim-dap").setup({
-  automatic_installation = true,
-  ensure_installed = { "python", "cortex-debug" }
-})
-
 vim.keymap.set("n", "<leader>bb", require("dap").toggle_breakpoint, { desc = "Breakpoint toggle" })
 vim.keymap.set("n", "<leader>bc", require("dap").continue, { desc = "Connect/Continue" })
 vim.keymap.set("n", "<leader>bp", require("dap").pause, { desc = "Pause" })
@@ -702,16 +704,16 @@ local tide = require("tide")
 vim.schedule(function()
   tide.setup({
     keys = {
-      leader = ";",              -- Leader key to prefix all Tide commands
-      panel = ";",               -- Open the panel (uses leader key as prefix)
-      add_item = "a",            -- Add a new item to the list (leader + 'a')
-      delete = "d",              -- Remove an item from the list (leader + 'd')
-      clear_all = "x",           -- Clear all items (leader + 'x')
-      horizontal = "s",          -- Split window horizontally (leader + '-')
-      vertical = "v",            -- Split window vertically (leader + '|')
+      leader = ";",                -- Leader key to prefix all Tide commands
+      panel = ";",                 -- Open the panel (uses leader key as prefix)
+      add_item = "a",              -- Add a new item to the list (leader + 'a')
+      delete = "d",                -- Remove an item from the list (leader + 'd')
+      clear_all = "x",             -- Clear all items (leader + 'x')
+      horizontal = "s",            -- Split window horizontally (leader + '-')
+      vertical = "v",              -- Split window vertically (leader + '|')
     },
-    animation_duration = 180,    -- Animation duration in milliseconds
-    animation_fps = 30,          -- Frames per second for animations
+    animation_duration = 180,      -- Animation duration in milliseconds
+    animation_fps = 30,            -- Frames per second for animations
     hints = {
       dictionary = "hjklyuionm,.", -- Key hints for quick access
     },
