@@ -29,7 +29,7 @@
 !rofi/
 !rofi/**
 
-kitty/session/**
+kitty/sessions/**
 
 # but ignore these anyway!
 **/*.log~                                                                                                                                                                                                                                             

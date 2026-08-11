@@ -12,7 +12,7 @@ return {
       -- nil means capabilities don't exist at all
       -- somehow ruff now ignores false
       client.server_capabilities.hoverProvider = nil
-      -- client.server_capabilities.diagnosticProvider = nil
+      client.server_capabilities.diagnosticProvider = nil -- disable all shit
     end
   end
 }
