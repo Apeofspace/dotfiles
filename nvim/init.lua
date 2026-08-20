@@ -17,6 +17,8 @@ vim.pack.add({
   { src = "https://github.com/ficcdaf/ashen.nvim" },
   { src = "https://github.com/WTFox/luna.nvim" },
   { src = "https://github.com/ember-theme/nvim",                         name = "ember" },
+  { src = "https://github.com/WeiTing1991/suannhai.nvim" },
+
 
   -- must have
   { src = "https://github.com/rmagatti/auto-session" },
@@ -58,7 +60,6 @@ vim.pack.add({
   { src = "https://github.com/ruicsh/termite.nvim" },
   { src = "https://github.com/rachartier/tiny-cmdline.nvim" },
   { src = "https://github.com/Bekaboo/dropbar.nvim" },
-  { src = "https://github.com/jackMort/tide.nvim" },
 
 
   -- AI
@@ -253,6 +254,8 @@ vim.opt.winborder = "rounded" -- borders for completion and hover
 
 ashen.setup(ashen_opts)
 vim.cmd.colorscheme("ashen")
+
+-- vim.cmd.colorscheme("suannhai-jiufen")
 
 -- require("ember").setup({ variant = "ember-soft" })
 -- vim.cmd.colorscheme("ember")
@@ -702,27 +705,6 @@ require("dropbar").setup({})
 local dropbar_api = require('dropbar.api')
 vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in winbar' })
 
--- Tide
-local tide = require("tide")
-vim.schedule(function()
-  tide.setup({
-    keys = {
-      leader = ";",                -- Leader key to prefix all Tide commands
-      panel = ";",                 -- Open the panel (uses leader key as prefix)
-      add_item = "a",              -- Add a new item to the list (leader + 'a')
-      delete = "d",                -- Remove an item from the list (leader + 'd')
-      clear_all = "x",             -- Clear all items (leader + 'x')
-      horizontal = "s",            -- Split window horizontally (leader + '-')
-      vertical = "v",              -- Split window vertically (leader + '|')
-    },
-    animation_duration = 180,      -- Animation duration in milliseconds
-    animation_fps = 30,            -- Frames per second for animations
-    hints = {
-      dictionary = "hjklyuionm,.", -- Key hints for quick access
-    },
-  })
-end)
-
 -- UI2 stuff
 require('vim._core.ui2').enable({})
 vim.o.cmdheight = 0
@@ -738,7 +720,7 @@ vim.keymap.set("n", "<C-r>", ":silent redo<CR>", { silent = true })
 -- CODECOMPANION / AI
 vim.schedule(function()
   local lmstudio = { adapter = "lmstudio" }
-  local opencode = { adapter = "opencode", model = "opencode-go/grok-4.5" }
+  local opencode = { adapter = "opencode", model = "opencode-go/deepseek-v4-flash" }
   require("codecompanion").setup({
     opts = { log_level = "DEBUG" },
     adapters = {
@@ -770,6 +752,21 @@ vim.schedule(function()
       -- inline = lmstudio,
       -- cmd = lmstudio,
       -- background = lmstudio,
+      cli = {
+        -- this is a workaround for opencode
+        -- because codecompanion is bugged
+        -- and doesn't work normally
+        -- open this with codecompanionCLI
+        agent = "opencode",
+        agents = {
+          opencode = {
+            cmd = "opencode",
+            args = {},
+            description = "OpenCode CLI",
+            provider = "terminal",
+          },
+        },
+      },
     },
     rules = {
       default = {
