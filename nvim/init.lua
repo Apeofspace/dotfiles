@@ -607,7 +607,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 
     -- format with LSP
-    if client.server_capabilities.documentFormattingProvider then
+    if client:supports_method("textDocument/formatting") then
       map_lsp("<leader>f", vim.lsp.buf.format, "Format with LSP")
     end
     -- The following two autocommands are used to highlight references of the

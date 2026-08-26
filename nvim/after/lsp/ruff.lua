@@ -6,13 +6,15 @@ return {
     }
   },
   on_attach = function(client, bufnr)
-    _ = bufnr
     if client.name == 'ruff' then
       -- false means don't advertice capabilities
       -- nil means capabilities don't exist at all
       -- somehow ruff now ignores false
       client.server_capabilities.hoverProvider = nil
       client.server_capabilities.diagnosticProvider = nil -- disable all shit
+
+      -- workaround for ruff dynamic advertising of capabilities making it not register normally
+      vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { buffer = bufnr, desc = "LSP: Format with LSP" })
 
       -- this here long ass autocommand makes it so ruff auto organizeImports on save
       vim.api.nvim_create_autocmd("BufWritePre", {
