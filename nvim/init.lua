@@ -15,10 +15,9 @@ vim.pack.add({
 
   -- colorschemes
   { src = "https://github.com/ficcdaf/ashen.nvim" },
-  { src = "https://github.com/WTFox/luna.nvim" },
   { src = "https://github.com/ember-theme/nvim",                         name = "ember" },
   { src = "https://github.com/WeiTing1991/suannhai.nvim" },
-
+  { src = "https://github.com/sainnhe/everforest" },
 
   -- must have
   { src = "https://github.com/rmagatti/auto-session" },
@@ -57,7 +56,6 @@ vim.pack.add({
 
   -- misc
   { src = "https://github.com/chrisgrieser/nvim-early-retirement" },
-  { src = "https://github.com/ruicsh/termite.nvim" },
   { src = "https://github.com/rachartier/tiny-cmdline.nvim" },
   { src = "https://github.com/Bekaboo/dropbar.nvim" },
 
@@ -255,6 +253,7 @@ vim.opt.winborder = "rounded" -- borders for completion and hover
 ashen.setup(ashen_opts)
 vim.cmd.colorscheme("ashen")
 
+vim.g.everforest_background = "hard"
 -- vim.cmd.colorscheme("suannhai-jiufen")
 
 -- require("ember").setup({ variant = "ember-soft" })
@@ -694,9 +693,8 @@ require("render-markdown").setup({
   file_types = { "markdown", "codecompanion" },
 })
 
--- MISC / early retirement termite aerial
+-- MISC / early retirement
 require("early-retirement").setup({})
-require("termite").setup({})
 
 -- MISC / dropbar
 vim.api.nvim_set_hl(0, "WinBar", { bg = normal_bg })

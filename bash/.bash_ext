@@ -40,7 +40,8 @@ export SUDO_EDITOR=nvim
 alias n='nvim'
 alias nv='neovide'
 alias gits='git status'
-alias gitl='git log -15 --oneline --decorate --graph --branches'
+alias gitl='git log -15 --oneline --decorate --graph'
+# alias gitl='git log -15 --oneline --decorate --graph --branches'
 alias zfzf='z $(fzf)'
 alias ll='ls -la'
 

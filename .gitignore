@@ -30,6 +30,7 @@
 !rofi/**
 
 kitty/sessions/**
+!kitty/sessions/main.kitty-session
 
 # but ignore these anyway!
 **/*.log~                                                                                                                                                                                                                                             
