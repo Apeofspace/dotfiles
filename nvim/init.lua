@@ -18,6 +18,7 @@ vim.pack.add({
   { src = "https://github.com/ember-theme/nvim",                         name = "ember" },
   { src = "https://github.com/WeiTing1991/suannhai.nvim" },
   { src = "https://github.com/sainnhe/everforest" },
+  { src = "https://github.com/rezniqov/soviet.nvim" },
 
   -- must have
   { src = "https://github.com/rmagatti/auto-session" },
@@ -59,6 +60,8 @@ vim.pack.add({
   { src = "https://github.com/rachartier/tiny-cmdline.nvim" },
   { src = "https://github.com/Bekaboo/dropbar.nvim" },
 
+  -- dumb shit
+  { src = "https://github.com/RedEye-Developers/starfall.nvim" },
 
   -- AI
   { src = "https://github.com/olimorris/codecompanion.nvim" },
@@ -192,7 +195,7 @@ require("mini.clue").setup(clueopts)
 require("mini.surround").setup(surroundopts)
 require("mini.comment").setup(commentopts)
 require("mini.splitjoin").setup({}) -- gS to toggle line/column for lists
-require("mini.diff").setup({})
+-- require("mini.diff").setup({})
 
 vim.keymap.set("n", "<leader>td", require("mini.diff").toggle_overlay, { desc = "Toggle inline diff" })
 require("mini.icons").mock_nvim_web_devicons()
@@ -252,6 +255,10 @@ vim.opt.winborder = "rounded" -- borders for completion and hover
 
 ashen.setup(ashen_opts)
 vim.cmd.colorscheme("ashen")
+
+require("starfall").setup({})
+vim.cmd("StarfallStart")
+vim.keymap.set("n", "<leader>sS", "<cmd>StarfallToggle<CR>", { desc = "Toggle starfall" })
 
 vim.g.everforest_background = "hard"
 -- vim.cmd.colorscheme("suannhai-jiufen")
