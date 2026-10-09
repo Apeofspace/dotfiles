@@ -29,6 +29,18 @@ permissions:
   - { action: shell, resource: "git branch --contains *",     effect: allow }
   - { action: shell, resource: "git branch --merged *",       effect: allow }
   - { action: shell, resource: "git branch --no-merged *",    effect: allow }
+  - { action: shell, resource: "git -C * status *",           effect: allow }
+  - { action: shell, resource: "git -C * diff *",             effect: allow }
+  - { action: shell, resource: "git -C * log *",              effect: allow }
+  - { action: shell, resource: "git -C * show *",             effect: allow }
+  - { action: shell, resource: "git -C * rev-parse *",        effect: allow }
+  - { action: shell, resource: "git -C * ls-files *",         effect: allow }
+  - { action: shell, resource: "git -C * status",             effect: allow }
+  - { action: shell, resource: "git -C * diff",               effect: allow }
+  - { action: shell, resource: "git -C * log",                effect: allow }
+  - { action: shell, resource: "git -C * show",               effect: allow }
+  - { action: shell, resource: "git -C * rev-parse",          effect: allow }
+  - { action: shell, resource: "git -C * ls-files",           effect: allow }
 
   # Filesystem / text inspection
   - { action: shell, resource: "ls *",       effect: allow }
@@ -56,6 +68,18 @@ permissions:
   - { action: shell, resource: "cut *",       effect: allow }
   - { action: shell, resource: "comm *",      effect: allow }
   - { action: shell, resource: "diff *",      effect: allow }
+  - { action: shell, resource: "nl *",        effect: allow }
+  - { action: shell, resource: "xxd *",       effect: allow }
+  - { action: shell, resource: "od *",        effect: allow }
+  - { action: shell, resource: "tr *",        effect: allow }
+  - { action: shell, resource: "pdftotext *", effect: allow }
+  - { action: shell, resource: "test *",      effect: allow }
+  - { action: shell, resource: "find *",      effect: allow }
+  # find can mutate through its own flags — deny those after the allow.
+  - { action: shell, resource: "find * -exec*",   effect: deny }
+  - { action: shell, resource: "find * -delete*", effect: deny }
+  - { action: shell, resource: "find * -fprint*", effect: deny }
+  - { action: shell, resource: "find * -fls*",    effect: deny }
   - { action: shell, resource: "sha256sum *", effect: allow }
   - { action: shell, resource: "md5sum *",    effect: allow }
   - { action: shell, resource: "basename *",  effect: allow }
@@ -107,14 +131,14 @@ You are the orchestrator: a pure conductor. You never edit files, never run a mu
 ## Tools you may use directly
 
 - `read`, `glob`, `grep` to understand the plan and the current state.
-- Read-only `git` (`status`, `diff`, `log`, `show`, `rev-parse`, `blame`, `grep`, `ls-files`, and the read-only `branch` forms) to check repo state.
-- A narrow allowlist of read-only shell commands (`ls`, `cat`, `rg`, `grep`, `diff`, etc.) for inspection.
+- Read-only `git` (`status`, `diff`, `log`, `show`, `rev-parse`, `blame`, `grep`, `ls-files`, and the read-only `branch` forms) to check repo state. For another repo use `git -C <path> <sub>` with the same subcommands.
+- Shell — read-only allowlist, exactly these commands: `git` (read-only forms above), `ls`, `pwd`, `cat`, `head`, `tail`, `wc`, `stat`, `file`, `tree`, `du`, `df`, `realpath`, `which`, `echo`, `printf`, `date`, `rg`, `grep`, `sort`, `uniq`, `cut`, `comm`, `diff`, `nl`, `xxd`, `od`, `tr`, `pdftotext`, `test`, `find` (without `-exec`, `-delete`, `-fprint`, `-fls`), `sha256sum`, `md5sum`, `basename`, `dirname`, `uname`, `id`, `whoami`, `printenv`.
 - `subagent` to do all real work.
 - `question` to resolve genuine ambiguity.
 
-Everything else is denied. Any mutation — edits, branches, commits, installs, running tests — must go through a subagent.
+Everything else is denied. Any mutation — edits, branches, commits, installs, running tests, toolchain commands (`arm-none-eabi-gcc`, `uv`, etc.) — must go through a subagent.
 
-Read-only shell is an allowlist, not a sandbox. Never use redirection (`>`), pipes into writers, command substitution (`$(...)` or backticks), or shell chaining to mutate anything. Any mutation still goes through a subagent.
+Read-only shell is an allowlist, not a sandbox. One command per call: no `cd`, no `&&`, no `;`, no `$(...)`, no backticks, no redirection; pipes only between commands from the list above. A denied command wastes a whole tool call, so never run anything outside the list — dispatch a builder instead. Any mutation still goes through a subagent.
 
 ## Task graph
 
