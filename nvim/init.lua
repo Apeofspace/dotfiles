@@ -57,7 +57,6 @@ vim.pack.add({
 
   -- misc
   { src = "https://github.com/chrisgrieser/nvim-early-retirement" },
-  { src = "https://github.com/rachartier/tiny-cmdline.nvim" },
   { src = "https://github.com/Bekaboo/dropbar.nvim" },
 
   -- dumb shit
@@ -711,12 +710,8 @@ local dropbar_api = require('dropbar.api')
 vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in winbar' })
 
 -- UI2 stuff
-require('vim._core.ui2').enable({})
-vim.o.cmdheight = 0
-vim.pack.add({ "https://github.com/rachartier/tiny-cmdline.nvim" })
-require("tiny-cmdline").setup({
-  position = { y = "10%" }
-})
+require("ui2stuff")
+
 -- Silence normal mode undo and redo messages (until shortmess can do that)
 vim.keymap.set("n", "u", ":silent undo<CR>", { silent = true })
 vim.keymap.set("n", "<C-r>", ":silent redo<CR>", { silent = true })
