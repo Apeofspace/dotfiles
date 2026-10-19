@@ -1,7 +1,7 @@
 ---
 description: Implements one specific task from a plan, runs the relevant checks, and reports evidence
 mode: subagent
-model: opencode-go/deepseek-v4.1-flash
+model: opencode/glm-5.3-flash-free
 permissions:
   - action: subagent
     resource: "*"

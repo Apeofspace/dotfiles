@@ -1,19 +1,37 @@
 {
   "$schema": "https://opencode.ai/v2/cli.json",
   "diffs": {
-    "wrap": "word"
+    "wrap": "word",
+    "tree": true,
+    "single": true,
+    "view": "split"
   },
   "terminal": {
-    "title": false
+    "title": true,
+    "copy": "select"
   },
   "prompt": {
-    "paste": "full"
+    "paste": "full",
+    "image_preview": true
   },
   "session": {
     "sidebar": "auto",
-    "scrollbar": false,
+    "scrollbar": true,
     "thinking": "hide",
-    "permissions": "autoaccept"
+    "permissions": "prompt",
+    "new_location": "inherit",
+    "verbosity": "medium",
+    "tps": true,
+    "markdown": "rendered"
   },
-  "animations": true
+  "animations": true,
+  "tabs": {
+    "scope": "cwd",
+    "mode": "on",
+    "indicators": "status"
+  },
+  "attention": {
+    "notifications": true,
+    "sound": true
+  }
 }
