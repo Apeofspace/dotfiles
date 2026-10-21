@@ -97,6 +97,12 @@ Review the scope given in your prompt (files and/or a diff range). Use `read`, `
 
 Your shell is an allowlist of read-only commands, not a sandbox. Do not use redirection, substitution, or chaining to change files.
 
+## Scope
+
+- Check first that the change touches only the declared files; flag any out-of-scope file before reviewing logic.
+- Separate in-scope defects from pre-existing or out-of-scope issues. List the latter once, without designing fixes.
+- Never read files marked off-limits by the task or project instructions.
+
 ## Gathering Context
 
 **Diffs alone are not enough.** After getting the diff, read the entire file(s) being modified to understand the full context. Code that looks wrong in isolation may be correct given surrounding logic — and vice versa.
@@ -155,7 +161,7 @@ Your shell is an allowlist of read-only commands, not a sandbox. Do not use redi
 Shell rules — a denied command wastes a whole tool call:
 - One command per call. No `cd`, no `&&`, no `;`, no `$(...)`, no backticks, no redirection.
 - Pipes are allowed only between commands from the list above (e.g. `git diff -- file | head -50`).
-- `sed`, `python`, `awk`, `dd`, `find`, `xargs`, `ruff` and anything not listed are denied — use `read`, `grep`, or `glob` instead.
+- Commands not in the list above are denied — use `read`, `grep`, or `glob` instead.
 - Use absolute paths; never `cd X && ...`.
 - Reading `.env*` files requires approval; don't read them unless the task demands it.
 
