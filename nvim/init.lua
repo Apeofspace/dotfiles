@@ -58,12 +58,10 @@ vim.pack.add({
   -- misc
   { src = "https://github.com/chrisgrieser/nvim-early-retirement" },
   { src = "https://github.com/Bekaboo/dropbar.nvim" },
+  { src = "https://github.com/0xdeadf1sh/AssemblyForNeovim" },
 
   -- dumb shit
   { src = "https://github.com/RedEye-Developers/starfall.nvim" },
-
-  -- AI
-  -- { src = "https://github.com/olimorris/codecompanion.nvim" },
 
   -- langmapper
   { src = "https://github.com/Wansmer/langmapper.nvim" },
@@ -196,7 +194,7 @@ require("mini.comment").setup(commentopts)
 require("mini.splitjoin").setup({}) -- gS to toggle line/column for lists
 -- require("mini.diff").setup({})
 
-vim.keymap.set("n", "<leader>td", require("mini.diff").toggle_overlay, { desc = "Toggle inline diff" })
+vim.keymap.set("n", "<leader>tD", require("mini.diff").toggle_overlay, { desc = "Toggle inline diff" })
 require("mini.icons").mock_nvim_web_devicons()
 
 
@@ -709,77 +707,15 @@ require("dropbar").setup({})
 local dropbar_api = require('dropbar.api')
 vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in winbar' })
 
+-- MISC / asm
+require("asm").setup()
+
 -- UI2 stuff
 require("ui2stuff")
 
 -- Silence normal mode undo and redo messages (until shortmess can do that)
 vim.keymap.set("n", "u", ":silent undo<CR>", { silent = true })
 vim.keymap.set("n", "<C-r>", ":silent redo<CR>", { silent = true })
-
-
--- -- CODECOMPANION / AI
--- vim.schedule(function()
---   local lmstudio = { adapter = "lmstudio" }
---   local opencode = { adapter = "opencode", model = "opencode-go/deepseek-v4-flash" }
---   require("codecompanion").setup({
---     opts = { log_level = "DEBUG" },
---     adapters = {
---       http = {
---         lmstudio = function()
---           return require("codecompanion.adapters").extend("openai_compatible", {
---             name = "lmstudio",
---             env = {
---               url = "http://localhost:1234", -- LM Studio server URL
---             },
---             schema = {
---               model = {
---                 -- This can technically be anything since LM Studio auto-detects
---               },
---               num_ctx = {
---                 default = 32768, -- Match the context window you set in LM Studio
---               },
---             },
---           })
---         end,
---       },
---     },
---     interactions = {
---       chat = opencode,
---       inline = opencode,
---       cmd = opencode,
---       background = opencode,
---       -- chat = lmstudio,
---       -- inline = lmstudio,
---       -- cmd = lmstudio,
---       -- background = lmstudio,
---       cli = {
---         -- this is a workaround for opencode
---         -- because codecompanion is bugged
---         -- and doesn't work normally
---         -- open this with codecompanionCLI
---         agent = "opencode",
---         agents = {
---           opencode = {
---             cmd = "opencode",
---             args = {},
---             description = "OpenCode CLI",
---             provider = "terminal",
---           },
---         },
---       },
---     },
---     rules = {
---       default = {
---         files = {
---           "AGENT.md"
---         }
---       }
---     },
---   })
---   vim.api.nvim_set_keymap('n', '<leader>a', '<cmd>CodeCompanionChat Toggle<cr>', { desc = "Open AI chat" })
---   vim.api.nvim_set_keymap('v', '<leader>a', '<cmd>CodeCompanionChat Add<cr>', { desc = "Add selection to AI chat" })
---   vim.api.nvim_set_keymap('n', 'grA', '<cmd>CodeCompanionActions<CR>', { desc = "AI code actions" })
--- end)
 
 -- LANGMAPPER should be last
 require("langmapper").setup({})

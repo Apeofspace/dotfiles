@@ -1,5 +1,5 @@
 ---
-description: Execute a plan from .agents/plans/ with builder subagents and a reviewer loop
+description: Execute a plan file with builder subagents and a reviewer loop
 agent: orchestrator
 ---
 

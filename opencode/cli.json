@@ -33,5 +33,8 @@
   "attention": {
     "notifications": true,
     "sound": true
+  },
+  "theme": {
+    "name": "opencode"
   }
 }
