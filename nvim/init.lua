@@ -1,6 +1,9 @@
 require("langmap_config")
 require("options")
 
+-- UI2 stuff
+require("ui2stuff")
+
 -- After much consideration I've decided to have a singular init.lua file with most config,
 -- and only just a few extra files
 -- all of the vim.pack.add() happens at once, setups happen below
@@ -59,6 +62,8 @@ vim.pack.add({
   { src = "https://github.com/chrisgrieser/nvim-early-retirement" },
   { src = "https://github.com/Bekaboo/dropbar.nvim" },
   { src = "https://github.com/0xdeadf1sh/AssemblyForNeovim" },
+  { src = "https://github.com/hat0uma/csvview.nvim" },
+
 
   -- dumb shit
   { src = "https://github.com/RedEye-Developers/starfall.nvim" },
@@ -710,8 +715,20 @@ vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in win
 -- MISC / asm
 require("asm").setup()
 
--- UI2 stuff
-require("ui2stuff")
+-- MISC / CSV
+local csv_group = vim.api.nvim_create_augroup("CSVGroup", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "csv",
+  group = csv_group,
+  desc = "Enable CSV stuff",
+  callback = function(_)
+    local key = "<leader>f"
+    require('csvview').setup()
+    vim.schedule(function() vim.notify("Press " .. key .. " to format", vim.log.levels.INFO) end)
+    vim.keymap.set({ "v", "n" }, key, function() require("csvview").toggle() end,
+      { desc = "Toggle CSV format", buffer = true })
+  end
+})
 
 -- Silence normal mode undo and redo messages (until shortmess can do that)
 vim.keymap.set("n", "u", ":silent undo<CR>", { silent = true })
