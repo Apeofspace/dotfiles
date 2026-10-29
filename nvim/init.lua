@@ -227,6 +227,7 @@ local ashen_opts = {
       ["@constructor"] = { "orange_glow" },
       ["WinSeparator"] = { "grey" },
       ["@punctuation.delimiter"] = { "g_5" },
+      ["LineNr"] = { "#3d3d3d" },
       -- ["@markup.raw"] = { "bg0" },
       ["@markup.list"] = { "orange_smolder" },
       ["@markup.list.checked"] = { "green_light" },
