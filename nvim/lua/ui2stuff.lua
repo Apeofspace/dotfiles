@@ -35,7 +35,6 @@ local M = {
   _disabled = false, -- gave up after too many errors
   _errors = 0, -- error counter; cleared by a success only if no error intervened
   _bumped = false, -- dirty flag: bump_error ran since the last counter reset
-  _notified = false,
 }
 
 ---@class Ui2StuffWidth
@@ -61,7 +60,7 @@ local defaults = {
   cmdheight = 0,
 }
 
-local config = vim.tbl_deep_extend('force', defaults, {})
+local config = vim.deepcopy(defaults)
 M.config = config
 
 -- Runtime state.
@@ -103,22 +102,15 @@ local BORDER_PRESETS = {
   solid = true,
 }
 
---- Resolve the effective border, normalized to a uniform preset.
+--- Resolve the effective border together with the number of cells it adds per
+--- side (0 for none, else 1); the value is normalized to a uniform preset, so
+--- the returned border is always one of BORDER_PRESETS.
 local function resolved_border()
-  local b = config.border
-  if b == nil then
-    local wb = vim.o.winborder
-    b = (wb ~= nil and wb ~= '') and wb or 'rounded'
-  end
+  local b = config.border or vim.o.winborder
   if type(b) ~= 'string' or not BORDER_PRESETS[b] then
     b = 'rounded'
   end
-  return b
-end
-
---- Number of cells the border adds per side (0 for none).
-local function border_size(border)
-  return (border == nil or border == '' or border == 'none') and 0 or 1
+  return b, b == 'none' and 0 or 1
 end
 
 local function valid_win(win)
@@ -165,20 +157,20 @@ local function disable(err)
   M._disabled, M._enabled = true, false
   -- Put the layout back first, so we don't leave the windows centered or a stale
   -- `vim.g.ui_cmdline_pos` behind (blink.cmp would keep anchoring to it).
-  pcall(M.restore)
+  -- (restore() is already internally pcall-guarded.)
+  M.restore()
   if cmdline and orig.cmdline_show and orig.cmdline_hide then
     cmdline.cmdline_show, cmdline.cmdline_hide = orig.cmdline_show, orig.cmdline_hide
   end
   if messages and orig.set_pos then
     messages.set_pos = orig.set_pos
   end
-  if not M._notified then
-    M._notified = true
-    vim.notify(
-      ('[ui2stuff] disabling after repeated errors: %s'):format(tostring(err)),
-      vim.log.levels.WARN
-    )
-  end
+  -- Safe to notify unconditionally: _disabled is set above and the guard at the
+  -- top of this function makes this run at most once.
+  vim.notify(
+    ('[ui2stuff] disabling after repeated errors: %s'):format(tostring(err)),
+    vim.log.levels.WARN
+  )
   vim.g.ui2stuff_enabled = false
 end
 
@@ -203,7 +195,7 @@ local function capture()
   if saved then
     return
   end
-  saved = { ui_cmdline_pos = vim.g.ui_cmdline_pos, cmd = nil, dialog = nil }
+  saved = { ui_cmdline_pos = vim.g.ui_cmdline_pos }
   for _, key in ipairs({ 'cmd', 'dialog' }) do
     local win = ui2.wins and ui2.wins[key]
     if win and api.nvim_win_is_valid(win) then
@@ -279,8 +271,7 @@ local function do_reposition()
   capture()
 
   local cols, lines = vim.o.columns, vim.o.lines
-  local border = resolved_border()
-  local b = border_size(border)
+  local border, b = resolved_border()
 
   local w = clamp(parse_dimension(config.width.value, cols), config.width.min, config.width.max)
   w = math.max(1, math.min(w, cols - 2 * b))
@@ -311,9 +302,9 @@ local function do_reposition()
     if it.key == 'dialog' then
       api.nvim_win_set_config(it.win, { width = w })
       local texth = math.max(1, api.nvim_win_text_height(it.win, {}).all)
-      local cfgmin = (ui2.cfg and ui2.cfg.msg and ui2.cfg.msg.dialog and ui2.cfg.msg.dialog.height) or 0.5
+      local cfgmin = vim.tbl_get(ui2, 'cfg', 'msg', 'dialog', 'height') or 0.5
       local limit = cfgmin > 1 and cfgmin or math.ceil(lines * cfgmin)
-      if dlg_visible and texth > limit and orig.set_pos then
+      if texth > limit then
         pcall(orig.set_pos, 'dialog')
         it.h = math.max(1, api.nvim_win_get_height(it.win))
       else
@@ -335,15 +326,14 @@ local function do_reposition()
     end
   end
   local dlg_budget = math.max(1, lines - (cmd_h + 2 * b) - 2 * b)
+
+  -- The visible block is each window's border box stacked with no gap, so apply
+  -- the dialog cap and the total height in the same pass.
+  local block_h = 0
   for _, it in ipairs(stack) do
     if it.key == 'dialog' then
       it.h = math.min(it.h, dlg_budget)
     end
-  end
-
-  -- The visible block is each window's border box stacked with no gap.
-  local block_h = 0
-  for _, it in ipairs(stack) do
     block_h = block_h + it.h + 2 * b
   end
 
@@ -367,7 +357,7 @@ local function do_reposition()
 
   if cmd_bottom then
     -- blink.cmp reads this and stores it as a (1,0)-indexed screen position.
-    vim.g.ui_cmdline_pos = { cmd_bottom, col + b + (config.menu_col_offset or 0) }
+    vim.g.ui_cmdline_pos = { cmd_bottom, col + b + config.menu_col_offset }
   else
     -- No cmd window in the stack (dialog-only): drop any stale anchor from a
     -- previous reposition so blink.cmp doesn't follow a phantom cmdline.
@@ -400,13 +390,44 @@ end
 -- Enable + hook installation
 -- ---------------------------------------------------------------------------
 
---- Install our wrappers over the ui2 module functions.
-local wrapped = false
-local function wrap()
-  if wrapped then
+local function enable()
+  if M._enabled or M._disabled then
     return
   end
-  wrapped = true
+
+  -- Must precede require('vim._core.ui2'): it snapshots 'cmdheight' at load.
+  set_cmdheight(config.cmdheight)
+
+  -- Load and validate the ui2 internals we hook into.
+  local ok, ui, cmdl, msgs = pcall(function()
+    local u = require('vim._core.ui2')
+    local c = require('vim._core.ui2.cmdline')
+    local m = require('vim._core.ui2.messages')
+    assert(type(u) == 'table' and type(u.wins) == 'table', 'vim._core.ui2.wins')
+    assert(type(c) == 'table' and type(c.cmdline_show) == 'function', 'cmdline.cmdline_show')
+    assert(type(c.cmdline_hide) == 'function', 'cmdline.cmdline_hide')
+    assert(type(m) == 'table' and type(m.set_pos) == 'function', 'messages.set_pos')
+    return u, c, m
+  end)
+  if not ok then
+    vim.notify(
+      ('[ui2stuff] required ui2 internals are unavailable (%s); leaving ui2 untouched'):format(tostring(ui)),
+      vim.log.levels.WARN
+    )
+    return
+  end
+  ui2, cmdline, messages = ui, cmdl, msgs
+
+  local ok_enable, err = pcall(ui2.enable, {})
+  if not ok_enable then
+    vim.notify(('[ui2stuff] vim._core.ui2.enable failed: %s'):format(tostring(err)), vim.log.levels.WARN)
+    ui2 = nil
+    return
+  end
+
+  -- Install our wrappers over the ui2 module functions. No re-wrap guard is
+  -- needed: enable() runs at most once (guarded above), so these are always
+  -- ui2's own functions.
   orig.cmdline_show = cmdline.cmdline_show
   orig.cmdline_hide = cmdline.cmdline_hide
   orig.set_pos = messages.set_pos
@@ -438,46 +459,6 @@ local function wrap()
     -- Run AFTER ui2's own positioning so our centered layout is final.
     M.reposition()
   end
-end
-
-local function enable()
-  if M._enabled or M._disabled then
-    return
-  end
-
-  -- Must precede require('vim._core.ui2'): it snapshots 'cmdheight' at load.
-  set_cmdheight(config.cmdheight)
-
-  local ok_ui, ui = pcall(require, 'vim._core.ui2')
-  local ok_c, cmdl = pcall(require, 'vim._core.ui2.cmdline')
-  local ok_m, msgs = pcall(require, 'vim._core.ui2.messages')
-  if
-    not (
-      ok_ui
-      and ok_c
-      and ok_m
-      and type(ui) == 'table'
-      and type(cmdl) == 'table'
-      and type(msgs) == 'table'
-      and type(ui.wins) == 'table'
-      and type(cmdl.cmdline_show) == 'function'
-      and type(cmdl.cmdline_hide) == 'function'
-      and type(msgs.set_pos) == 'function'
-    )
-  then
-    vim.notify('[ui2stuff] required ui2 internals are unavailable; leaving ui2 untouched', vim.log.levels.WARN)
-    return
-  end
-  ui2, cmdline, messages = ui, cmdl, msgs
-
-  local ok_enable, err = pcall(ui2.enable, {})
-  if not ok_enable then
-    vim.notify(('[ui2stuff] vim._core.ui2.enable failed: %s'):format(tostring(err)), vim.log.levels.WARN)
-    ui2 = nil
-    return
-  end
-
-  wrap()
 
   local group = api.nvim_create_augroup('ui2stuff', { clear = true })
   api.nvim_create_autocmd({ 'VimResized', 'TabEnter' }, {
@@ -529,10 +510,13 @@ end
 --- re-applies (used by the user to tweak the position at runtime).
 ---@param opts Ui2StuffConfig?
 function M.setup(opts)
+  if opts and next(opts) ~= nil then
+    config = vim.tbl_deep_extend('force', defaults, opts)
+    M.config = config
+  end
+
   if M._initialized then
     if opts and next(opts) ~= nil then
-      config = vim.tbl_deep_extend('force', defaults, opts)
-      M.config = config
       M.reposition()
     end
     return
