@@ -23,12 +23,10 @@
 !opencode/**
 !moxide/
 !moxide/**
-!waybar/
-!waybar/**
-!hypr/
-!hypr/**
-!rofi/
-!rofi/**
+!umbriel/
+!umbriel/**
+!noctalia/
+!noctalia/**
 
 kitty/sessions/**
 !kitty/sessions/main.kitty-session
