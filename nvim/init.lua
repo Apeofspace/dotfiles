@@ -136,14 +136,14 @@ local clueopts = {
     miniclue.gen_clues.registers(),
     miniclue.gen_clues.windows(),
     miniclue.gen_clues.z(),
-    { mode = "n", keys = "<Leader>o",  desc = "Oil" },
-    { mode = "n", keys = "<Leader>m",  desc = "Markdown" },
-    { mode = "n", keys = "<Leader>g",  desc = "GIT" },
-    { mode = "n", keys = "<Leader>gd", desc = "Git diffview" },
-    { mode = "n", keys = "<Leader>s",  desc = "PICKERS" },
-    { mode = "n", keys = "<Leader>t",  desc = "Toggles" },
-    { mode = "n", keys = "<Leader>w",  desc = "doesnt work for some reason" },
-    { mode = "n", keys = "<Leader>D",  desc = "DEBUG" },
+    { mode = { 'n', 'v' }, keys = "<Leader>o",  desc = "Oil" },
+    { mode = { 'n', 'v' }, keys = "<Leader>m",  desc = "Markdown" },
+    { mode = { 'n', 'v' }, keys = "<Leader>g",  desc = "GIT" },
+    { mode = { 'n', 'v' }, keys = "<Leader>gd", desc = "Git diffview" },
+    { mode = { 'n', 'v' }, keys = "<Leader>s",  desc = "PICKERS" },
+    { mode = { 'n', 'v' }, keys = "<Leader>t",  desc = "Toggles" },
+    { mode = { 'n', 'v' }, keys = "<Leader>w",  desc = "doesnt work for some reason" },
+    { mode = { 'n', 'v' }, keys = "<Leader>D",  desc = "DEBUG" },
   },
   window = {
     delay = 0,
@@ -209,7 +209,8 @@ local colors = require("ashen.colors")
 local ashen_opts = {
   colors = { background = "#1d1f21", blue = colors["orange_blaze"], g_0 = "#f0f0f0", g_10 = "#1d1d1c" },
   style_presets = { italic_comments = true },
-  transparent = true, -- linenumber may be hard to see if you do this
+  transparent = true,
+  -- transparent = false,
   hl = {
     merge_override = {
       ["@constant"] = { "orange_smolder" },
@@ -259,22 +260,10 @@ vim.opt.winborder = "rounded" -- borders for completion and hover
 ashen.setup(ashen_opts)
 vim.cmd.colorscheme("ashen")
 
--- ashen's `transparent` only strips the bg from Normal, SignColumn and LineNr.
--- Two things still paint a background and should follow the theme instead:
---  * statusline base groups: a statusline cell with no bg inherits
---    StatusLine/StatusLineNC, so lualine's bg-less sections would stay opaque;
---  * the fzf picker list: fzf-lua draws it with the real `fzf` binary, which
---    gets its canvas colors from `vim.g.fzf_colors`.
--- When the theme is transparent (Normal has no bg) the base groups lose their
--- bg and fzf gets "-1" (terminal default = transparent). When it is opaque,
--- fzf uses Normal's bg and the base groups keep their own colors. Lualine's
--- auto theme is captured here, before the base groups are cleared, so clearing
--- them cannot change section colors.
 local lualine_base_theme
 local function sync_theme_bg()
   local bg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).bg
   lualine_base_theme = require("lualine.utils.loader").load_theme("auto")
-
   if bg == nil then
     for _, group in ipairs({ "StatusLine", "StatusLineNC", "StatusLineTerm", "StatusLineTermNC" }) do
       local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
@@ -284,7 +273,6 @@ local function sync_theme_bg()
       end
     end
   end
-
   local color = bg and string.format("#%06x", bg) or "-1"
   vim.g.fzf_colors = vim.tbl_extend("force", vim.g.fzf_colors or {}, {
     ["bg"] = color,
@@ -297,13 +285,6 @@ sync_theme_bg()
 require("starfall").setup({})
 vim.cmd("StarfallStart")
 vim.keymap.set("n", "<leader>sS", "<cmd>StarfallToggle<CR>", { desc = "Toggle starfall" })
-
-vim.g.everforest_background = "hard"
--- vim.cmd.colorscheme("suannhai-jiufen")
-
--- require("ember").setup({ variant = "ember-soft" })
--- vim.cmd.colorscheme("ember")
-
 
 -- TREESITTER
 local ensure_installed_ts = {
@@ -390,12 +371,12 @@ map("n", "ff", fzf.files, { desc = "Find Files" })
 map("n", "<leader>sn", function() fzf.files({ cwd = vim.fn.stdpath("config") }) end, { desc = "NVIM config" })
 
 -- search
-map("n", "<leader>/", fzf.blines, { desc = "Buffer Lines" })
-map("n", "<leader>sg", fzf.live_grep, { desc = "Grep" })
+map({ "n", "v" }, "<leader>/", fzf.blines, { desc = "Buffer Lines" })
+map({ "n", "v" }, "<leader>sg", fzf.live_grep, { desc = "Grep" })
 map("n", "<leader>sh", fzf.help_tags, { desc = "Help Pages" })
 map("n", "<leader>sr", fzf.resume, { desc = "Resume search" })
 map("n", "<leader>sp", fzf.spell_suggest, { desc = "Spelling" })
-map("n", "<leader>sC", fzf.grep_cword, { desc = "Grep word under cursor" })
+map({ "n", "v" }, "<leader>sC", fzf.grep_cword, { desc = "Grep word under cursor" })
 
 -- LSP
 map("n", "gd", fzf.lsp_definitions, { desc = "Goto Definition" })
@@ -567,10 +548,6 @@ vim.schedule(function()
   vim.opt.showtabline = 1
 end)
 
--- alternative. doesn't fully properly work.
--- stolen from  https://github.com/mcauley-penney/nvim/tree/main with shakalington from grok
--- local ssline = require("stolenstatusline")
-
 -- QUICKER
 local quicker = require("quicker")
 quicker.setup()
@@ -739,6 +716,9 @@ require('dap-cortex-debug').setup()
 require("dap-view").setup({ winbar = { sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "disassembly", }, } })
 require("dap-disasm").setup({})
 
+-- MISC / asm
+require("asm").setup() -- i already have dap-disasm though lmao
+
 -- DIFF / GIT
 local codediff = require("codediff")
 codediff.setup({ explorer = { view_mode = "tree" } })
@@ -768,9 +748,6 @@ vim.api.nvim_set_hl(0, "WinBarNC", { bg = nil })
 require("dropbar").setup({})
 local dropbar_api = require('dropbar.api')
 vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in winbar' })
-
--- MISC / asm
-require("asm").setup()
 
 -- MISC / CSV
 local csv_group = vim.api.nvim_create_augroup("CSVGroup", { clear = true })
