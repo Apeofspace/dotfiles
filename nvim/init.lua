@@ -259,6 +259,41 @@ vim.opt.winborder = "rounded" -- borders for completion and hover
 ashen.setup(ashen_opts)
 vim.cmd.colorscheme("ashen")
 
+-- ashen's `transparent` only strips the bg from Normal, SignColumn and LineNr.
+-- Two things still paint a background and should follow the theme instead:
+--  * statusline base groups: a statusline cell with no bg inherits
+--    StatusLine/StatusLineNC, so lualine's bg-less sections would stay opaque;
+--  * the fzf picker list: fzf-lua draws it with the real `fzf` binary, which
+--    gets its canvas colors from `vim.g.fzf_colors`.
+-- When the theme is transparent (Normal has no bg) the base groups lose their
+-- bg and fzf gets "-1" (terminal default = transparent). When it is opaque,
+-- fzf uses Normal's bg and the base groups keep their own colors. Lualine's
+-- auto theme is captured here, before the base groups are cleared, so clearing
+-- them cannot change section colors.
+local lualine_base_theme
+local function sync_theme_bg()
+  local bg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).bg
+  lualine_base_theme = require("lualine.utils.loader").load_theme("auto")
+
+  if bg == nil then
+    for _, group in ipairs({ "StatusLine", "StatusLineNC", "StatusLineTerm", "StatusLineTermNC" }) do
+      local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
+      if hl.bg then
+        hl.bg = nil
+        vim.api.nvim_set_hl(0, group, hl)
+      end
+    end
+  end
+
+  local color = bg and string.format("#%06x", bg) or "-1"
+  vim.g.fzf_colors = vim.tbl_extend("force", vim.g.fzf_colors or {}, {
+    ["bg"] = color,
+    ["gutter"] = color,
+  })
+end
+vim.api.nvim_create_autocmd("ColorScheme", { callback = sync_theme_bg })
+sync_theme_bg()
+
 require("starfall").setup({})
 vim.cmd("StarfallStart")
 vim.keymap.set("n", "<leader>sS", "<cmd>StarfallToggle<CR>", { desc = "Toggle starfall" })
@@ -494,8 +529,29 @@ local section_config = {
 local tabline_config = {
   lualine_a = { { "tabs", mode = 2 } },
 }
+-- Make lualine sections c and x transparent when the theme is set to
+-- transparent: c (and x, which uses c) copies `Normal`, so it keeps the theme
+-- background when opaque and has no bg when the theme is transparent. The
+-- statusline base groups are cleared by `sync_theme_bg` for the same reason.
+local function lualine_theme()
+  -- use the theme captured by `sync_theme_bg` before the base groups were cleared
+  local theme = vim.deepcopy(lualine_base_theme or require("lualine.utils.loader").load_theme("auto"))
+  local normal = require("lualine.utils.utils").extract_highlight_colors("Normal")
+
+  if normal then
+    for _, mode in pairs(theme) do
+      if type(mode) == "table" and mode.c then -- x uses c; inactive.c too
+        mode.c.fg = normal.fg or mode.c.fg
+        mode.c.bg = normal.bg
+      end
+    end
+  end
+
+  return theme
+end
 require("lualine").setup({
   options = {
+    theme = lualine_theme,
     -- globalstatus = true, -- uncomment for single bar
     section_separators = { left = '', right = '' },
     component_separators = { left = '', right = '' }
@@ -707,8 +763,8 @@ require("render-markdown").setup({
 require("early-retirement").setup({})
 
 -- MISC / dropbar
-vim.api.nvim_set_hl(0, "WinBar", { bg = normal_bg })
-vim.api.nvim_set_hl(0, "WinBarNC", { bg = normal_bg })
+vim.api.nvim_set_hl(0, "WinBar", { bg = nil })
+vim.api.nvim_set_hl(0, "WinBarNC", { bg = nil })
 require("dropbar").setup({})
 local dropbar_api = require('dropbar.api')
 vim.keymap.set('n', '<Leader>;', dropbar_api.pick, { desc = 'Pick symbols in winbar' })
