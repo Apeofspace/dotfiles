@@ -1,27 +1,23 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "experimental": {
-    // Allow the reviewer subagent to launch explore (one nesting level).
-    "subagent_depth": 2
-  },
-  // Built-ins work inline; custom subagents (builder, builder-max, reviewer,
-  // researcher) are reserved for the orchestrator. Deny removes them from the
-  // built-ins' subagent catalog entirely, so they won't even try.
+  // Built-ins stay stock. The custom subagents are hidden from the @ menu and
+  // are reserved for the orchestrator; denying them here also keeps them out
+  // of the built-ins' subagent catalogs.
   "agents": {
     "build": {
       "permissions": [
-        { "action": "subagent", "resource": "reviewer", "effect": "deny" },
-        { "action": "subagent", "resource": "researcher", "effect": "deny" },
-        { "action": "subagent", "resource": "builder-max", "effect": "deny" },
-        { "action": "subagent", "resource": "builder", "effect": "deny" }
+        { "action": "subagent", "resource": "builder", "effect": "deny" },
+        { "action": "subagent", "resource": "scout", "effect": "deny" },
+        { "action": "subagent", "resource": "verifier", "effect": "deny" },
+        { "action": "subagent", "resource": "reviewer", "effect": "deny" }
       ]
     },
     "plan": {
       "permissions": [
-        { "action": "subagent", "resource": "reviewer", "effect": "deny" },
-        { "action": "subagent", "resource": "researcher", "effect": "deny" },
-        { "action": "subagent", "resource": "builder-max", "effect": "deny" },
-        { "action": "subagent", "resource": "builder", "effect": "deny" }
+        { "action": "subagent", "resource": "builder", "effect": "deny" },
+        { "action": "subagent", "resource": "scout", "effect": "deny" },
+        { "action": "subagent", "resource": "verifier", "effect": "deny" },
+        { "action": "subagent", "resource": "reviewer", "effect": "deny" }
       ]
     }
   },

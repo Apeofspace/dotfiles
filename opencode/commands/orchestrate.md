@@ -1,8 +1,10 @@
 ---
-description: Execute a plan file with builder subagents and a reviewer loop
+description: Execute a Markdown plan with builder, verifier, and reviewer subagents
 agent: orchestrator
 ---
 
-Execute the plan at $ARGUMENTS.
+Execute the Markdown plan at $ARGUMENTS.
 
-Work the task graph: dispatch builder subagents (parallel where safe), run a reviewer, and iterate until the plan is verified done. If no plan path is given, ask me which plan to run.
+Build the task graph, dispatch builders (in parallel only when their files are disjoint), prove
+each batch with the verifier, then review it. Iterate until every task is verified and the review
+is clean. If no plan path is given, ask me which plan to run.

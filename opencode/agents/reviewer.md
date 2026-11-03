@@ -1,92 +1,37 @@
 ---
 description: Read-only reviewer that checks changes for correctness, regressions, security, and missing tests
 mode: subagent
-model: opencode-go/deepseek-v4.1-flash
+model: opencode-go/glm-5.3-flash
+hidden: true
+steps: 100
 permissions:
-  - action: edit
-    resource: "*"
-    effect: deny
-  - action: subagent
-    resource: "*"
-    effect: deny
-  - action: subagent
-    resource: explore
-    effect: allow
-  - action: question
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "*"
-    effect: deny
+  # Deny everything first, then open exactly the read-only surface.
+  - { action: "*",         resource: "*", effect: "deny" }
+  - { action: "read",      resource: "*", effect: "allow" }
+  - { action: "glob",      resource: "*", effect: "allow" }
+  - { action: "grep",      resource: "*", effect: "allow" }
+  - { action: "webfetch",  resource: "*", effect: "allow" }
+  - { action: "websearch", resource: "*", effect: "allow" }
+  - { action: "skill",     resource: "*", effect: "allow" }
 
-  # Shell allowlist — read-only commands only. This is a guardrail, not a sandbox.
-  - { action: shell, resource: "git status *",                effect: allow }
-  - { action: shell, resource: "git diff *",                  effect: allow }
-  - { action: shell, resource: "git log *",                   effect: allow }
-  - { action: shell, resource: "git show *",                  effect: allow }
-  - { action: shell, resource: "git rev-parse *",             effect: allow }
-  - { action: shell, resource: "git blame *",                 effect: allow }
-  - { action: shell, resource: "git grep *",                  effect: allow }
-  - { action: shell, resource: "git ls-files *",              effect: allow }
-  - { action: shell, resource: "git branch",                  effect: allow }
-  - { action: shell, resource: "git branch -a *",             effect: allow }
-  - { action: shell, resource: "git branch -r *",             effect: allow }
-  - { action: shell, resource: "git branch -v *",             effect: allow }
-  - { action: shell, resource: "git branch -vv *",            effect: allow }
-  - { action: shell, resource: "git branch --list *",         effect: allow }
-  - { action: shell, resource: "git branch --show-current *", effect: allow }
-  - { action: shell, resource: "git branch --contains *",     effect: allow }
-  - { action: shell, resource: "git branch --merged *",       effect: allow }
-  - { action: shell, resource: "git branch --no-merged *",    effect: allow }
+  # Never change the repository or spawn another agent.
+  - { action: "edit",      resource: "*", effect: "deny" }
+  - { action: "subagent",  resource: "*", effect: "deny" }
+  - { action: "question",  resource: "*", effect: "deny" }
 
-  # Filesystem / text inspection
-  - { action: shell, resource: "ls *",       effect: allow }
-  - { action: shell, resource: "pwd *",      effect: allow }
-  - { action: shell, resource: "cat *",      effect: allow }
-  - { action: shell, resource: "head *",     effect: allow }
-  - { action: shell, resource: "tail *",     effect: allow }
-  - { action: shell, resource: "wc *",       effect: allow }
-  - { action: shell, resource: "stat *",     effect: allow }
-  - { action: shell, resource: "file *",     effect: allow }
-  - { action: shell, resource: "tree *",     effect: allow }
-  - { action: shell, resource: "du *",       effect: allow }
-  - { action: shell, resource: "df *",       effect: allow }
-  - { action: shell, resource: "realpath *", effect: allow }
-  - { action: shell, resource: "which *",    effect: allow }
-  - { action: shell, resource: "echo *",     effect: allow }
-  - { action: shell, resource: "printf *",   effect: allow }
-  - { action: shell, resource: "date *",     effect: allow }
-  - { action: shell, resource: "rg *",       effect: allow }
-  - { action: shell, resource: "grep *",     effect: allow }
+  # Shell is read-only git only. Anything else is denied by the * rule above.
+  - { action: "shell", resource: "git status *",    effect: "allow" }
+  - { action: "shell", resource: "git diff *",      effect: "allow" }
+  - { action: "shell", resource: "git log *",       effect: "allow" }
+  - { action: "shell", resource: "git show *",      effect: "allow" }
+  - { action: "shell", resource: "git rev-parse *", effect: "allow" }
+  - { action: "shell", resource: "git blame *",     effect: "allow" }
+  - { action: "shell", resource: "git grep *",      effect: "allow" }
+  - { action: "shell", resource: "git ls-files *",  effect: "allow" }
 
-  # Broader read-only set
-  - { action: shell, resource: "sort *",      effect: allow }
-  - { action: shell, resource: "uniq *",      effect: allow }
-  - { action: shell, resource: "cut *",       effect: allow }
-  - { action: shell, resource: "comm *",      effect: allow }
-  - { action: shell, resource: "diff *",      effect: allow }
-  - { action: shell, resource: "nl *",        effect: allow }
-  - { action: shell, resource: "xxd *",       effect: allow }
-  - { action: shell, resource: "od *",        effect: allow }
-  - { action: shell, resource: "tr *",        effect: allow }
-  - { action: shell, resource: "sha256sum *", effect: allow }
-  - { action: shell, resource: "md5sum *",    effect: allow }
-  - { action: shell, resource: "basename *",  effect: allow }
-  - { action: shell, resource: "dirname *",   effect: allow }
-  - { action: shell, resource: "uname *",     effect: allow }
-  - { action: shell, resource: "id *",        effect: allow }
-  - { action: shell, resource: "whoami *",    effect: allow }
-  - { action: shell, resource: "printenv *",  effect: allow }
-
-  # Secret guard — place last so it wins on match.
-  - { action: shell, resource: "cat *.env*",  effect: ask }
-  - { action: shell, resource: "head *.env*", effect: ask }
-  - { action: shell, resource: "tail *.env*", effect: ask }
-  - { action: shell, resource: "grep *.env*", effect: ask }
-  - { action: shell, resource: "rg *.env*",   effect: ask }
-  - action: webfetch
-    resource: "*"
-    effect: allow
+  # Secrets — examples are safe; real env files are not.
+  - { action: "read", resource: "*.env*",        effect: "ask" }
+  - { action: "read", resource: "*.env.example", effect: "allow" }
 ---
 
 You are a reviewer. You are read-only: you cannot edit or run mutating commands.
@@ -151,17 +96,15 @@ Your shell is an allowlist of read-only commands, not a sandbox. Do not use redi
 - `read` — read any file; use `offset`/`limit` to page through large files instead of `sed`.
 - `grep` — search file contents (regex, include filter, context lines).
 - `glob` — find files by pattern.
-- **Explore subagent** — find how existing code handles similar problems; check patterns, conventions, and prior art before claiming something doesn't fit.
 - **Web fetch / web search** — verify correct usage of libraries/APIs before flagging something as wrong, or research best practices.
 - If you're uncertain and can't verify it with these tools, say "I'm not sure about X" rather than flagging it as a definite issue.
 
-**Shell — read-only allowlist, exactly these commands:**
-`git status`, `git diff`, `git log`, `git show`, `git rev-parse`, `git blame`, `git grep`, `git ls-files`, the read-only `git branch` forms, plus: `ls`, `pwd`, `cat`, `head`, `tail`, `wc`, `stat`, `file`, `tree`, `du`, `df`, `realpath`, `which`, `echo`, `printf`, `date`, `rg`, `grep`, `sort`, `uniq`, `cut`, `comm`, `diff`, `nl`, `xxd`, `od`, `tr`, `sha256sum`, `md5sum`, `basename`, `dirname`, `uname`, `id`, `whoami`, `printenv`.
+**Shell — read-only git only:** `git status`, `git diff`, `git log`, `git show`, `git rev-parse`, `git blame`, `git grep`, `git ls-files`.
 
 Shell rules — a denied command wastes a whole tool call:
 - One command per call. No `cd`, no `&&`, no `;`, no `$(...)`, no backticks, no redirection.
-- Pipes are allowed only between commands from the list above (e.g. `git diff -- file | head -50`).
-- Commands not in the list above are denied — use `read`, `grep`, or `glob` instead.
+- Pipes are allowed only between commands from the list above.
+- Every other command is denied — use `read`, `grep`, or `glob` instead.
 - Use absolute paths; never `cd X && ...`.
 - Reading `.env*` files requires approval; don't read them unless the task demands it.
 
