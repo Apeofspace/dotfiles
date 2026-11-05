@@ -494,7 +494,8 @@ local section_config = {
   -- +-------------------------------------------------+
   -- | A | B | C                             X | Y | Z |
   -- +-------------------------------------------------+
-  lualine_a = { "mode" },
+  lualine_a = {},
+  -- lualine_a = { "mode" },
   lualine_b = { "branch", "filename" },
   lualine_c = { "diagnostics" },
   -- lualine_x = { inline_hints_status, codelens_status, "lsp_status", "encoding" },
